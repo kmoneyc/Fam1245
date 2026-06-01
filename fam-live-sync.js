@@ -1,4 +1,4 @@
-// FAM 1245 Live Sync v4.52
+// FAM 1245 Live Sync v4.53 — GitHub Pages static data mode
 // Safe static-site sync layer: tries public Kingshot.net-style endpoints, caches successful data, and falls back to local FAM K1245 data.
 (function(){
   "use strict";
@@ -12,37 +12,16 @@
     docs: "https://kingshot.net/api-docs",
     endpoints: {
       giftCodes: [
-        "/api/gift-codes",
-        "https://kingshot.net/api/gift-codes",
-        "https://kingshot.net/api/codes",
-        "https://kingshot.net/api/tools/gift-codes",
-        "https://kingshot.net/api/public/gift-codes",
-        "https://kingshot.net/api/v1/gift-codes"
+        "data/gift-codes.json"
       ],
       calendar: [
-        "/api/events",
-        "/api/calendar/today",
-        "https://kingshot.net/api/calendar",
-        "https://kingshot.net/api/event-calendar",
-        "https://kingshot.net/api/events/calendar",
-        "https://kingshot.net/api/public/calendar",
-        "https://kingshot.net/api/v1/calendar"
+        "data/events.json"
       ],
       calculatorData: [
-        "/api/calculator-data",
-        "https://kingshot.net/api/calculators/data",
-        "https://kingshot.net/api/database",
-        "https://kingshot.net/api/game-data",
-        "https://kingshot.net/api/public/game-data",
-        "https://kingshot.net/api/v1/database"
+        "data/calculator-data.json"
       ],
       transferHistory: [
-        "/api/transfer-history",
-        "https://kingshot.net/api/transfer-history?kingdom=1245",
-        "https://kingshot.net/api/transfers/history?kingdom=1245",
-        "https://kingshot.net/api/kingdoms/1245/transfer-history",
-        "https://kingshot.net/api/v1/transfer-history?kingdom=1245",
-        "https://v2.kingshot.net/api/transfer-history?kingdom=1245"
+        "data/transfer-history.json"
       ]
     }
   };
@@ -189,13 +168,21 @@
     try{ localStorage.setItem(key(kind), JSON.stringify({savedAt:now(), payload:payload})); }catch(e){}
   }
 
+  function resolveStaticUrl(url){
+    if(/^https?:\/\//i.test(url) || url.charAt(0) === "/") return url;
+    var base = document.querySelector("base");
+    if(base && base.href) return new URL(url, base.href).toString();
+    return new URL(url, window.location.href).toString();
+  }
+
   function fetchJson(url){
+    var resolved = resolveStaticUrl(url);
     var opts = {cache:"no-store", headers:{Accept:"application/json"}};
-    if(/^https?:\/\//i.test(url)){
+    if(/^https?:\/\//i.test(resolved) && !resolved.startsWith(window.location.origin)){
       opts.mode = "cors";
       opts.credentials = "omit";
     }
-    return fetch(url, opts).then(function(r){
+    return fetch(resolved, opts).then(function(r){
       if(!r.ok) throw new Error("HTTP "+r.status);
       return r.json();
     });

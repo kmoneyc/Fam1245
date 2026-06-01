@@ -413,3 +413,12 @@ To swap the hero image: replace `hero.webp` and `hero.jpg` (keep same filenames)
 - Added `cloudflare/schema.sql`, `cloudflare/seed.sql`, `wrangler.example.toml`, `_headers`, and `CLOUDFLARE_SETUP.md`.
 - Updated `fam-live-sync.js` to try local `/api/*` endpoints before external/public endpoints.
 - Kept changelog grouped by 24-hour increments.
+
+
+## v4.53 GitHub Pages workflows and static database
+- Converted the backend plan from Cloudflare Functions/KV/D1 to GitHub Pages static hosting.
+- Removed Cloudflare-specific `/functions`, `cloudflare`, `_headers`, and `wrangler.example.toml` files.
+- Added GitHub Actions workflows for deploy, validation, and scheduled JSON data refresh.
+- Added static JSON database docs under `db/` and setup instructions in `GITHUB_PAGES_SETUP.md`.
+- Updated `fam-live-sync.js` to read local `data/*.json` files first and cache them in `localStorage`.
+- Added `.nojekyll` for GitHub Pages.

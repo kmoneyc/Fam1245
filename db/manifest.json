@@ -1,0 +1,32 @@
+{
+  "host": "github-pages",
+  "updatedAt": "2026-06-01T01:35:18.800Z",
+  "database": "Static JSON files in /data",
+  "browserCache": "localStorage cache via fam-live-sync.js",
+  "files": [
+    {
+      "file": "data/gift-codes.json",
+      "bytes": 946
+    },
+    {
+      "file": "data/events.json",
+      "bytes": 1017
+    },
+    {
+      "file": "data/calculator-data.json",
+      "bytes": 685
+    },
+    {
+      "file": "data/transfer-history.json",
+      "bytes": 459
+    },
+    {
+      "file": "data/changelog.json",
+      "bytes": 477
+    },
+    {
+      "file": "data/guide-index.json",
+      "bytes": 1914
+    }
+  ]
+}
