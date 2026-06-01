@@ -5,8 +5,11 @@
   "entries": [
     {
       "date": "May 17, 2026",
-      "title": "Daily Build Summary \u2014 v4.44 to v4.52",
+      "title": "Daily Build Summary — v4.44 to v4.52",
       "summary": "Cloudflare Functions/KV/D1 API layer added and changelog kept daily grouped."
     }
-  ]
+  ],
+  "host": "github-pages",
+  "lastWorkflowRefresh": "2026-06-01T01:35:18.800Z",
+  "updatePolicy": "Static JSON database refreshed by GitHub Actions."
 }

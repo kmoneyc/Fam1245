@@ -6,5 +6,8 @@
     "Verify current in-game transfer rules and power caps before locking invites.",
     "Use the transfer planner for candidate status, invite type, power, and comments."
   ],
-  "history": []
+  "history": [],
+  "host": "github-pages",
+  "lastWorkflowRefresh": "2026-06-01T01:35:18.800Z",
+  "updatePolicy": "Static JSON database refreshed by GitHub Actions."
 }

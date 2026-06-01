@@ -39,5 +39,8 @@
       "Recovery + reward claim",
       "Daily value packs"
     ]
-  }
+  },
+  "host": "github-pages",
+  "lastWorkflowRefresh": "2026-06-01T01:35:18.800Z",
+  "updatePolicy": "Static JSON database refreshed by GitHub Actions."
 }

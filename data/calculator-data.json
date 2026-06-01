@@ -21,5 +21,8 @@
   },
   "widgets": {
     "upgradeRule": "Upgrade at 2-4-6-8-10; avoid odd levels unless needed."
-  }
+  },
+  "host": "github-pages",
+  "lastWorkflowRefresh": "2026-06-01T01:35:18.800Z",
+  "updatePolicy": "Static JSON database refreshed by GitHub Actions."
 }
