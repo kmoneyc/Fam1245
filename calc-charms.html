@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Charms Optimizer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+<style>
+.optimizer-shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 2.5rem;}
+.opt-hero{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:1.35rem;margin-bottom:1rem;box-shadow:0 16px 40px rgba(168,32,94,.10);}
+.opt-hero .eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.opt-hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.75rem,4vw,3.15rem);line-height:1.05;margin:.35rem 0;color:var(--text);}
+.opt-hero p{color:var(--text-dim);line-height:1.65;max-width:850px;margin:0;}
+.opt-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1rem;align-items:start;}
+.opt-card,.opt-panel{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1rem;box-shadow:0 12px 32px rgba(168,32,94,.08);}
+.opt-panel{position:sticky;top:84px;}
+.card-title{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start;border-bottom:1px solid var(--border);padding-bottom:.7rem;margin-bottom:.85rem;}
+.card-title h2{font-family:'Orbitron',sans-serif;font-size:1rem;margin:0;color:var(--text);}
+.card-title p{font-size:.82rem;color:var(--text-dim);margin:.2rem 0 0;line-height:1.5;}
+.badge-soft{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:rgba(214,48,122,.08);border:1px solid rgba(214,48,122,.24);border-radius:999px;padding:.24rem .45rem;white-space:nowrap;}
+.input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem;}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.28rem;}
+.input,.select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.68rem .72rem;font-family:'DM Mono',monospace;font-size:.86rem;outline:none;}
+.input:focus,.select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,48,122,.10);}
+.tool-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0;}
+.btn-small,.btn-main,.btn-danger{border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;cursor:pointer;transition:.15s ease;padding:.48rem .7rem;}
+.btn-main{background:linear-gradient(135deg,#ff4aa2,#7c3aed);color:white;border:none;font-weight:800;}
+.btn-small:hover,.btn-main:hover{transform:translateY(-1px);border-color:var(--gold);}
+.btn-danger:hover{background:#d6307a;color:white;border-color:#d6307a;}
+.item-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;}
+.item-card{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:.75rem;}
+.item-card h3{font-size:.88rem;margin:0 0 .55rem;color:var(--text);}
+.item-card .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.8rem;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;min-width:0;}
+.summary-card span{display:block;font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.25rem;}
+.summary-card strong{display:block;font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-list{display:flex;flex-direction:column;gap:.55rem;}
+.rec{border:1px solid var(--border);background:var(--surface2);border-radius:14px;padding:.75rem;}
+.rec strong{display:block;color:var(--text);}
+.rec span{display:block;color:var(--text-dim);font-size:.8rem;margin-top:.18rem;line-height:1.45;}
+.progress-bar{height:10px;background:var(--surface3);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:.45rem;}
+.progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff4aa2,#7c3aed);width:0%;}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface2);}
+.opt-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:640px;}
+.opt-table th,.opt-table td{padding:.65rem .7rem;border-bottom:1px solid var(--border);text-align:left;}
+.opt-table th{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:.08em;}
+.opt-note{font-size:.8rem;color:var(--text-dim);line-height:1.55;margin-top:.75rem;}
+@media(max-width:980px){.opt-grid{grid-template-columns:1fr}.opt-panel{position:static}}
+@media(max-width:680px){.optimizer-shell{padding:.9rem .75rem 2rem}.input-grid,.item-grid,.summary-grid{grid-template-columns:1fr}.item-card .mini-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+<main class="optimizer-shell">
+<div class="crumb"><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Charms</span></div>
+<section class="opt-hero"><span class="eyebrow">FAM OPTIMIZER · CHARMS</span><h1>Governor Charms Optimizer</h1><p>Plan Charm Guides and Charm Designs across Infantry, Cavalry, and Archer charm slots.</p></section>
+
+<div id="charmsDataSyncStatus"></div>
+<div class="k1245-panel"><strong>Charms Data Sync</strong><p>K1245 charms planning attempts live calculator-data sync and falls back to local estimates.</p></div>
+<div class="opt-grid">
+  <section class="opt-card">
+    <div class="card-title"><div><h2>Charm Inventory + Slots</h2><p>Track 18 charm slots and your Charm Guide / Charm Design balance.</p></div><span class="badge-soft">Optimizer</span></div>
+    <div class="input-grid">
+      <div class="field"><label>Charm Guides</label><input class="input" id="guides" type="number" value="0" min="0" oninput="calcCharms()"></div>
+      <div class="field"><label>Charm Designs</label><input class="input" id="designs" type="number" value="0" min="0" oninput="calcCharms()"></div>
+      <div class="field"><label>Focus</label><select class="select" id="focus" onchange="calcCharms()"><option>Balanced</option><option>Infantry</option><option>Cavalry</option><option>Archer</option></select></div>
+    </div>
+    <div class="tool-row">
+      <button class="btn-small" onclick="setAllCharmTargets(3)">Set Targets 3</button>
+      <button class="btn-small" onclick="setAllCharmTargets(5)">Set Targets 5</button>
+      <button class="btn-small" onclick="saveCharms()">Save</button>
+      <button class="btn-danger" onclick="resetCharms()">Reset</button>
+    </div>
+    <div class="item-grid" id="charmItems"></div>
+  </section>
+  <aside class="opt-panel">
+    <div class="card-title"><div><h2>Charm Summary</h2><p>Best next upgrade and material balance warning.</p></div><span class="badge-soft">Live</span></div>
+    <div class="summary-grid">
+      <div class="summary-card"><span>Guides Needed</span><strong id="needGuides">0</strong></div>
+      <div class="summary-card"><span>Designs Needed</span><strong id="needDesigns">0</strong></div>
+      <div class="summary-card"><span>Missing</span><strong id="needMissing">0</strong></div>
+      <div class="summary-card"><span>Balance</span><strong id="balanceText">OK</strong></div>
+    </div>
+    <div class="rec-list" id="charmRecs"></div>
+    <div class="tool-row"><button class="btn-main" onclick="copyCharms()">Copy Plan</button></div>
+    <p class="opt-note">Balance uses the public optimizer idea that Charm Guides and Charm Designs should be watched together; this tool flags when one material is heavily bottlenecking the other.</p>
+  </aside>
+</div>
+
+<script>
+
+const troops=['Infantry','Cavalry','Archer'];
+const storeKey='fam_charms_v1';
+const maxLevel=10;
+const costs=[{g:0,d:0},{g:12,d:20},{g:24,d:42},{g:44,d:78},{g:75,d:135},{g:120,d:215},{g:180,d:320},{g:260,d:465},{g:360,d:640},{g:490,d:875},{g:650,d:1160}];
+function num(id){return Math.max(0,parseInt(document.getElementById(id).value,10)||0)}
+function opts(sel){let o='';for(let i=0;i<=maxLevel;i++)o+=`<option value="${i}" ${i==sel?'selected':''}>${i?'Level '+i:'None'}</option>`;return o}
+function initCharms(){
+ const saved=JSON.parse(localStorage.getItem(storeKey)||'null'); if(saved){guides.value=saved.guides||0;designs.value=saved.designs||0;focus.value=saved.focus||'Balanced'}
+ const data=saved?.items||{};
+ let html='';
+ troops.forEach(t=>{for(let i=1;i<=6;i++){const k=`${t} ${i}`, cur=data[k]?.cur||0, tar=data[k]?.tar||1;html+=`<div class="item-card"><h3>${k}</h3><div class="mini-grid"><div class="field"><label>Current</label><select class="select cur" data-key="${k}" onchange="calcCharms()">${opts(cur)}</select></div><div class="field"><label>Target</label><select class="select tar" data-key="${k}" onchange="calcCharms()">${opts(tar)}</select></div></div></div>`}})
+ charmItems.innerHTML=html; calcCharms();
+}
+function cost(cur,tar){let t={g:0,d:0};for(let i=Number(cur)+1;i<=Number(tar);i++){t.g+=costs[i]?.g||0;t.d+=costs[i]?.d||0}return t}
+function collect(){
+ let total={g:0,d:0}, items={}, next=[];
+ document.querySelectorAll('.cur').forEach(c=>{
+  const k=c.dataset.key, cur=Number(c.value), tar=Number(document.querySelector(`.tar[data-key="${k}"]`).value);
+  items[k]={cur,tar}; const cc=tar>cur?cost(cur,tar):{g:0,d:0}; total.g+=cc.g; total.d+=cc.d;
+  if(cur<maxLevel){const n=cur+1, nc=cost(cur,n); next.push({k,cur,n,...nc,troop:k.split(' ')[0]})}
+ });
+ return {total,items,next};
+}
+function calcCharms(){
+ const {total,next}=collect(), inv={g:num('guides'),d:num('designs')};
+ needGuides.textContent=total.g.toLocaleString(); needDesigns.textContent=total.d.toLocaleString(); needMissing.textContent=(Math.max(0,total.g-inv.g)+Math.max(0,total.d-inv.d)).toLocaleString();
+ const ratio=inv.g?inv.d/inv.g:0; balanceText.textContent=ratio?ratio.toFixed(2)+':1':'--';
+ const f=focus.value; let candidates=next.filter(x=>f==='Balanced'||x.troop===f);
+ const affordable=candidates.filter(x=>x.g<=inv.g&&x.d<=inv.d).sort((a,b)=>(b.n-a.n)||(a.g+a.d)-(b.g+b.d))[0];
+ const warning=ratio && (ratio<1.2||ratio>2.4) ? `Material balance looks off. Designs/Guide ratio is ${ratio.toFixed(2)}.` : 'Material mix looks reasonable for planning.';
+ charmRecs.innerHTML=`<div class="rec"><strong>${warning}</strong><span>Public optimizers emphasize checking Guide/Design balance instead of spending one material blindly.</span></div><div class="rec"><strong>${affordable?`Best affordable next: ${affordable.k} → Level ${affordable.n}`:'No affordable next charm upgrade'}</strong><span>${affordable?`Cost: ${affordable.g} Guides, ${affordable.d} Designs.`:'Add more materials or lower targets.'}</span></div>`;
+}
+function setAllCharmTargets(l){document.querySelectorAll('.tar').forEach(s=>s.value=l);calcCharms()}
+function saveCharms(){const d=collect();localStorage.setItem(storeKey,JSON.stringify({guides:num('guides'),designs:num('designs'),focus:focus.value,items:d.items}));calcCharms()}
+function resetCharms(){localStorage.removeItem(storeKey);location.reload()}
+function copyCharms(){const d=collect();navigator.clipboard?.writeText(`Charms Plan\nGuides: ${d.total.g}\nDesigns: ${d.total.d}\nFocus: ${focus.value}`)}
+initCharms();
+
+function synccharmsDataSyncStatus(){
+  if(!window.FAM_LIVE_SYNC) return;
+  FAM_LIVE_SYNC.get('calculatorData',{cacheHours:24}).then(function(result){
+    FAM_LIVE_SYNC.injectSyncBadge('#charmsDataSyncStatus', result, 'Charms Data Sync');
+  });
+}
+synccharmsDataSyncStatus();
+
+
+</script>
+
+</main>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="fam-live-sync.js?v=1779083200"></script>
+</body>
+</html>

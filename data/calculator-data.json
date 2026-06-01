@@ -1,0 +1,25 @@
+{
+  "source": "FAM fallback estimates",
+  "updatedAt": "2026-05-31T00:00:00Z",
+  "kingdom": 1245,
+  "calculatorVersion": "v4.52",
+  "constants": {
+    "bearRatio": "10/10/80+",
+    "castleBeginnerDelaySeconds": 60,
+    "castleAdvancedDelaySeconds": 30,
+    "recommendedRallyGapSeconds": [
+      10,
+      30
+    ]
+  },
+  "governorGear": {
+    "materialNames": [
+      "Satin",
+      "Gilded Threads",
+      "Artisan's Visions"
+    ]
+  },
+  "widgets": {
+    "upgradeRule": "Upgrade at 2-4-6-8-10; avoid odd levels unless needed."
+  }
+}

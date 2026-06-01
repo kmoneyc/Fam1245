@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Events & Packs Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+<link rel="stylesheet" href="event-calendar.css?v=1779083200">
+</head>
+<body class="events-calendar-page">
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>EVENTS &amp; PACKS &middot; K1245</span></a>
+    <div class="calc-top-nav" aria-label="Tool quick links">
+      <a href="index.html">Manual</a>
+      <a href="calculators.html">Calculators</a>
+      <a href="calc-castle.html">Castle</a>
+      <a href="calc-gear.html">Gear</a>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="index.html" class="header-back">&larr; Back to Manual</a>
+    </div>
+  </div>
+</header>
+
+<main class="calendar-shell">
+  <section class="calendar-hero">
+    <div>
+      <span class="eyebrow">FAM EVENTS &middot; LIVE UTC TRACKING</span>
+      <h1>Events &amp; Packs Calendar</h1>
+      <p>Track the active game day, what event is up, which packs are shown for the day, and how long remains until the next UTC reset. Set your current week/day once and the site will keep rolling the 4-week cycle forward.</p>
+    </div>
+    <aside class="calendar-live-card">
+      <div><span>Server time</span><strong id="calendarUtcNow">--:--:-- UTC</strong></div>
+      <div><span>Reset countdown</span><strong id="calendarCountdown">--:--:--</strong></div>
+      <div><span>Next event</span><strong id="calendarNextEvent">Loading...</strong></div>
+    </aside>
+  </section>
+
+  <div id="calendarSyncStatus"></div>
+  <div class="k1245-panel"><strong>K1245 personalized calendar</strong><p>This page is anchored for Kingdom 1245 and attempts live public calendar sync. If sync is unavailable, it falls back to the saved K1245 Week 3 Saturday rotation and keeps rolling by UTC.</p></div>
+
+  <section class="calendar-grid-two">
+    <article class="calendar-card">
+      <span class="calendar-badge">Current game day</span>
+      <h2 class="calendar-today-title" id="calendarTodayTitle">Loading event...</h2>
+      <p class="today-meta" id="calendarTodayMeta">Checking rotation...</p>
+      <p class="today-prep" id="calendarTodayPrep">Loading plan...</p>
+      <div class="event-note-box">Default tracker is set to Saturday, Week 3 on May 16, 2026 UTC. If your kingdom is on a different position, set the current week/day below and it will be saved on this device.</div>
+    </article>
+    <article class="calendar-card">
+      <h2>Packs available today</h2>
+      <ul class="pack-list" id="calendarPacksList"><li><strong>Loading...</strong><span>Live</span></li></ul>
+      <div class="event-note-box">Daily available packs are Pet Chests and Gear Enhancement. Governor Stamina Pack is marked conditional because it appears during Cesares Fury windows.</div>
+    </article>
+  </section>
+
+  <section class="calendar-card" style="margin-bottom:1rem">
+    <h2>Set your current position</h2>
+    <div class="calendar-control-row">
+      <div class="calendar-field"><label for="calendarWeekSelect">Current week</label><select id="calendarWeekSelect"></select></div>
+      <div class="calendar-field"><label for="calendarDaySelect">Current day</label><select id="calendarDaySelect"></select></div>
+      <button class="calendar-action primary" id="saveCalendarPosition" type="button">Save position</button>
+      <button class="calendar-action" id="resetCalendarPosition" type="button">Reset default</button>
+    </div>
+  </section>
+
+  <section class="calendar-grid-two">
+    <article class="calendar-card timeline-card">
+      <h2>Next 7 days</h2>
+      <ul class="timeline-list" id="calendarNextSeven"></ul>
+    </article>
+    <article class="calendar-card">
+      <h2>Pack rules</h2>
+      <ul style="margin-left:1.1rem;line-height:1.75;color:var(--text-dim)">
+        <li><strong>Daily:</strong> Pet Chests and Gear Enhancement.</li>
+        <li><strong>Event pack windows:</strong> Custom Selection, Champagne Fair, Combat Medic, and conditional Governor Stamina Pack.</li>
+        <li><strong>Note:</strong> Custom Pet Chests / Enhance Gear are not included in the daily pack list note.</li>
+      </ul>
+    </article>
+  </section>
+
+  <div id="calendarWeekGrid"></div>
+
+  <section class="calendar-card">
+    <h2>FAM planning notes</h2>
+    <p style="color:var(--text-dim);line-height:1.7">Use this as the alliance-facing planning board. The live home-page widget reads from the same data, so changing the saved current position here automatically fixes the event and pack shown on the main page for this browser/device.</p>
+  </section>
+</main>
+
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="fam-live-sync.js?v=1779083200"></script>
+<script src="event-calendar.js?v=1779083200"></script>
+</body>
+</html>

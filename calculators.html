@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Calculators Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+
+<style>
+.calc-category-section{margin-top:1.25rem;}
+.calc-category-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin:0 0 .75rem;padding-bottom:.55rem;border-bottom:1px solid var(--border);}
+.calc-category-head h2{font-family:'Orbitron',sans-serif;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text);margin:0;}
+.calc-category-head p{color:var(--text-dim);font-size:.82rem;line-height:1.45;margin:.18rem 0 0;max-width:720px;}
+.calc-category-count{font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);border:1px solid rgba(214,48,122,.24);background:rgba(214,48,122,.08);border-radius:999px;padding:.25rem .5rem;white-space:nowrap;}
+.calc-grid.category-grid{margin-bottom:1rem;}
+@media(max-width:640px){.calc-category-head{align-items:flex-start;flex-direction:column;gap:.35rem}.calc-category-count{align-self:flex-start}}
+</style>
+
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="calc-top-nav" aria-label="Calculator quick links">
+      <a href="index.html">Manual</a>
+      <a href="event-calendar.html">Events</a>
+      <a href="calc-castle.html">Castle</a>
+      <a href="calc-hero-gear-optimizer.html">Gear</a>
+      <a href="calc-love-royale.html">Love Royale</a>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="index.html" class="header-back">&larr; Back to Manual</a>
+    </div>
+  </div>
+</header>
+
+<div class="app-body">
+<div class="page-container tool-hub">
+  <section class="hub-hero">
+    <div>
+      <span class="eyebrow">FAM TOOLS &middot; K1245</span>
+      <h1>Calculators Hub</h1>
+      <p>Quick launch every FAM calculator, filter by task, and plan your next upgrade without digging through the field manual.</p>
+      <div class="hero-actions">
+        <a class="action-pill" href="calc-masters.html">Open Master Calculator</a>
+        <a class="action-pill secondary" href="calc-castle.html">Castle Rally Tool</a>
+        <a class="action-pill secondary" href="calc-bear-sim.html">Bear Simulator</a>
+        <a class="action-pill secondary" href="calc-governor-gear.html">Governor Gear</a>
+      </div>
+    </div>
+    <div class="hub-status-card">
+      <span>LIVE TOOLKIT</span>
+      <strong>22</strong>
+      <p>Tools ready</p>
+    </div>
+  </section>
+
+  <div class="hub-controls">
+    <label class="hub-search"><span>&#128269;</span><input data-calc-search type="search" placeholder="Search calculators, resources, events..."></label>
+    <div class="filter-row" data-tab-group="calc-filter">
+      <button class="filter-chip active" data-calc-filter="all">All</button>
+      <button class="filter-chip" data-calc-filter="combat">Combat</button>
+      <button class="filter-chip" data-calc-filter="resources">Resources</button>
+      <button class="filter-chip" data-calc-filter="time">Time</button>
+      <button class="filter-chip" data-calc-filter="events">Events</button>
+      <button class="filter-chip" data-calc-filter="planning">Planning</button>
+    </div>
+    <p class="filter-count" data-calc-count>22 tools shown</p>
+  </div>
+  <section class="calc-category-section">
+    <div class="calc-category-head">
+      <div><h2>Featured & Daily Planning</h2><p>The tools most members will open first: core planning, live events, rally timing, and ratio testing.</p></div>
+      <span class="calc-category-count">4 tools</span>
+    </div>
+    <div class="calc-grid enhanced-grid category-grid">
+    <a href="calc-masters.html" class="calc-tile featured" data-calc-card data-category="planning resources combat master">
+      <span class="calc-tile-badge">NEW</span><span class="calc-tile-icon">&#127894;</span><h3>Master Calculator</h3><p>Pick Valora, Pan, or Roman. Estimate affinity, emblems, manuscripts, power gain, buff gain, and remaining stock.</p><div class="tile-tags"><span>Calculate</span><span>Tables</span><span>Compare</span></div>
+    </a>
+    <a href="event-calendar.html" class="calc-tile featured" data-calc-card data-category="events planning time packs">
+      <span class="calc-tile-badge">LIVE</span><span class="calc-tile-icon">&#128197;</span><h3>Events &amp; Packs Calendar</h3><p>Live UTC day tracking, current event, available packs, reset countdown, and 4-week rotation planner.</p><div class="tile-tags"><span>Events</span><span>Packs</span><span>UTC</span></div>
+    </a>
+    <a href="calc-castle.html" class="calc-tile featured" data-calc-card data-category="combat events time rally castle">
+      <span class="calc-tile-badge">LIVE</span><span class="calc-tile-icon">&#127984;</span><h3>Castle Battle Rally Planner</h3><p>Interval-based attack and defense rally planning with UTC target timers, player spacing, buffers, and copyable starts.</p><div class="tile-tags"><span>UTC</span><span>Rallies</span><span>Interval</span></div>
+    </a>
+    <a href="calc-love-royale.html" class="calc-tile featured" data-calc-card data-category="combat planning ratios love royale">
+      <span class="calc-tile-badge">NEW</span><span class="calc-tile-icon">💘</span><h3>Love Royale Calculator</h3><p>Enter troop attack/lethality stats and rank the best Infantry/Cavalry/Archer ratios for Love Royale-style planning.</p><div class="tile-tags"><span>Ratios</span><span>Combat</span><span>Save Stats</span></div>
+    </a>
+    </div>
+  </section>
+    <section class="calc-category-section">
+    <div class="calc-category-head">
+      <div><h2>Simulators & Formation Lab</h2><p>Frakinator-inspired FAM tools for Bear Hunt, Mystic Trial no-hero formations, battle matchup testing, and transparent combat theory.</p></div>
+      <span class="calc-category-count">4 tools</span>
+    </div>
+    <div class="calc-grid enhanced-grid category-grid">
+      <a href="calc-bear-sim.html" class="calc-tile featured" data-calc-card data-category="combat simulator bear formation optimizer frakinator damage">
+        <span class="calc-tile-badge">SIM</span><span class="calc-tile-icon">🐻</span><h3>Bear Hunt Formation Simulator</h3><p>Compare Bear troop ratios using battle-report stats, archer bonus, and a transparent damage-pressure model.</p><div class="tile-tags"><span>Bear</span><span>Ratio</span><span>Damage</span></div>
+      </a>
+      <a href="calc-mystic-sim.html" class="calc-tile featured" data-calc-card data-category="combat simulator mystic trial no heroes formation">
+        <span class="calc-tile-badge">SIM</span><span class="calc-tile-icon">🔮</span><h3>Mystic Trial Simulator</h3><p>Optimize no-hero Mystic Trial troop composition against enemy Infantry/Cavalry/Archer mix and stat assumptions.</p><div class="tile-tags"><span>Mystic</span><span>No Heroes</span><span>Counter</span></div>
+      </a>
+      <a href="calc-battle-sim.html" class="calc-tile" data-calc-card data-category="combat simulator battle heroes matchup">
+        <span class="calc-tile-badge">SIM</span><span class="calc-tile-icon">⚔️</span><h3>Battle Simulator</h3><p>Compare two marches with stats, troop ratios, hero presets, buffs, capacity, and counter advantage.</p><div class="tile-tags"><span>Battle</span><span>Heroes</span><span>Matchup</span></div>
+      </a>
+      <a href="calc-sim-theory.html" class="calc-tile" data-calc-card data-category="combat simulator theory math guide">
+        <span class="calc-tile-badge">GUIDE</span><span class="calc-tile-icon">🧠</span><h3>Simulation Theory Lab</h3><p>See how the FAM simulator math works, how to calibrate it with reports, and when not to trust estimates.</p><div class="tile-tags"><span>Math</span><span>Theory</span><span>Reports</span></div>
+      </a>
+    </div>
+  </section>
+
+<section class="calc-category-section">
+    <div class="calc-category-head">
+      <div><h2>Gear, Charms & Combat Optimization</h2><p>Optimizer-style pages for the expensive combat upgrades: hero gear, governor gear, charms, pets, and widgets.</p></div>
+      <span class="calc-category-count">6 tools</span>
+    </div>
+    <div class="calc-grid enhanced-grid category-grid">
+    <a href="calc-hero-gear-optimizer.html" class="calc-tile featured" data-calc-card data-category="combat resources planning gear optimizer">
+      <span class="calc-tile-badge">OPTIMIZER</span><span class="calc-tile-icon">⚔️</span><h3>Hero Gear Optimizer Lite</h3><p>Profiles, weights, inventory, near-miss checks, and best next hero gear upgrade recommendations.</p><div class="tile-tags"><span>Profiles</span><span>Best Next</span><span>Save</span></div>
+    </a>
+    <a href="calc-governor-gear.html" class="calc-tile featured" data-calc-card data-category="combat resources planning governor gear">
+      <span class="calc-tile-badge">NEW</span><span class="calc-tile-icon">🛡️</span><h3>Governor Gear Optimizer</h3><p>Plan Satin, Gilded Threads, Artisan's Visions, missing materials, and next affordable upgrades.</p><div class="tile-tags"><span>Satin</span><span>Threads</span><span>Vision</span></div>
+    </a>
+    <a href="calc-charms.html" class="calc-tile featured" data-calc-card data-category="combat resources planning charms">
+      <span class="calc-tile-badge">NEW</span><span class="calc-tile-icon">💎</span><h3>Governor Charms Optimizer</h3><p>Track 18 charm slots, Charm Guides, Charm Designs, material balance, and best next charm upgrade.</p><div class="tile-tags"><span>Guides</span><span>Designs</span><span>Balance</span></div>
+    </a>
+    <a href="calc-widgets.html" class="calc-tile" data-calc-card data-category="combat resources planning widgets heroes">
+      <span class="calc-tile-badge">NEW</span><span class="calc-tile-icon">🧩</span><h3>Hero Widgets Planner</h3><p>Plan widget parts, hero priorities, power gains, and best next widget upgrade by role.</p><div class="tile-tags"><span>Widgets</span><span>Heroes</span></div>
+    </a>
+    <a href="calc-pets.html" class="calc-tile" data-calc-card data-category="combat events resources planning pets">
+      <span class="calc-tile-badge">NEW</span><span class="calc-tile-icon">🐺</span><h3>Pets Planner</h3><p>Plan pet level targets, inventory, focus priorities, and event spending reminders.</p><div class="tile-tags"><span>Pets</span><span>Events</span></div>
+    </a>
+    <a href="calc-gear.html" class="calc-tile" data-calc-card data-category="combat resources planning classic gear">
+      <span class="calc-tile-badge">CLASSIC</span><span class="calc-tile-icon">&#9876;&#65039;</span><h3>Classic Hero Gear Calculator</h3><p>Find the best gear upgrades for your resources. Includes stat lookup, cost reference tables, and resource planner.</p><div class="tile-tags"><span>Gear</span><span>Stats</span></div>
+    </a>
+    </div>
+  </section>
+  <section class="calc-category-section">
+    <div class="calc-category-head">
+      <div><h2>Growth, Resources & Timers</h2><p>Upgrade planning for troops, Truegold, construction, buildings, and research time/resource decisions.</p></div>
+      <span class="calc-category-count">5 tools</span>
+    </div>
+    <div class="calc-grid enhanced-grid category-grid">
+    <a href="calc-troops.html" class="calc-tile" data-calc-card data-category="combat time resources troops training">
+      <span class="calc-tile-icon">&#127993;</span><h3>Troop Training</h3><p>Calculate troops you can produce with speedups, or time required for a target troop count. T1-T10.</p><div class="tile-tags"><span>Training</span><span>Speedups</span></div>
+    </a>
+    <a href="calc-truegold.html" class="calc-tile" data-calc-card data-category="resources planning truegold dust">
+      <span class="calc-tile-icon">&#129689;</span><h3>Truegold &amp; Dust</h3><p>Convert between Truegold, Dust, and Tempered Truegold. Plan TG8 upgrades and refinement value.</p><div class="tile-tags"><span>TG8</span><span>Dust</span></div>
+    </a>
+    <a href="calc-construction.html" class="calc-tile" data-calc-card data-category="time resources planning construction">
+      <span class="calc-tile-icon">&#9201;&#65039;</span><h3>Construction Time</h3><p>Apply speed bonuses to base build times to see real-world duration.</p><div class="tile-tags"><span>Build</span><span>Time</span></div>
+    </a>
+    <a href="calc-buildings.html" class="calc-tile" data-calc-card data-category="resources planning buildings">
+      <span class="calc-tile-icon">&#127970;</span><h3>Building Upgrades</h3><p>Plan Truegold building progression and estimate total costs across multiple upgrades.</p><div class="tile-tags"><span>Buildings</span><span>Costs</span></div>
+    </a>
+    <a href="calc-research.html" class="calc-tile" data-calc-card data-category="resources time planning research">
+      <span class="calc-tile-icon">&#128218;</span><h3>Research Planner</h3><p>Resource and time estimates for War Academy research. Bonus stacking with speedups.</p><div class="tile-tags"><span>Research</span><span>War Academy</span></div>
+    </a>
+    </div>
+  </section>
+  <section class="calc-category-section">
+    <div class="calc-category-head">
+      <div><h2>Heroes & Comparison</h2><p>Hero shard planning and side-by-side hero comparison tools.</p></div>
+      <span class="calc-category-count">2 tools</span>
+    </div>
+    <div class="calc-grid enhanced-grid category-grid">
+    <a href="calc-shards.html" class="calc-tile" data-calc-card data-category="combat resources planning heroes shards">
+      <span class="calc-tile-icon">&#11088;</span><h3>Hero Shards</h3><p>Shards needed to take a hero from current star/tier to target. Rare, Epic, and Mythic stages.</p><div class="tile-tags"><span>Heroes</span><span>Shards</span></div>
+    </a>
+    <a href="calc-comparison.html" class="calc-tile" data-calc-card data-category="combat planning heroes comparison">
+      <span class="calc-tile-icon">&#9878;&#65039;</span><h3>Hero Comparison</h3><p>Side-by-side hero stats from stars and weapons. Compare two heroes to pick your best rally lead.</p><div class="tile-tags"><span>Compare</span><span>Stats</span></div>
+    </a>
+    </div>
+  </section>
+  <section class="calc-category-section">
+    <div class="calc-category-head">
+      <div><h2>Events & Score Planning</h2><p>Score-builder planning for Strongest Governor, Kingdom of Power, Armament Competition, Officer Project, and Alliance Brawl.</p></div>
+      <span class="calc-category-count">1 tools</span>
+    </div>
+    <div class="calc-grid enhanced-grid category-grid">
+    <a href="calc-events.html" class="calc-tile" data-calc-card data-category="events resources planning score">
+      <span class="calc-tile-icon">&#127942;</span><h3>Event Score Builder</h3><p>Build event plans from speedups, troops, building, research, and hero shards for major milestone events.</p><div class="tile-tags"><span>Points</span><span>KvK</span></div>
+    </a>
+    </div>
+  </section>
+
+  <div class="alert alert-amber" style="margin-top:1.5rem"><span>&#9888;&#65039;</span><div><strong>Estimator note:</strong> these tools are fan-made planning helpers. Always verify expensive upgrades against current in-game values before spending.</div></div>
+</div>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="event-calendar.html">Events</a><a href="calc-governor-gear.html">Governor Gear</a><a href="calc-charms.html">Charms</a><a href="calc-castle.html">Castle Battle</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="calc-ui.js?v=1779083200"></script>
+</body>
+</html>

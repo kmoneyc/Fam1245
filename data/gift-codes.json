@@ -1,0 +1,32 @@
+{
+  "source": "FAM local fallback",
+  "updatedAt": "2026-05-31T00:00:00Z",
+  "kingdom": 1245,
+  "active": [
+    {
+      "code": "OFFICIALSTORE516",
+      "status": "active",
+      "reward": "Public active code",
+      "note": "Verify in-game before posting alliance-wide."
+    },
+    {
+      "code": "LOVEFAMILY",
+      "status": "active",
+      "reward": "Public active code",
+      "note": "Verify in-game before posting alliance-wide."
+    },
+    {
+      "code": "KSPRAWNING",
+      "status": "active",
+      "reward": "Public active code",
+      "note": "Verify in-game before posting alliance-wide."
+    },
+    {
+      "code": "VIP777",
+      "status": "active",
+      "reward": "Public active code",
+      "note": "Verify in-game before posting alliance-wide."
+    }
+  ],
+  "expired": []
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Hero Gear Optimizer Lite</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+<style>
+.optimizer-shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 2.5rem;}
+.opt-hero{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:1.35rem;margin-bottom:1rem;box-shadow:0 16px 40px rgba(168,32,94,.10);}
+.opt-hero .eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.opt-hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.75rem,4vw,3.15rem);line-height:1.05;margin:.35rem 0;color:var(--text);}
+.opt-hero p{color:var(--text-dim);line-height:1.65;max-width:850px;margin:0;}
+.opt-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1rem;align-items:start;}
+.opt-card,.opt-panel{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1rem;box-shadow:0 12px 32px rgba(168,32,94,.08);}
+.opt-panel{position:sticky;top:84px;}
+.card-title{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start;border-bottom:1px solid var(--border);padding-bottom:.7rem;margin-bottom:.85rem;}
+.card-title h2{font-family:'Orbitron',sans-serif;font-size:1rem;margin:0;color:var(--text);}
+.card-title p{font-size:.82rem;color:var(--text-dim);margin:.2rem 0 0;line-height:1.5;}
+.badge-soft{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:rgba(214,48,122,.08);border:1px solid rgba(214,48,122,.24);border-radius:999px;padding:.24rem .45rem;white-space:nowrap;}
+.input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem;}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.28rem;}
+.input,.select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.68rem .72rem;font-family:'DM Mono',monospace;font-size:.86rem;outline:none;}
+.input:focus,.select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,48,122,.10);}
+.tool-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0;}
+.btn-small,.btn-main,.btn-danger{border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;cursor:pointer;transition:.15s ease;padding:.48rem .7rem;}
+.btn-main{background:linear-gradient(135deg,#ff4aa2,#7c3aed);color:white;border:none;font-weight:800;}
+.btn-small:hover,.btn-main:hover{transform:translateY(-1px);border-color:var(--gold);}
+.btn-danger:hover{background:#d6307a;color:white;border-color:#d6307a;}
+.item-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;}
+.item-card{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:.75rem;}
+.item-card h3{font-size:.88rem;margin:0 0 .55rem;color:var(--text);}
+.item-card .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.8rem;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;min-width:0;}
+.summary-card span{display:block;font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.25rem;}
+.summary-card strong{display:block;font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-list{display:flex;flex-direction:column;gap:.55rem;}
+.rec{border:1px solid var(--border);background:var(--surface2);border-radius:14px;padding:.75rem;}
+.rec strong{display:block;color:var(--text);}
+.rec span{display:block;color:var(--text-dim);font-size:.8rem;margin-top:.18rem;line-height:1.45;}
+.progress-bar{height:10px;background:var(--surface3);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:.45rem;}
+.progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff4aa2,#7c3aed);width:0%;}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface2);}
+.opt-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:640px;}
+.opt-table th,.opt-table td{padding:.65rem .7rem;border-bottom:1px solid var(--border);text-align:left;}
+.opt-table th{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:.08em;}
+.opt-note{font-size:.8rem;color:var(--text-dim);line-height:1.55;margin-top:.75rem;}
+@media(max-width:980px){.opt-grid{grid-template-columns:1fr}.opt-panel{position:static}}
+@media(max-width:680px){.optimizer-shell{padding:.9rem .75rem 2rem}.input-grid,.item-grid,.summary-grid{grid-template-columns:1fr}.item-card .mini-grid{grid-template-columns:1fr}}
+</style>
+
+
+<style id="v48-target-calculator-compact-header-fix">
+/* v4.48 — Compact header fix for remaining calculator pages */
+body.calc-theme-modern .page-header,
+body.calc-theme-modern .opt-hero{
+  position:relative !important;
+  min-height:0 !important;
+  display:block !important;
+  padding:1.1rem 1.2rem !important;
+  margin:0 0 1rem !important;
+  border-radius:20px !important;
+  border:1px solid color-mix(in srgb,var(--border) 82%,transparent) !important;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--surface) 96%,transparent),
+    color-mix(in srgb,var(--surface2) 74%,transparent)
+  ) !important;
+  box-shadow:0 14px 40px rgba(0,0,0,.14) !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+}
+body.calc-theme-modern .page-header::before,
+body.calc-theme-modern .page-header::after,
+body.calc-theme-modern .opt-hero::before,
+body.calc-theme-modern .opt-hero::after{
+  display:none !important;
+  content:none !important;
+}
+body.calc-theme-modern .page-header h1,
+body.calc-theme-modern .opt-hero h1{
+  max-width:none !important;
+  margin:0 !important;
+  font-size:clamp(1.95rem,7vw,3.25rem) !important;
+  line-height:1 !important;
+  letter-spacing:.01em !important;
+  text-transform:none !important;
+  color:var(--text) !important;
+  text-shadow:none !important;
+}
+body.calc-theme-modern .page-header p,
+body.calc-theme-modern .opt-hero p{
+  max-width:820px !important;
+  margin:.55rem 0 0 !important;
+  font-size:.95rem !important;
+  line-height:1.5 !important;
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .page-header .mini-note,
+body.calc-theme-modern .opt-hero .mini-note,
+body.calc-theme-modern .page-header .badge,
+body.calc-theme-modern .opt-hero .badge{
+  position:static !important;
+  display:inline-flex !important;
+  margin-top:.75rem !important;
+}
+body.calc-theme-modern .crumb{
+  margin:0 0 .85rem !important;
+  font-size:.76rem !important;
+  line-height:1.2 !important;
+}
+body.calc-theme-modern .crumb,
+body.calc-theme-modern .crumb a{
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .crumb a:hover{
+  color:var(--gold) !important;
+}
+body.calc-theme-modern .app-body,
+body.calc-theme-modern .page-container,
+body.calc-theme-modern .optimizer-shell{
+  width:min(100%,1120px) !important;
+  max-width:1120px !important;
+  margin:0 auto !important;
+  padding:1rem 1rem 2rem !important;
+}
+body.calc-theme-modern .calc-card,
+body.calc-theme-modern .opt-card,
+body.calc-theme-modern .opt-panel,
+body.calc-theme-modern .k1245-panel,
+body.calc-theme-modern .master-card,
+body.calc-theme-modern .summary-card,
+body.calc-theme-modern .resource-card,
+body.calc-theme-modern .results-box,
+body.calc-theme-modern .stat-result-box{
+  border-radius:18px !important;
+}
+body.calc-theme-modern .calc-card-header,
+body.calc-theme-modern .card-title,
+body.calc-theme-modern .results-header{
+  padding:.85rem 1rem !important;
+}
+body.calc-theme-modern .calc-body,
+body.calc-theme-modern .opt-card > :not(.card-title),
+body.calc-theme-modern .opt-panel > :not(.card-title){
+  padding:1rem !important;
+}
+@media(max-width:760px){
+  body.calc-theme-modern .app-body,
+  body.calc-theme-modern .page-container,
+  body.calc-theme-modern .optimizer-shell{
+    width:100% !important;
+    max-width:100% !important;
+    padding:.8rem .85rem 1.5rem !important;
+    overflow-x:hidden !important;
+  }
+  body.calc-theme-modern .page-header,
+  body.calc-theme-modern .opt-hero{
+    padding:1rem !important;
+    border-radius:18px !important;
+    margin-bottom:.9rem !important;
+  }
+  body.calc-theme-modern .page-header h1,
+  body.calc-theme-modern .opt-hero h1{
+    font-size:clamp(1.7rem,8.8vw,2.7rem) !important;
+    line-height:1.02 !important;
+    overflow-wrap:anywhere !important;
+  }
+  body.calc-theme-modern .page-header p,
+  body.calc-theme-modern .opt-hero p{
+    font-size:.9rem !important;
+    line-height:1.45 !important;
+  }
+}
+</style>
+
+</head>
+<body class="calc-theme-modern">
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+<main class="optimizer-shell">
+<div class="crumb"><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Hero Gear Optimizer</span></div>
+<section class="opt-hero no-theme-art"><span class="eyebrow">FAM OPTIMIZER · HERO GEAR</span><h1>Hero Gear Optimizer Lite</h1><p>A faster optimizer-style hero gear page with profiles, inventory, next-best upgrade, and save/load.</p></section>
+
+<div id="heroGearDataSyncStatus"></div>
+<div class="k1245-panel"><strong>Hero Gear Data Sync</strong><p>K1245 hero gear planning attempts live calculator-data sync and falls back to local estimates.</p></div>
+<div class="opt-grid">
+  <section class="opt-card">
+    <div class="card-title"><div><h2>Hero Gear Profile</h2><p>Use build profiles and inventory to decide the best next gear upgrade.</p></div><span class="badge-soft">Optimizer Lite</span></div>
+    <div class="input-grid">
+      <div class="field"><label>XP</label><input class="input" id="xp" type="number" value="0" min="0" oninput="calcHeroGear()"></div>
+      <div class="field"><label>Forgehammers</label><input class="input" id="hammers" type="number" value="0" min="0" oninput="calcHeroGear()"></div>
+      <div class="field"><label>Mithril</label><input class="input" id="mithril" type="number" value="0" min="0" oninput="calcHeroGear()"></div>
+      <div class="field"><label>Build Profile</label><select class="select" id="profile" onchange="applyProfile();calcHeroGear()"><option>FAM Recommended</option><option>Bear Hunt</option><option>PvP Rally</option><option>Garrison</option><option>Balanced</option></select></div>
+      <div class="field"><label>Infantry Weight</label><input class="input" id="wInf" type="number" value="4" min="0" oninput="calcHeroGear()"></div>
+      <div class="field"><label>Archer Weight</label><input class="input" id="wArc" type="number" value="4" min="0" oninput="calcHeroGear()"></div>
+    </div>
+    <div class="tool-row"><button class="btn-small" onclick="saveHeroGear()">Save</button><button class="btn-danger" onclick="resetHeroGear()">Reset</button><a class="btn-small" href="calc-gear.html">Open Classic Gear Calculator</a></div>
+    <div class="item-grid" id="heroGearItems"></div>
+  </section>
+  <aside class="opt-panel">
+    <div class="card-title"><div><h2>Next Best Upgrade</h2><p>Weighted recommendation based on your profile and inventory.</p></div><span class="badge-soft">Live</span></div>
+    <div class="summary-grid">
+      <div class="summary-card"><span>XP Needed</span><strong id="hgXp">0</strong></div>
+      <div class="summary-card"><span>Hammers Needed</span><strong id="hgHammer">0</strong></div>
+      <div class="summary-card"><span>Mithril Needed</span><strong id="hgMithril">0</strong></div>
+      <div class="summary-card"><span>Score Gain</span><strong id="hgScore">0</strong></div>
+    </div>
+    <div class="rec-list" id="heroGearRecs"></div>
+    <div class="tool-row"><button class="btn-main" onclick="copyHeroGear()">Copy Plan</button></div>
+  </aside>
+</div>
+
+<script>
+
+const gear=['Infantry Helmet','Infantry Armor','Cavalry Boots','Cavalry Gloves','Archer Bow','Archer Ring'];
+const typeMap={'Infantry Helmet':'Infantry','Infantry Armor':'Infantry','Cavalry Boots':'Cavalry','Cavalry Gloves':'Cavalry','Archer Bow':'Archer','Archer Ring':'Archer'};
+const storeKey='fam_hero_gear_opt_v1';
+function n(id){return Math.max(0,parseInt(document.getElementById(id).value,10)||0)}
+function cost(c,t){let xp=0,h=0,m=0,score=0;for(let i=Number(c)+1;i<=Number(t);i++){xp+=800+i*220;h+=8+i*2;m+=i>=10?i-8:0;score+=600+i*160}return {xp,h,m,score}}
+function applyProfile(){const p=profile.value;if(p==='Bear Hunt'||p==='FAM Recommended'){wInf.value=5;wArc.value=5}else if(p==='PvP Rally'){wInf.value=4;wArc.value=5}else if(p==='Garrison'){wInf.value=5;wArc.value=3}else{wInf.value=3;wArc.value=3}}
+function initHeroGear(){const saved=JSON.parse(localStorage.getItem(storeKey)||'null');if(saved){xp.value=saved.xp||0;hammers.value=saved.hammers||0;mithril.value=saved.mithril||0;profile.value=saved.profile||'FAM Recommended';wInf.value=saved.wInf||4;wArc.value=saved.wArc||4}const data=saved?.items||{};heroGearItems.innerHTML=gear.map(g=>`<div class="item-card"><h3>${g}</h3><div class="mini-grid"><div class="field"><label>Current</label><input class="input cur" data-g="${g}" type="number" value="${data[g]?.cur||0}" min="0" max="20" oninput="calcHeroGear()"></div><div class="field"><label>Target</label><input class="input tar" data-g="${g}" type="number" value="${data[g]?.tar||5}" min="0" max="20" oninput="calcHeroGear()"></div></div></div>`).join('');calcHeroGear()}
+function collect(){let total={xp:0,h:0,m:0,score:0},items={},next=[];gear.forEach(g=>{const cur=Number(document.querySelector(`.cur[data-g="${g}"]`).value)||0,tar=Number(document.querySelector(`.tar[data-g="${g}"]`).value)||0;items[g]={cur,tar};const c=tar>cur?cost(cur,tar):{xp:0,h:0,m:0,score:0};total.xp+=c.xp;total.h+=c.h;total.m+=c.m;total.score+=c.score;if(cur<20){const nc=cost(cur,cur+1);const t=typeMap[g];const w=t==='Infantry'?n('wInf'):t==='Archer'?n('wArc'):2;next.push({g,cur,next:cur+1,...nc,weighted:nc.score*w})}});return {total,items,next}}
+function calcHeroGear(){const d=collect(),inv={xp:n('xp'),h:n('hammers'),m:n('mithril')};hgXp.textContent=d.total.xp.toLocaleString();hgHammer.textContent=d.total.h.toLocaleString();hgMithril.textContent=d.total.m.toLocaleString();hgScore.textContent=d.total.score.toLocaleString();const best=d.next.filter(x=>x.xp<=inv.xp&&x.h<=inv.h&&x.m<=inv.m).sort((a,b)=>b.weighted-a.weighted)[0];const near=d.next.sort((a,b)=>(Math.max(0,a.xp-inv.xp)+Math.max(0,a.h-inv.h)*200+Math.max(0,a.m-inv.m)*500)-(Math.max(0,b.xp-inv.xp)+Math.max(0,b.h-inv.h)*200+Math.max(0,b.m-inv.m)*500))[0];heroGearRecs.innerHTML=`<div class="rec"><strong>${best?`Best affordable: ${best.g} → ${best.next}`:'No affordable upgrade'}</strong><span>${best?`Cost ${best.xp} XP, ${best.h} hammers, ${best.m} mithril.`:near?`Near miss: ${near.g} needs ${Math.max(0,near.xp-inv.xp)} XP, ${Math.max(0,near.h-inv.h)} hammers, ${Math.max(0,near.m-inv.m)} mithril.`:'Add gear pieces.'}</span></div><div class="rec"><strong>Profile: ${profile.value}</strong><span>Infantry weight ${wInf.value}, Archer weight ${wArc.value}. Adjust weights if your build is different.</span></div>`}
+function saveHeroGear(){const d=collect();localStorage.setItem(storeKey,JSON.stringify({xp:n('xp'),hammers:n('hammers'),mithril:n('mithril'),profile:profile.value,wInf:wInf.value,wArc:wArc.value,items:d.items}));calcHeroGear()}
+function resetHeroGear(){localStorage.removeItem(storeKey);location.reload()}
+function copyHeroGear(){const d=collect();navigator.clipboard?.writeText(`Hero Gear Optimizer\nXP: ${d.total.xp}\nHammers: ${d.total.h}\nMithril: ${d.total.m}\nScore: ${d.total.score}\nProfile: ${profile.value}`)}
+initHeroGear();
+
+function syncheroGearDataSyncStatus(){
+  if(!window.FAM_LIVE_SYNC) return;
+  FAM_LIVE_SYNC.get('calculatorData',{cacheHours:24}).then(function(result){
+    FAM_LIVE_SYNC.injectSyncBadge('#heroGearDataSyncStatus', result, 'Hero Gear Data Sync');
+  });
+}
+syncheroGearDataSyncStatus();
+
+
+</script>
+
+</main>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="fam-live-sync.js?v=1779083200"></script>
+</body>
+</html>

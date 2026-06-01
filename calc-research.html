@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Research Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+
+
+<style id="v48-target-calculator-compact-header-fix">
+/* v4.48 — Compact header fix for remaining calculator pages */
+body.calc-theme-modern .page-header,
+body.calc-theme-modern .opt-hero{
+  position:relative !important;
+  min-height:0 !important;
+  display:block !important;
+  padding:1.1rem 1.2rem !important;
+  margin:0 0 1rem !important;
+  border-radius:20px !important;
+  border:1px solid color-mix(in srgb,var(--border) 82%,transparent) !important;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--surface) 96%,transparent),
+    color-mix(in srgb,var(--surface2) 74%,transparent)
+  ) !important;
+  box-shadow:0 14px 40px rgba(0,0,0,.14) !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+}
+body.calc-theme-modern .page-header::before,
+body.calc-theme-modern .page-header::after,
+body.calc-theme-modern .opt-hero::before,
+body.calc-theme-modern .opt-hero::after{
+  display:none !important;
+  content:none !important;
+}
+body.calc-theme-modern .page-header h1,
+body.calc-theme-modern .opt-hero h1{
+  max-width:none !important;
+  margin:0 !important;
+  font-size:clamp(1.95rem,7vw,3.25rem) !important;
+  line-height:1 !important;
+  letter-spacing:.01em !important;
+  text-transform:none !important;
+  color:var(--text) !important;
+  text-shadow:none !important;
+}
+body.calc-theme-modern .page-header p,
+body.calc-theme-modern .opt-hero p{
+  max-width:820px !important;
+  margin:.55rem 0 0 !important;
+  font-size:.95rem !important;
+  line-height:1.5 !important;
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .page-header .mini-note,
+body.calc-theme-modern .opt-hero .mini-note,
+body.calc-theme-modern .page-header .badge,
+body.calc-theme-modern .opt-hero .badge{
+  position:static !important;
+  display:inline-flex !important;
+  margin-top:.75rem !important;
+}
+body.calc-theme-modern .crumb{
+  margin:0 0 .85rem !important;
+  font-size:.76rem !important;
+  line-height:1.2 !important;
+}
+body.calc-theme-modern .crumb,
+body.calc-theme-modern .crumb a{
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .crumb a:hover{
+  color:var(--gold) !important;
+}
+body.calc-theme-modern .app-body,
+body.calc-theme-modern .page-container,
+body.calc-theme-modern .optimizer-shell{
+  width:min(100%,1120px) !important;
+  max-width:1120px !important;
+  margin:0 auto !important;
+  padding:1rem 1rem 2rem !important;
+}
+body.calc-theme-modern .calc-card,
+body.calc-theme-modern .opt-card,
+body.calc-theme-modern .opt-panel,
+body.calc-theme-modern .k1245-panel,
+body.calc-theme-modern .master-card,
+body.calc-theme-modern .summary-card,
+body.calc-theme-modern .resource-card,
+body.calc-theme-modern .results-box,
+body.calc-theme-modern .stat-result-box{
+  border-radius:18px !important;
+}
+body.calc-theme-modern .calc-card-header,
+body.calc-theme-modern .card-title,
+body.calc-theme-modern .results-header{
+  padding:.85rem 1rem !important;
+}
+body.calc-theme-modern .calc-body,
+body.calc-theme-modern .opt-card > :not(.card-title),
+body.calc-theme-modern .opt-panel > :not(.card-title){
+  padding:1rem !important;
+}
+@media(max-width:760px){
+  body.calc-theme-modern .app-body,
+  body.calc-theme-modern .page-container,
+  body.calc-theme-modern .optimizer-shell{
+    width:100% !important;
+    max-width:100% !important;
+    padding:.8rem .85rem 1.5rem !important;
+    overflow-x:hidden !important;
+  }
+  body.calc-theme-modern .page-header,
+  body.calc-theme-modern .opt-hero{
+    padding:1rem !important;
+    border-radius:18px !important;
+    margin-bottom:.9rem !important;
+  }
+  body.calc-theme-modern .page-header h1,
+  body.calc-theme-modern .opt-hero h1{
+    font-size:clamp(1.7rem,8.8vw,2.7rem) !important;
+    line-height:1.02 !important;
+    overflow-wrap:anywhere !important;
+  }
+  body.calc-theme-modern .page-header p,
+  body.calc-theme-modern .opt-hero p{
+    font-size:.9rem !important;
+    line-height:1.45 !important;
+  }
+}
+</style>
+
+</head>
+<body class="calc-theme-modern">
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions"><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button><a href="calculators.html" class="header-back">&larr; All Calculators</a></div>
+  </div>
+</header>
+
+<div class="app-body">
+<div class="page-container">
+
+  <div class="crumb">
+    <a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span>
+    <a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span>
+    <span>Research Planner</span>
+  </div>
+
+  <div class="page-header no-theme-art">
+    <h1>Research Planner</h1>
+    <p>WAR ACADEMY &middot; TRUEGOLD LEGIONARIES &middot; T11 PROGRESSION</p>
+  </div>
+
+  <div class="alert alert-info">
+    <span>&#128218;</span>
+    <div>The War Academy unlocks at <strong>~Day 220</strong>. For F2P/low spenders, prioritize <strong>Truegold Legionaries</strong> (Infantry, Archer, Lancer) for rally capacity. Don't convert Truegold to Dust if you're going TG8 path &mdash; use free Dust from Commission Tab + Tidal Shop only.</div>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-card-header"><h2>Research Target</h2><span class="badge">Step 1</span></div>
+    <div class="calc-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Research Track</label>
+          <select class="form-select" id="track" onchange="calcResearch()">
+            <option value="legionaries">Truegold Legionaries (Inf/Arc/Lan)</option>
+            <option value="battalion">Truegold Battalion</option>
+            <option value="blades">Truegold Blades</option>
+            <option value="shields">Truegold Shields</option>
+            <option value="mauls">Truegold Mauls</option>
+            <option value="plating">Truegold Plating</option>
+            <option value="t11">T11 Troop Tree (Full)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current Level</label>
+          <input class="form-input" type="number" id="fromLevel" value="0" min="0" max="10" oninput="calcResearch()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Level</label>
+          <input class="form-input" type="number" id="toLevel" value="5" min="1" max="10" oninput="calcResearch()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-card-header"><h2>Your Resources</h2><span class="badge">Step 2</span></div>
+    <div class="calc-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Truegold Dust</label>
+          <input class="form-input" type="number" id="ownDust" value="0" min="0" oninput="calcResearch()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Gold (millions)</label>
+          <input class="form-input" type="number" id="ownGold" value="0" min="0" oninput="calcResearch()" step="0.1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Research Speed Bonus (%)</label>
+          <input class="form-input" type="number" id="researchBonus" value="50" min="0" step="1" oninput="calcResearch()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-header">RESOURCE REQUIREMENTS</div>
+    <div class="stat-result-box">
+      <div class="stat-result-grid">
+        <div class="stat-result-item">
+          <div class="stat-result-label">Truegold Dust Needed</div>
+          <div class="stat-result-value" id="dustNeed">0</div>
+        </div>
+        <div class="stat-result-item">
+          <div class="stat-result-label">Gold Needed</div>
+          <div class="stat-result-value amber" id="goldNeed">0M</div>
+        </div>
+        <div class="stat-result-item">
+          <div class="stat-result-label">Base Time</div>
+          <div class="stat-result-value muted" id="baseTime">&mdash;</div>
+        </div>
+        <div class="stat-result-item">
+          <div class="stat-result-label">Reduced Time</div>
+          <div class="stat-result-value green" id="reducedTime">&mdash;</div>
+        </div>
+      </div>
+      <div class="stat-divider">
+        <div class="stat-result-grid">
+          <div class="stat-result-item">
+            <div class="stat-result-label">Missing Dust</div>
+            <div class="stat-result-value" id="missingDust">0</div>
+          </div>
+          <div class="stat-result-item">
+            <div class="stat-result-label">Missing Gold</div>
+            <div class="stat-result-value" id="missingGold">0M</div>
+          </div>
+          <div class="stat-result-item">
+            <div class="stat-result-label">Status</div>
+            <div class="stat-result-value green" id="resStatus">&mdash;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-card" style="margin-top:1.5rem">
+    <div class="calc-card-header"><h2>Truegold Legionaries &mdash; Per Level Cost</h2></div>
+    <div class="calc-body">
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Level</th><th>Dust</th><th>Gold</th><th>Base Time</th></tr></thead>
+          <tbody>
+            <tr><td class="accent">1</td><td>150</td><td>50M</td><td>~3d</td></tr>
+            <tr><td>2</td><td>350</td><td>100M</td><td>~5d</td></tr>
+            <tr><td>3</td><td>700</td><td>200M</td><td>~8d</td></tr>
+            <tr><td>4</td><td>1,200</td><td>350M</td><td>~12d</td></tr>
+            <tr><td>5</td><td>2,000</td><td>500M</td><td>~18d</td></tr>
+            <tr><td class="accent">6</td><td>3,200</td><td>800M</td><td>~24d</td></tr>
+            <tr><td>7</td><td>5,000</td><td>1,200M</td><td>~32d</td></tr>
+            <tr><td>8</td><td>7,500</td><td>1,800M</td><td>~42d</td></tr>
+            <tr><td>9</td><td>10,500</td><td>2,500M</td><td>~55d</td></tr>
+            <tr><td class="amber">10 (Max)</td><td class="amber">13,421</td><td class="amber">3,974M</td><td>~71d</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.5rem">Maxing all 3 Legionaries (Infantry + Archer + Lancer) requires ~40,000 Dust and ~12B gold. T11 full tree is ~3&times; this. <a href="index.html" onclick="event.preventDefault();window.location='index.html'">Read the TG8 vs T11 strategy guide</a> before committing.</p>
+    </div>
+  </div>
+
+  <p class="source-note">Source: kingshotguides.com T10-TG8 analysis &middot; kingshotoptimizer.com research data. Cost values for top levels (8-10) are well-validated; lower levels are approximations.</p>
+
+</div>
+</div>
+
+<script>
+// Cost data per level - based on Truegold Legionaries baseline
+const COST_TABLE = {
+  legionaries: {
+    dust: [0, 150, 350, 700, 1200, 2000, 3200, 5000, 7500, 10500, 13421],
+    gold: [0, 50, 100, 200, 350, 500, 800, 1200, 1800, 2500, 3974], // millions
+    hours: [0, 72, 120, 192, 288, 432, 576, 768, 1008, 1320, 1704],
+  },
+  battalion: { mult: 0.8 },
+  blades: { mult: 0.7 },
+  shields: { mult: 0.7 },
+  mauls: { mult: 0.7 },
+  plating: { mult: 0.6 },
+  t11: { mult: 3.0 }, // T11 full tree ~3x Legionaries
+};
+
+function getCosts(track, fromL, toL) {
+  const base = COST_TABLE.legionaries;
+  const mult = COST_TABLE[track].mult ?? 1.0;
+  let dust = 0, gold = 0, hours = 0;
+  for (let i = fromL + 1; i <= toL; i++) {
+    dust += Math.round(base.dust[i] * mult);
+    gold += Math.round(base.gold[i] * mult);
+    hours += Math.round(base.hours[i] * mult);
+  }
+  return {dust, gold, hours};
+}
+
+function fmtTime(hours) {
+  if (hours === 0) return '—';
+  const d = Math.floor(hours / 24);
+  const h = hours % 24;
+  return d > 0 ? `${d}d ${h}h` : `${h}h`;
+}
+
+function calcResearch() {
+  const track = document.getElementById('track').value;
+  const fromL = parseInt(document.getElementById('fromLevel').value) || 0;
+  const toL = parseInt(document.getElementById('toLevel').value) || 0;
+
+  if (toL <= fromL) {
+    ['dustNeed','goldNeed','missingDust','missingGold'].forEach(id => document.getElementById(id).textContent = '—');
+    document.getElementById('baseTime').textContent = '—';
+    document.getElementById('reducedTime').textContent = '—';
+    document.getElementById('resStatus').textContent = '—';
+    return;
+  }
+
+  const c = getCosts(track, fromL, toL);
+
+  const ownDust = parseInt(document.getElementById('ownDust').value) || 0;
+  const ownGold = parseFloat(document.getElementById('ownGold').value) || 0;
+  const speedBonus = parseFloat(document.getElementById('researchBonus').value) || 0;
+
+  const missingDust = Math.max(0, c.dust - ownDust);
+  const missingGold = Math.max(0, c.gold - ownGold);
+
+  const reducedHours = c.hours / (1 + speedBonus / 100);
+
+  document.getElementById('dustNeed').textContent = c.dust.toLocaleString();
+  document.getElementById('goldNeed').textContent = c.gold.toLocaleString() + 'M';
+  document.getElementById('missingDust').textContent = missingDust.toLocaleString();
+  document.getElementById('missingGold').textContent = missingGold.toLocaleString() + 'M';
+  document.getElementById('baseTime').textContent = fmtTime(c.hours);
+  document.getElementById('reducedTime').textContent = fmtTime(Math.round(reducedHours));
+
+  const ok = missingDust === 0 && missingGold === 0;
+  const status = document.getElementById('resStatus');
+  if (ok) {
+    status.textContent = '✓ Ready';
+    status.className = 'stat-result-value green';
+  } else {
+    status.textContent = 'Short';
+    status.className = 'stat-result-value amber';
+  }
+}
+
+calcResearch();
+</script>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+
+<div class="legal-disclaimer" style="max-width:1180px;margin:1rem auto 1.5rem;padding:0 1rem;font-size:.76rem;color:var(--text-dim);line-height:1.5;text-align:center">
+  v4.52 &middot; May 2026 &middot; Independent FAM alliance project. Not affiliated with Kingshot or its developers. All game content, names, and trademarks belong to their respective owners.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Pets Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+<style>
+.optimizer-shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 2.5rem;}
+.opt-hero{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:1.35rem;margin-bottom:1rem;box-shadow:0 16px 40px rgba(168,32,94,.10);}
+.opt-hero .eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.opt-hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.75rem,4vw,3.15rem);line-height:1.05;margin:.35rem 0;color:var(--text);}
+.opt-hero p{color:var(--text-dim);line-height:1.65;max-width:850px;margin:0;}
+.opt-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1rem;align-items:start;}
+.opt-card,.opt-panel{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1rem;box-shadow:0 12px 32px rgba(168,32,94,.08);}
+.opt-panel{position:sticky;top:84px;}
+.card-title{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start;border-bottom:1px solid var(--border);padding-bottom:.7rem;margin-bottom:.85rem;}
+.card-title h2{font-family:'Orbitron',sans-serif;font-size:1rem;margin:0;color:var(--text);}
+.card-title p{font-size:.82rem;color:var(--text-dim);margin:.2rem 0 0;line-height:1.5;}
+.badge-soft{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:rgba(214,48,122,.08);border:1px solid rgba(214,48,122,.24);border-radius:999px;padding:.24rem .45rem;white-space:nowrap;}
+.input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem;}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.28rem;}
+.input,.select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.68rem .72rem;font-family:'DM Mono',monospace;font-size:.86rem;outline:none;}
+.input:focus,.select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,48,122,.10);}
+.tool-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0;}
+.btn-small,.btn-main,.btn-danger{border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;cursor:pointer;transition:.15s ease;padding:.48rem .7rem;}
+.btn-main{background:linear-gradient(135deg,#ff4aa2,#7c3aed);color:white;border:none;font-weight:800;}
+.btn-small:hover,.btn-main:hover{transform:translateY(-1px);border-color:var(--gold);}
+.btn-danger:hover{background:#d6307a;color:white;border-color:#d6307a;}
+.item-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;}
+.item-card{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:.75rem;}
+.item-card h3{font-size:.88rem;margin:0 0 .55rem;color:var(--text);}
+.item-card .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.8rem;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;min-width:0;}
+.summary-card span{display:block;font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.25rem;}
+.summary-card strong{display:block;font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-list{display:flex;flex-direction:column;gap:.55rem;}
+.rec{border:1px solid var(--border);background:var(--surface2);border-radius:14px;padding:.75rem;}
+.rec strong{display:block;color:var(--text);}
+.rec span{display:block;color:var(--text-dim);font-size:.8rem;margin-top:.18rem;line-height:1.45;}
+.progress-bar{height:10px;background:var(--surface3);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:.45rem;}
+.progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff4aa2,#7c3aed);width:0%;}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface2);}
+.opt-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:640px;}
+.opt-table th,.opt-table td{padding:.65rem .7rem;border-bottom:1px solid var(--border);text-align:left;}
+.opt-table th{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:.08em;}
+.opt-note{font-size:.8rem;color:var(--text-dim);line-height:1.55;margin-top:.75rem;}
+@media(max-width:980px){.opt-grid{grid-template-columns:1fr}.opt-panel{position:static}}
+@media(max-width:680px){.optimizer-shell{padding:.9rem .75rem 2rem}.input-grid,.item-grid,.summary-grid{grid-template-columns:1fr}.item-card .mini-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+<main class="optimizer-shell">
+<div class="crumb"><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Pets</span></div>
+<section class="opt-hero"><span class="eyebrow">FAM PLANNER · PETS</span><h1>Pets Upgrade Planner</h1><p>Track pet upgrade targets, inventory, and recommended next spending for events and combat focus.</p></section>
+
+<div id="petsDataSyncStatus"></div>
+<div class="k1245-panel"><strong>Pets Data Sync</strong><p>K1245 pet planning attempts live calculator-data sync and falls back to local estimates.</p></div>
+<div class="opt-grid">
+  <section class="opt-card">
+    <div class="card-title"><div><h2>Pet Plan</h2><p>Choose pets, levels, focus, and inventory to plan the next upgrades.</p></div><span class="badge-soft">Planner</span></div>
+    <div class="input-grid">
+      <div class="field"><label>Taming Marks</label><input class="input" id="marks" type="number" value="0" min="0" oninput="calcPets()"></div>
+      <div class="field"><label>Pet Food / XP</label><input class="input" id="food" type="number" value="0" min="0" oninput="calcPets()"></div>
+      <div class="field"><label>Focus</label><select class="select" id="petFocus" onchange="calcPets()"><option>Bear Damage</option><option>PvP Attack</option><option>Defense</option><option>Gathering</option></select></div>
+    </div>
+    <div class="tool-row"><button class="btn-small" onclick="savePets()">Save</button><button class="btn-danger" onclick="resetPets()">Reset</button></div>
+    <div class="item-grid" id="petItems"></div>
+  </section>
+  <aside class="opt-panel">
+    <div class="card-title"><div><h2>Pet Recommendations</h2><p>Simple priority planner for spending during pet events.</p></div><span class="badge-soft">Live</span></div>
+    <div class="summary-grid">
+      <div class="summary-card"><span>Marks Needed</span><strong id="petMarks">0</strong></div>
+      <div class="summary-card"><span>Food Needed</span><strong id="petFood">0</strong></div>
+      <div class="summary-card"><span>Missing</span><strong id="petMissing">0</strong></div>
+      <div class="summary-card"><span>Focus</span><strong id="petFocusOut">Bear</strong></div>
+    </div>
+    <div class="rec-list" id="petRecs"></div>
+    <div class="tool-row"><button class="btn-main" onclick="copyPets()">Copy Plan</button></div>
+  </aside>
+</div>
+
+<script>
+
+const pets=['Terror Wolf','Giant Elk','Snow Ape','Fire Lizard','Storm Eagle','Cave Lion'];
+const priorities={'Bear Damage':['Terror Wolf','Storm Eagle','Fire Lizard'],'PvP Attack':['Storm Eagle','Cave Lion','Fire Lizard'],'Defense':['Snow Ape','Giant Elk','Cave Lion'],'Gathering':['Giant Elk','Snow Ape','Terror Wolf']};
+const storeKey='fam_pets_v1';
+function n(id){return Math.max(0,parseInt(document.getElementById(id).value,10)||0)}
+function cost(c,t){let m=0,f=0;for(let i=Number(c)+1;i<=Number(t);i++){m+=10+i*4;f+=120+i*35}return {m,f}}
+function initPets(){const saved=JSON.parse(localStorage.getItem(storeKey)||'null');if(saved){marks.value=saved.marks||0;food.value=saved.food||0;petFocus.value=saved.focus||'Bear Damage'}const data=saved?.items||{};petItems.innerHTML=pets.map(p=>`<div class="item-card"><h3>${p}</h3><div class="mini-grid"><div class="field"><label>Current</label><input class="input cur" data-p="${p}" type="number" min="0" max="100" value="${data[p]?.cur||0}" oninput="calcPets()"></div><div class="field"><label>Target</label><input class="input tar" data-p="${p}" type="number" min="0" max="100" value="${data[p]?.tar||10}" oninput="calcPets()"></div></div></div>`).join('');calcPets()}
+function collect(){let total={m:0,f:0}, items={}, next=[];pets.forEach(p=>{const cur=Number(document.querySelector(`.cur[data-p="${p}"]`).value)||0, tar=Number(document.querySelector(`.tar[data-p="${p}"]`).value)||0;items[p]={cur,tar};const c=tar>cur?cost(cur,tar):{m:0,f:0};total.m+=c.m;total.f+=c.f;if(cur<100){const nc=cost(cur,cur+1);next.push({p,cur,next:cur+1,...nc})}});return {total,items,next}}
+function calcPets(){const d=collect(), inv={m:n('marks'),f:n('food')};petMarks.textContent=d.total.m.toLocaleString();petFood.textContent=d.total.f.toLocaleString();petMissing.textContent=(Math.max(0,d.total.m-inv.m)+Math.max(0,d.total.f-inv.f)).toLocaleString();petFocusOut.textContent=petFocus.value.split(' ')[0];const pref=priorities[petFocus.value]||pets;const best=d.next.filter(x=>x.m<=inv.m&&x.f<=inv.f).sort((a,b)=>pref.indexOf(a.p)-pref.indexOf(b.p))[0];petRecs.innerHTML=`<div class="rec"><strong>${best?`Best next: ${best.p} → ${best.next}`:'No affordable pet upgrade'}</strong><span>${best?`Cost: ${best.m} Marks and ${best.f} Food. Priority based on ${petFocus.value}.`:'Add inventory or lower targets.'}</span></div><div class="rec"><strong>Event tip</strong><span>Save big pet spending for pet/event days when possible so upgrades also score points.</span></div>`}
+function savePets(){const d=collect();localStorage.setItem(storeKey,JSON.stringify({marks:n('marks'),food:n('food'),focus:petFocus.value,items:d.items}));calcPets()}
+function resetPets(){localStorage.removeItem(storeKey);location.reload()}
+function copyPets(){const d=collect();navigator.clipboard?.writeText(`Pet Plan\nMarks: ${d.total.m}\nFood: ${d.total.f}\nFocus: ${petFocus.value}`)}
+initPets();
+
+function syncpetsDataSyncStatus(){
+  if(!window.FAM_LIVE_SYNC) return;
+  FAM_LIVE_SYNC.get('calculatorData',{cacheHours:24}).then(function(result){
+    FAM_LIVE_SYNC.injectSyncBadge('#petsDataSyncStatus', result, 'Pets Data Sync');
+  });
+}
+syncpetsDataSyncStatus();
+
+
+</script>
+
+</main>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="fam-live-sync.js?v=1779083200"></script>
+</body>
+</html>

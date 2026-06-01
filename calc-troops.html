@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Troop Training Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+
+
+<style id="v48-target-calculator-compact-header-fix">
+/* v4.48 — Compact header fix for remaining calculator pages */
+body.calc-theme-modern .page-header,
+body.calc-theme-modern .opt-hero{
+  position:relative !important;
+  min-height:0 !important;
+  display:block !important;
+  padding:1.1rem 1.2rem !important;
+  margin:0 0 1rem !important;
+  border-radius:20px !important;
+  border:1px solid color-mix(in srgb,var(--border) 82%,transparent) !important;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--surface) 96%,transparent),
+    color-mix(in srgb,var(--surface2) 74%,transparent)
+  ) !important;
+  box-shadow:0 14px 40px rgba(0,0,0,.14) !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+}
+body.calc-theme-modern .page-header::before,
+body.calc-theme-modern .page-header::after,
+body.calc-theme-modern .opt-hero::before,
+body.calc-theme-modern .opt-hero::after{
+  display:none !important;
+  content:none !important;
+}
+body.calc-theme-modern .page-header h1,
+body.calc-theme-modern .opt-hero h1{
+  max-width:none !important;
+  margin:0 !important;
+  font-size:clamp(1.95rem,7vw,3.25rem) !important;
+  line-height:1 !important;
+  letter-spacing:.01em !important;
+  text-transform:none !important;
+  color:var(--text) !important;
+  text-shadow:none !important;
+}
+body.calc-theme-modern .page-header p,
+body.calc-theme-modern .opt-hero p{
+  max-width:820px !important;
+  margin:.55rem 0 0 !important;
+  font-size:.95rem !important;
+  line-height:1.5 !important;
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .page-header .mini-note,
+body.calc-theme-modern .opt-hero .mini-note,
+body.calc-theme-modern .page-header .badge,
+body.calc-theme-modern .opt-hero .badge{
+  position:static !important;
+  display:inline-flex !important;
+  margin-top:.75rem !important;
+}
+body.calc-theme-modern .crumb{
+  margin:0 0 .85rem !important;
+  font-size:.76rem !important;
+  line-height:1.2 !important;
+}
+body.calc-theme-modern .crumb,
+body.calc-theme-modern .crumb a{
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .crumb a:hover{
+  color:var(--gold) !important;
+}
+body.calc-theme-modern .app-body,
+body.calc-theme-modern .page-container,
+body.calc-theme-modern .optimizer-shell{
+  width:min(100%,1120px) !important;
+  max-width:1120px !important;
+  margin:0 auto !important;
+  padding:1rem 1rem 2rem !important;
+}
+body.calc-theme-modern .calc-card,
+body.calc-theme-modern .opt-card,
+body.calc-theme-modern .opt-panel,
+body.calc-theme-modern .k1245-panel,
+body.calc-theme-modern .master-card,
+body.calc-theme-modern .summary-card,
+body.calc-theme-modern .resource-card,
+body.calc-theme-modern .results-box,
+body.calc-theme-modern .stat-result-box{
+  border-radius:18px !important;
+}
+body.calc-theme-modern .calc-card-header,
+body.calc-theme-modern .card-title,
+body.calc-theme-modern .results-header{
+  padding:.85rem 1rem !important;
+}
+body.calc-theme-modern .calc-body,
+body.calc-theme-modern .opt-card > :not(.card-title),
+body.calc-theme-modern .opt-panel > :not(.card-title){
+  padding:1rem !important;
+}
+@media(max-width:760px){
+  body.calc-theme-modern .app-body,
+  body.calc-theme-modern .page-container,
+  body.calc-theme-modern .optimizer-shell{
+    width:100% !important;
+    max-width:100% !important;
+    padding:.8rem .85rem 1.5rem !important;
+    overflow-x:hidden !important;
+  }
+  body.calc-theme-modern .page-header,
+  body.calc-theme-modern .opt-hero{
+    padding:1rem !important;
+    border-radius:18px !important;
+    margin-bottom:.9rem !important;
+  }
+  body.calc-theme-modern .page-header h1,
+  body.calc-theme-modern .opt-hero h1{
+    font-size:clamp(1.7rem,8.8vw,2.7rem) !important;
+    line-height:1.02 !important;
+    overflow-wrap:anywhere !important;
+  }
+  body.calc-theme-modern .page-header p,
+  body.calc-theme-modern .opt-hero p{
+    font-size:.9rem !important;
+    line-height:1.45 !important;
+  }
+}
+</style>
+
+</head>
+<body class="calc-theme-modern">
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions"><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button><a href="calculators.html" class="header-back">&larr; All Calculators</a></div>
+  </div>
+</header>
+
+<div class="app-body">
+<div class="page-container">
+
+  <div class="crumb">
+    <a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span>
+    <a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span>
+    <span>Troop Training</span>
+  </div>
+
+  <div class="page-header no-theme-art">
+    <h1>Troop Training</h1>
+    <p>SPEEDUPS &harr; TROOPS &middot; T1 THROUGH T10 &middot; INCLUDES PROMOTION TIME</p>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-card-header">
+      <h2>Configuration</h2>
+      <span class="badge">Step 1</span>
+    </div>
+    <div class="calc-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Calculation Mode</label>
+          <select class="form-select" id="mode" onchange="updateMode()">
+            <option value="speedups2troops">By Speedups &rarr; Troops</option>
+            <option value="troops2speedups">By Troops &rarr; Time</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Training Speed Bonus (%) <span class="hint">your boost</span></label>
+          <input class="form-input" type="number" id="speedBonus" value="100" min="0" step="1">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODE A: Speedups to Troops -->
+  <div class="calc-card" id="mode-A">
+    <div class="calc-card-header">
+      <h2>Available Speedups</h2>
+      <span class="badge">Step 2</span>
+    </div>
+    <div class="calc-body">
+      <div class="form-grid-3">
+        <div class="form-group">
+          <label class="form-label">Days</label>
+          <input class="form-input" type="number" id="spDays" value="0" min="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hours</label>
+          <input class="form-input" type="number" id="spHours" value="0" min="0" max="23">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Minutes</label>
+          <input class="form-input" type="number" id="spMins" value="0" min="0" max="59">
+        </div>
+      </div>
+
+      <div class="section-label">Training Queue</div>
+      <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:0.6rem">Add troop types to train. Speedups will be distributed across the queue in order.</p>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Troop Tier</label>
+          <select class="form-select" id="queueTier">
+            <option value="1">T1 (12s)</option>
+            <option value="2">T2 (17s)</option>
+            <option value="3">T3 (24s)</option>
+            <option value="4">T4 (32s)</option>
+            <option value="5">T5 (44s)</option>
+            <option value="6">T6 (60s)</option>
+            <option value="7">T7 (83s)</option>
+            <option value="8">T8 (113s)</option>
+            <option value="9">T9 (131s)</option>
+            <option value="10" selected>T10 (152s)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Action</label>
+          <select class="form-select" id="queueAction">
+            <option value="train">Train (full time)</option>
+            <option value="promote">Promote (60% of train time)</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="action-btn btn-secondary" onclick="addToQueue()" style="margin-top:0.25rem">+ Add to Queue</button>
+
+      <div class="queue-list" id="queueList">
+        <div class="queue-empty" id="queueEmpty">Your training queue is empty.</div>
+      </div>
+
+      <button class="action-btn" onclick="calcSpeedups2Troops()" style="margin-top:1rem">CALCULATE TROOPS</button>
+
+      <div class="results-section" id="results-A" style="display:none">
+        <div class="results-header">RESULTS</div>
+        <div class="stat-result-box" id="resultsBoxA"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODE B: Troops to Speedups -->
+  <div class="calc-card" id="mode-B" style="display:none">
+    <div class="calc-card-header">
+      <h2>Troops to Create</h2>
+      <span class="badge">Step 2</span>
+    </div>
+    <div class="calc-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Troop Tier</label>
+          <select class="form-select" id="bTier">
+            <option value="1">T1</option><option value="2">T2</option><option value="3">T3</option>
+            <option value="4">T4</option><option value="5">T5</option><option value="6">T6</option>
+            <option value="7">T7</option><option value="8">T8</option><option value="9">T9</option>
+            <option value="10" selected>T10</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Quantity</label>
+          <input class="form-input" type="number" id="bQty" value="1000" min="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Action</label>
+          <select class="form-select" id="bAction">
+            <option value="train">Train</option>
+            <option value="promote">Promote</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="action-btn" onclick="calcTroops2Time()">CALCULATE TIME</button>
+
+      <div class="results-section" id="results-B" style="display:none">
+        <div class="results-header">RESULTS</div>
+        <div class="stat-result-box" id="resultsBoxB"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reference table -->
+  <div class="calc-card">
+    <div class="calc-card-header"><h2>Troop Tier Reference</h2></div>
+    <div class="calc-body">
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tier</th><th>Train Time</th><th>Power</th><th>KvK Pts</th><th>SG Pts</th><th>HoG Pts</th></tr></thead>
+          <tbody id="tierTable"></tbody>
+        </table>
+      </div>
+      <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem">Train time is base seconds per troop (before bonuses). Power = combat power per troop. Points = event points per troop trained.</p>
+    </div>
+  </div>
+
+  <p class="source-note">Data: kingshotoptimizer.com troop tier table (T1-T10). Promotion time = ~60% of full train time based on community testing &mdash; verify in-game for exact values.</p>
+
+</div>
+</div>
+
+<script>
+// Real tier data extracted from kingshotoptimizer.com
+const TIERS = [
+  {tier:'T1', time:12, power:3, kvk:3, sg:1, hog:90},
+  {tier:'T2', time:17, power:4, kvk:4, sg:2, hog:120},
+  {tier:'T3', time:24, power:6, kvk:5, sg:3, hog:180},
+  {tier:'T4', time:32, power:9, kvk:8, sg:5, hog:265},
+  {tier:'T5', time:44, power:13, kvk:12, sg:7, hog:385},
+  {tier:'T6', time:60, power:20, kvk:18, sg:11, hog:595},
+  {tier:'T7', time:83, power:28, kvk:25, sg:16, hog:830},
+  {tier:'T8', time:113, power:38, kvk:35, sg:23, hog:1130},
+  {tier:'T9', time:131, power:50, kvk:45, sg:30, hog:1485},
+  {tier:'T10', time:152, power:66, kvk:60, sg:39, hog:1960},
+];
+
+let queue = [];
+
+function updateMode() {
+  const m = document.getElementById('mode').value;
+  document.getElementById('mode-A').style.display = m === 'speedups2troops' ? 'block' : 'none';
+  document.getElementById('mode-B').style.display = m === 'troops2speedups' ? 'block' : 'none';
+}
+
+function addToQueue() {
+  const tier = parseInt(document.getElementById('queueTier').value);
+  const action = document.getElementById('queueAction').value;
+  queue.push({tier, action});
+  renderQueue();
+}
+
+function removeQueue(i) {
+  queue.splice(i, 1);
+  renderQueue();
+}
+
+function renderQueue() {
+  const list = document.getElementById('queueList');
+  if (queue.length === 0) {
+    list.innerHTML = '<div class="queue-empty">Your training queue is empty.</div>';
+    return;
+  }
+  list.innerHTML = queue.map((q, i) => {
+    const t = TIERS[q.tier - 1];
+    const actionLabel = q.action === 'promote' ? 'Promote' : 'Train';
+    return `<div class="queue-item">
+      <div class="queue-item-info"><strong>${actionLabel}</strong> ${t.tier} &middot; ${t.time}s base/troop</div>
+      <button class="queue-remove" onclick="removeQueue(${i})" aria-label="Remove">&times;</button>
+    </div>`;
+  }).join('');
+}
+
+function getEffectiveTime(tier, action, speedBonusPct) {
+  const baseSec = TIERS[tier - 1].time;
+  const actionMult = action === 'promote' ? 0.6 : 1.0;
+  const speedMult = 1 + (speedBonusPct / 100);
+  return (baseSec * actionMult) / speedMult;
+}
+
+function formatDuration(sec) {
+  sec = Math.max(0, Math.round(sec));
+  const d = Math.floor(sec / 86400);
+  const h = Math.floor((sec % 86400) / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = sec % 60;
+  if (d > 0) return `${d}d ${h}h ${m}m`;
+  if (h > 0) return `${h}h ${m}m ${s}s`;
+  if (m > 0) return `${m}m ${s}s`;
+  return `${s}s`;
+}
+
+function calcSpeedups2Troops() {
+  if (queue.length === 0) {
+    document.getElementById('results-A').style.display = 'block';
+    document.getElementById('resultsBoxA').innerHTML = '<p style="color:var(--text-muted);text-align:center">Add at least one item to your queue first.</p>';
+    return;
+  }
+
+  const days = parseInt(document.getElementById('spDays').value) || 0;
+  const hours = parseInt(document.getElementById('spHours').value) || 0;
+  const mins = parseInt(document.getElementById('spMins').value) || 0;
+  const totalSec = days * 86400 + hours * 3600 + mins * 60;
+
+  const speedBonus = parseFloat(document.getElementById('speedBonus').value) || 0;
+
+  // Distribute time across queue items (equal split)
+  let remaining = totalSec;
+  let totalTroops = 0;
+  let totalPower = 0;
+  let totalKvk = 0;
+  let totalSg = 0;
+  let totalHog = 0;
+  const perItem = totalSec / queue.length;
+
+  const breakdown = queue.map(q => {
+    const effSec = getEffectiveTime(q.tier, q.action, speedBonus);
+    const count = Math.floor(perItem / effSec);
+    const t = TIERS[q.tier - 1];
+    totalTroops += count;
+    totalPower += count * t.power;
+    totalKvk += count * t.kvk;
+    totalSg += count * t.sg;
+    totalHog += count * t.hog;
+    return {tier: t.tier, action: q.action, count, effSec};
+  });
+
+  document.getElementById('results-A').style.display = 'block';
+  let html = `<div class="stat-result-grid">
+    <div class="stat-result-item">
+      <div class="stat-result-label">Total Troops</div>
+      <div class="stat-result-value green">${totalTroops.toLocaleString()}</div>
+    </div>
+    <div class="stat-result-item">
+      <div class="stat-result-label">Combat Power</div>
+      <div class="stat-result-value amber">+${totalPower.toLocaleString()}</div>
+    </div>
+    <div class="stat-result-item">
+      <div class="stat-result-label">KvK Points</div>
+      <div class="stat-result-value">${totalKvk.toLocaleString()}</div>
+    </div>
+    <div class="stat-result-item">
+      <div class="stat-result-label">SG Points</div>
+      <div class="stat-result-value">${totalSg.toLocaleString()}</div>
+    </div>
+    <div class="stat-result-item">
+      <div class="stat-result-label">HoG Points</div>
+      <div class="stat-result-value">${totalHog.toLocaleString()}</div>
+    </div>
+  </div>
+  <div class="stat-divider">
+    <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.08em">Per-Queue Breakdown</div>`;
+  breakdown.forEach(b => {
+    html += `<div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:0.85rem;padding:0.35rem 0;border-bottom:1px solid var(--border)">
+      <span>${b.action === 'promote' ? 'Promote' : 'Train'} ${b.tier}</span>
+      <span style="color:var(--red);font-weight:600">${b.count.toLocaleString()} troops</span>
+    </div>`;
+  });
+  html += '</div>';
+
+  document.getElementById('resultsBoxA').innerHTML = html;
+}
+
+function calcTroops2Time() {
+  const tier = parseInt(document.getElementById('bTier').value);
+  const qty = parseInt(document.getElementById('bQty').value) || 0;
+  const action = document.getElementById('bAction').value;
+  const speedBonus = parseFloat(document.getElementById('speedBonus').value) || 0;
+
+  const effSec = getEffectiveTime(tier, action, speedBonus);
+  const baseSec = TIERS[tier - 1].time * (action === 'promote' ? 0.6 : 1);
+  const totalEff = effSec * qty;
+  const totalBase = baseSec * qty;
+  const t = TIERS[tier - 1];
+
+  document.getElementById('results-B').style.display = 'block';
+  document.getElementById('resultsBoxB').innerHTML = `
+    <div class="stat-result-grid">
+      <div class="stat-result-item">
+        <div class="stat-result-label">Original Time</div>
+        <div class="stat-result-value muted">${formatDuration(totalBase)}</div>
+      </div>
+      <div class="stat-result-item">
+        <div class="stat-result-label">Reduced Time</div>
+        <div class="stat-result-value green">${formatDuration(totalEff)}</div>
+      </div>
+      <div class="stat-result-item">
+        <div class="stat-result-label">Time Saved</div>
+        <div class="stat-result-value amber">${formatDuration(totalBase - totalEff)}</div>
+      </div>
+    </div>
+    <div class="stat-divider">
+      <div class="stat-result-grid">
+        <div class="stat-result-item">
+          <div class="stat-result-label">Combat Power</div>
+          <div class="stat-result-value">${(qty * t.power).toLocaleString()}</div>
+        </div>
+        <div class="stat-result-item">
+          <div class="stat-result-label">KvK Points</div>
+          <div class="stat-result-value">${(qty * t.kvk).toLocaleString()}</div>
+        </div>
+        <div class="stat-result-item">
+          <div class="stat-result-label">SG Points</div>
+          <div class="stat-result-value">${(qty * t.sg).toLocaleString()}</div>
+        </div>
+        <div class="stat-result-item">
+          <div class="stat-result-label">HoG Points</div>
+          <div class="stat-result-value">${(qty * t.hog).toLocaleString()}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+// Build reference table
+const tbody = document.getElementById('tierTable');
+tbody.innerHTML = TIERS.map(t => `<tr>
+  <td class="accent">${t.tier}</td>
+  <td>${t.time}s</td>
+  <td>${t.power}</td>
+  <td>${t.kvk}</td>
+  <td>${t.sg}</td>
+  <td>${t.hog}</td>
+</tr>`).join('');
+</script>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+
+<div class="legal-disclaimer" style="max-width:1180px;margin:1rem auto 1.5rem;padding:0 1rem;font-size:.76rem;color:var(--text-dim);line-height:1.5;text-align:center">
+  v4.52 &middot; May 2026 &middot; Independent FAM alliance project. Not affiliated with Kingshot or its developers. All game content, names, and trademarks belong to their respective owners.
+</div>
+
+</body>
+</html>

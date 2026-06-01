@@ -1,0 +1,43 @@
+{
+  "source": "FAM K1245 fallback rotation",
+  "updatedAt": "2026-05-31T00:00:00Z",
+  "kingdom": 1245,
+  "timezone": "UTC",
+  "baseline": {
+    "week": 3,
+    "day": "Saturday",
+    "date": "2026-05-16",
+    "note": "K1245 fallback anchor."
+  },
+  "cycleWeeks": 4,
+  "packsByDay": {
+    "Monday": [
+      "Alliance Championship",
+      "Daily value packs"
+    ],
+    "Tuesday": [
+      "Growth / speedup packs",
+      "Daily value packs"
+    ],
+    "Wednesday": [
+      "Officer / armament packs",
+      "Daily value packs"
+    ],
+    "Thursday": [
+      "Hero / pet / gear value packs",
+      "Daily value packs"
+    ],
+    "Friday": [
+      "KvK prep / battle packs",
+      "Daily value packs"
+    ],
+    "Saturday": [
+      "Event push packs",
+      "Daily value packs"
+    ],
+    "Sunday": [
+      "Recovery + reward claim",
+      "Daily value packs"
+    ]
+  }
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Mystic Trial Simulator</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+
+<style>
+.sim-shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 2.6rem;}
+.sim-hero{background:var(--surface);border:1px solid var(--soft-grey-line,var(--border));border-left:7px solid var(--gold);border-radius:22px;padding:1.35rem;margin-bottom:1rem;box-shadow:0 16px 40px rgba(45,34,42,.09);}
+.sim-hero .eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.sim-hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.75rem,4vw,3.15rem);line-height:1.05;margin:.35rem 0;color:var(--section-ink,var(--text));}
+.sim-hero p{color:var(--structure-grey,var(--text-dim));line-height:1.65;max-width:900px;margin:0;}
+.sim-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:1rem;align-items:start;}
+.sim-card,.sim-panel{background:var(--surface);border:1px solid var(--soft-grey-line,var(--border));border-radius:18px;padding:1rem;box-shadow:0 12px 32px rgba(45,34,42,.075);}
+.sim-panel{position:sticky;top:84px;}
+.card-title{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start;border-bottom:1px solid var(--soft-grey-line,var(--border));padding-bottom:.7rem;margin-bottom:.85rem;}
+.card-title h2{font-family:'Orbitron',sans-serif;font-size:1rem;margin:0;color:var(--section-ink,var(--text));}
+.card-title p{font-size:.82rem;color:var(--structure-grey,var(--text-dim));margin:.2rem 0 0;line-height:1.5;}
+.badge-soft{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:rgba(214,48,122,.08);border:1px solid rgba(214,48,122,.24);border-radius:999px;padding:.24rem .45rem;white-space:nowrap;}
+.input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem;}
+.input-grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--structure-grey-2,var(--text-muted));margin-bottom:.28rem;}
+.input,.select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.68rem .72rem;font-family:'DM Mono',monospace;font-size:.86rem;outline:none;}
+.input:focus,.select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,48,122,.10);}
+.tool-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0;}
+.btn-small,.btn-main,.btn-danger{border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;cursor:pointer;transition:.15s ease;padding:.48rem .7rem;text-decoration:none;}
+.btn-main{background:linear-gradient(135deg,#ff4aa2,#7c3aed);color:white;border:none;font-weight:800;}
+.btn-small:hover,.btn-main:hover{transform:translateY(-1px);border-color:var(--gold);}
+.btn-danger:hover{background:#d6307a;color:white;border-color:#d6307a;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.8rem;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;min-width:0;}
+.summary-card span{display:block;font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--structure-grey-2,var(--text-muted));margin-bottom:.25rem;}
+.summary-card strong{display:block;font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-list{display:flex;flex-direction:column;gap:.55rem;}
+.rec{border:1px solid var(--border);background:var(--surface2);border-radius:14px;padding:.75rem;}
+.rec strong{display:block;color:var(--section-ink,var(--text));}
+.rec span{display:block;color:var(--structure-grey,var(--text-dim));font-size:.8rem;margin-top:.18rem;line-height:1.45;}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface2);}
+.sim-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:650px;}
+.sim-table th,.sim-table td{padding:.62rem .68rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:middle;}
+.sim-table th{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;color:var(--structure-grey-2,var(--text-muted));letter-spacing:.08em;}
+.result-good{color:#1ea96a;font-weight:800}.result-warn{color:#d6307a;font-weight:800}
+.progress-bar{height:10px;background:var(--surface3);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:.45rem;}
+.progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff4aa2,#7c3aed);width:0%;}
+.info-box{border:1px solid rgba(214,48,122,.24);background:linear-gradient(135deg,rgba(214,48,122,.09),rgba(124,58,237,.06));border-radius:16px;padding:.9rem;margin:.85rem 0;color:var(--structure-grey,var(--text-dim));font-size:.86rem;line-height:1.6;}
+@media(max-width:980px){.sim-grid{grid-template-columns:1fr}.sim-panel{position:static}}
+@media(max-width:680px){.sim-shell{padding:.9rem .75rem 2rem}.input-grid,.input-grid.two,.summary-grid{grid-template-columns:1fr}.sim-table{min-width:600px}}
+</style>
+
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+<main class="sim-shell">
+<div class="crumb"><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Mystic Trial Simulator</span></div>
+<section class="sim-hero"><span class="eyebrow">FAM SIM LAB · K1245</span><h1>Mystic Trial Composition Simulator</h1><p>A no-hero Mystic Trial composition optimizer inspired by the Frakinator feature list. It brute-forces Infantry/Cavalry/Archer ratios against enemy troop mix and stat assumptions.</p></section>
+
+<div class="sim-grid">
+  <section class="sim-card">
+    <div class="card-title"><div><h2>Mystic Trial Inputs</h2><p>Use this for no-hero Mystic Trials. It brute-forces troop ratios and estimates win probability.</p></div><span class="badge-soft">No Heroes</span></div>
+    <div class="input-grid">
+      <div class="field"><label>March Capacity</label><input class="input" id="cap" type="number" value="250000" min="1" oninput="calcMystic()"></div>
+      <div class="field"><label>Enemy Infantry %</label><input class="input" id="eInf" type="number" value="40" oninput="normalizeEnemy();calcMystic()"></div>
+      <div class="field"><label>Enemy Cavalry %</label><input class="input" id="eCav" type="number" value="30" oninput="normalizeEnemy();calcMystic()"></div>
+      <div class="field"><label>Enemy Archer %</label><input class="input" id="eArc" type="number" value="30" oninput="normalizeEnemy();calcMystic()"></div>
+      <div class="field"><label>Your Attack %</label><input class="input" id="atk" type="number" value="500" oninput="calcMystic()"></div>
+      <div class="field"><label>Your Health %</label><input class="input" id="hp" type="number" value="450" oninput="calcMystic()"></div>
+      <div class="field"><label>Your Lethality %</label><input class="input" id="leth" type="number" value="500" oninput="calcMystic()"></div>
+      <div class="field"><label>Enemy Attack %</label><input class="input" id="eAtk" type="number" value="450" oninput="calcMystic()"></div>
+      <div class="field"><label>Enemy Health %</label><input class="input" id="eHp" type="number" value="450" oninput="calcMystic()"></div>
+      <div class="field"><label>Enemy Lethality %</label><input class="input" id="eLeth" type="number" value="450" oninput="calcMystic()"></div>
+      <div class="field"><label>Search Step %</label><select class="select" id="step" onchange="calcMystic()"><option value="5">5%</option><option value="2">2%</option><option value="1">1%</option></select></div>
+      <div class="field"><label>Counter Strength %</label><input class="input" id="counter" type="number" value="20" oninput="calcMystic()"></div>
+    </div>
+    <div class="info-box"><strong>Counter logic:</strong> Infantry beats Cavalry, Cavalry beats Archers, Archers beat Infantry. The calculator applies your counter advantage and enemy counter advantage across the full matchup matrix, then combines attack, lethality, and health.</div>
+    <div class="tool-row">
+      <button class="btn-small" onclick="trialPreset('forest')">Forest / Inf-heavy</button>
+      <button class="btn-small" onclick="trialPreset('cav')">Cav-heavy</button>
+      <button class="btn-small" onclick="trialPreset('archer')">Archer-heavy</button>
+      <button class="btn-main" onclick="copyMystic()">Copy Mystic Plan</button>
+    </div>
+    <div class="table-wrap">
+      <table class="sim-table"><thead><tr><th>Rank</th><th>Ratio</th><th>Win Chance</th><th>Power Edge</th><th>Counter Edge</th></tr></thead><tbody id="mysticRows"></tbody></table>
+    </div>
+  </section>
+  <aside class="sim-panel">
+    <div class="card-title"><div><h2>Best Composition</h2><p>Best estimated ratio for current enemy setup.</p></div><span class="badge-soft">Live</span></div>
+    <div class="summary-grid">
+      <div class="summary-card"><span>Best Ratio</span><strong id="bestRatio">--</strong></div>
+      <div class="summary-card"><span>Win Chance</span><strong id="bestWin">--</strong></div>
+      <div class="summary-card"><span>Inf / Cav / Arc</span><strong id="bestCounts">--</strong></div>
+      <div class="summary-card"><span>Counter Edge</span><strong id="bestCounter">--</strong></div>
+    </div>
+    <div class="rec-list" id="mysticRecs"></div>
+  </aside>
+</div>
+
+</main>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="calc-bear-sim.html">Bear Sim</a><a href="calc-battle-sim.html">Battle Sim</a></nav>
+</footer>
+<script>
+
+function n(id){return Number(document.getElementById(id).value)||0}
+function normalizeEnemy(){let a=n('eInf'),b=n('eCav'),c=n('eArc'),t=a+b+c;if(t<=0)return;}
+function counterCoef(my,enemy){
+  // order: inf, cav, arc. inf>cav, cav>arc, arc>inf
+  const adv = {inf:'cav', cav:'arc', arc:'inf'};
+  const dis = {inf:'arc', cav:'inf', arc:'cav'};
+  const bonus=n('counter')/100;
+  if(adv[my]===enemy) return 1+bonus;
+  if(dis[my]===enemy) return 1-bonus;
+  return 1;
+}
+function mixCoef(myMix, enemyMix){
+  let sum=0;
+  ['inf','cav','arc'].forEach(m=>{['inf','cav','arc'].forEach(e=>{sum += (myMix[m]/100)*(enemyMix[e]/100)*counterCoef(m,e);});});
+  return sum;
+}
+function evaluate(inf,cav,arc){
+  const my={inf,cav,arc}, enemy={inf:n('eInf'),cav:n('eCav'),arc:n('eArc')};
+  const myCounter=mixCoef(my,enemy), enemyCounter=mixCoef(enemy,my);
+  const attack=(1+n('atk')/100)*(1+n('leth')/100)*myCounter;
+  const survive=(1+n('hp')/100);
+  const enemyAttack=(1+n('eAtk')/100)*(1+n('eLeth')/100)*enemyCounter;
+  const enemySurvive=(1+n('eHp')/100);
+  const myPower=attack*survive, enemyPower=enemyAttack*enemySurvive;
+  const edge=myPower/enemyPower;
+  const win=100/(1+Math.exp(-5*(edge-1)));
+  return {inf,cav,arc,myCounter,edge,win};
+}
+function fmt(x){return Math.round(x).toLocaleString()}
+function calcMystic(){
+  const step=n('step')||5, cap=n('cap');
+  let rows=[];
+  for(let inf=0; inf<=100; inf+=step){for(let cav=0;cav<=100-inf;cav+=step){let arc=100-inf-cav;rows.push(evaluate(inf,cav,arc));}}
+  rows.sort((a,b)=>b.win-a.win || b.edge-a.edge);
+  const top=rows.slice(0,10), best=top[0];
+  bestRatio.textContent=`${best.inf}/${best.cav}/${best.arc}`;
+  bestWin.textContent=best.win.toFixed(1)+'%';
+  bestCounts.textContent=`${fmt(cap*best.inf/100)} / ${fmt(cap*best.cav/100)} / ${fmt(cap*best.arc/100)}`;
+  bestCounter.textContent=((best.myCounter-1)*100).toFixed(1)+'%';
+  mysticRows.innerHTML=top.map((r,i)=>`<tr><td>${i+1}</td><td><strong>${r.inf}/${r.cav}/${r.arc}</strong></td><td class="${r.win>=70?'result-good':r.win<50?'result-warn':''}">${r.win.toFixed(1)}%</td><td>${r.edge.toFixed(3)}x</td><td>${((r.myCounter-1)*100).toFixed(1)}%</td></tr>`).join('');
+  mysticRecs.innerHTML=`<div class="rec"><strong>Recommended ratio: ${best.inf}/${best.cav}/${best.arc}</strong><span>Counts: ${fmt(cap*best.inf/100)} Infantry, ${fmt(cap*best.cav/100)} Cavalry, ${fmt(cap*best.arc/100)} Archers.</span></div><div class="rec"><strong>Math note</strong><span>This estimates relative matchup strength. If a live battle report disagrees, use the report stats and increase/decrease enemy stats until the model matches your result.</span></div>`;
+}
+function trialPreset(type){if(type==='forest'){eInf.value=55;eCav.value=25;eArc.value=20}else if(type==='cav'){eInf.value=20;eCav.value=55;eArc.value=25}else{eInf.value=25;eCav.value=20;eArc.value=55}calcMystic()}
+function copyMystic(){navigator.clipboard&&navigator.clipboard.writeText(`Mystic Trial Plan\nBest ratio: ${bestRatio.textContent}\nWin chance: ${bestWin.textContent}\nCounts: ${bestCounts.textContent}`)}
+calcMystic();
+
+</script>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+</body>
+</html>

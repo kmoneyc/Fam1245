@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Castle Battle Rally Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+<style>
+/* v4.13 Castle Battle interval planner rebuild */
+.castle-shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 2.5rem;}
+.castle-hero{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:1rem;align-items:stretch;margin-bottom:1rem;}
+.castle-hero-main,.clock-card,.planner-card,.result-panel,.help-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:0 16px 40px rgba(168,32,94,.10);}
+.castle-hero-main{padding:1.35rem;}
+.castle-hero-main .eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.castle-hero-main h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,4vw,3.35rem);line-height:1.03;margin:.35rem 0;color:var(--text);}
+.castle-hero-main p{color:var(--text-dim);line-height:1.65;max-width:780px;margin:0;}
+.clock-card{padding:1rem;display:flex;flex-direction:column;justify-content:center;text-align:center;}
+.clock-card span{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);}
+.clock-card strong{font-family:'Orbitron',sans-serif;font-size:2rem;color:var(--gold);font-variant-numeric:tabular-nums;margin:.25rem 0;}
+.clock-card em{font-style:normal;color:var(--text-dim);font-size:.8rem;}
+.mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1rem;}
+.mode-btn{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:16px;padding:.9rem 1rem;cursor:pointer;text-align:left;transition:.15s ease;box-shadow:0 10px 28px rgba(168,32,94,.08);}
+.mode-btn strong{display:block;font-family:'Orbitron',sans-serif;font-size:.95rem;letter-spacing:.04em;}
+.mode-btn span{display:block;color:var(--text-dim);font-size:.78rem;margin-top:.2rem;}
+.mode-btn.active{border-color:rgba(214,48,122,.55);background:linear-gradient(135deg,rgba(214,48,122,.16),rgba(124,58,237,.10));box-shadow:0 16px 38px rgba(214,48,122,.16);}
+.planner-grid{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:1rem;align-items:start;}
+.planner-card{padding:1rem;}
+.card-title{display:flex;justify-content:space-between;gap:.75rem;align-items:flex-start;margin-bottom:.8rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
+.card-title h2{font-family:'Orbitron',sans-serif;font-size:1rem;margin:0;color:var(--text);}
+.card-title p{font-size:.82rem;color:var(--text-dim);margin:.2rem 0 0;line-height:1.5;}
+.badge-soft{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:rgba(214,48,122,.08);border:1px solid rgba(214,48,122,.24);border-radius:999px;padding:.24rem .45rem;white-space:nowrap;}
+.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.input-grid .wide{grid-column:1/-1;}
+.field label{display:flex;justify-content:space-between;gap:.5rem;font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.28rem;}
+.field label small{font-size:.62rem;color:var(--gold);font-weight:500;}
+.input,.select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.72rem .78rem;font-family:'DM Mono',monospace;font-size:.9rem;outline:none;}
+.input:focus,.select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,48,122,.10);}
+.split-inputs{display:grid;grid-template-columns:1fr auto 1fr;gap:.4rem;align-items:center;}
+.split-inputs span{color:var(--text-muted);font-family:'Orbitron',sans-serif;}
+.quick-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.5rem;}
+.tiny-btn,.action-btn,.danger-btn,.copy-btn{border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;cursor:pointer;transition:.15s ease;padding:.48rem .7rem;}
+.tiny-btn:hover,.action-btn:hover,.copy-btn:hover{border-color:var(--gold);transform:translateY(-1px);}
+.action-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1rem;}
+.primary-btn{border:none;border-radius:14px;background:linear-gradient(135deg,#ff4aa2,#7c3aed);color:white;font-family:'Orbitron',sans-serif;font-weight:800;letter-spacing:.06em;padding:.9rem 1rem;cursor:pointer;box-shadow:0 12px 28px rgba(214,48,122,.25);}
+.secondary-btn{border:1px solid var(--border);border-radius:14px;background:var(--surface2);color:var(--text);font-family:'Orbitron',sans-serif;font-weight:700;letter-spacing:.04em;padding:.9rem 1rem;cursor:pointer;}
+.players-head{display:flex;justify-content:space-between;align-items:center;gap:.75rem;margin:.95rem 0 .55rem;}
+.players-head strong{font-family:'Orbitron',sans-serif;font-size:.9rem;color:var(--text);}
+.player-list{display:flex;flex-direction:column;gap:.5rem;}
+.player-row{display:grid;grid-template-columns:minmax(0,1.3fr) 92px 42px;gap:.5rem;align-items:end;background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.6rem;}
+.player-row label{display:block;font-family:'DM Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.22rem;}
+.player-row input{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:.55rem .6rem;font-family:'DM Mono',monospace;font-size:.82rem;outline:none;}
+.remove-btn{height:38px;width:38px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text-dim);cursor:pointer;font-size:1.1rem;}
+.remove-btn:hover{background:#d6307a;color:white;border-color:#d6307a;}
+.result-panel{padding:1rem;position:sticky;top:84px;}
+.summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.55rem;margin-bottom:.85rem;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;min-width:0;}
+.summary-card span{display:block;font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.25rem;}
+.summary-card strong{display:block;font-family:'Orbitron',sans-serif;font-size:.88rem;color:var(--gold);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.countdown-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;background:linear-gradient(135deg,rgba(214,48,122,.13),rgba(124,58,237,.09));border:1px solid rgba(214,48,122,.22);border-radius:16px;padding:.85rem 1rem;margin-bottom:.85rem;}
+.countdown-bar span{font-family:'DM Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);}
+.countdown-bar strong{font-family:'Orbitron',sans-serif;font-size:1.25rem;color:var(--gold);font-variant-numeric:tabular-nums;}
+.launch-list{display:flex;flex-direction:column;gap:.55rem;}
+.launch-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:.75rem;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;}
+.launch-row.leader{border-color:rgba(214,48,122,.42);background:rgba(214,48,122,.08);}
+.launch-name{font-weight:800;color:var(--text);}
+.launch-meta{font-size:.76rem;color:var(--text-dim);margin-top:.18rem;}
+.launch-time{text-align:right;font-family:'Orbitron',sans-serif;color:var(--gold);font-variant-numeric:tabular-nums;}
+.launch-sub{text-align:right;font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text-muted);margin-top:.1rem;}
+.status-pill{display:inline-flex;align-items:center;justify-content:center;min-width:84px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);padding:.28rem .45rem;font-family:'DM Mono',monospace;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;}
+.launch-row.ready .status-pill{color:#1ea96a;border-color:rgba(30,169,106,.45);background:rgba(30,169,106,.08);}
+.launch-row.soon .status-pill{color:#ff5da8;border-color:rgba(255,93,168,.5);background:rgba(255,93,168,.08);}
+.launch-row.past .status-pill{color:var(--text-muted);}
+.empty-state{border:1px dashed var(--border);border-radius:14px;padding:1.2rem;text-align:center;color:var(--text-dim);line-height:1.5;background:var(--surface2);}
+.copy-row{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:.8rem;}
+.copy-btn{background:linear-gradient(135deg,rgba(214,48,122,.14),rgba(124,58,237,.08));}
+.help-card{padding:1rem;margin-top:1rem;}
+.help-card h3{font-family:'Orbitron',sans-serif;font-size:.95rem;margin:0 0 .5rem;color:var(--gold);}
+.help-card ol{margin:.2rem 0 0 1.15rem;color:var(--text-dim);line-height:1.7;font-size:.88rem;}
+.mode-panel{display:none;}
+.mode-panel.active{display:block;}
+@media(max-width:980px){.castle-hero,.planner-grid{grid-template-columns:1fr}.result-panel{position:static}.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:640px){.castle-shell{padding:.85rem .75rem 2rem}.mode-switch{grid-template-columns:1fr}.input-grid{grid-template-columns:1fr}.action-row{grid-template-columns:1fr}.player-row{grid-template-columns:1fr 1fr 42px}.summary-grid{grid-template-columns:1fr 1fr}.launch-row{grid-template-columns:1fr}.launch-time,.launch-sub{text-align:left}.status-pill{justify-self:start}.clock-card strong{font-size:1.55rem}.countdown-bar{align-items:flex-start;flex-direction:column;gap:.25rem}}
+@media(max-width:420px){.player-row{grid-template-columns:1fr}.remove-btn{width:100%}.summary-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+
+<div class="app-body">
+<main class="castle-shell">
+  <div class="crumb"><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Castle Battle Rally Planner</span></div>
+
+  <section class="castle-hero">
+    <div class="castle-hero-main">
+      <span class="eyebrow">Castle Battle &middot; Rally Interval Planner</span>
+      <h1>Castle Battle Rally Planner</h1>
+      <p>Enter the target timer/time, add your rally leads or defenders, then choose the delay between rally starts. The planner spaces every player by your interval instead of only delaying the first launch.</p>
+    </div>
+    <aside class="clock-card">
+      <span>Live UTC</span>
+      <strong id="utcClock">--:--:--</strong>
+      <em id="utcDate">UTC</em>
+    </aside>
+  </section>
+
+  <div class="mode-switch" role="tablist" aria-label="Planner mode">
+    <button class="mode-btn active" id="attackTab" type="button" onclick="switchMode('attack')">
+      <strong>⚔️ Attack Rally</strong>
+      <span>Schedule rally starts at fixed intervals before impact.</span>
+    </button>
+    <button class="mode-btn" id="defenseTab" type="button" onclick="switchMode('defense')">
+      <strong>🛡️ Defense Rally</strong>
+      <span>Schedule defenders at fixed intervals for a shared arrival plan.</span>
+    </button>
+  </div>
+
+  <section class="mode-panel active" id="panel-attack">
+    <div class="planner-grid">
+      <div>
+        <section class="planner-card">
+          <div class="card-title"><div><h2>Attack Setup</h2><p>Set the target impact, interval between rally starts, and optional buffer.</p></div><span class="badge-soft">Step 1</span></div>
+          <div class="input-grid">
+            <div class="field wide">
+              <label>Target Impact UTC <small>HH:MM:SS</small></label>
+              <input class="input" id="attackTargetTime" placeholder="HH:MM:SS" oninput="manualTarget('attack')">
+              <div class="quick-row">
+                <button class="tiny-btn" onclick="setTargetIn('attack',1)">+1m</button>
+                <button class="tiny-btn" onclick="setTargetIn('attack',2)">+2m</button>
+                <button class="tiny-btn" onclick="setTargetIn('attack',3)">+3m</button>
+                <button class="tiny-btn" onclick="setTargetIn('attack',5)">+5m</button>
+                <button class="tiny-btn" onclick="setTargetIn('attack',10)">+10m</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Use Timer <small>min : sec</small></label>
+              <div class="split-inputs">
+                <input class="input" type="number" id="attackTimerMin" value="5" min="0">
+                <span>:</span>
+                <input class="input" type="number" id="attackTimerSec" value="0" min="0" max="59">
+              </div>
+            </div>
+            <div class="field">
+              <label>&nbsp;</label>
+              <button class="secondary-btn" type="button" onclick="applyCountdown('attack')">Set From Timer</button>
+            </div>
+            <div class="field">
+              <label>First Launch Delay <small>min : sec</small></label>
+              <div class="split-inputs">
+                <input class="input" type="number" id="attackFirstMin" value="0" min="0" max="10" oninput="updateAll()">
+                <span>:</span>
+                <input class="input" type="number" id="attackFirstSec" value="30" min="0" max="59" oninput="updateAll()">
+              </div>
+              <div class="quick-row">
+                <button class="tiny-btn" onclick="setDelay('attack',1,0)">Beginner 1:00</button>
+                <button class="tiny-btn" onclick="setDelay('attack',0,30)">Advanced 0:30</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Delay Between Rally Starts <small>seconds</small></label>
+              <input class="input" type="number" id="attackInterval" value="15" min="0" max="120" oninput="updateAll()">
+              <div class="quick-row">
+                <button class="tiny-btn" onclick="setIntervalDelay('attack',10)">10s</button>
+                <button class="tiny-btn" onclick="setIntervalDelay('attack',15)">15s</button>
+                <button class="tiny-btn" onclick="setIntervalDelay('attack',30)">30s</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Buffer Before Impact <small>seconds early</small></label>
+              <input class="input" type="number" id="attackBuffer" value="0" min="0" max="120" oninput="updateAll()">
+            </div>
+            <div class="field">
+              <label>Sort Players By</label>
+              <select class="select" id="attackSort" onchange="updateAll()">
+                <option value="longest">Longest march first</option>
+                <option value="list">List order</option>
+                <option value="shortest">Shortest march first</option>
+              </select>
+            </div>
+          </div>
+          <div class="action-row">
+            <button class="primary-btn" onclick="startPlan('attack')">START ATTACK PLAN</button>
+            <button class="secondary-btn" onclick="resetPlan('attack')">Reset Attack</button>
+          </div>
+        </section>
+
+        <section class="planner-card" style="margin-top:1rem">
+          <div class="card-title"><div><h2>Attack Players</h2><p>Add rally leads and their march times.</p></div><span class="badge-soft">Step 2</span></div>
+          <div class="quick-row">
+            <button class="tiny-btn" onclick="addPreset('attack','Messi')">Messi</button>
+            <button class="tiny-btn" onclick="addPreset('attack','Blaza')">Blaza</button>
+            <button class="tiny-btn" onclick="addPreset('attack','Hakk')">Hakk</button>
+            <button class="tiny-btn" onclick="addPreset('attack','Gorilla')">Gorilla</button>
+            <button class="tiny-btn" onclick="addPreset('attack','Emerald')">Emerald</button>
+            <button class="tiny-btn" onclick="addPreset('attack','Chris')">Chris</button>
+          </div>
+          <div class="players-head"><strong>Rally Leads</strong><button class="tiny-btn" onclick="addCustom('attack')">+ Add Custom</button></div>
+          <div class="player-list" id="attackPlayers"></div>
+          <div class="copy-row"><button class="danger-btn" onclick="clearPlayers('attack')">Clear Players</button></div>
+        </section>
+      </div>
+
+      <aside class="result-panel">
+        <div class="card-title"><div><h2>Attack Launch Plan</h2><p>Send these start times to your rally leads.</p></div><span class="badge-soft" id="attackPlanState">Draft</span></div>
+        <div class="summary-grid">
+          <div class="summary-card"><span>Target Impact</span><strong id="attackSummaryTarget">--:--:--</strong></div>
+          <div class="summary-card"><span>First Start</span><strong id="attackSummaryFirst">--:--:--</strong></div>
+          <div class="summary-card"><span>Interval</span><strong id="attackSummaryInterval">15s</strong></div>
+          <div class="summary-card"><span>Buffer</span><strong id="attackSummaryBuffer">0s</strong></div>
+        </div>
+        <div class="countdown-bar"><span>Time to target impact</span><strong id="attackCountdown">Set target</strong></div>
+        <div class="launch-list" id="attackResults"></div>
+        <div class="copy-row">
+          <button class="copy-btn" id="attackCopyBtn" onclick="copyPlan('attack')">📋 Copy Attack Plan</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="mode-panel" id="panel-defense">
+    <div class="planner-grid">
+      <div>
+        <section class="planner-card">
+          <div class="card-title"><div><h2>Defense Setup</h2><p>Set the desired defense arrival, interval between sends, and optional buffer.</p></div><span class="badge-soft">Step 1</span></div>
+          <div class="input-grid">
+            <div class="field wide">
+              <label>Target Arrival UTC <small>HH:MM:SS</small></label>
+              <input class="input" id="defenseTargetTime" placeholder="HH:MM:SS" oninput="manualTarget('defense')">
+              <div class="quick-row">
+                <button class="tiny-btn" onclick="setTargetIn('defense',1)">+1m</button>
+                <button class="tiny-btn" onclick="setTargetIn('defense',2)">+2m</button>
+                <button class="tiny-btn" onclick="setTargetIn('defense',3)">+3m</button>
+                <button class="tiny-btn" onclick="setTargetIn('defense',5)">+5m</button>
+                <button class="tiny-btn" onclick="setTargetIn('defense',10)">+10m</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Use Timer <small>min : sec</small></label>
+              <div class="split-inputs">
+                <input class="input" type="number" id="defenseTimerMin" value="5" min="0">
+                <span>:</span>
+                <input class="input" type="number" id="defenseTimerSec" value="0" min="0" max="59">
+              </div>
+            </div>
+            <div class="field">
+              <label>&nbsp;</label>
+              <button class="secondary-btn" type="button" onclick="applyCountdown('defense')">Set From Timer</button>
+            </div>
+            <div class="field">
+              <label>First Launch Delay <small>min : sec</small></label>
+              <div class="split-inputs">
+                <input class="input" type="number" id="defenseFirstMin" value="0" min="0" max="10" oninput="updateAll()">
+                <span>:</span>
+                <input class="input" type="number" id="defenseFirstSec" value="30" min="0" max="59" oninput="updateAll()">
+              </div>
+              <div class="quick-row">
+                <button class="tiny-btn" onclick="setDelay('defense',1,0)">Beginner 1:00</button>
+                <button class="tiny-btn" onclick="setDelay('defense',0,30)">Advanced 0:30</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Delay Between Defense Sends <small>seconds</small></label>
+              <input class="input" type="number" id="defenseInterval" value="15" min="0" max="120" oninput="updateAll()">
+              <div class="quick-row">
+                <button class="tiny-btn" onclick="setIntervalDelay('defense',10)">10s</button>
+                <button class="tiny-btn" onclick="setIntervalDelay('defense',15)">15s</button>
+                <button class="tiny-btn" onclick="setIntervalDelay('defense',30)">30s</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Buffer Before Arrival <small>seconds early</small></label>
+              <input class="input" type="number" id="defenseBuffer" value="0" min="0" max="120" oninput="updateAll()">
+            </div>
+            <div class="field">
+              <label>Sort Players By</label>
+              <select class="select" id="defenseSort" onchange="updateAll()">
+                <option value="longest">Longest march first</option>
+                <option value="list">List order</option>
+                <option value="shortest">Shortest march first</option>
+              </select>
+            </div>
+          </div>
+          <div class="action-row">
+            <button class="primary-btn" onclick="startPlan('defense')">START DEFENSE PLAN</button>
+            <button class="secondary-btn" onclick="resetPlan('defense')">Reset Defense</button>
+          </div>
+        </section>
+
+        <section class="planner-card" style="margin-top:1rem">
+          <div class="card-title"><div><h2>Defense Players</h2><p>Add defenders and their march times.</p></div><span class="badge-soft">Step 2</span></div>
+          <div class="quick-row">
+            <button class="tiny-btn" onclick="addPreset('defense','Messi')">Messi</button>
+            <button class="tiny-btn" onclick="addPreset('defense','Blaza')">Blaza</button>
+            <button class="tiny-btn" onclick="addPreset('defense','Hakk')">Hakk</button>
+            <button class="tiny-btn" onclick="addPreset('defense','Gorilla')">Gorilla</button>
+            <button class="tiny-btn" onclick="addPreset('defense','Emerald')">Emerald</button>
+            <button class="tiny-btn" onclick="addPreset('defense','Chris')">Chris</button>
+          </div>
+          <div class="players-head"><strong>Defenders</strong><button class="tiny-btn" onclick="addCustom('defense')">+ Add Custom</button></div>
+          <div class="player-list" id="defensePlayers"></div>
+          <div class="copy-row"><button class="danger-btn" onclick="clearPlayers('defense')">Clear Players</button></div>
+        </section>
+      </div>
+
+      <aside class="result-panel">
+        <div class="card-title"><div><h2>Defense Send Plan</h2><p>Send these times to defenders.</p></div><span class="badge-soft" id="defensePlanState">Draft</span></div>
+        <div class="summary-grid">
+          <div class="summary-card"><span>Target Arrival</span><strong id="defenseSummaryTarget">--:--:--</strong></div>
+          <div class="summary-card"><span>First Send</span><strong id="defenseSummaryFirst">--:--:--</strong></div>
+          <div class="summary-card"><span>Interval</span><strong id="defenseSummaryInterval">15s</strong></div>
+          <div class="summary-card"><span>Buffer</span><strong id="defenseSummaryBuffer">0s</strong></div>
+        </div>
+        <div class="countdown-bar"><span>Time to target arrival</span><strong id="defenseCountdown">Set target</strong></div>
+        <div class="launch-list" id="defenseResults"></div>
+        <div class="copy-row">
+          <button class="copy-btn" id="defenseCopyBtn" onclick="copyPlan('defense')">📋 Copy Defense Plan</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="help-card">
+    <h3>How the interval schedule works</h3>
+    <ol>
+      <li>Set your target impact/arrival using exact UTC time or a countdown timer.</li>
+      <li>Pick the delay between rally starts, such as 10, 15, or 30 seconds.</li>
+      <li>The planner spaces players by that interval and calculates each player’s expected arrival using their march time.</li>
+      <li>Use buffer to make the target arrival earlier by a few seconds. This changes the schedule and the copied plan.</li>
+      <li>Sort by longest march first for most rally timing plans, or use list order if you want to control the exact player sequence yourself.</li>
+    </ol>
+  </section>
+</main>
+</div>
+
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+
+<script>
+const pad = n => String(n).padStart(2,'0');
+const state = {
+  mode:'attack',
+  attack:{targetSec:null, started:false, startedAt:null, players:[]},
+  defense:{targetSec:null, started:false, startedAt:null, players:[]}
+};
+
+function nowSec(){
+  const d = new Date();
+  return d.getUTCHours()*3600 + d.getUTCMinutes()*60 + d.getUTCSeconds();
+}
+function fmtHMS(sec){
+  if(sec === null || !Number.isFinite(sec)) return '--:--:--';
+  sec = ((Math.round(sec)%86400)+86400)%86400;
+  const h = Math.floor(sec/3600), m = Math.floor((sec%3600)/60), s = sec%60;
+  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+function fmtDuration(diff){
+  if(diff === null || !Number.isFinite(diff)) return 'Set target';
+  diff = Math.round(diff);
+  const past = diff < 0;
+  const abs = Math.abs(diff);
+  const h = Math.floor(abs/3600), m = Math.floor((abs%3600)/60), s = abs%60;
+  let out = '';
+  if(h) out += `${h}h `;
+  if(h || m) out += `${m}m `;
+  out += `${s}s`;
+  return past ? `-${out}` : out;
+}
+function parseHMS(str){
+  const value = String(str||'').trim();
+  if(!value || value.includes('--')) return null;
+  const parts = value.split(':').map(Number);
+  if(parts.length === 2) parts.push(0);
+  if(parts.length !== 3 || parts.some(n => !Number.isFinite(n) || n < 0)) return null;
+  const [h,m,s] = parts;
+  if(h>23 || m>59 || s>59) return null;
+  return h*3600 + m*60 + s;
+}
+function parseMarch(str){
+  const value = String(str||'').trim();
+  if(!value) return 0;
+  if(!value.includes(':')) return Math.max(0, parseInt(value,10)||0);
+  const parts = value.split(':').map(Number);
+  if(parts.some(n => !Number.isFinite(n) || n < 0)) return 0;
+  if(parts.length === 2) return parts[0]*60 + Math.min(parts[1],59);
+  if(parts.length === 3) return parts[0]*3600 + parts[1]*60 + parts[2];
+  return 0;
+}
+function fmtMarch(sec){
+  sec = Math.max(0, Math.round(sec)||0);
+  const h = Math.floor(sec/3600), m = Math.floor((sec%3600)/60), s = sec%60;
+  return h ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
+}
+function clampInt(id, min, max, fallback=0){
+  const el = document.getElementById(id);
+  let val = parseInt(el?.value,10);
+  if(!Number.isFinite(val)) val = fallback;
+  val = Math.min(max, Math.max(min, val));
+  if(el) el.value = val;
+  return val;
+}
+function escapeHtml(value){
+  return String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function updateClock(){
+  const d = new Date();
+  document.getElementById('utcClock').textContent = `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`;
+  document.getElementById('utcDate').textContent = d.toUTCString().slice(0,16) + ' UTC';
+}
+
+function switchMode(mode){
+  state.mode = mode;
+  document.getElementById('attackTab').classList.toggle('active', mode === 'attack');
+  document.getElementById('defenseTab').classList.toggle('active', mode === 'defense');
+  document.getElementById('panel-attack').classList.toggle('active', mode === 'attack');
+  document.getElementById('panel-defense').classList.toggle('active', mode === 'defense');
+  updateAll();
+}
+function manualTarget(mode){
+  const target = parseHMS(document.getElementById(`${mode}TargetTime`).value);
+  state[mode].targetSec = target;
+  state[mode].started = false;
+  updateAll();
+}
+function setTargetIn(mode, minutes){
+  const target = (nowSec() + minutes*60) % 86400;
+  state[mode].targetSec = target;
+  state[mode].started = false;
+  document.getElementById(`${mode}TargetTime`).value = fmtHMS(target);
+  updateAll();
+}
+function applyCountdown(mode){
+  const min = clampInt(`${mode}TimerMin`,0,999,0);
+  const sec = clampInt(`${mode}TimerSec`,0,59,0);
+  const target = (nowSec() + min*60 + sec) % 86400;
+  state[mode].targetSec = target;
+  state[mode].started = false;
+  document.getElementById(`${mode}TargetTime`).value = fmtHMS(target);
+  updateAll();
+}
+function setDelay(mode, min, sec){
+  document.getElementById(`${mode}FirstMin`).value = min;
+  document.getElementById(`${mode}FirstSec`).value = sec;
+  updateAll();
+}
+function setIntervalDelay(mode, sec){
+  document.getElementById(`${mode}Interval`).value = sec;
+  updateAll();
+}
+function startPlan(mode){
+  const target = state[mode].targetSec;
+  if(target === null){
+    applyCountdown(mode);
+  }
+  state[mode].started = true;
+  state[mode].startedAt = nowSec();
+  document.getElementById(`${mode}PlanState`).textContent = 'Live';
+  updateAll();
+}
+function resetPlan(mode){
+  state[mode].targetSec = null;
+  state[mode].started = false;
+  state[mode].startedAt = null;
+  document.getElementById(`${mode}TargetTime`).value = '';
+  document.getElementById(`${mode}PlanState`).textContent = 'Draft';
+  updateAll();
+}
+
+function addPreset(mode,name){
+  if(state[mode].players.some(p => p.name === name)) return;
+  state[mode].players.push({name, marchStr:'5:00'});
+  renderPlayers(mode);
+  updateAll();
+}
+function addCustom(mode){
+  state[mode].players.push({name:`Player ${state[mode].players.length+1}`, marchStr:'5:00'});
+  renderPlayers(mode);
+  updateAll();
+}
+function clearPlayers(mode){
+  state[mode].players = [];
+  renderPlayers(mode);
+  updateAll();
+}
+function removePlayer(mode,index){
+  state[mode].players.splice(index,1);
+  renderPlayers(mode);
+  updateAll();
+}
+function updatePlayer(mode,index,key,value){
+  if(!state[mode].players[index]) return;
+  state[mode].players[index][key] = value;
+  updateAll();
+}
+function renderPlayers(mode){
+  const box = document.getElementById(`${mode}Players`);
+  if(!state[mode].players.length){
+    box.innerHTML = '<div class="empty-state">No players added yet. Use Quick Add or + Add Custom.</div>';
+    return;
+  }
+  box.innerHTML = state[mode].players.map((p,i)=>`
+    <div class="player-row">
+      <div>
+        <label>Player</label>
+        <input value="${escapeHtml(p.name)}" oninput="updatePlayer('${mode}',${i},'name',this.value)">
+      </div>
+      <div>
+        <label>March</label>
+        <input value="${escapeHtml(p.marchStr)}" placeholder="5:00" oninput="updatePlayer('${mode}',${i},'marchStr',this.value)">
+      </div>
+      <button class="remove-btn" onclick="removePlayer('${mode}',${i})" title="Remove">&times;</button>
+    </div>
+  `).join('');
+}
+function getSettings(mode){
+  const firstDelay = clampInt(`${mode}FirstMin`,0,10,0)*60 + clampInt(`${mode}FirstSec`,0,59,30);
+  const interval = clampInt(`${mode}Interval`,0,120,15);
+  const buffer = clampInt(`${mode}Buffer`,0,120,0);
+  const sort = document.getElementById(`${mode}Sort`).value;
+  return {firstDelay, interval, buffer, sort};
+}
+function getOrderedPlayers(mode){
+  const {sort} = getSettings(mode);
+  const players = state[mode].players.map((p,i)=>({...p, originalIndex:i, marchSec:parseMarch(p.marchStr)}));
+  if(sort === 'longest') players.sort((a,b)=>b.marchSec-a.marchSec || a.originalIndex-b.originalIndex);
+  if(sort === 'shortest') players.sort((a,b)=>a.marchSec-b.marchSec || a.originalIndex-b.originalIndex);
+  return players;
+}
+function buildRows(mode){
+  const target = state[mode].targetSec;
+  if(target === null) return [];
+  const {firstDelay, interval, buffer} = getSettings(mode);
+  const ordered = getOrderedPlayers(mode);
+  const effectiveTarget = (target - buffer + 86400) % 86400;
+  if(!ordered.length) return [];
+  const idealFirst = (effectiveTarget - ordered[0].marchSec + 86400) % 86400;
+  const liveFirst = state[mode].started ? (nowSec() + firstDelay) % 86400 : idealFirst;
+  return ordered.map((p,idx)=>{
+    const launchSec = (liveFirst + idx*interval) % 86400;
+    const arrivalSec = (launchSec + p.marchSec) % 86400;
+    const launchDiff = secondsUntil(launchSec);
+    const arrivalDiff = secondsUntil(arrivalSec);
+    return {...p, idx, launchSec, arrivalSec, launchDiff, arrivalDiff};
+  });
+}
+function secondsUntil(target){
+  if(target === null) return null;
+  let diff = target - nowSec();
+  if(diff < -43200) diff += 86400;
+  if(diff > 43200) diff -= 86400;
+  return diff;
+}
+function statusFor(diff){
+  if(diff === null) return {cls:'', label:'Wait'};
+  if(diff < -30) return {cls:'past', label:'Missed'};
+  if(diff <= 0) return {cls:'soon', label:'Start Now'};
+  if(diff <= 10) return {cls:'soon', label:'Get Ready'};
+  if(diff <= 30) return {cls:'ready', label:'Ready'};
+  return {cls:'', label:'Wait'};
+}
+function updateAll(){
+  ['attack','defense'].forEach(renderPlan);
+}
+function renderPlan(mode){
+  const target = state[mode].targetSec;
+  const {interval, buffer} = getSettings(mode);
+  const rows = buildRows(mode);
+  const results = document.getElementById(`${mode}Results`);
+  document.getElementById(`${mode}SummaryTarget`).textContent = target === null ? '--:--:--' : fmtHMS(target);
+  document.getElementById(`${mode}SummaryFirst`).textContent = rows.length ? fmtHMS(rows[0].launchSec) : '--:--:--';
+  document.getElementById(`${mode}SummaryInterval`).textContent = `${interval}s`;
+  document.getElementById(`${mode}SummaryBuffer`).textContent = `${buffer}s`;
+  document.getElementById(`${mode}PlanState`).textContent = state[mode].started ? 'Live' : 'Draft';
+  const diff = target === null ? null : secondsUntil(target);
+  document.getElementById(`${mode}Countdown`).textContent = fmtDuration(diff);
+
+  if(target === null){
+    results.innerHTML = '<div class="empty-state">Set a target time or use the countdown timer to build the plan.</div>';
+    return;
+  }
+  if(!state[mode].players.length){
+    results.innerHTML = '<div class="empty-state">Add players to see start times. The interval will apply between every player.</div>';
+    return;
+  }
+
+  results.innerHTML = rows.map((row,idx)=>{
+    const status = statusFor(row.launchDiff);
+    const late = row.arrivalSec !== target ? `Expected arrival: ${fmtHMS(row.arrivalSec)}` : `Expected arrival: ${fmtHMS(row.arrivalSec)}`;
+    return `<div class="launch-row ${idx===0?'leader':''} ${status.cls}">
+      <div>
+        <div class="launch-name">${escapeHtml(row.name)}${idx===0?' · FIRST':''}</div>
+        <div class="launch-meta">March ${fmtMarch(row.marchSec)} · ${late}</div>
+      </div>
+      <div>
+        <div class="launch-time">${fmtHMS(row.launchSec)}</div>
+        <div class="launch-sub">${fmtDuration(row.launchDiff)}</div>
+      </div>
+      <span class="status-pill">${status.label}</span>
+    </div>`;
+  }).join('');
+}
+function copyPlan(mode){
+  const target = state[mode].targetSec;
+  if(target === null) return;
+  const {firstDelay, interval, buffer, sort} = getSettings(mode);
+  const rows = buildRows(mode);
+  const label = mode === 'attack' ? '⚔️ CASTLE ATTACK RALLY PLAN' : '🛡️ CASTLE DEFENSE RALLY PLAN';
+  let text = `${label}\n`;
+  text += `Target ${mode === 'attack' ? 'impact' : 'arrival'}: ${fmtHMS(target)} UTC\n`;
+  text += `First launch delay: ${fmtMarch(firstDelay)}\n`;
+  text += `Delay between rally starts: ${interval}s\n`;
+  text += `Buffer: ${buffer}s early\n`;
+  text += `Sort: ${sort}\n\n`;
+  if(!rows.length){
+    text += 'No players added yet.\n';
+  } else {
+    rows.forEach((r,idx)=>{
+      text += `${idx+1}. ${r.name} start ${fmtHMS(r.launchSec)} UTC — march ${fmtMarch(r.marchSec)} — arrives ${fmtHMS(r.arrivalSec)} UTC\n`;
+    });
+  }
+  const btn = document.getElementById(`${mode}CopyBtn`);
+  const done = () => {
+    const old = btn.innerHTML;
+    btn.innerHTML = '✅ Copied!';
+    setTimeout(()=>btn.innerHTML=old,1600);
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text, done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+function fallbackCopy(text, callback){
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try{document.execCommand('copy'); callback();}catch(e){}
+  ta.remove();
+}
+
+renderPlayers('attack');
+renderPlayers('defense');
+updateClock();
+updateAll();
+setInterval(()=>{updateClock(); updateAll();}, 1000);
+</script>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+</body>
+</html>

@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#d6307a">
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>FAM 1245 — Hero Gear Optimizer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdf5f8;
+  --surface: #ffffff;
+  --surface2: #fdebf3;
+  --surface3: #fde4ee;
+  --border: #f0d0e0;
+  --border-bright: #e8b8d0;
+  --red: #d6307a;
+  --red-dim: #a8205e;
+  --amber: #ff5da8;
+  --green: #1ea96a;
+  --blue: #6a4cd9;
+  --warn: #c41440;
+  --text: #1e1018;
+  --text-dim: #6a5560;
+  --text-muted: #9a8590;
+  --sidebar-w: 240px;
+  --header-h: 64px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* ── HEADER ── */
+header{position:fixed;top:0;left:0;right:0;height:var(--header-h);z-index:300;background:rgba(14,14,14,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;box-shadow:0 4px 24px rgba(168,32,94,0.12);}
+.header-inner{width:100%;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;}
+.logo{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:var(--red);letter-spacing:0.14em;cursor:pointer;text-decoration:none;flex-shrink:0;}
+.logo span{color:var(--text-muted);font-size:0.55rem;display:block;letter-spacing:0.2em;margin-top:4px;font-family:'DM Mono',monospace;}
+.header-back{margin-left:auto;display:flex;align-items:center;gap:0.5rem;color:var(--text-dim);font-size:0.82rem;text-decoration:none;padding:6px 12px;border:1px solid var(--border);border-radius:8px;transition:all 0.15s;}
+.header-back:hover{color:var(--text);border-color:var(--border-bright);}
+
+/* ── LAYOUT ── */
+.app-body{padding-top:var(--header-h);}
+.page-container{max-width:1100px;margin:0 auto;padding:2.5rem 2rem 5rem;}
+
+/* ── PAGE HEADER ── */
+.page-header{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.page-header h1{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:700;color:var(--text);letter-spacing:0.06em;}
+.page-header p{font-size:0.82rem;color:var(--text-muted);margin-top:0.4rem;font-family:'DM Mono',monospace;}
+
+/* ── TOOL TABS ── */
+.tool-tabs{display:flex;gap:0.4rem;margin-bottom:2rem;flex-wrap:wrap;}
+.tool-tab{font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;padding:8px 18px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--text-dim);cursor:pointer;transition:all 0.15s;}
+.tool-tab:hover{color:var(--text);background:var(--surface2);}
+.tool-tab.active{background:rgba(214,48,122,0.1);border-color:var(--red);color:var(--red);font-weight:600;}
+.tool-panel{display:none;}
+.tool-panel.active{display:block;}
+
+/* ── CARDS ── */
+.calc-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;}
+.calc-card-header{background:var(--surface2);padding:0.85rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem;}
+.calc-card-header h2{font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:700;color:var(--text);}
+.calc-card-header .badge{font-family:'DM Mono',monospace;font-size:0.65rem;background:rgba(214,48,122,0.12);color:var(--red);border:1px solid rgba(214,48,122,0.25);padding:2px 8px;border-radius:20px;}
+.calc-body{padding:1.25rem 1.2rem;}
+
+/* ── INPUTS ── */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:1.25rem;}
+.form-group{display:flex;flex-direction:column;gap:0.35rem;}
+.form-label{font-size:0.78rem;color:var(--text-dim);font-family:'DM Mono',monospace;letter-spacing:0.04em;display:flex;align-items:center;gap:0.4rem;}
+.form-label .hint{font-size:0.68rem;color:var(--text-muted);}
+.form-input{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:0.55rem 0.85rem;color:var(--text);font-family:'DM Mono',monospace;font-size:0.85rem;outline:none;transition:border-color 0.15s;width:100%;}
+.form-input:focus{border-color:var(--red);}
+.form-select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:0.55rem 0.85rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;transition:border-color 0.15s;width:100%;cursor:pointer;-webkit-appearance:none;}
+.form-select:focus{border-color:var(--red);}
+
+/* ── HERO GEAR OPTIMIZER ── */
+.hero-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin-bottom:1.25rem;}
+.hero-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.hero-card-head{padding:0.75rem 1rem;background:var(--surface3);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.hero-type{font-family:'Orbitron',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;}
+.hero-type.inf{color:#3a7dd1;}
+.hero-type.cav{color:#d6307a;}
+.hero-type.arc{color:#1ea96a;}
+.hero-toggle{display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--text-dim);}
+.hero-toggle input{accent-color:var(--red);}
+.gear-piece{padding:0.75rem 1rem;border-bottom:1px solid var(--border);}
+.gear-piece:last-child{border-bottom:none;}
+.gear-piece-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;}
+.gear-name{font-size:0.82rem;font-weight:600;color:var(--text);}
+.gear-type-badge{font-size:0.65rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:10px;font-weight:500;}
+.gear-type-badge.lethality{background:rgba(214,48,122,0.12);color:var(--red);border:1px solid rgba(214,48,122,0.2);}
+.gear-type-badge.health{background:rgba(85,136,255,0.12);color:var(--blue);border:1px solid rgba(85,136,255,0.2);}
+.gear-inputs{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
+.gear-input-group{display:flex;flex-direction:column;gap:0.2rem;}
+.gear-input-label{font-size:0.68rem;color:var(--text-muted);font-family:'DM Mono',monospace;}
+.gear-input{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 8px;color:var(--text);font-family:'DM Mono',monospace;font-size:0.82rem;outline:none;width:100%;transition:border-color 0.15s;}
+.gear-input:focus{border-color:var(--red);}
+.gear-stat{font-size:0.7rem;color:var(--text-muted);margin-top:0.4rem;font-family:'DM Mono',monospace;}
+.gear-stat span{color:var(--amber);}
+
+/* quality selector */
+.quality-selector{display:flex;gap:3px;margin-bottom:0.5rem;}
+.q-btn{font-size:0.62rem;padding:2px 8px;border-radius:4px;border:1px solid var(--border);background:none;color:var(--text-muted);cursor:pointer;font-family:'DM Mono',monospace;transition:all 0.12s;}
+.q-btn.active-epic{background:rgba(30,169,106,0.12);border-color:var(--green);color:var(--green);}
+.q-btn.active-mythic{background:rgba(255,93,168,0.12);border-color:var(--amber);color:var(--amber);}
+.q-btn.active-red{background:rgba(214,48,122,0.12);border-color:var(--red);color:var(--red);}
+
+/* ── RESOURCES SECTION ── */
+.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.85rem;margin-bottom:1.25rem;}
+.resource-item{display:flex;flex-direction:column;gap:0.3rem;}
+.resource-label{font-size:0.75rem;color:var(--text-dim);font-family:'DM Mono',monospace;display:flex;align-items:center;gap:0.4rem;}
+.resource-emoji{font-size:0.9rem;}
+.resource-input{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.8rem;color:var(--text);font-family:'DM Mono',monospace;font-size:0.85rem;outline:none;transition:border-color 0.15s;width:100%;}
+.resource-input:focus{border-color:var(--red);}
+
+/* ── ACTION BUTTON ── */
+.action-btn{width:100%;padding:0.9rem;background:var(--red);border:none;border-radius:10px;color:white;font-family:'Orbitron',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;cursor:pointer;transition:all 0.2s;margin-top:0.5rem;}
+.action-btn:hover{background:var(--red-dim);transform:translateY(-1px);box-shadow:0 4px 20px rgba(214,48,122,0.3);}
+.action-btn:active{transform:translateY(0);}
+
+/* ── RESULTS ── */
+.results-section{margin-top:1.5rem;}
+.results-header{font-family:'Orbitron',sans-serif;font-size:0.75rem;color:var(--red);letter-spacing:0.12em;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.5rem;}
+.results-header::before{content:'';display:block;width:3px;height:14px;background:var(--red);border-radius:2px;flex-shrink:0;}
+.result-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem;margin-bottom:0.65rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:border-color 0.15s;}
+.result-card:hover{border-color:var(--border-bright);}
+.result-left{display:flex;flex-direction:column;gap:0.25rem;}
+.result-hero{font-size:0.7rem;color:var(--text-muted);font-family:'DM Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;}
+.result-piece{font-size:0.9rem;font-weight:600;color:var(--text);}
+.result-action{font-size:0.78rem;color:var(--text-dim);margin-top:0.1rem;}
+.result-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.2rem;flex-shrink:0;}
+.result-gain{font-family:'Orbitron',sans-serif;font-size:0.85rem;color:var(--green);font-weight:700;}
+.result-cost{font-size:0.72rem;color:var(--text-muted);font-family:'DM Mono',monospace;}
+.result-priority{font-size:0.65rem;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:10px;}
+.result-priority.high{background:rgba(214,48,122,0.12);color:var(--red);border:1px solid rgba(214,48,122,0.2);}
+.result-priority.med{background:rgba(255,93,168,0.12);color:var(--amber);border:1px solid rgba(255,93,168,0.2);}
+.result-priority.low{background:rgba(72,68,64,0.3);color:var(--text-muted);border:1px solid var(--border);}
+.summary-box{background:rgba(214,48,122,0.06);border:1px solid rgba(214,48,122,0.2);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem;}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.75rem;}
+.summary-stat{display:flex;flex-direction:column;gap:0.2rem;}
+.summary-label{font-size:0.68rem;color:var(--text-muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;}
+.summary-value{font-size:1rem;font-weight:700;color:var(--text);font-family:'DM Mono',monospace;}
+.summary-value.highlight{color:var(--red);}
+.no-results{text-align:center;padding:2.5rem 1rem;color:var(--text-muted);font-size:0.85rem;}
+.no-results .icon{font-size:2rem;margin-bottom:0.5rem;display:block;opacity:0.4;}
+
+/* ── COST REFERENCE TABLES ── */
+.ref-tabs{display:flex;gap:0.3rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border);padding-bottom:0.75rem;flex-wrap:wrap;}
+.ref-tab{font-size:0.78rem;padding:5px 14px;border:1px solid var(--border);border-radius:6px;background:none;color:var(--text-dim);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.12s;}
+.ref-tab.active{background:rgba(214,48,122,0.1);border-color:var(--red);color:var(--red);font-weight:600;}
+.ref-panel{display:none;}
+.ref-panel.active{display:block;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.82rem;}
+.data-table th{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);padding:0.6rem 0.75rem;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:0.5rem 0.75rem;border-bottom:1px solid rgba(44,44,44,0.5);font-family:'DM Mono',monospace;color:var(--text);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:var(--surface2);}
+.data-table td.accent{color:var(--red);font-weight:600;}
+.data-table td.green{color:var(--green);}
+.data-table td.amber{color:var(--amber);}
+.data-table td.blue{color:var(--blue);}
+.data-table td.muted{color:var(--text-muted);}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px;border:1px solid var(--border);}
+
+/* ── STAT CALCULATOR ── */
+.stat-result-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.2rem;margin-top:1rem;}
+.stat-result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;}
+.stat-result-item{text-align:center;}
+.stat-result-label{font-size:0.68rem;color:var(--text-muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.25rem;}
+.stat-result-value{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;color:var(--red);}
+.stat-progress{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:1rem;}
+.stat-progress-fill{height:100%;background:linear-gradient(90deg,var(--red-dim),var(--red));border-radius:3px;transition:width 0.3s ease;}
+
+/* ── ALERT ── */
+.alert{padding:0.75rem 1rem;border-radius:8px;font-size:0.82rem;margin-bottom:1rem;display:flex;gap:0.6rem;align-items:flex-start;line-height:1.55;}
+.alert-info{background:rgba(85,136,255,0.07);border-left:3px solid var(--blue);}
+.alert-warn{background:rgba(214,48,122,0.07);border-left:3px solid var(--red);}
+.alert-ok{background:rgba(30,169,106,0.07);border-left:3px solid var(--green);}
+
+/* ── SECTION LABEL ── */
+.section-label{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.75rem;margin-top:1.5rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.5rem;}
+.section-label::before{content:'';display:block;width:3px;height:12px;background:var(--red);border-radius:2px;flex-shrink:0;opacity:0.7;}
+
+/* ── MOBILE ── */
+@media(max-width:640px){
+  .page-container{padding:1.5rem 1rem 5rem;}
+  .hero-grid{grid-template-columns:1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .resource-grid{grid-template-columns:repeat(2,1fr);}
+  .stat-result-grid{grid-template-columns:1fr 1fr;}
+  .page-header h1{font-size:1.2rem;}
+  .tool-tab{font-size:0.78rem;padding:6px 12px;}
+}
+
+/* Build 1778962800 gear theme */
+html[data-theme="dark"]{--bg:#15131b;--surface:#201d2a;--surface2:#2a2635;--surface3:#352f42;--border:#463b57;--border-bright:#7657a4;--red:#ff5db8;--red-dim:#c34b95;--amber:#ff8ccd;--green:#6ee7b7;--blue:#9b7cff;--warn:#ff6b8a;--text:#fff6fb;--text-dim:#d8c5df;--text-muted:#a999b2;}
+html[data-theme="dark"] body{background:radial-gradient(ellipse at 18% 0%,rgba(255,93,184,.12),transparent 45%),radial-gradient(ellipse at 90% 70%,rgba(155,124,255,.1),transparent 50%),var(--bg);}
+html[data-theme="dark"] header{background:rgba(21,19,27,.94);box-shadow:0 8px 30px rgba(0,0,0,.25);} 
+.header-actions{margin-left:auto;display:flex;align-items:center;gap:.6rem;}.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);border-radius:999px;min-height:34px;padding:0 .78rem;font-family:'DM Mono',monospace;font-size:.68rem;cursor:pointer;transition:all .18s;white-space:nowrap;}.theme-toggle:hover{color:var(--red);border-color:var(--red);background:var(--surface3);}@media(max-width:640px){.theme-toggle span[data-theme-label]{display:none;}.theme-toggle{min-width:36px;padding:0 .65rem;}.header-actions{gap:.4rem;}.header-back{font-size:.72rem;padding:6px 9px;}}
+
+</style>
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+</head>
+<body class="calc-legacy-page">
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      FAM COMMAND
+      <span>KINGSHOT &middot; K1245</span>
+    </a>
+    <div class="header-actions"><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button><a href="calculators.html" class="header-back">&larr; All Calculators</a></div>
+  </div>
+</header>
+
+<div class="app-body">
+<div class="page-container">
+  <div class="crumb">
+    <a href="index.html">FAM Manual</a>
+    <span class="sep">&rsaquo;</span>
+    <a href="calculators.html">Calculators</a>
+    <span class="sep">&rsaquo;</span>
+    <span>Hero Gear Optimizer</span>
+  </div>
+
+
+  <div class="page-header">
+    <h1>Hero Gear Optimizer</h1>
+    <p>GEAR OPTIMIZER &middot; STAT LOOKUP &middot; COST REFERENCE &middot; RESOURCE PLANNER</p>
+  </div>
+
+  <div class="tool-tabs">
+    <button class="tool-tab active" onclick="switchTool('optimizer')">⚔️ Gear Optimizer</button>
+    <button class="tool-tab" onclick="switchTool('stat')">📊 Stat Calculator</button>
+    <button class="tool-tab" onclick="switchTool('reference')">📋 Cost Reference</button>
+    <button class="tool-tab" onclick="switchTool('planner')">🎯 Resource Planner</button>
+  </div>
+
+  <!-- ══════════════════════════════════════ OPTIMIZER ══════════════════════════════════════ -->
+  <div class="tool-panel active" id="tool-optimizer">
+
+    <div class="calc-card">
+      <div class="calc-card-header">
+        <h2>Your Resources</h2>
+        <span class="badge">Step 1</span>
+      </div>
+      <div class="calc-body">
+        <div class="resource-grid">
+          <div class="resource-item">
+            <div class="resource-label"><span class="resource-emoji">🟢</span>XP Parts (×10)</div>
+            <input class="resource-input" type="number" id="xp10" value="0" min="0" oninput="updateXPTotal()">
+          </div>
+          <div class="resource-item">
+            <div class="resource-label"><span class="resource-emoji">🟣</span>XP Parts (×100)</div>
+            <input class="resource-input" type="number" id="xp100" value="0" min="0" oninput="updateXPTotal()">
+          </div>
+          <div class="resource-item">
+            <div class="resource-label"><span class="resource-emoji">🔨</span>Forgehammers</div>
+            <input class="resource-input" type="number" id="hammers" value="0" min="0">
+          </div>
+          <div class="resource-item">
+            <div class="resource-label"><span class="resource-emoji">🟡</span>Mythic Gear</div>
+            <input class="resource-input" type="number" id="mythic_res" value="0" min="0">
+          </div>
+          <div class="resource-item">
+            <div class="resource-label"><span class="resource-emoji">🔴</span>Mithril</div>
+            <input class="resource-input" type="number" id="mithril_res" value="0" min="0">
+          </div>
+        </div>
+        <div class="alert alert-info" id="xp-total-display">
+          <span>📦</span><div>Total XP Available: <strong id="xp-total">0</strong> XP &nbsp;·&nbsp; Approx <strong id="xp-levels">—</strong> enhancement levels on Mythic gear</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Your Hero Gear — Current Levels</div>
+
+    <div class="hero-grid">
+      <!-- Infantry -->
+      <div class="hero-card" id="hero-inf">
+        <div class="hero-card-head">
+          <span class="hero-type inf">⚔️ INFANTRY</span>
+          <label class="hero-toggle"><input type="checkbox" id="inc-inf" checked onchange="toggleHero('inf')"> Include</label>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head">
+            <span class="gear-name">🪖 Helm</span>
+            <div>
+              <span class="gear-type-badge lethality">Lethality &nbsp;0.7×</span>
+            </div>
+          </div>
+          <div class="quality-selector" id="qs-inf-helm">
+            <button class="q-btn active-mythic" onclick="setQuality('inf','helm','epic')">Epic</button>
+            <button class="q-btn active-mythic" onclick="setQuality('inf','helm','mythic')">Mythic</button>
+            <button class="q-btn" onclick="setQuality('inf','helm','red')">Red</button>
+          </div>
+          <div class="gear-inputs">
+            <div class="gear-input-group">
+              <span class="gear-input-label">Enhancement</span>
+              <input class="gear-input" type="number" id="inf-helm-enh" value="0" min="0" max="200" oninput="updateStat('inf','helm')">
+            </div>
+            <div class="gear-input-group">
+              <span class="gear-input-label">Mastery</span>
+              <input class="gear-input" type="number" id="inf-helm-mas" value="0" min="0" max="20" oninput="updateStat('inf','helm')">
+            </div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-inf-helm">15.00%</span></div>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head">
+            <span class="gear-name">🧤 Gloves</span>
+            <span class="gear-type-badge health">Health &nbsp;1.5×</span>
+          </div>
+          <div class="quality-selector" id="qs-inf-gloves">
+            <button class="q-btn" onclick="setQuality('inf','gloves','epic')">Epic</button>
+            <button class="q-btn active-mythic" onclick="setQuality('inf','gloves','mythic')">Mythic</button>
+            <button class="q-btn" onclick="setQuality('inf','gloves','red')">Red</button>
+          </div>
+          <div class="gear-inputs">
+            <div class="gear-input-group">
+              <span class="gear-input-label">Enhancement</span>
+              <input class="gear-input" type="number" id="inf-gloves-enh" value="0" min="0" max="200" oninput="updateStat('inf','gloves')">
+            </div>
+            <div class="gear-input-group">
+              <span class="gear-input-label">Mastery</span>
+              <input class="gear-input" type="number" id="inf-gloves-mas" value="0" min="0" max="20" oninput="updateStat('inf','gloves')">
+            </div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-inf-gloves">15.00%</span></div>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head">
+            <span class="gear-name">🛡️ Chest</span>
+            <span class="gear-type-badge health">Health &nbsp;1.5×</span>
+          </div>
+          <div class="quality-selector" id="qs-inf-chest">
+            <button class="q-btn" onclick="setQuality('inf','chest','epic')">Epic</button>
+            <button class="q-btn active-mythic" onclick="setQuality('inf','chest','mythic')">Mythic</button>
+            <button class="q-btn" onclick="setQuality('inf','chest','red')">Red</button>
+          </div>
+          <div class="gear-inputs">
+            <div class="gear-input-group">
+              <span class="gear-input-label">Enhancement</span>
+              <input class="gear-input" type="number" id="inf-chest-enh" value="0" min="0" max="200" oninput="updateStat('inf','chest')">
+            </div>
+            <div class="gear-input-group">
+              <span class="gear-input-label">Mastery</span>
+              <input class="gear-input" type="number" id="inf-chest-mas" value="0" min="0" max="20" oninput="updateStat('inf','chest')">
+            </div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-inf-chest">15.00%</span></div>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head">
+            <span class="gear-name">👢 Boots</span>
+            <span class="gear-type-badge lethality">Lethality &nbsp;0.7×</span>
+          </div>
+          <div class="quality-selector" id="qs-inf-boots">
+            <button class="q-btn" onclick="setQuality('inf','boots','epic')">Epic</button>
+            <button class="q-btn active-mythic" onclick="setQuality('inf','boots','mythic')">Mythic</button>
+            <button class="q-btn" onclick="setQuality('inf','boots','red')">Red</button>
+          </div>
+          <div class="gear-inputs">
+            <div class="gear-input-group">
+              <span class="gear-input-label">Enhancement</span>
+              <input class="gear-input" type="number" id="inf-boots-enh" value="0" min="0" max="200" oninput="updateStat('inf','boots')">
+            </div>
+            <div class="gear-input-group">
+              <span class="gear-input-label">Mastery</span>
+              <input class="gear-input" type="number" id="inf-boots-mas" value="0" min="0" max="20" oninput="updateStat('inf','boots')">
+            </div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-inf-boots">15.00%</span></div>
+        </div>
+      </div>
+
+      <!-- Cavalry -->
+      <div class="hero-card" id="hero-cav">
+        <div class="hero-card-head">
+          <span class="hero-type cav">🐎 CAVALRY</span>
+          <label class="hero-toggle"><input type="checkbox" id="inc-cav" checked onchange="toggleHero('cav')"> Include</label>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head"><span class="gear-name">🪖 Helm</span><span class="gear-type-badge lethality">Lethality &nbsp;0.4×</span></div>
+          <div class="quality-selector" id="qs-cav-helm"><button class="q-btn" onclick="setQuality('cav','helm','epic')">Epic</button><button class="q-btn active-mythic" onclick="setQuality('cav','helm','mythic')">Mythic</button><button class="q-btn" onclick="setQuality('cav','helm','red')">Red</button></div>
+          <div class="gear-inputs">
+            <div class="gear-input-group"><span class="gear-input-label">Enhancement</span><input class="gear-input" type="number" id="cav-helm-enh" value="0" min="0" max="200" oninput="updateStat('cav','helm')"></div>
+            <div class="gear-input-group"><span class="gear-input-label">Mastery</span><input class="gear-input" type="number" id="cav-helm-mas" value="0" min="0" max="20" oninput="updateStat('cav','helm')"></div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-cav-helm">15.00%</span></div>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head"><span class="gear-name">🧤 Gloves</span><span class="gear-type-badge health">Health &nbsp;0.2×</span></div>
+          <div class="quality-selector" id="qs-cav-gloves"><button class="q-btn" onclick="setQuality('cav','gloves','epic')">Epic</button><button class="q-btn active-mythic" onclick="setQuality('cav','gloves','mythic')">Mythic</button><button class="q-btn" onclick="setQuality('cav','gloves','red')">Red</button></div>
+          <div class="gear-inputs">
+            <div class="gear-input-group"><span class="gear-input-label">Enhancement</span><input class="gear-input" type="number" id="cav-gloves-enh" value="0" min="0" max="200" oninput="updateStat('cav','gloves')"></div>
+            <div class="gear-input-group"><span class="gear-input-label">Mastery</span><input class="gear-input" type="number" id="cav-gloves-mas" value="0" min="0" max="20" oninput="updateStat('cav','gloves')"></div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-cav-gloves">15.00%</span></div>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head"><span class="gear-name">🛡️ Chest</span><span class="gear-type-badge health">Health &nbsp;0.2×</span></div>
+          <div class="quality-selector" id="qs-cav-chest"><button class="q-btn" onclick="setQuality('cav','chest','epic')">Epic</button><button class="q-btn active-mythic" onclick="setQuality('cav','chest','mythic')">Mythic</button><button class="q-btn" onclick="setQuality('cav','chest','red')">Red</button></div>
+          <div class="gear-inputs">
+            <div class="gear-input-group"><span class="gear-input-label">Enhancement</span><input class="gear-input" type="number" id="cav-chest-enh" value="0" min="0" max="200" oninput="updateStat('cav','chest')"></div>
+            <div class="gear-input-group"><span class="gear-input-label">Mastery</span><input class="gear-input" type="number" id="cav-chest-mas" value="0" min="0" max="20" oninput="updateStat('cav','chest')"></div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-cav-chest">15.00%</span></div>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head"><span class="gear-name">👢 Boots</span><span class="gear-type-badge lethality">Lethality &nbsp;0.4×</span></div>
+          <div class="quality-selector" id="qs-cav-boots"><button class="q-btn" onclick="setQuality('cav','boots','epic')">Epic</button><button class="q-btn active-mythic" onclick="setQuality('cav','boots','mythic')">Mythic</button><button class="q-btn" onclick="setQuality('cav','boots','red')">Red</button></div>
+          <div class="gear-inputs">
+            <div class="gear-input-group"><span class="gear-input-label">Enhancement</span><input class="gear-input" type="number" id="cav-boots-enh" value="0" min="0" max="200" oninput="updateStat('cav','boots')"></div>
+            <div class="gear-input-group"><span class="gear-input-label">Mastery</span><input class="gear-input" type="number" id="cav-boots-mas" value="0" min="0" max="20" oninput="updateStat('cav','boots')"></div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-cav-boots">15.00%</span></div>
+        </div>
+      </div>
+
+      <!-- Archery -->
+      <div class="hero-card" id="hero-arc">
+        <div class="hero-card-head">
+          <span class="hero-type arc">🏹 ARCHERY</span>
+          <label class="hero-toggle"><input type="checkbox" id="inc-arc" checked onchange="toggleHero('arc')"> Include</label>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head"><span class="gear-name">🪖 Helm</span><span class="gear-type-badge lethality">Lethality &nbsp;1.4×</span></div>
+          <div class="quality-selector" id="qs-arc-helm"><button class="q-btn" onclick="setQuality('arc','helm','epic')">Epic</button><button class="q-btn active-mythic" onclick="setQuality('arc','helm','mythic')">Mythic</button><button class="q-btn" onclick="setQuality('arc','helm','red')">Red</button></div>
+          <div class="gear-inputs">
+            <div class="gear-input-group"><span class="gear-input-label">Enhancement</span><input class="gear-input" type="number" id="arc-helm-enh" value="0" min="0" max="200" oninput="updateStat('arc','helm')"></div>
+            <div class="gear-input-group"><span class="gear-input-label">Mastery</span><input class="gear-input" type="number" id="arc-helm-mas" value="0" min="0" max="20" oninput="updateStat('arc','helm')"></div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-arc-helm">15.00%</span></div>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head"><span class="gear-name">🧤 Gloves</span><span class="gear-type-badge health">Health &nbsp;0.7×</span></div>
+          <div class="quality-selector" id="qs-arc-gloves"><button class="q-btn" onclick="setQuality('arc','gloves','epic')">Epic</button><button class="q-btn active-mythic" onclick="setQuality('arc','gloves','mythic')">Mythic</button><button class="q-btn" onclick="setQuality('arc','gloves','red')">Red</button></div>
+          <div class="gear-inputs">
+            <div class="gear-input-group"><span class="gear-input-label">Enhancement</span><input class="gear-input" type="number" id="arc-gloves-enh" value="0" min="0" max="200" oninput="updateStat('arc','gloves')"></div>
+            <div class="gear-input-group"><span class="gear-input-label">Mastery</span><input class="gear-input" type="number" id="arc-gloves-mas" value="0" min="0" max="20" oninput="updateStat('arc','gloves')"></div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-arc-gloves">15.00%</span></div>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head"><span class="gear-name">🛡️ Chest</span><span class="gear-type-badge health">Health &nbsp;0.7×</span></div>
+          <div class="quality-selector" id="qs-arc-chest"><button class="q-btn" onclick="setQuality('arc','chest','epic')">Epic</button><button class="q-btn active-mythic" onclick="setQuality('arc','chest','mythic')">Mythic</button><button class="q-btn" onclick="setQuality('arc','chest','red')">Red</button></div>
+          <div class="gear-inputs">
+            <div class="gear-input-group"><span class="gear-input-label">Enhancement</span><input class="gear-input" type="number" id="arc-chest-enh" value="0" min="0" max="200" oninput="updateStat('arc','chest')"></div>
+            <div class="gear-input-group"><span class="gear-input-label">Mastery</span><input class="gear-input" type="number" id="arc-chest-mas" value="0" min="0" max="20" oninput="updateStat('arc','chest')"></div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-arc-chest">15.00%</span></div>
+        </div>
+        <div class="gear-piece">
+          <div class="gear-piece-head"><span class="gear-name">👢 Boots</span><span class="gear-type-badge lethality">Lethality &nbsp;1.4×</span></div>
+          <div class="quality-selector" id="qs-arc-boots"><button class="q-btn" onclick="setQuality('arc','boots','epic')">Epic</button><button class="q-btn active-mythic" onclick="setQuality('arc','boots','mythic')">Mythic</button><button class="q-btn" onclick="setQuality('arc','boots','red')">Red</button></div>
+          <div class="gear-inputs">
+            <div class="gear-input-group"><span class="gear-input-label">Enhancement</span><input class="gear-input" type="number" id="arc-boots-enh" value="0" min="0" max="200" oninput="updateStat('arc','boots')"></div>
+            <div class="gear-input-group"><span class="gear-input-label">Mastery</span><input class="gear-input" type="number" id="arc-boots-mas" value="0" min="0" max="20" oninput="updateStat('arc','boots')"></div>
+          </div>
+          <div class="gear-stat">Current stat: <span id="stat-arc-boots">15.00%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="action-btn" onclick="runOptimizer()">⚡ FIND BEST UPGRADES</button>
+
+    <div class="results-section" id="optimizer-results" style="display:none">
+      <div class="results-header">OPTIMIZATION RESULTS</div>
+      <div class="summary-box" id="summary-box"></div>
+      <div id="results-list"></div>
+    </div>
+    <div class="no-results" id="no-results-placeholder">
+      <span class="icon">⚙️</span>
+      Enter your resources and current gear levels, then hit Optimize.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ STAT CALCULATOR ══════════════════════════════════════ -->
+  <div class="tool-panel" id="tool-stat">
+    <div class="calc-card">
+      <div class="calc-card-header"><h2>Stat Lookup</h2><span class="badge">Enhancement + Mastery → Stat%</span></div>
+      <div class="calc-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Gear Quality</label>
+            <select class="form-select" id="stat-quality" onchange="calcStat()">
+              <option value="epic">Epic</option>
+              <option value="mythic" selected>Mythic</option>
+              <option value="red">Red (Ascended)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Enhancement Level</label>
+            <input class="form-input" type="number" id="stat-enh" value="0" min="0" max="200" oninput="calcStat()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mastery Level <span class="hint">(0–20)</span></label>
+            <input class="form-input" type="number" id="stat-mas" value="0" min="0" max="20" oninput="calcStat()">
+          </div>
+        </div>
+        <div class="stat-result-box">
+          <div class="stat-result-grid">
+            <div class="stat-result-item">
+              <div class="stat-result-label">Base Stat</div>
+              <div class="stat-result-value" id="calc-base">15.00%</div>
+            </div>
+            <div class="stat-result-item">
+              <div class="stat-result-label">From Enhancement</div>
+              <div class="stat-result-value" id="calc-enh-bonus">+0.00%</div>
+            </div>
+            <div class="stat-result-item">
+              <div class="stat-result-label">Total Stat</div>
+              <div class="stat-result-value" id="calc-total" style="color:var(--green)">15.00%</div>
+            </div>
+          </div>
+          <div class="stat-progress" style="margin-top:1rem;">
+            <div class="stat-progress-fill" id="stat-progress-bar" style="width:30%"></div>
+          </div>
+          <div style="font-size:0.7rem;color:var(--text-muted);font-family:'DM Mono',monospace;margin-top:0.4rem;text-align:right" id="stat-progress-label">30% of max (Mythic 100%)</div>
+        </div>
+        <div class="section-label" style="margin-top:1.5rem">XP Cost to Reach This Level</div>
+        <div class="stat-result-box">
+          <div class="stat-result-grid">
+            <div class="stat-result-item">
+              <div class="stat-result-label">XP from Level 0</div>
+              <div class="stat-result-value" id="xp-from-zero" style="font-size:0.85rem">0</div>
+            </div>
+            <div class="stat-result-item">
+              <div class="stat-result-label">Forgehammers</div>
+              <div class="stat-result-value" id="hammer-total" style="font-size:0.85rem">0</div>
+            </div>
+            <div class="stat-result-item">
+              <div class="stat-result-label">Mythic Gear Used</div>
+              <div class="stat-result-value" id="mythic-total" style="font-size:0.85rem">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ COST REFERENCE ══════════════════════════════════════ -->
+  <div class="tool-panel" id="tool-reference">
+    <div class="ref-tabs">
+      <button class="ref-tab active" onclick="switchRef('xp')">XP Costs</button>
+      <button class="ref-tab" onclick="switchRef('hammer')">Forgehammer Costs</button>
+      <button class="ref-tab" onclick="switchRef('statbonuses')">Stat Bonuses</button>
+    </div>
+
+    <div class="ref-panel active" id="ref-xp">
+      <div class="alert alert-info"><span>ℹ️</span><div>Incremental XP cost per enhancement level. Epic max: 80 · Mythic max: 100 · Red continues from 101–200.</div></div>
+      <div class="table-wrap">
+        <table class="data-table" id="xp-table"></table>
+      </div>
+    </div>
+
+    <div class="ref-panel" id="ref-hammer">
+      <div class="alert alert-info"><span>ℹ️</span><div>Formula: Mastery Level × 10 Forgehammers per level. Levels 11–20 also require Mythic Gear pieces.</div></div>
+      <div class="table-wrap">
+        <table class="data-table" id="hammer-table"></table>
+      </div>
+    </div>
+
+    <div class="ref-panel" id="ref-statbonuses">
+      <div class="alert alert-info"><span>ℹ️</span><div>Stat at each milestone level. Epic: 0.09 + (lvl×0.0021). Mythic: 0.15 + (lvl×0.0035). Red: 0.50 + ((lvl−100)×0.005).</div></div>
+      <div class="table-wrap">
+        <table class="data-table" id="stat-table"></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ RESOURCE PLANNER ══════════════════════════════════════ -->
+  <div class="tool-panel" id="tool-planner">
+    <div class="calc-card">
+      <div class="calc-card-header"><h2>Resource Planner</h2><span class="badge">How much do I need?</span></div>
+      <div class="calc-body">
+        <div class="alert alert-info"><span>🎯</span><div>Enter your current level and target level to see exactly what resources you need.</div></div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Gear Quality</label>
+            <select class="form-select" id="plan-quality" onchange="calcPlan()">
+              <option value="epic">Epic</option>
+              <option value="mythic" selected>Mythic</option>
+              <option value="red">Red (Ascended)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Current Enhancement</label>
+            <input class="form-input" type="number" id="plan-from-enh" value="0" min="0" max="199" oninput="calcPlan()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Enhancement</label>
+            <input class="form-input" type="number" id="plan-to-enh" value="20" min="1" max="200" oninput="calcPlan()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Current Mastery</label>
+            <input class="form-input" type="number" id="plan-from-mas" value="0" min="0" max="19" oninput="calcPlan()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Mastery</label>
+            <input class="form-input" type="number" id="plan-to-mas" value="10" min="0" max="20" oninput="calcPlan()">
+          </div>
+        </div>
+        <div class="stat-result-box" id="plan-results">
+          <div class="stat-result-grid">
+            <div class="stat-result-item">
+              <div class="stat-result-label">XP Needed</div>
+              <div class="stat-result-value" id="plan-xp" style="font-size:0.9rem">—</div>
+            </div>
+            <div class="stat-result-item">
+              <div class="stat-result-label">Forgehammers</div>
+              <div class="stat-result-value" id="plan-hammers" style="font-size:0.9rem">—</div>
+            </div>
+            <div class="stat-result-item">
+              <div class="stat-result-label">Mythic Gear</div>
+              <div class="stat-result-value" id="plan-mythic" style="font-size:0.9rem">—</div>
+            </div>
+          </div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+            <div class="stat-result-grid">
+              <div class="stat-result-item">
+                <div class="stat-result-label">Stat From</div>
+                <div class="stat-result-value" id="plan-stat-from" style="font-size:0.9rem;color:var(--text-dim)">—</div>
+              </div>
+              <div class="stat-result-item">
+                <div class="stat-result-label">Stat To</div>
+                <div class="stat-result-value" id="plan-stat-to" style="font-size:0.9rem;color:var(--green)">—</div>
+              </div>
+              <div class="stat-result-item">
+                <div class="stat-result-label">Stat Gain</div>
+                <div class="stat-result-value" id="plan-stat-gain" style="font-size:0.9rem;color:var(--red)">—</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+            <div class="stat-result-label" style="margin-bottom:0.4rem;">Equivalent XP Parts (×100 purple)</div>
+            <div class="stat-result-value" id="plan-parts" style="color:var(--amber)">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  GAME DATA — extracted from kingshotoptimizer.com
+// ═══════════════════════════════════════════════════════
+
+// Incremental XP cost per enhancement level (index = level, value = XP to reach that level)
+const MYTHIC_XP = [0,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,160,170,180,190,200,210,220,230,240,250,270,290,310,330,350,370,390,410,430,450,470,490,510,530,550,570,590,610,630,650,680,710,740,770,800,830,860,890,920,950,990,1030,1070,1110,1150,1190,1230,1270,1310,1350,1400,1450,1500,1550,1600,1650,1700,1750,1800,1850,1900,1950,2000,2050,2100,2150,2200,2250,2300,2350,2400,0,2500,2550,2600,2650,2700,2750,2800,2850,2900,2950,3000,3050,3100,3150,3200,3250,3300,3350,0,3450,3500,3550,3600,3650,3700,3750,3800,3850,3900,3950,4000,4050,4100,4150,4200,4250,4300,4350,0,4450,4500,4550,4600,4650,4700,4750,4800,4850,4900,4950,5000,5050,5100,5150,5200,5250,5300,5350,0,5500,5600,5700,5800,5900,6000,6100,6200,6300,6400,6500,6600,6700,6800,6900,7000,7100,7200,7300,0,7500,7600,7700,7800,7900,8000,8100,8200,8300,8400,8500,8600,8700,8800,8900,9000,9100,9200,9300,0];
+
+// Cumulative XP from level 0 to level N
+function cumulativeXP(quality, fromLevel, toLevel) {
+  let total = 0;
+  const table = MYTHIC_XP; // same table used for epic/mythic/red; epic stops at 80
+  for (let i = fromLevel + 1; i <= toLevel; i++) {
+    if (i < table.length) total += table[i] || 0;
+  }
+  return total;
+}
+
+// Stat formulas
+function getStat(quality, enhLevel, masteryLevel) {
+  let base;
+  if (quality === 'epic') {
+    base = 0.09 + (Math.min(enhLevel, 80) * 0.0021);
+  } else if (quality === 'mythic') {
+    base = 0.15 + (Math.min(enhLevel, 100) * 0.0035);
+  } else { // red
+    const redLevel = Math.min(Math.max(enhLevel, 101), 200);
+    base = 0.50 + ((redLevel - 100) * 0.005);
+  }
+  return base;
+}
+
+// Max enhancement level per quality
+function maxEnhLevel(quality) {
+  if (quality === 'epic') return 80;
+  if (quality === 'mythic') return 100;
+  return 200;
+}
+
+// Forgehammer cost for mastery levels
+function hammerCost(fromMas, toMas) {
+  let hammers = 0, mythic = 0;
+  for (let i = fromMas + 1; i <= toMas; i++) {
+    hammers += i * 10;
+    if (i > 10) mythic += (i - 10);
+  }
+  return {hammers, mythic};
+}
+
+// Quality state per piece
+const qualities = {};
+['inf','cav','arc'].forEach(h => {
+  ['helm','gloves','chest','boots'].forEach(p => {
+    qualities[`${h}-${p}`] = 'mythic';
+  });
+});
+
+// Hero weights
+const WEIGHTS = {
+  inf: {helm:{type:'lethality',w:0.7}, gloves:{type:'health',w:1.5}, chest:{type:'health',w:1.5}, boots:{type:'lethality',w:0.7}},
+  cav: {helm:{type:'lethality',w:0.4}, gloves:{type:'health',w:0.2}, chest:{type:'health',w:0.2}, boots:{type:'lethality',w:0.4}},
+  arc: {helm:{type:'lethality',w:1.4}, gloves:{type:'health',w:0.7}, chest:{type:'health',w:0.7}, boots:{type:'lethality',w:1.4}},
+};
+
+// ═══ TOOL SWITCHER ═══
+function switchTool(id) {
+  document.querySelectorAll('.tool-tab').forEach((t,i) => {
+    const ids = ['optimizer','stat','reference','planner'];
+    t.classList.toggle('active', ids[i] === id);
+  });
+  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tool-'+id).classList.add('active');
+  if (id === 'reference') buildReferenceTables();
+  if (id === 'stat') calcStat();
+  if (id === 'planner') calcPlan();
+}
+
+function switchRef(id) {
+  document.querySelectorAll('.ref-tab').forEach((t,i) => {
+    const ids = ['xp','hammer','statbonuses'];
+    t.classList.toggle('active', ids[i] === id);
+  });
+  document.querySelectorAll('.ref-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('ref-'+id).classList.add('active');
+}
+
+// ═══ QUALITY SELECTOR ═══
+function setQuality(hero, piece, quality) {
+  const key = `${hero}-${piece}`;
+  qualities[key] = quality;
+  const container = document.getElementById(`qs-${hero}-${piece}`);
+  container.querySelectorAll('.q-btn').forEach((btn, i) => {
+    const qs = ['epic','mythic','red'];
+    btn.className = 'q-btn' + (qs[i] === quality ? ` active-${quality}` : '');
+  });
+  const maxL = maxEnhLevel(quality);
+  const enhInput = document.getElementById(`${hero}-${piece}-enh`);
+  enhInput.max = maxL;
+  if (parseInt(enhInput.value) > maxL) enhInput.value = maxL;
+  updateStat(hero, piece);
+}
+
+// ═══ STAT DISPLAY ═══
+function updateStat(hero, piece) {
+  const key = `${hero}-${piece}`;
+  const q = qualities[key] || 'mythic';
+  const enh = parseInt(document.getElementById(`${hero}-${piece}-enh`).value) || 0;
+  const mas = parseInt(document.getElementById(`${hero}-${piece}-mas`).value) || 0;
+  const stat = getStat(q, enh, mas);
+  document.getElementById(`stat-${hero}-${piece}`).textContent = (stat * 100).toFixed(2) + '%';
+}
+
+// ═══ XP TOTAL ═══
+function updateXPTotal() {
+  const xp10 = parseInt(document.getElementById('xp10').value) || 0;
+  const xp100 = parseInt(document.getElementById('xp100').value) || 0;
+  const total = xp10 * 10 + xp100 * 100;
+  document.getElementById('xp-total').textContent = total.toLocaleString();
+  // Estimate levels on mythic gear (rough: avg ~300 XP per level in midgame)
+  let rem = total, levels = 0;
+  for (let i = 1; i <= 100; i++) {
+    const cost = MYTHIC_XP[i] || 0;
+    if (rem >= cost) { rem -= cost; levels++; } else break;
+  }
+  document.getElementById('xp-levels').textContent = levels > 0 ? `~${levels} levels` : '< 1 level';
+}
+
+// ═══ HERO TOGGLE ═══
+function toggleHero(hero) {
+  const checked = document.getElementById(`inc-${hero}`).checked;
+  document.getElementById(`hero-${hero}`).style.opacity = checked ? '1' : '0.4';
+}
+
+// ═══ OPTIMIZER ═══
+function runOptimizer() {
+  const xp10 = parseInt(document.getElementById('xp10').value) || 0;
+  const xp100 = parseInt(document.getElementById('xp100').value) || 0;
+  let availXP = xp10 * 10 + xp100 * 100;
+  let availHammers = parseInt(document.getElementById('hammers').value) || 0;
+  let availMythic = parseInt(document.getElementById('mythic_res').value) || 0;
+
+  const heroes = ['inf','cav','arc'];
+  const pieces = ['helm','gloves','chest','boots'];
+
+  // Build candidate upgrades (each piece, each next level)
+  let candidates = [];
+  for (const hero of heroes) {
+    if (!document.getElementById(`inc-${hero}`).checked) continue;
+    for (const piece of pieces) {
+      const key = `${hero}-${piece}`;
+      const q = qualities[key] || 'mythic';
+      const curEnh = parseInt(document.getElementById(`${hero}-${piece}-enh`).value) || 0;
+      const curMas = parseInt(document.getElementById(`${hero}-${piece}-mas`).value) || 0;
+      const maxL = maxEnhLevel(q);
+      const weight = WEIGHTS[hero][piece].w;
+
+      // Try each next enhancement level
+      for (let nextL = curEnh + 1; nextL <= maxL; nextL++) {
+        const xpCost = MYTHIC_XP[nextL] || 0;
+        if (xpCost === 0) continue;
+        if (xpCost > availXP * 2) break; // stop looking too far
+        const statBefore = getStat(q, curEnh, curMas);
+        const statAfter = getStat(q, nextL, curMas);
+        const gain = (statAfter - statBefore) * weight;
+        const efficiency = gain / xpCost;
+        candidates.push({hero, piece, q, curEnh, curMas, nextL, xpCost, gain, efficiency, type: 'enh', label: `Enh ${curEnh}→${nextL}`});
+        break; // only suggest next level, greedy step-by-step
+      }
+
+      // Try each next mastery level (if enh >= 20)
+      if (curEnh >= 20 && curMas < 20) {
+        const nextMas = curMas + 1;
+        const hCosts = hammerCost(curMas, nextMas);
+        const statBefore = getStat(q, curEnh, curMas);
+        const statAfter = getStat(q, curEnh, nextMas);
+        const gain = (statAfter - statBefore) * weight;
+        if (hCosts.hammers > 0) {
+          const efficiency = gain / hCosts.hammers * 10;
+          candidates.push({hero, piece, q, curEnh, curMas, nextMas, hammers: hCosts.hammers, mythicCost: hCosts.mythic, gain, efficiency, type: 'mas', label: `Mastery ${curMas}→${nextMas}`});
+        }
+      }
+    }
+  }
+
+  // Sort by weighted efficiency
+  candidates.sort((a, b) => b.efficiency - a.efficiency);
+
+  // Greedily pick upgrades that fit in budget
+  const chosen = [];
+  let usedXP = 0, usedHammers = 0, usedMythic = 0;
+
+  for (const c of candidates) {
+    if (c.type === 'enh') {
+      if (c.xpCost <= availXP - usedXP) {
+        chosen.push(c);
+        usedXP += c.xpCost;
+      }
+    } else {
+      if (c.hammers <= availHammers - usedHammers && c.mythicCost <= availMythic - usedMythic) {
+        chosen.push(c);
+        usedHammers += c.hammers;
+        usedMythic += c.mythicCost;
+      }
+    }
+    if (chosen.length >= 20) break;
+  }
+
+  // Render results
+  const section = document.getElementById('optimizer-results');
+  const placeholder = document.getElementById('no-results-placeholder');
+  const listEl = document.getElementById('results-list');
+
+  if (chosen.length === 0) {
+    section.style.display = 'none';
+    placeholder.style.display = 'block';
+    placeholder.innerHTML = '<span class="icon">💸</span>Not enough resources for any upgrades, or all gear is maxed.';
+    return;
+  }
+
+  placeholder.style.display = 'none';
+  section.style.display = 'block';
+
+  // Summary
+  const totalGain = chosen.reduce((s, c) => s + c.gain, 0);
+  document.getElementById('summary-box').innerHTML = `
+    <div class="summary-grid">
+      <div class="summary-stat"><div class="summary-label">Upgrades Found</div><div class="summary-value highlight">${chosen.length}</div></div>
+      <div class="summary-stat"><div class="summary-label">XP to Use</div><div class="summary-value">${usedXP.toLocaleString()}</div></div>
+      <div class="summary-stat"><div class="summary-label">Hammers to Use</div><div class="summary-value">${usedHammers.toLocaleString()}</div></div>
+      <div class="summary-stat"><div class="summary-label">Weighted Stat Gain</div><div class="summary-value highlight">+${(totalGain*100).toFixed(2)}%</div></div>
+    </div>`;
+
+  // List
+  const heroNames = {inf:'Infantry',cav:'Cavalry',arc:'Archery'};
+  const pieceNames = {helm:'Helm',gloves:'Gloves',chest:'Chest',boots:'Boots'};
+  const heroEmoji = {inf:'⚔️',cav:'🐎',arc:'🏹'};
+
+  listEl.innerHTML = chosen.map((c, i) => {
+    const priority = i < 3 ? 'high' : i < 8 ? 'med' : 'low';
+    const priorityLabel = i < 3 ? 'HIGH' : i < 8 ? 'MED' : 'LOW';
+    const costStr = c.type === 'enh'
+      ? `${c.xpCost.toLocaleString()} XP`
+      : `${c.hammers} 🔨${c.mythicCost ? ' · ' + c.mythicCost + ' 🟡' : ''}`;
+    return `<div class="result-card">
+      <div class="result-left">
+        <div class="result-hero">${heroEmoji[c.hero]} ${heroNames[c.hero]} · ${pieceNames[c.piece]}</div>
+        <div class="result-piece">${c.label}</div>
+        <div class="result-action">${c.type === 'enh' ? 'Enhancement upgrade' : 'Mastery upgrade'} · Cost: ${costStr}</div>
+      </div>
+      <div class="result-right">
+        <div class="result-gain">+${(c.gain*100).toFixed(3)}%</div>
+        <div class="result-cost">weighted gain</div>
+        <div class="result-priority ${priority}">${priorityLabel}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══ STAT CALCULATOR ═══
+function calcStat() {
+  const q = document.getElementById('stat-quality').value;
+  const enh = parseInt(document.getElementById('stat-enh').value) || 0;
+  const mas = parseInt(document.getElementById('stat-mas').value) || 0;
+
+  // Clamp enhancement to valid range
+  const maxL = maxEnhLevel(q);
+  const clampedEnh = Math.min(enh, maxL);
+
+  const base = q === 'epic' ? 0.09 : q === 'mythic' ? 0.15 : 0.50;
+  const total = getStat(q, clampedEnh, mas);
+  const maxStat = q === 'epic' ? (0.09 + 80*0.0021) : q === 'mythic' ? (0.15 + 100*0.0035) : (0.50 + 100*0.005);
+
+  document.getElementById('calc-base').textContent = (base * 100).toFixed(2) + '%';
+  document.getElementById('calc-enh-bonus').textContent = '+' + ((total - base) * 100).toFixed(2) + '%';
+  document.getElementById('calc-total').textContent = (total * 100).toFixed(2) + '%';
+
+  const pct = Math.min(100, (total / maxStat) * 100);
+  document.getElementById('stat-progress-bar').style.width = pct + '%';
+  document.getElementById('stat-progress-label').textContent = pct.toFixed(1) + '% of max (' + (maxStat*100).toFixed(1) + '%)';
+
+  // XP cost from 0 to current
+  const xpNeeded = cumulativeXP(q, 0, clampedEnh);
+  const {hammers, mythic} = hammerCost(0, Math.min(mas, 20));
+  document.getElementById('xp-from-zero').textContent = xpNeeded.toLocaleString();
+  document.getElementById('hammer-total').textContent = hammers.toLocaleString();
+  document.getElementById('mythic-total').textContent = mythic.toLocaleString();
+}
+
+// ═══ RESOURCE PLANNER ═══
+function calcPlan() {
+  const q = document.getElementById('plan-quality').value;
+  const fromEnh = parseInt(document.getElementById('plan-from-enh').value) || 0;
+  const toEnh = parseInt(document.getElementById('plan-to-enh').value) || 0;
+  const fromMas = parseInt(document.getElementById('plan-from-mas').value) || 0;
+  const toMas = parseInt(document.getElementById('plan-to-mas').value) || 0;
+
+  const maxL = maxEnhLevel(q);
+  const clFrom = Math.min(fromEnh, maxL);
+  const clTo = Math.min(toEnh, maxL);
+
+  if (clTo <= clFrom && toMas <= fromMas) {
+    ['plan-xp','plan-hammers','plan-mythic','plan-stat-from','plan-stat-to','plan-stat-gain','plan-parts'].forEach(id => {
+      document.getElementById(id).textContent = '—';
+    });
+    return;
+  }
+
+  const xpNeeded = cumulativeXP(q, clFrom, clTo);
+  const {hammers, mythic} = hammerCost(fromMas, Math.min(toMas, 20));
+  const statFrom = getStat(q, clFrom, fromMas);
+  const statTo = getStat(q, clTo, Math.min(toMas, 20));
+  const gain = statTo - statFrom;
+  const parts100 = Math.ceil(xpNeeded / 100);
+
+  document.getElementById('plan-xp').textContent = xpNeeded.toLocaleString();
+  document.getElementById('plan-hammers').textContent = hammers.toLocaleString();
+  document.getElementById('plan-mythic').textContent = mythic.toLocaleString();
+  document.getElementById('plan-stat-from').textContent = (statFrom * 100).toFixed(2) + '%';
+  document.getElementById('plan-stat-to').textContent = (statTo * 100).toFixed(2) + '%';
+  document.getElementById('plan-stat-gain').textContent = '+' + (gain * 100).toFixed(2) + '%';
+  document.getElementById('plan-parts').textContent = parts100.toLocaleString() + ' × purple parts';
+}
+
+// ═══ BUILD REFERENCE TABLES ═══
+function buildReferenceTables() {
+  // XP Table
+  const xpTable = document.getElementById('xp-table');
+  if (!xpTable.innerHTML) {
+    let html = `<thead><tr>
+      <th>Level</th><th>XP Cost</th><th>Cumulative</th><th>Notes</th>
+    </tr></thead><tbody>`;
+    let cumulative = 0;
+    for (let i = 1; i <= 200; i++) {
+      const cost = MYTHIC_XP[i] || 0;
+      if (cost === 0 && i > 1) continue; // skip zero-cost milestone gaps
+      cumulative += cost;
+      const note = i === 80 ? 'Epic Max' : i === 100 ? 'Mythic Max / Red Ascension' : i === 200 ? 'Red Max' : '';
+      const cls = i === 80 ? 'green' : i === 100 ? 'accent' : i === 200 ? 'amber' : '';
+      html += `<tr>
+        <td class="${cls}">${i}</td>
+        <td>${cost.toLocaleString()}</td>
+        <td>${cumulative.toLocaleString()}</td>
+        <td class="muted">${note}</td>
+      </tr>`;
+    }
+    xpTable.innerHTML = html + '</tbody>';
+  }
+
+  // Hammer Table
+  const hammerTable = document.getElementById('hammer-table');
+  if (!hammerTable.innerHTML) {
+    let html = `<thead><tr>
+      <th>Mastery Level</th><th>Hammers (this level)</th><th>Cumulative Hammers</th><th>Mythic Gear</th><th>Cumulative Mythic</th>
+    </tr></thead><tbody>`;
+    let cumH = 0, cumM = 0;
+    for (let i = 1; i <= 20; i++) {
+      const h = i * 10;
+      const m = i > 10 ? (i - 10) : 0;
+      cumH += h; cumM += m;
+      const cls = i === 10 ? 'amber' : i === 20 ? 'accent' : '';
+      html += `<tr>
+        <td class="${cls}">M${i}</td>
+        <td>${h}</td>
+        <td>${cumH.toLocaleString()}</td>
+        <td>${m || '—'}</td>
+        <td>${cumM || '—'}</td>
+      </tr>`;
+    }
+    hammerTable.innerHTML = html + '</tbody>';
+  }
+
+  // Stat Bonuses Table
+  const statTable = document.getElementById('stat-table');
+  if (!statTable.innerHTML) {
+    const milestones = [0,5,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200];
+    let html = `<thead><tr>
+      <th>Level</th><th>Epic Stat</th><th>Mythic Stat</th><th>Red Stat</th>
+    </tr></thead><tbody>`;
+    for (const lvl of milestones) {
+      const epic = lvl <= 80 ? ((0.09 + lvl * 0.0021) * 100).toFixed(2) + '%' : '—';
+      const mythic = lvl <= 100 ? ((0.15 + lvl * 0.0035) * 100).toFixed(2) + '%' : '—';
+      const red = lvl >= 100 ? ((0.50 + (Math.min(lvl, 200) - 100) * 0.005) * 100).toFixed(2) + '%' : '—';
+      const cls = lvl === 80 ? 'green' : lvl === 100 ? 'accent' : lvl === 200 ? 'amber' : '';
+      html += `<tr>
+        <td class="${cls}">${lvl}</td>
+        <td class="${lvl <= 80 ? 'green' : 'muted'}">${epic}</td>
+        <td class="${lvl <= 100 ? 'accent' : 'muted'}">${mythic}</td>
+        <td class="${lvl >= 101 ? 'amber' : 'muted'}">${red}</td>
+      </tr>`;
+    }
+    statTable.innerHTML = html + '</tbody>';
+  }
+}
+
+// Init
+updateXPTotal();
+calcStat();
+calcPlan();
+</script>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+
+<div class="legal-disclaimer" style="max-width:1180px;margin:1rem auto 1.5rem;padding:0 1rem;font-size:.76rem;color:var(--text-dim);line-height:1.5;text-align:center">
+  v4.52 &middot; May 2026 &middot; Independent FAM alliance project. Not affiliated with Kingshot or its developers. All game content, names, and trademarks belong to their respective owners.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Hero Shards Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+
+
+<style id="v48-target-calculator-compact-header-fix">
+/* v4.48 — Compact header fix for remaining calculator pages */
+body.calc-theme-modern .page-header,
+body.calc-theme-modern .opt-hero{
+  position:relative !important;
+  min-height:0 !important;
+  display:block !important;
+  padding:1.1rem 1.2rem !important;
+  margin:0 0 1rem !important;
+  border-radius:20px !important;
+  border:1px solid color-mix(in srgb,var(--border) 82%,transparent) !important;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--surface) 96%,transparent),
+    color-mix(in srgb,var(--surface2) 74%,transparent)
+  ) !important;
+  box-shadow:0 14px 40px rgba(0,0,0,.14) !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+}
+body.calc-theme-modern .page-header::before,
+body.calc-theme-modern .page-header::after,
+body.calc-theme-modern .opt-hero::before,
+body.calc-theme-modern .opt-hero::after{
+  display:none !important;
+  content:none !important;
+}
+body.calc-theme-modern .page-header h1,
+body.calc-theme-modern .opt-hero h1{
+  max-width:none !important;
+  margin:0 !important;
+  font-size:clamp(1.95rem,7vw,3.25rem) !important;
+  line-height:1 !important;
+  letter-spacing:.01em !important;
+  text-transform:none !important;
+  color:var(--text) !important;
+  text-shadow:none !important;
+}
+body.calc-theme-modern .page-header p,
+body.calc-theme-modern .opt-hero p{
+  max-width:820px !important;
+  margin:.55rem 0 0 !important;
+  font-size:.95rem !important;
+  line-height:1.5 !important;
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .page-header .mini-note,
+body.calc-theme-modern .opt-hero .mini-note,
+body.calc-theme-modern .page-header .badge,
+body.calc-theme-modern .opt-hero .badge{
+  position:static !important;
+  display:inline-flex !important;
+  margin-top:.75rem !important;
+}
+body.calc-theme-modern .crumb{
+  margin:0 0 .85rem !important;
+  font-size:.76rem !important;
+  line-height:1.2 !important;
+}
+body.calc-theme-modern .crumb,
+body.calc-theme-modern .crumb a{
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .crumb a:hover{
+  color:var(--gold) !important;
+}
+body.calc-theme-modern .app-body,
+body.calc-theme-modern .page-container,
+body.calc-theme-modern .optimizer-shell{
+  width:min(100%,1120px) !important;
+  max-width:1120px !important;
+  margin:0 auto !important;
+  padding:1rem 1rem 2rem !important;
+}
+body.calc-theme-modern .calc-card,
+body.calc-theme-modern .opt-card,
+body.calc-theme-modern .opt-panel,
+body.calc-theme-modern .k1245-panel,
+body.calc-theme-modern .master-card,
+body.calc-theme-modern .summary-card,
+body.calc-theme-modern .resource-card,
+body.calc-theme-modern .results-box,
+body.calc-theme-modern .stat-result-box{
+  border-radius:18px !important;
+}
+body.calc-theme-modern .calc-card-header,
+body.calc-theme-modern .card-title,
+body.calc-theme-modern .results-header{
+  padding:.85rem 1rem !important;
+}
+body.calc-theme-modern .calc-body,
+body.calc-theme-modern .opt-card > :not(.card-title),
+body.calc-theme-modern .opt-panel > :not(.card-title){
+  padding:1rem !important;
+}
+@media(max-width:760px){
+  body.calc-theme-modern .app-body,
+  body.calc-theme-modern .page-container,
+  body.calc-theme-modern .optimizer-shell{
+    width:100% !important;
+    max-width:100% !important;
+    padding:.8rem .85rem 1.5rem !important;
+    overflow-x:hidden !important;
+  }
+  body.calc-theme-modern .page-header,
+  body.calc-theme-modern .opt-hero{
+    padding:1rem !important;
+    border-radius:18px !important;
+    margin-bottom:.9rem !important;
+  }
+  body.calc-theme-modern .page-header h1,
+  body.calc-theme-modern .opt-hero h1{
+    font-size:clamp(1.7rem,8.8vw,2.7rem) !important;
+    line-height:1.02 !important;
+    overflow-wrap:anywhere !important;
+  }
+  body.calc-theme-modern .page-header p,
+  body.calc-theme-modern .opt-hero p{
+    font-size:.9rem !important;
+    line-height:1.45 !important;
+  }
+}
+</style>
+
+</head>
+<body class="calc-theme-modern">
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions"><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button><a href="calculators.html" class="header-back">&larr; All Calculators</a></div>
+  </div>
+</header>
+
+<div class="app-body">
+<div class="page-container">
+
+  <div class="crumb">
+    <a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span>
+    <a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span>
+    <span>Hero Shards</span>
+  </div>
+
+  <div class="page-header no-theme-art">
+    <h1>Hero Shards</h1>
+    <p>SHARDS TO REACH TARGET STAR &middot; ALL 16 HEROES, S1-S5</p>
+  </div>
+
+  <div class="alert alert-info">
+    <span>&#129327;</span>
+    <div>Costs extracted from kingshotoptimizer.com. Stars run 0&rarr;5 with tiers 0&rarr;5 within each star (max = 5/5). Stat values shown are the Attack/Defense bonuses each hero gets at each star+tier.</div>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-card-header"><h2>Hero &amp; Target</h2><span class="badge">Step 1</span></div>
+    <div class="calc-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Hero</label>
+          <select class="form-select" id="hero" onchange="updateCalc()">
+            <optgroup label="Season 1">
+              <option value="jabel">Jabel (Cavalry)</option>
+              <option value="amadeus">Amadeus (Infantry)</option>
+              <option value="helga">Helga (Infantry)</option>
+              <option value="saul">Saul (Archer)</option>
+            </optgroup>
+            <optgroup label="Season 2">
+              <option value="hilde">Hilde (Cavalry)</option>
+              <option value="zoe">Zoe (Infantry)</option>
+              <option value="marlin">Marlin (Archer)</option>
+            </optgroup>
+            <optgroup label="Season 3">
+              <option value="jaeger">Jaeger (Archer)</option>
+              <option value="eric">Eric (Infantry)</option>
+              <option value="petra" selected>Petra (Cavalry)</option>
+            </optgroup>
+            <optgroup label="Season 4">
+              <option value="rosa">Rosa (Archer)</option>
+              <option value="alcar">Alcar (Infantry)</option>
+              <option value="margot">Margot (Cavalry)</option>
+            </optgroup>
+            <optgroup label="Season 5">
+              <option value="vivian">Vivian (Archer)</option>
+              <option value="long_fei">Long Fei (Infantry)</option>
+              <option value="thrud">Thrud (Cavalry)</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current Star</label>
+          <select class="form-select" id="fromStar" onchange="updateCalc()">
+            <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current Tier <span class="hint">in star</span></label>
+          <select class="form-select" id="fromTier" onchange="updateCalc()">
+            <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Star</label>
+          <select class="form-select" id="toStar" onchange="updateCalc()">
+            <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Tier</label>
+          <select class="form-select" id="toTier" onchange="updateCalc()">
+            <option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-card-header"><h2>Your Inventory</h2><span class="badge">Step 2</span></div>
+    <div class="calc-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Shards Owned</label>
+          <input class="form-input" type="number" id="owned" value="0" min="0" oninput="updateCalc()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-header">RESULTS</div>
+    <div class="stat-result-box">
+      <div class="stat-result-grid">
+        <div class="stat-result-item">
+          <div class="stat-result-label">Needed</div>
+          <div class="stat-result-value" id="shardsNeeded">0</div>
+        </div>
+        <div class="stat-result-item">
+          <div class="stat-result-label">Owned</div>
+          <div class="stat-result-value muted" id="shardsOwned">0</div>
+        </div>
+        <div class="stat-result-item">
+          <div class="stat-result-label">Missing</div>
+          <div class="stat-result-value amber" id="shardsMissing">0</div>
+        </div>
+        <div class="stat-result-item">
+          <div class="stat-result-label">Status</div>
+          <div class="stat-result-value green" id="shardsStatus">&mdash;</div>
+        </div>
+      </div>
+      <div class="stat-divider">
+        <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text-muted);margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.08em">Stat Gain (Atk &amp; Def each)</div>
+        <div id="statIncrease" style="font-family:'DM Mono',monospace;font-size:1rem;color:var(--gold);font-weight:700">+0</div>
+        <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem;font-family:'DM Mono',monospace" id="statDetail">Current &rarr; Target</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-card" style="margin-top:1.5rem">
+    <div class="calc-card-header"><h2>Step Breakdown</h2></div>
+    <div class="calc-body">
+      <div id="stepBreakdown" style="font-family:'DM Mono',monospace;font-size:0.82rem;line-height:1.7"></div>
+    </div>
+  </div>
+
+  <div class="calc-card" style="margin-top:1.5rem">
+    <div class="calc-card-header"><h2>Cost Reference</h2></div>
+    <div class="calc-body">
+      <p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:0.75rem">Each star band has 6 tier steps (0-5). Cost is identical for every tier within a band.</p>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Star Band</th><th>Per Tier Step</th><th>Total per Star Band</th></tr></thead>
+          <tbody>
+            <tr><td>0&rarr;1</td><td>1</td><td>6</td></tr>
+            <tr><td>1&rarr;2</td><td>2</td><td>12</td></tr>
+            <tr><td>2&rarr;3</td><td>5</td><td>30</td></tr>
+            <tr><td>3&rarr;4</td><td>15</td><td>90</td></tr>
+            <tr><td>4&rarr;5</td><td>40</td><td>240</td></tr>
+            <tr><td class="accent">5+ tiers</td><td class="accent">100</td><td class="accent">600</td></tr>
+            <tr><td class="muted">Total 0&rarr;5</td><td class="muted">—</td><td class="muted">378 shards</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;font-family:'DM Mono',monospace">Same shard costs apply across S1-S5. Higher seasons just deliver more stat per star.</p>
+    </div>
+  </div>
+
+  <div class="calc-card" style="margin-top:1.5rem">
+    <div class="calc-card-header"><h2>Stat Per Star &mdash; by Season</h2></div>
+    <div class="calc-body">
+      <p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:0.75rem">Stat (Attack and Defense) added per tier-step. Higher seasons give more &mdash; catch-up mechanic.</p>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Season</th><th>Per Step</th><th>Heroes</th></tr></thead>
+          <tbody>
+            <tr><td>S1</td><td>5.00</td><td>Jabel, Saul</td></tr>
+            <tr><td>S1 (special)</td><td class="amber">5.55</td><td>Helga</td></tr>
+            <tr><td>S1 (special)</td><td class="amber">6.25</td><td>Amadeus</td></tr>
+            <tr><td>S2</td><td>6.00</td><td>Hilde, Zoe, Marlin</td></tr>
+            <tr><td>S3</td><td>7.00</td><td>Jaeger, Eric, Petra</td></tr>
+            <tr><td>S4</td><td>9.25</td><td>Rosa, Alcar, Margot</td></tr>
+            <tr><td class="amber">S5</td><td class="amber">11.10</td><td class="amber">Vivian, Long Fei, Thrud</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+
+<script>
+function shardCost(star) {
+  if (star === 0) return 1;
+  if (star === 1) return 2;
+  if (star === 2) return 5;
+  if (star === 3) return 15;
+  if (star === 4) return 40;
+  return 100;
+}
+
+const HEROES = {
+  jabel:    {name:'Jabel',    season:'S1', type:'Cavalry',  perStar: 5.00},
+  amadeus:  {name:'Amadeus',  season:'S1', type:'Infantry', perStar: 6.25},
+  helga:    {name:'Helga',    season:'S1', type:'Infantry', perStar: 5.55},
+  saul:     {name:'Saul',     season:'S1', type:'Archer',   perStar: 5.00},
+  hilde:    {name:'Hilde',    season:'S2', type:'Cavalry',  perStar: 6.00},
+  zoe:      {name:'Zoe',      season:'S2', type:'Infantry', perStar: 6.00},
+  marlin:   {name:'Marlin',   season:'S2', type:'Archer',   perStar: 6.00},
+  jaeger:   {name:'Jaeger',   season:'S3', type:'Archer',   perStar: 7.00},
+  eric:     {name:'Eric',     season:'S3', type:'Infantry', perStar: 7.00},
+  petra:    {name:'Petra',    season:'S3', type:'Cavalry',  perStar: 7.00},
+  rosa:     {name:'Rosa',     season:'S4', type:'Archer',   perStar: 9.25},
+  alcar:    {name:'Alcar',    season:'S4', type:'Infantry', perStar: 9.25},
+  margot:   {name:'Margot',   season:'S4', type:'Cavalry',  perStar: 9.25},
+  vivian:   {name:'Vivian',   season:'S5', type:'Archer',   perStar: 11.10},
+  long_fei: {name:'Long Fei', season:'S5', type:'Infantry', perStar: 11.10},
+  thrud:    {name:'Thrud',    season:'S5', type:'Cavalry',  perStar: 11.10},
+};
+
+function shardsForRange(fromStar, fromTier, toStar, toTier) {
+  const fromAbs = fromStar * 6 + fromTier;
+  const toAbs = toStar * 6 + toTier;
+  if (toAbs <= fromAbs) return {total: 0, steps: []};
+  let total = 0;
+  const steps = [];
+  for (let abs = fromAbs; abs < toAbs; abs++) {
+    const star = Math.floor(abs / 6);
+    const cost = shardCost(star);
+    total += cost;
+    steps.push({star, tier: abs % 6, cost});
+  }
+  return {total, steps};
+}
+
+function statAt(hero, star, tier) {
+  const h = HEROES[hero];
+  if (!h) return 0;
+  return (star * 6 + tier) * h.perStar;
+}
+
+function updateCalc() {
+  const hero = document.getElementById('hero').value;
+  const fromStar = parseInt(document.getElementById('fromStar').value);
+  const fromTier = parseInt(document.getElementById('fromTier').value);
+  const toStar = parseInt(document.getElementById('toStar').value);
+  const toTier = parseInt(document.getElementById('toTier').value);
+  const owned = parseInt(document.getElementById('owned').value) || 0;
+  
+  const result = shardsForRange(fromStar, fromTier, toStar, toTier);
+  const needed = result.total;
+  const missing = Math.max(0, needed - owned);
+  
+  document.getElementById('shardsNeeded').textContent = needed.toLocaleString();
+  document.getElementById('shardsOwned').textContent = owned.toLocaleString();
+  document.getElementById('shardsMissing').textContent = missing.toLocaleString();
+  
+  const statusEl = document.getElementById('shardsStatus');
+  if (needed === 0) {
+    statusEl.textContent = '—';
+    statusEl.className = 'stat-result-value muted';
+  } else if (missing === 0) {
+    statusEl.textContent = 'READY';
+    statusEl.className = 'stat-result-value green';
+  } else {
+    statusEl.textContent = 'NEED MORE';
+    statusEl.className = 'stat-result-value amber';
+  }
+  
+  const statFrom = statAt(hero, fromStar, fromTier);
+  const statTo = statAt(hero, toStar, toTier);
+  const diff = statTo - statFrom;
+  document.getElementById('statIncrease').textContent = diff > 0 ? `+${diff.toFixed(2)}` : '0';
+  document.getElementById('statDetail').textContent = `${statFrom.toFixed(2)} → ${statTo.toFixed(2)}`;
+  
+  const stepDiv = document.getElementById('stepBreakdown');
+  if (result.steps.length === 0) {
+    stepDiv.innerHTML = '<span style="color:var(--text-muted)">No upgrades needed.</span>';
+  } else {
+    // Group by star band
+    const byStar = {};
+    for (const s of result.steps) {
+      if (!byStar[s.star]) byStar[s.star] = {count:0, cost:s.cost};
+      byStar[s.star].count++;
+    }
+    let html = '';
+    for (const star of Object.keys(byStar).sort((a,b)=>a-b)) {
+      const b = byStar[star];
+      html += `<div>Star ${star}: ${b.count} step${b.count>1?'s':''} × ${b.cost} = <strong style="color:var(--gold)">${(b.count*b.cost).toLocaleString()}</strong> shards</div>`;
+    }
+    stepDiv.innerHTML = html;
+  }
+}
+
+updateCalc();
+</script>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+
+<div class="legal-disclaimer" style="max-width:1180px;margin:1rem auto 1.5rem;padding:0 1rem;font-size:.76rem;color:var(--text-dim);line-height:1.5;text-align:center">
+  v4.52 &middot; May 2026 &middot; Independent FAM alliance project. Not affiliated with Kingshot or its developers. All game content, names, and trademarks belong to their respective owners.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+# wrangler.example.toml
+# Copy this to wrangler.toml only if you deploy Pages with Wrangler.
+# If you use the Cloudflare dashboard/Git integration, create these bindings in:
+# Cloudflare Dashboard -> Workers & Pages -> your Pages project -> Settings -> Functions -> Bindings
+
+name = "fam1245"
+compatibility_date = "2026-05-31"
+pages_build_output_dir = "."
+
+# KV binding used by /functions/api/*
+# [[kv_namespaces]]
+# binding = "FAM_KV"
+# id = "YOUR_KV_NAMESPACE_ID"
+
+# D1 binding used by /functions/api/*
+# [[d1_databases]]
+# binding = "FAM_DB"
+# database_name = "fam1245"
+# database_id = "YOUR_D1_DATABASE_ID"

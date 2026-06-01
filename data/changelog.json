@@ -1,0 +1,12 @@
+{
+  "source": "FAM site",
+  "updatedAt": "2026-05-31T00:00:00Z",
+  "policy": "Grouped by 24-hour increments.",
+  "entries": [
+    {
+      "date": "May 17, 2026",
+      "title": "Daily Build Summary \u2014 v4.44 to v4.52",
+      "summary": "Cloudflare Functions/KV/D1 API layer added and changelog kept daily grouped."
+    }
+  ]
+}

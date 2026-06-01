@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Love Royale Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="calc-top-nav" aria-label="FAM quick links">
+      <a href="index.html">Manual</a>
+      <a href="calculators.html">Calculators</a>
+      <a href="event-calendar.html">Events</a>
+      <a href="gift-codes.html">Gift Codes</a>
+      <a href="transfer-planner.html">Transfer</a>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="index.html" class="header-back">&larr; Back to Manual</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+
+<div class="page-container">
+  <div class="crumb"><a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Love Royale</span></div>
+
+  <section class="hub-hero tool-hero">
+    <div><span class="eyebrow">COMBAT CALCULATOR &middot; RATIO OPTIMIZER</span><h1>Love Royale Calculator</h1><p>Enter your Infantry, Cavalry, and Archer attack/lethality stats to compare troop ratios and find your strongest estimated split.</p><div class="hero-actions"><button class="action-pill" type="button" id="saveLoveStats">Save Stats</button><button class="action-pill secondary" type="button" id="copyLoveResults">Copy Results</button></div></div>
+    <div class="hub-status-card"><span>BEST SPLIT</span><strong id="bestSplitHero">--</strong><p id="bestScoreHero">Enter stats</p></div>
+  </section>
+
+  <div class="alert alert-amber"><span>⚠️</span><div><strong>Estimator:</strong> exact battle math can vary by buffs, heroes, widgets, pets, rally size, and enemy composition. Use this to compare your own stat-weighted ratios, not as a guaranteed combat simulator.</div></div>
+
+  <div class="master-layout">
+    <section>
+      <div class="calc-card">
+        <div class="calc-card-header"><h2>Stats</h2><span class="badge">Attack + Lethality</span></div>
+        <div class="calc-body">
+          <div class="form-grid-3">
+            <div class="stat-input-card"><h3>Infantry</h3><label class="form-label">Attack %</label><input class="form-input love-input" id="infAtk" type="number" step="0.1" value="0"><label class="form-label">Lethality %</label><input class="form-input love-input" id="infLeth" type="number" step="0.1" value="0"></div>
+            <div class="stat-input-card"><h3>Cavalry</h3><label class="form-label">Attack %</label><input class="form-input love-input" id="cavAtk" type="number" step="0.1" value="0"><label class="form-label">Lethality %</label><input class="form-input love-input" id="cavLeth" type="number" step="0.1" value="0"></div>
+            <div class="stat-input-card"><h3>Archers</h3><label class="form-label">Attack %</label><input class="form-input love-input" id="arcAtk" type="number" step="0.1" value="0"><label class="form-label">Lethality %</label><input class="form-input love-input" id="arcLeth" type="number" step="0.1" value="0"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-card-header"><h2>Ratio rules</h2><span class="badge">Formation</span></div>
+        <div class="calc-body">
+          <div class="form-grid">
+            <div class="form-group"><label class="form-label">Total Troops</label><input class="form-input love-input" id="totalTroops" type="number" min="0" value="1000000"></div>
+            <div class="form-group"><label class="form-label">Search Step</label><select class="form-select love-input" id="ratioStep"><option value="1">1%</option><option value="5" selected>5%</option><option value="10">10%</option></select></div>
+            <div class="form-group"><label class="form-label">Min Infantry %</label><input class="form-input love-input" id="minInf" type="number" min="0" max="100" value="10"></div>
+            <div class="form-group"><label class="form-label">Min Cavalry %</label><input class="form-input love-input" id="minCav" type="number" min="0" max="100" value="10"></div>
+            <div class="form-group"><label class="form-label">Min Archer %</label><input class="form-input love-input" id="minArc" type="number" min="0" max="100" value="10"></div>
+          </div>
+          <div class="inline-actions"><button class="btn-small" type="button" data-preset="50,20,30">Preset 50/20/30</button><button class="btn-small" type="button" data-preset="60,20,20">Preset 60/20/20</button><button class="btn-small" type="button" data-preset="10,10,80">Preset 10/10/80</button><button class="btn-small" type="button" data-clear-love>Reset</button></div>
+        </div>
+      </div>
+
+      <div class="section-label">Top ranked ratios</div>
+      <div class="data-table-wrap love-table-wrap"><table class="data-table"><thead><tr><th>#</th><th>Ratio</th><th>Troop Counts</th><th>Score</th></tr></thead><tbody id="loveRows"></tbody></table></div>
+    </section>
+
+    <aside class="calc-card sticky-card">
+      <div class="calc-card-header"><h2>Best result</h2><span class="badge">Live</span></div>
+      <div class="calc-body">
+        <div class="stat-result-box"><div class="stat-result-grid"><div class="stat-result-item"><div class="stat-result-label">Infantry</div><div class="stat-result-value" id="bestInf">--</div></div><div class="stat-result-item"><div class="stat-result-label">Cavalry</div><div class="stat-result-value" id="bestCav">--</div></div><div class="stat-result-item"><div class="stat-result-label">Archers</div><div class="stat-result-value" id="bestArc">--</div></div><div class="stat-result-item"><div class="stat-result-label">Score</div><div class="stat-result-value green" id="bestScore">--</div></div></div></div>
+        <div class="section-label">Troop value weights</div>
+        <div class="result-stack" id="troopWeights"></div>
+      </div>
+    </aside>
+  </div>
+</div>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script>
+(function(){
+  var KEY='fam_love_royale_stats_v1'; var lastResults=[];
+  function $(id){return document.getElementById(id);} function n(id){return Number($(id).value||0);} function fmt(num){return Math.round(num).toLocaleString();}
+  function val(atk,leth){return (1+atk/100)*(1+leth/100);} 
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s){Object.keys(s).forEach(function(k){if($(k)) $(k).value=s[k];});}}catch(e){}}
+  function save(){var ids=['infAtk','infLeth','cavAtk','cavLeth','arcAtk','arcLeth','totalTroops','ratioStep','minInf','minCav','minArc']; var s={}; ids.forEach(function(id){s[id]=$(id).value;}); try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
+  function calculate(){
+    var inf=val(n('infAtk'),n('infLeth')), cav=val(n('cavAtk'),n('cavLeth')), arc=val(n('arcAtk'),n('arcLeth'));
+    var minInf=Math.max(0,Math.min(100,n('minInf'))), minCav=Math.max(0,Math.min(100,n('minCav'))), minArc=Math.max(0,Math.min(100,n('minArc'))), step=Number($('ratioStep').value||5), total=n('totalTroops');
+    var results=[];
+    for(var i=minInf;i<=100;i+=step){for(var c=minCav;c<=100-i;c+=step){var a=100-i-c; if(a<minArc) continue; var score=(i*inf+c*cav+a*arc)/100; results.push({i:i,c:c,a:a,score:score,counts:[total*i/100,total*c/100,total*a/100]});}}
+    results.sort(function(x,y){return y.score-x.score;}); lastResults=results.slice(0,10); var best=lastResults[0];
+    if(!best){$('loveRows').innerHTML='<tr><td colspan="4" class="muted">No valid ratios. Lower your minimum percentages.</td></tr>'; return;}
+    $('bestSplitHero').textContent=best.i+'/'+best.c+'/'+best.a; $('bestScoreHero').textContent='Score '+best.score.toFixed(3); $('bestInf').textContent=best.i+'%'; $('bestCav').textContent=best.c+'%'; $('bestArc').textContent=best.a+'%'; $('bestScore').textContent=best.score.toFixed(3);
+    $('troopWeights').innerHTML='<div class="resource-card"><span>Infantry weight</span><strong>'+inf.toFixed(3)+'</strong><em>Attack/lethality combined</em></div><div class="resource-card"><span>Cavalry weight</span><strong>'+cav.toFixed(3)+'</strong><em>Attack/lethality combined</em></div><div class="resource-card"><span>Archer weight</span><strong>'+arc.toFixed(3)+'</strong><em>Attack/lethality combined</em></div>';
+    $('loveRows').innerHTML=lastResults.map(function(r,idx){return '<tr><td>'+(idx+1)+'</td><td><span class="love-ratio-pill">'+r.i+'/'+r.c+'/'+r.a+'</span></td><td class="love-counts">Inf '+fmt(r.counts[0])+' · Cav '+fmt(r.counts[1])+' · Arc '+fmt(r.counts[2])+'</td><td class="green">'+r.score.toFixed(3)+'</td></tr>';}).join('');
+  }
+  document.querySelectorAll('.love-input').forEach(function(el){el.addEventListener('input',calculate); el.addEventListener('change',calculate);});
+  $('saveLoveStats').addEventListener('click',function(){save(); this.textContent='Saved'; var b=this; setTimeout(function(){b.textContent='Save Stats';},1200);});
+  $('copyLoveResults').addEventListener('click',function(){var txt='Love Royale Results\n'+lastResults.map(function(r,idx){return (idx+1)+'. '+r.i+'/'+r.c+'/'+r.a+' score '+r.score.toFixed(3);}).join('\n'); if(navigator.clipboard) navigator.clipboard.writeText(txt).catch(function(){}); this.textContent='Copied'; var b=this; setTimeout(function(){b.textContent='Copy Results';},1200);});
+  document.addEventListener('click',function(e){var p=e.target.closest('[data-preset]'); if(p){var v=p.getAttribute('data-preset').split(','); $('minInf').value=v[0]; $('minCav').value=v[1]; $('minArc').value=v[2]; calculate();} if(e.target.closest('[data-clear-love]')){['infAtk','infLeth','cavAtk','cavLeth','arcAtk','arcLeth'].forEach(function(id){$(id).value=0;}); $('minInf').value=10; $('minCav').value=10; $('minArc').value=10; calculate();}});
+  load(); calculate();
+})();
+</script>
+</body>
+</html>

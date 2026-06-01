@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Event Score Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+<style>
+.optimizer-shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 2.5rem;}
+.opt-hero{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:1.35rem;margin-bottom:1rem;box-shadow:0 16px 40px rgba(168,32,94,.10);}
+.opt-hero .eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.opt-hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.75rem,4vw,3.15rem);line-height:1.05;margin:.35rem 0;color:var(--text);}
+.opt-hero p{color:var(--text-dim);line-height:1.65;max-width:850px;margin:0;}
+.opt-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1rem;align-items:start;}
+.opt-card,.opt-panel{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1rem;box-shadow:0 12px 32px rgba(168,32,94,.08);}
+.opt-panel{position:sticky;top:84px;}
+.card-title{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start;border-bottom:1px solid var(--border);padding-bottom:.7rem;margin-bottom:.85rem;}
+.card-title h2{font-family:'Orbitron',sans-serif;font-size:1rem;margin:0;color:var(--text);}
+.card-title p{font-size:.82rem;color:var(--text-dim);margin:.2rem 0 0;line-height:1.5;}
+.badge-soft{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:rgba(214,48,122,.08);border:1px solid rgba(214,48,122,.24);border-radius:999px;padding:.24rem .45rem;white-space:nowrap;}
+.input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem;}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.28rem;}
+.input,.select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.68rem .72rem;font-family:'DM Mono',monospace;font-size:.86rem;outline:none;}
+.input:focus,.select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,48,122,.10);}
+.tool-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0;}
+.btn-small,.btn-main,.btn-danger{border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;cursor:pointer;transition:.15s ease;padding:.48rem .7rem;}
+.btn-main{background:linear-gradient(135deg,#ff4aa2,#7c3aed);color:white;border:none;font-weight:800;}
+.btn-small:hover,.btn-main:hover{transform:translateY(-1px);border-color:var(--gold);}
+.btn-danger:hover{background:#d6307a;color:white;border-color:#d6307a;}
+.item-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;}
+.item-card{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:.75rem;}
+.item-card h3{font-size:.88rem;margin:0 0 .55rem;color:var(--text);}
+.item-card .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.8rem;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;min-width:0;}
+.summary-card span{display:block;font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.25rem;}
+.summary-card strong{display:block;font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-list{display:flex;flex-direction:column;gap:.55rem;}
+.rec{border:1px solid var(--border);background:var(--surface2);border-radius:14px;padding:.75rem;}
+.rec strong{display:block;color:var(--text);}
+.rec span{display:block;color:var(--text-dim);font-size:.8rem;margin-top:.18rem;line-height:1.45;}
+.progress-bar{height:10px;background:var(--surface3);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:.45rem;}
+.progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff4aa2,#7c3aed);width:0%;}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface2);}
+.opt-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:640px;}
+.opt-table th,.opt-table td{padding:.65rem .7rem;border-bottom:1px solid var(--border);text-align:left;}
+.opt-table th{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:.08em;}
+.opt-note{font-size:.8rem;color:var(--text-dim);line-height:1.55;margin-top:.75rem;}
+@media(max-width:980px){.opt-grid{grid-template-columns:1fr}.opt-panel{position:static}}
+@media(max-width:680px){.optimizer-shell{padding:.9rem .75rem 2rem}.input-grid,.item-grid,.summary-grid{grid-template-columns:1fr}.item-card .mini-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+<main class="optimizer-shell">
+<div class="crumb"><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Event Score Builder</span></div>
+<section class="opt-hero"><span class="eyebrow">FAM OPTIMIZER · EVENTS</span><h1>Event Score Builder</h1><p>Plan event points for Strongest Governor, Kingdom of Power, Armament Competition, Officer Project, and Alliance Brawl.</p></section>
+
+<div id="eventDataSyncStatus"></div>
+<div class="k1245-panel"><strong>Event Data Sync</strong><p>K1245 event scoring attempts live calculator-data sync and falls back to local point-rate estimates.</p></div>
+<div class="opt-grid">
+  <section class="opt-card">
+    <div class="card-title"><div><h2>Event Setup</h2><p>Pick the event, add scoring actions, and track milestone progress.</p></div><span class="badge-soft">Score Builder</span></div>
+    <div class="input-grid">
+      <div class="field"><label>Event Type</label><select class="select" id="eventType" onchange="eventPreset();calcEvent()"><option>Strongest Governor</option><option>Kingdom of Power</option><option>Armament Competition</option><option>Officer Project</option><option>Alliance Brawl</option></select></div>
+      <div class="field"><label>Target Milestone Points</label><input class="input" id="targetPoints" type="number" value="1000000" min="0" oninput="calcEvent()"></div>
+      <div class="field"><label>Current Points</label><input class="input" id="currentPoints" type="number" value="0" min="0" oninput="calcEvent()"></div>
+    </div>
+    <div class="tool-row">
+      <button class="btn-small" onclick="addAction('speedups')">+ Speedups</button>
+      <button class="btn-small" onclick="addAction('troops')">+ Train Troops</button>
+      <button class="btn-small" onclick="addAction('building')">+ Building Power</button>
+      <button class="btn-small" onclick="addAction('research')">+ Research Power</button>
+      <button class="btn-small" onclick="addAction('shards')">+ Hero Shards</button>
+      <button class="btn-small" onclick="saveEvent()">Save</button>
+      <button class="btn-danger" onclick="clearActions()">Clear</button>
+    </div>
+    <div class="table-wrap">
+      <table class="opt-table"><thead><tr><th>Action</th><th>Amount</th><th>Rate</th><th>Points</th><th></th></tr></thead><tbody id="actionRows"></tbody></table>
+    </div>
+  </section>
+  <aside class="opt-panel">
+    <div class="card-title"><div><h2>Event Plan</h2><p>Progress and next best spend suggestion.</p></div><span class="badge-soft">Live</span></div>
+    <div class="summary-grid">
+      <div class="summary-card"><span>Total Points</span><strong id="eventTotal">0</strong></div>
+      <div class="summary-card"><span>Remaining</span><strong id="eventRemain">0</strong></div>
+      <div class="summary-card"><span>Progress</span><strong id="eventProgress">0%</strong></div>
+      <div class="summary-card"><span>Event</span><strong id="eventName">SG</strong></div>
+    </div>
+    <div class="progress-bar"><i id="eventBar"></i></div>
+    <div class="rec-list" id="eventRecs" style="margin-top:.8rem"></div>
+    <div class="tool-row"><button class="btn-main" onclick="copyEvent()">Copy Event Plan</button></div>
+  </aside>
+</div>
+
+<script>
+
+const rates={speedups:1000,troops:45,building:20,research:20,shards:8000};
+const labels={speedups:'Speedups Used (minutes)',troops:'Troops Trained',building:'Building Power Gain',research:'Research Power Gain',shards:'Hero Shards Used'};
+const storeKey='fam_event_builder_v1';
+let actions=[];
+function n(id){return Math.max(0,parseFloat(document.getElementById(id).value)||0)}
+function eventPreset(){const v=eventType.value;targetPoints.value= v==='Kingdom of Power'?3000000:v==='Armament Competition'?800000:v==='Officer Project'?500000:1000000}
+function addAction(type, amount=0){actions.push({type,amount,rate:rates[type]});renderActions();calcEvent()}
+function renderActions(){actionRows.innerHTML=actions.map((a,i)=>`<tr><td>${labels[a.type]}</td><td><input class="input" type="number" value="${a.amount}" min="0" oninput="actions[${i}].amount=Number(this.value)||0;calcEvent()"></td><td><input class="input" type="number" value="${a.rate}" min="0" oninput="actions[${i}].rate=Number(this.value)||0;calcEvent()"></td><td id="pts${i}">0</td><td><button class="btn-danger" onclick="actions.splice(${i},1);renderActions();calcEvent()">×</button></td></tr>`).join('')||'<tr><td colspan="5">No actions added yet.</td></tr>'}
+function calcEvent(){let add=0;actions.forEach((a,i)=>{const pts=a.amount*a.rate;add+=pts;const cell=document.getElementById('pts'+i);if(cell)cell.textContent=Math.round(pts).toLocaleString()});const total=n('currentPoints')+add,target=n('targetPoints'),remain=Math.max(0,target-total),pct=target?Math.min(100,total/target*100):0;eventTotal.textContent=Math.round(total).toLocaleString();eventRemain.textContent=Math.round(remain).toLocaleString();eventProgress.textContent=pct.toFixed(1)+'%';eventBar.style.width=pct+'%';eventName.textContent=eventType.value.split(' ').map(x=>x[0]).join('');const best=Object.entries(rates).map(([k,r])=>({k,r,need:Math.ceil(remain/r)})).filter(x=>x.need>0).sort((a,b)=>a.need-b.need)[0];eventRecs.innerHTML=`<div class="rec"><strong>${remain<=0?'Milestone reached':'Still need '+Math.round(remain).toLocaleString()+' points'}</strong><span>${best?`Example: about ${best.need.toLocaleString()} ${labels[best.k].toLowerCase()} at current rates.`:'You are at or above the target.'}</span></div><div class="rec"><strong>Timing tip</strong><span>Match spending to today’s Events & Packs calendar so upgrades score where possible.</span></div>`}
+function saveEvent(){localStorage.setItem(storeKey,JSON.stringify({event:eventType.value,target:targetPoints.value,current:currentPoints.value,actions}));calcEvent()}
+function clearActions(){actions=[];renderActions();calcEvent()}
+function copyEvent(){let t=`${eventType.value} Plan\nTotal: ${eventTotal.textContent}\nRemaining: ${eventRemain.textContent}\n`;actions.forEach(a=>t+=`${labels[a.type]}: ${a.amount} x ${a.rate}\n`);navigator.clipboard?.writeText(t)}
+function init(){const s=JSON.parse(localStorage.getItem(storeKey)||'null');if(s){eventType.value=s.event||eventType.value;targetPoints.value=s.target||targetPoints.value;currentPoints.value=s.current||0;actions=s.actions||[]}else{addAction('speedups',0);addAction('troops',0)}renderActions();calcEvent()}
+init();
+
+function synceventDataSyncStatus(){
+  if(!window.FAM_LIVE_SYNC) return;
+  FAM_LIVE_SYNC.get('calculatorData',{cacheHours:24}).then(function(result){
+    FAM_LIVE_SYNC.injectSyncBadge('#eventDataSyncStatus', result, 'Event Data Sync');
+  });
+}
+synceventDataSyncStatus();
+
+
+</script>
+
+</main>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="fam-live-sync.js?v=1779083200"></script>
+</body>
+</html>

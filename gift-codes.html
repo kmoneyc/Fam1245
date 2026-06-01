@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Gift Codes</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="calc-top-nav" aria-label="FAM quick links">
+      <a href="index.html">Manual</a>
+      <a href="calculators.html">Calculators</a>
+      <a href="event-calendar.html">Events</a>
+      <a href="gift-codes.html">Gift Codes</a>
+      <a href="transfer-planner.html">Transfer</a>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="index.html" class="header-back">&larr; Back to Manual</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+
+<div class="page-container">
+  <div class="crumb">
+    <a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span>
+    <span>Gift Codes</span>
+  </div>
+
+  <section class="hub-hero tool-hero">
+    <div>
+      <span class="eyebrow">FAM TOOLS &middot; K1245 LIVE SYNC</span>
+      <h1>Gift Codes</h1>
+      <p>Quick-copy active Kingshot codes for FAM K1245 members. The page tries to live-sync public code data, then falls back to the FAM seed list if the API is unavailable.</p>
+      <div class="hero-actions">
+        <button class="action-pill" type="button" data-copy-all-active>Copy Active Codes</button>
+        <a class="action-pill secondary" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener">Open Redeem Site</a>
+      </div>
+    </div>
+    <div class="hub-status-card">
+      <span>ACTIVE CODES</span>
+      <strong id="activeCodeCount">4</strong>
+      <p id="giftSyncStatus">Preparing live sync...</p>
+    </div>
+  </section>
+
+  <div class="alert alert-amber">
+    <span>⚠️</span>
+    <div><strong>K1245 live sync:</strong> this static page tries public Kingshot data first, caches it, and falls back to the FAM list if the API is unavailable. Always verify rewards in game.</div>
+  </div>
+
+  <div class="section-label">Active codes</div>
+  <div class="tool-card-grid" id="activeCodeGrid"></div>
+
+  <div class="tool-layout">
+    <section class="calc-card">
+      <div class="calc-card-header"><h2>Add FAM code note</h2><span class="badge">Local</span></div>
+      <div class="calc-body">
+        <p class="muted-copy">Use this for codes your alliance wants to test. These custom notes save only in this browser.</p>
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Code</label><input class="form-input" id="customCode" placeholder="Example: NEWCODE123"></div>
+          <div class="form-group"><label class="form-label">Expires / Status</label><input class="form-input" id="customExpires" placeholder="Unknown / May 20"></div>
+          <div class="form-group"><label class="form-label">Note</label><input class="form-input" id="customNote" placeholder="Where it came from"></div>
+        </div>
+        <button class="action-btn" type="button" id="addCustomCode">Add Custom Code</button>
+      </div>
+    </section>
+
+    <aside class="calc-card sticky-card">
+      <div class="calc-card-header"><h2>How to redeem</h2><span class="badge">Steps</span></div>
+      <div class="calc-body prose-list">
+        <ol>
+          <li>Copy the code from this page.</li>
+          <li>Open the official redeem site.</li>
+          <li>Enter Player ID, log in, paste code, confirm.</li>
+          <li>Check rewards in your in-game mailbox.</li>
+        </ol>
+        <div class="stat-result-box mini-stack">
+          <div><span>Official redeem URL</span><strong>Century Game</strong></div>
+          <a class="btn-small" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener">Open site</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="section-label">FAM custom / testing list</div>
+  <div class="data-table-wrap">
+    <table class="data-table"><thead><tr><th>Code</th><th>Status</th><th>Note</th><th>Action</th></tr></thead><tbody id="customCodeRows"></tbody></table>
+  </div>
+
+  <div class="section-label">Recently expired / worth knowing</div>
+  <div class="chip-cloud" id="expiredCodes"></div>
+</div>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="fam-live-sync.js?v=1779083200"></script>
+<script>
+(function(){
+  var activeCodes=[
+    {code:'OFFICIALSTORE516',expires:'No public expiry shown',note:'FAM fallback active list'},
+    {code:'LOVEFAMILY',expires:'Expires 05/20/2026',note:'FAM fallback active list'},
+    {code:'KSPRAWNING',expires:'No public expiry shown',note:'FAM fallback active list'},
+    {code:'VIP777',expires:'Expires 12/31/2026',note:'FAM fallback active list'}
+  ];
+  var expired=['BESTMOM2026','Childrenday0505','WORKERPOWER','KSGW26JP','OFFICIALSTORE9','KS0426','0425FORU','KS0425'];
+  var customKey='fam_custom_gift_codes_v1';
+  function copy(text){
+    if(navigator.clipboard){navigator.clipboard.writeText(text).catch(function(){});} 
+    else {var t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();}
+  }
+  function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function toast(btn,msg){var old=btn.textContent;btn.textContent=msg;btn.disabled=true;setTimeout(function(){btn.textContent=old;btn.disabled=false;},1200);}
+  function renderActive(){
+    var grid=document.getElementById('activeCodeGrid');
+    grid.innerHTML=activeCodes.map(function(item){
+      return '<article class="tool-card code-card"><div class="code-card-top"><span class="status-dot active">Active</span><span>'+esc(item.expires||'No public expiry shown')+'</span></div><h3>'+esc(item.code)+'</h3><p>'+esc(item.note||item.reward||'K1245 synced code')+'</p><div class="inline-actions"><button class="btn-small" data-copy-code="'+esc(item.code)+'">Copy Code</button><a class="btn-small" href="https://ks-giftcode.centurygame.com/" target="_blank" rel="noopener">Redeem</a></div></article>';
+    }).join('');
+    document.getElementById('activeCodeCount').textContent=String(activeCodes.length);
+  }
+  function loadCustom(){try{return JSON.parse(localStorage.getItem(customKey)||'[]');}catch(e){return [];}}
+  function saveCustom(list){try{localStorage.setItem(customKey,JSON.stringify(list));}catch(e){}}
+  function renderCustom(){
+    var list=loadCustom();
+    var body=document.getElementById('customCodeRows');
+    body.innerHTML=list.length?list.map(function(item,i){return '<tr><td class="accent">'+esc(item.code)+'</td><td>'+esc(item.expires)+'</td><td>'+esc(item.note)+'</td><td><button class="btn-small" data-copy-code="'+esc(item.code)+'">Copy</button> <button class="btn-small" data-remove-custom="'+i+'">Remove</button></td></tr>';}).join(''):'<tr><td colspan="4" class="muted">No custom codes saved yet.</td></tr>';
+  }
+  function renderExpired(){document.getElementById('expiredCodes').innerHTML=expired.map(function(c){return '<button class="tiny-chip" type="button" data-copy-code="'+esc(c)+'">'+esc(c)+'</button>';}).join('');}
+  function setSyncStatus(text){var el=document.getElementById('giftSyncStatus');if(el)el.textContent=text;}
+  function applyLiveData(res){
+    var data=res&&res.data;
+    if(!data)return;
+    activeCodes=(data.active||[]).map(function(c){return {code:c.code,expires:c.expires||'No public expiry shown',note:c.reward||c.note||'K1245 live/fallback code'};});
+    if(data.expired&&data.expired.length)expired=data.expired.map(function(c){return c.code||c;});
+    setSyncStatus('Gift code sync · '+(data.sourceUrl||data.source||'FAM fallback')+' · '+(data.lastChecked||data.syncedAt||''));
+    renderActive();renderExpired();
+  }
+  document.addEventListener('click',function(e){
+    var copyBtn=e.target.closest('[data-copy-code]');
+    if(copyBtn){copy(copyBtn.getAttribute('data-copy-code'));toast(copyBtn,'Copied');return;}
+    var remove=e.target.closest('[data-remove-custom]');
+    if(remove){var list=loadCustom();list.splice(parseInt(remove.getAttribute('data-remove-custom'),10),1);saveCustom(list);renderCustom();return;}
+    if(e.target.closest('[data-copy-all-active]')){copy(activeCodes.map(function(c){return c.code;}).join('\n'));toast(e.target.closest('[data-copy-all-active]'),'Copied All');}
+  });
+  document.getElementById('addCustomCode').addEventListener('click',function(){
+    var code=document.getElementById('customCode').value.trim().toUpperCase();
+    if(!code) return;
+    var list=loadCustom();
+    list.unshift({code:code,expires:document.getElementById('customExpires').value.trim()||'Unknown',note:document.getElementById('customNote').value.trim()||'FAM K1245 note'});
+    saveCustom(list);document.getElementById('customCode').value='';document.getElementById('customExpires').value='';document.getElementById('customNote').value='';renderCustom();
+  });
+  renderActive();renderCustom();renderExpired();
+  if(window.FAM_LIVE_SYNC){
+    FAM_LIVE_SYNC.get('giftCodes',{cacheHours:6}).then(function(result){
+      var payload=result.payload||{};
+      applyLiveData({data:{active:payload.active||[],expired:payload.expired||[],lastChecked:payload.updatedAt||payload.syncedAt,source:payload.source,sourceUrl:payload.endpoint}});
+      setSyncStatus('Gift code sync · '+FAM_LIVE_SYNC.lastSyncText(result)+' · K1245');
+    }).catch(function(){setSyncStatus('FAM fallback · K1245 · live sync unavailable');});
+  } else {
+    setSyncStatus('FAM fallback · K1245');
+  }
+})();
+</script>
+</body>
+</html>

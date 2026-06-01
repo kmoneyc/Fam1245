@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Bear Hunt Formation Simulator</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+
+<style>
+.sim-shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 2.6rem;}
+.sim-hero{background:var(--surface);border:1px solid var(--soft-grey-line,var(--border));border-left:7px solid var(--gold);border-radius:22px;padding:1.35rem;margin-bottom:1rem;box-shadow:0 16px 40px rgba(45,34,42,.09);}
+.sim-hero .eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.sim-hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.75rem,4vw,3.15rem);line-height:1.05;margin:.35rem 0;color:var(--section-ink,var(--text));}
+.sim-hero p{color:var(--structure-grey,var(--text-dim));line-height:1.65;max-width:900px;margin:0;}
+.sim-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:1rem;align-items:start;}
+.sim-card,.sim-panel{background:var(--surface);border:1px solid var(--soft-grey-line,var(--border));border-radius:18px;padding:1rem;box-shadow:0 12px 32px rgba(45,34,42,.075);}
+.sim-panel{position:sticky;top:84px;}
+.card-title{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start;border-bottom:1px solid var(--soft-grey-line,var(--border));padding-bottom:.7rem;margin-bottom:.85rem;}
+.card-title h2{font-family:'Orbitron',sans-serif;font-size:1rem;margin:0;color:var(--section-ink,var(--text));}
+.card-title p{font-size:.82rem;color:var(--structure-grey,var(--text-dim));margin:.2rem 0 0;line-height:1.5;}
+.badge-soft{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:rgba(214,48,122,.08);border:1px solid rgba(214,48,122,.24);border-radius:999px;padding:.24rem .45rem;white-space:nowrap;}
+.input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem;}
+.input-grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--structure-grey-2,var(--text-muted));margin-bottom:.28rem;}
+.input,.select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.68rem .72rem;font-family:'DM Mono',monospace;font-size:.86rem;outline:none;}
+.input:focus,.select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,48,122,.10);}
+.tool-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0;}
+.btn-small,.btn-main,.btn-danger{border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;cursor:pointer;transition:.15s ease;padding:.48rem .7rem;text-decoration:none;}
+.btn-main{background:linear-gradient(135deg,#ff4aa2,#7c3aed);color:white;border:none;font-weight:800;}
+.btn-small:hover,.btn-main:hover{transform:translateY(-1px);border-color:var(--gold);}
+.btn-danger:hover{background:#d6307a;color:white;border-color:#d6307a;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.8rem;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;min-width:0;}
+.summary-card span{display:block;font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--structure-grey-2,var(--text-muted));margin-bottom:.25rem;}
+.summary-card strong{display:block;font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-list{display:flex;flex-direction:column;gap:.55rem;}
+.rec{border:1px solid var(--border);background:var(--surface2);border-radius:14px;padding:.75rem;}
+.rec strong{display:block;color:var(--section-ink,var(--text));}
+.rec span{display:block;color:var(--structure-grey,var(--text-dim));font-size:.8rem;margin-top:.18rem;line-height:1.45;}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface2);}
+.sim-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:650px;}
+.sim-table th,.sim-table td{padding:.62rem .68rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:middle;}
+.sim-table th{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;color:var(--structure-grey-2,var(--text-muted));letter-spacing:.08em;}
+.result-good{color:#1ea96a;font-weight:800}.result-warn{color:#d6307a;font-weight:800}
+.progress-bar{height:10px;background:var(--surface3);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:.45rem;}
+.progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff4aa2,#7c3aed);width:0%;}
+.info-box{border:1px solid rgba(214,48,122,.24);background:linear-gradient(135deg,rgba(214,48,122,.09),rgba(124,58,237,.06));border-radius:16px;padding:.9rem;margin:.85rem 0;color:var(--structure-grey,var(--text-dim));font-size:.86rem;line-height:1.6;}
+@media(max-width:980px){.sim-grid{grid-template-columns:1fr}.sim-panel{position:static}}
+@media(max-width:680px){.sim-shell{padding:.9rem .75rem 2rem}.input-grid,.input-grid.two,.summary-grid{grid-template-columns:1fr}.sim-table{min-width:600px}}
+</style>
+
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+<main class="sim-shell">
+<div class="crumb"><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Bear Hunt Simulator</span></div>
+<section class="sim-hero"><span class="eyebrow">FAM SIM LAB · K1245</span><h1>Bear Hunt Formation Simulator</h1><p>Frakinator-style Bear ratio calculator: enter Infantry, Cavalry, and Archery attack/lethality, select troop-specific lead heroes, choose troop tier, and get the optimal troop composition.</p></section>
+
+
+
+<div class="sim-grid">
+  <section class="sim-card">
+    <div class="card-title">
+      <div>
+        <h2>Bear Ratio Inputs</h2>
+        <p>Match the Frakinator-style Bear form: attack %, lethality %, lead hero by troop type, and troop tier.</p>
+      </div>
+      <span class="badge-soft">Bear Ratio</span>
+    </div>
+
+    <div class="input-grid">
+      <div class="field"><label>March Capacity</label><input class="input" id="cap" type="number" value="250000" min="1" oninput="calcBear()"></div>
+      <div class="field"><label>Troop Tier</label><select class="select" id="tier" onchange="calcBear()"><option value="t1t6">T1-T6</option><option value="t7plus">T7+</option><option value="tg3plus">TG3+ / advanced</option></select></div>
+      <div class="field"><label>Search Step %</label><select class="select" id="step" onchange="calcBear()"><option value="5">5%</option><option value="2">2%</option><option value="1">1%</option></select></div>
+    </div>
+
+    <div class="card-title" style="margin-top:1rem">
+      <div><h2>Infantry</h2><p>Enter the rally leader Infantry stats from a battle report.</p></div>
+      <span class="badge-soft">INF</span>
+    </div>
+    <div class="input-grid">
+      <div class="field"><label>Infantry attack %</label><input class="input" id="infAtk" type="number" value="500" step="0.01" oninput="calcBear()"></div>
+      <div class="field"><label>Infantry lethality %</label><input class="input" id="infLeth" type="number" value="500" step="0.01" oninput="calcBear()"></div>
+      <div class="field"><label>Lead infantry hero</label><select class="select" id="infHero" onchange="calcBear()"><option>Other</option><option>Alcar</option><option>Margot</option><option>Rosa</option></select></div>
+    </div>
+
+    <div class="card-title" style="margin-top:1rem">
+      <div><h2>Cavalry</h2><p>Enter the rally leader Cavalry stats from a battle report.</p></div>
+      <span class="badge-soft">CAV</span>
+    </div>
+    <div class="input-grid">
+      <div class="field"><label>Cavalry attack %</label><input class="input" id="cavAtk" type="number" value="500" step="0.01" oninput="calcBear()"></div>
+      <div class="field"><label>Cavalry lethality %</label><input class="input" id="cavLeth" type="number" value="500" step="0.01" oninput="calcBear()"></div>
+      <div class="field"><label>Lead cavalry hero</label><select class="select" id="cavHero" onchange="calcBear()"><option>Other</option><option>Alcar</option><option>Margot</option><option>Rosa</option></select></div>
+    </div>
+
+    <div class="card-title" style="margin-top:1rem">
+      <div><h2>Archery</h2><p>Archers get the Bear infantry counter bonus in this model.</p></div>
+      <span class="badge-soft">ARC</span>
+    </div>
+    <div class="input-grid">
+      <div class="field"><label>Archery attack %</label><input class="input" id="arcAtk" type="number" value="600" step="0.01" oninput="calcBear()"></div>
+      <div class="field"><label>Archery lethality %</label><input class="input" id="arcLeth" type="number" value="650" step="0.01" oninput="calcBear()"></div>
+      <div class="field"><label>Lead Archery hero</label><select class="select" id="arcHero" onchange="calcBear()"><option>Other</option><option>Alcar</option><option>Margot</option><option>Rosa</option></select></div>
+    </div>
+
+    <div class="info-box">
+      <strong>Formula used:</strong><br>
+      Damage factor is proportional to:<br>
+      <code>1/3 × Ainf × √finf + Acav × √fcav + 4/3 × Aarc × √farc × 1.1</code><br><br>
+      <strong>A</strong> is the attack factor for that troop type, based on the leader’s attack %, lethality %, and selected troop-specific hero modifier. The 1.1 on Archery is because Bear troops are Infantry.
+    </div>
+
+    <div class="tool-row">
+      <button class="btn-small" onclick="presetBalanced()">Balanced stats</button>
+      <button class="btn-small" onclick="presetArcherLead()">Archer-heavy leader</button>
+      <button class="btn-small" onclick="presetClean()">Reset heroes</button>
+      <button class="btn-main" onclick="copyBear()">Copy Bear Ratio</button>
+    </div>
+
+    <div class="table-wrap">
+      <table class="sim-table"><thead><tr><th>Rank</th><th>Ratio</th><th>Inf</th><th>Cav</th><th>Arc</th><th>Damage Factor</th></tr></thead><tbody id="bearRows"></tbody></table>
+    </div>
+  </section>
+
+  <aside class="sim-panel">
+    <div class="card-title"><div><h2>Optimal Composition</h2><p>Best troop ratio from the current inputs.</p></div><span class="badge-soft">Live</span></div>
+    <div class="summary-grid">
+      <div class="summary-card"><span>Best Ratio</span><strong id="bestRatio">--</strong></div>
+      <div class="summary-card"><span>Damage Factor</span><strong id="bestScore">--</strong></div>
+      <div class="summary-card"><span>Archers</span><strong id="bestArchers">--</strong></div>
+      <div class="summary-card"><span>vs 10/10/80</span><strong id="vsFam">--</strong></div>
+    </div>
+    <div class="rec-list" id="bearRecs"></div>
+    <div class="info-box">
+      <strong>Note:</strong> These are not final Bear damage numbers. This shows how damage changes when troop composition changes for the selected leader stats/heroes.
+    </div>
+  </aside>
+</div>
+
+</main>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="calc-bear-sim.html">Bear Sim</a><a href="calc-battle-sim.html">Battle Sim</a></nav>
+</footer>
+<script>
+
+function n(id){return Number(document.getElementById(id).value)||0}
+function fmt(x){return Math.round(x).toLocaleString()}
+function heroModifier(hero, type){
+  // Only troop-dependent heroes belong here. Petra-style all-troop buffs do not change the optimal ratio.
+  const table = {
+    Other:{inf:1,cav:1,arc:1},
+    Alcar:{inf:1.06,cav:1.10,arc:1.04},
+    Margot:{inf:1.04,cav:1.06,arc:1.12},
+    Rosa:{inf:1.08,cav:1.04,arc:1.10}
+  };
+  return (table[hero] && table[hero][type]) || 1;
+}
+function tierArcherModifier(){
+  const tier=document.getElementById('tier').value;
+  if(tier==='tg3plus') return 1.21; // Bear infantry counter 1.1 plus additional advanced archer factor.
+  if(tier==='t7plus') return 1.10;  // Keep selectable, but no extra factor unless advanced is selected.
+  return 1.10;                      // T1-T6 Bear infantry counter factor.
+}
+function attackFactor(type){
+  const atk = n(type+'Atk')/100;
+  const leth = n(type+'Leth')/100;
+  const hero = document.getElementById(type+'Hero').value;
+  // Linear in attack and lethality stats; using report percentages as multiplicative factors.
+  return (1 + atk) * (1 + leth) * heroModifier(hero, type);
+}
+function damageFactor(infPct,cavPct,arcPct){
+  const finf=infPct/100, fcav=cavPct/100, farc=arcPct/100;
+  const Ainf=attackFactor('inf');
+  const Acav=attackFactor('cav');
+  const Aarc=attackFactor('arc');
+  const infPart=(1/3)*Ainf*Math.sqrt(finf);
+  const cavPart=Acav*Math.sqrt(fcav);
+  const arcPart=(4/3)*Aarc*Math.sqrt(farc)*tierArcherModifier();
+  return {inf:infPct,cav:cavPct,arc:arcPct,score:infPart+cavPart+arcPart,infPart,cavPart,arcPart};
+}
+function countFor(pct){
+  return Math.floor(Math.max(1,n('cap'))*pct/100);
+}
+function calcBear(){
+  const step=Number(document.getElementById('step').value)||5;
+  let rows=[];
+  for(let inf=0; inf<=100; inf+=step){
+    for(let cav=0; cav<=100-inf; cav+=step){
+      const arc=100-inf-cav;
+      if(arc<0) continue;
+      rows.push(damageFactor(inf,cav,arc));
+    }
+  }
+  [[10,10,80],[1,1,98],[5,5,90],[20,10,70],[33,33,34]].forEach(function(r){
+    if(!rows.some(x=>x.inf===r[0]&&x.cav===r[1]&&x.arc===r[2])) rows.push(damageFactor(r[0],r[1],r[2]));
+  });
+  rows.sort((a,b)=>b.score-a.score);
+  const top=rows.slice(0,10), best=top[0], fam=damageFactor(10,10,80);
+  bestRatio.textContent=best.inf+'/'+best.cav+'/'+best.arc;
+  bestScore.textContent=best.score.toFixed(4);
+  bestArchers.textContent=fmt(countFor(best.arc));
+  vsFam.textContent=((best.score/fam.score-1)*100).toFixed(2)+'%';
+  bearRows.innerHTML=top.map(function(r,i){
+    return '<tr><td>'+(i+1)+'</td><td><strong>'+r.inf+'/'+r.cav+'/'+r.arc+'</strong></td><td>'+fmt(countFor(r.inf))+'</td><td>'+fmt(countFor(r.cav))+'</td><td>'+fmt(countFor(r.arc))+'</td><td>'+r.score.toFixed(4)+'</td></tr>';
+  }).join('');
+  bearRecs.innerHTML=
+    '<div class="rec"><strong>Recommended ratio: '+best.inf+'/'+best.cav+'/'+best.arc+'</strong><span>Send '+fmt(countFor(best.inf))+' Infantry, '+fmt(countFor(best.cav))+' Cavalry, and '+fmt(countFor(best.arc))+' Archers.</span></div>'+
+    '<div class="rec"><strong>Damage breakdown</strong><span>Infantry part: '+best.infPart.toFixed(4)+' · Cavalry part: '+best.cavPart.toFixed(4)+' · Archery part: '+best.arcPart.toFixed(4)+'.</span></div>'+
+    '<div class="rec"><strong>Hero note</strong><span>Only troop-specific heroes are included because same-buff heroes do not change the optimal ratio.</span></div>';
+}
+function presetBalanced(){
+  infAtk.value=500;infLeth.value=500;cavAtk.value=500;cavLeth.value=500;arcAtk.value=500;arcLeth.value=500;
+  infHero.value='Other';cavHero.value='Other';arcHero.value='Other';
+  calcBear();
+}
+function presetArcherLead(){
+  infAtk.value=500;infLeth.value=500;cavAtk.value=500;cavLeth.value=500;arcAtk.value=650;arcLeth.value=700;
+  infHero.value='Other';cavHero.value='Other';arcHero.value='Rosa';
+  calcBear();
+}
+function presetClean(){
+  infHero.value='Other';cavHero.value='Other';arcHero.value='Other';
+  calcBear();
+}
+function copyBear(){
+  const text='Bear Ratio Plan\\nBest ratio: '+bestRatio.textContent+'\\nDamage factor: '+bestScore.textContent+'\\nArchers: '+bestArchers.textContent+'\\nUse battle-report attack/lethality stats for best accuracy.';
+  navigator.clipboard&&navigator.clipboard.writeText(text);
+}
+calcBear();
+
+</script>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+</body>
+</html>

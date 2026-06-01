@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Master Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+
+
+<style id="v48-target-calculator-compact-header-fix">
+/* v4.48 — Compact header fix for remaining calculator pages */
+body.calc-theme-modern .page-header,
+body.calc-theme-modern .opt-hero{
+  position:relative !important;
+  min-height:0 !important;
+  display:block !important;
+  padding:1.1rem 1.2rem !important;
+  margin:0 0 1rem !important;
+  border-radius:20px !important;
+  border:1px solid color-mix(in srgb,var(--border) 82%,transparent) !important;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--surface) 96%,transparent),
+    color-mix(in srgb,var(--surface2) 74%,transparent)
+  ) !important;
+  box-shadow:0 14px 40px rgba(0,0,0,.14) !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+}
+body.calc-theme-modern .page-header::before,
+body.calc-theme-modern .page-header::after,
+body.calc-theme-modern .opt-hero::before,
+body.calc-theme-modern .opt-hero::after{
+  display:none !important;
+  content:none !important;
+}
+body.calc-theme-modern .page-header h1,
+body.calc-theme-modern .opt-hero h1{
+  max-width:none !important;
+  margin:0 !important;
+  font-size:clamp(1.95rem,7vw,3.25rem) !important;
+  line-height:1 !important;
+  letter-spacing:.01em !important;
+  text-transform:none !important;
+  color:var(--text) !important;
+  text-shadow:none !important;
+}
+body.calc-theme-modern .page-header p,
+body.calc-theme-modern .opt-hero p{
+  max-width:820px !important;
+  margin:.55rem 0 0 !important;
+  font-size:.95rem !important;
+  line-height:1.5 !important;
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .page-header .mini-note,
+body.calc-theme-modern .opt-hero .mini-note,
+body.calc-theme-modern .page-header .badge,
+body.calc-theme-modern .opt-hero .badge{
+  position:static !important;
+  display:inline-flex !important;
+  margin-top:.75rem !important;
+}
+body.calc-theme-modern .crumb{
+  margin:0 0 .85rem !important;
+  font-size:.76rem !important;
+  line-height:1.2 !important;
+}
+body.calc-theme-modern .crumb,
+body.calc-theme-modern .crumb a{
+  color:var(--text-dim) !important;
+}
+body.calc-theme-modern .crumb a:hover{
+  color:var(--gold) !important;
+}
+body.calc-theme-modern .app-body,
+body.calc-theme-modern .page-container,
+body.calc-theme-modern .optimizer-shell{
+  width:min(100%,1120px) !important;
+  max-width:1120px !important;
+  margin:0 auto !important;
+  padding:1rem 1rem 2rem !important;
+}
+body.calc-theme-modern .calc-card,
+body.calc-theme-modern .opt-card,
+body.calc-theme-modern .opt-panel,
+body.calc-theme-modern .k1245-panel,
+body.calc-theme-modern .master-card,
+body.calc-theme-modern .summary-card,
+body.calc-theme-modern .resource-card,
+body.calc-theme-modern .results-box,
+body.calc-theme-modern .stat-result-box{
+  border-radius:18px !important;
+}
+body.calc-theme-modern .calc-card-header,
+body.calc-theme-modern .card-title,
+body.calc-theme-modern .results-header{
+  padding:.85rem 1rem !important;
+}
+body.calc-theme-modern .calc-body,
+body.calc-theme-modern .opt-card > :not(.card-title),
+body.calc-theme-modern .opt-panel > :not(.card-title){
+  padding:1rem !important;
+}
+@media(max-width:760px){
+  body.calc-theme-modern .app-body,
+  body.calc-theme-modern .page-container,
+  body.calc-theme-modern .optimizer-shell{
+    width:100% !important;
+    max-width:100% !important;
+    padding:.8rem .85rem 1.5rem !important;
+    overflow-x:hidden !important;
+  }
+  body.calc-theme-modern .page-header,
+  body.calc-theme-modern .opt-hero{
+    padding:1rem !important;
+    border-radius:18px !important;
+    margin-bottom:.9rem !important;
+  }
+  body.calc-theme-modern .page-header h1,
+  body.calc-theme-modern .opt-hero h1{
+    font-size:clamp(1.7rem,8.8vw,2.7rem) !important;
+    line-height:1.02 !important;
+    overflow-wrap:anywhere !important;
+  }
+  body.calc-theme-modern .page-header p,
+  body.calc-theme-modern .opt-hero p{
+    font-size:.9rem !important;
+    line-height:1.45 !important;
+  }
+}
+</style>
+
+</head>
+<body class="calc-theme-modern">
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="calc-top-nav"><a href="calculators.html">Tools Hub</a><a href="calc-castle.html">Castle</a><a href="calc-gear.html">Gear</a></div>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+<div class="page-container master-page">
+  <div class="crumb"><a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Master Calculator</span></div>
+  <div class="page-header split-header no-theme-art">
+    <div><h1>Master Calculator</h1><p>Plan Affinity, Emblems, Manuscripts, Power gain, and squad buff gain.</p></div>
+    <div class="mini-note">Starter estimator &middot; Verify in-game before spending</div>
+  </div>
+
+  <section class="master-picker" aria-label="Pick a master">
+    <button class="master-card active" data-master="Valora" onclick="selectMaster('Valora')"><span class="master-avatar">V</span><strong>Valora</strong><em>Bear Hunter</em><b>+15.00%</b></button>
+    <button class="master-card" data-master="Pan" onclick="selectMaster('Pan')"><span class="master-avatar">P</span><strong>Pan</strong><em>Palace Administrator</em><b>+15.00%</b></button>
+    <button class="master-card" data-master="Roman" onclick="selectMaster('Roman')"><span class="master-avatar">R</span><strong>Roman</strong><em>Arena Champion</em><b>+15.00%</b></button>
+  </section>
+
+  <div class="mode-tabs master-tabs" data-tab-group="master-tabs">
+    <button class="mode-tab active" data-tab-btn="master-tabs" data-tab-target="calculate">Calculate</button>
+    <button class="mode-tab" data-tab-btn="master-tabs" data-tab-target="tables">Tables</button>
+    <button class="mode-tab" data-tab-btn="master-tabs" data-tab-target="compare">Compare</button>
+  </div>
+
+  <section class="tab-panel active" data-tab-panel="master-tabs" data-tab-id="calculate">
+    <div class="master-layout">
+      <div class="master-plan">
+        <div class="calc-card">
+          <div class="calc-card-header"><h2>Plan</h2><span class="badge">Current → Target</span><div class="card-actions"><button class="btn-small" onclick="resetMasterPlan()">Reset</button><button class="btn-small" onclick="maxMasterPlan()">Max</button></div></div>
+          <div class="calc-body">
+            <div class="form-grid-2 compact-grid">
+              <div class="form-group"><label class="form-label">Expert level current</label><input class="form-input" id="expertCurrent" type="number" min="0" max="10" value="0" oninput="calculateMaster()"></div>
+              <div class="form-group"><label class="form-label">Expert level target</label><input class="form-input" id="expertTarget" type="number" min="0" max="10" value="10" oninput="calculateMaster()"></div>
+              <div class="form-group"><label class="form-label">Relationship current</label><select class="form-select" id="relCurrent" onchange="calculateMaster()"></select></div>
+              <div class="form-group"><label class="form-label">Relationship target</label><select class="form-select" id="relTarget" onchange="calculateMaster()"></select></div>
+            </div>
+            <div class="section-label">Skills</div>
+            <div id="skillRows" class="skill-rows"></div>
+          </div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-card-header"><h2>Stock</h2><span class="badge">Optional subtraction</span></div>
+          <div class="calc-body">
+            <div class="form-grid-3">
+              <div class="form-group"><label class="form-label">Affinity in stock</label><input class="form-input" id="stockAffinity" type="number" min="0" value="0" oninput="calculateMaster()"></div>
+              <div class="form-group"><label class="form-label">Emblems in stock</label><input class="form-input" id="stockEmblems" type="number" min="0" value="0" oninput="calculateMaster()"></div>
+              <div class="form-group"><label class="form-label">Manuscripts in stock</label><input class="form-input" id="stockManuscripts" type="number" min="0" value="0" oninput="calculateMaster()"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="master-results">
+        <div class="calc-card sticky-card">
+          <div class="calc-card-header"><h2>Results</h2><span class="badge" id="selectedMasterBadge">Valora</span></div>
+          <div class="calc-body">
+            <div class="result-stack">
+              <div class="resource-card"><span>Affinity</span><strong id="outAffinity">0</strong><em id="needAffinity">still needed: 0</em></div>
+              <div class="resource-card"><span>Emblems</span><strong id="outEmblems">0</strong><em id="needEmblems">still needed: 0</em></div>
+              <div class="resource-card"><span>Manuscripts</span><strong id="outManuscripts">0</strong><em id="needManuscripts">still needed: 0</em></div>
+              <div class="resource-card"><span>Time to learn</span><strong id="outTime">0h</strong><em id="outXp">0 XP</em></div>
+              <div class="resource-card"><span>Power gain</span><strong id="outPower">+0</strong><em id="outPowerRange">0 → 0</em></div>
+              <div class="resource-card"><span>Squad buff gain</span><strong id="outBuff">+0.00%</strong><em id="outBuffRange">0.00% → 0.00%</em></div>
+            </div>
+            <button class="action-btn" onclick="copyMasterResults()">Copy Results</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="tab-panel" data-tab-panel="master-tabs" data-tab-id="tables">
+    <div class="calc-card"><div class="calc-card-header"><h2>Reference Tables</h2><span class="badge">Estimator values</span></div><div class="calc-body"><div class="table-wrap"><table class="data-table"><thead><tr><th>Upgrade</th><th>Affinity</th><th>Emblems</th><th>Manuscripts</th><th>XP</th></tr></thead><tbody id="masterTableBody"></tbody></table></div></div></div>
+  </section>
+
+  <section class="tab-panel" data-tab-panel="master-tabs" data-tab-id="compare">
+    <div class="compare-grid" id="compareGrid"></div>
+  </section>
+</div>
+</div>
+<footer class="calc-footer"><div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div><nav><a href="calculators.html">Tools Hub</a><a href="calc-gear.html">Gear</a><a href="calc-castle.html">Castle</a></nav></footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="calc-ui.js?v=1779083200"></script>
+<script>
+var masterData={
+  Valora:{role:'Bear Hunter',focus:'Bear Hunt damage and rally squad capacity',skills:['Dance of the Hunt','Leader By Example','Weapon Obsession','Savage Advantage'],priority:'Best for Bear Hunt and feast/reward value.'},
+  Pan:{role:'Palace Administrator',focus:'City development, administration, and growth',skills:['Royal Oversight','Civic Order','Resource Survey','Palace Mandate'],priority:'Best when you want economy and account-growth value.'},
+  Roman:{role:'Arena Champion',focus:'Arena pressure, combat buffs, and power gain',skills:['Gladiator Spirit','Arena Tactics','Veteran Drills','Champion Aura'],priority:'Best when you care about battle strength and arena pressure.'}
+};
+var selectedMaster='Valora';
+var rels=['Stranger','Acquaintance','Familiar','Trusted','Close Friend','Kindred Soul'];
+var affinityCost=[0,1200,2400,3800,5600,7800,10200,13200,16800,21000,25600];
+var emblemCost=[0,5,10,15,25,35,50,70,95,125,160];
+var manuscriptCost=[0,120,180,260,360,500,700,950,1250,1650,2100];
+var xpCost=[0,12000,24000,42000,70000,110000,170000,250000,360000,500000,680000];
+var relAffinity=[0,1500,3500,7000,12500,20000];
+function n(id){return document.getElementById(id);}
+function fmt(v){return Math.round(v).toLocaleString();}
+function clamp(v,min,max){v=parseInt(v||0,10); if(isNaN(v))v=0; return Math.min(max,Math.max(min,v));}
+function sumBetween(arr,c,t){var s=0; for(var i=c+1;i<=t;i++)s+=arr[i]||0; return Math.max(0,s);}
+function initMaster(){
+  ['relCurrent','relTarget'].forEach(function(id){n(id).innerHTML=rels.map(function(r,i){return '<option value="'+i+'">'+r+'</option>';}).join('');});
+  n('relTarget').value='5'; buildSkillRows(); buildTables(); buildCompare(); calculateMaster();
+}
+function buildSkillRows(){
+  var skills=masterData[selectedMaster].skills;
+  n('skillRows').innerHTML=skills.map(function(s,i){return '<div class="skill-row"><div class="skill-title"><strong>'+s+'</strong><span>'+(i===0?'Passive talent. Always active.':'Include in plan')+'</span></div><label class="checkbox-row"><input type="checkbox" id="skillInc'+i+'" '+(i===0?'checked disabled':'checked')+' onchange="calculateMaster()"><span>Include</span></label><div class="skill-inputs"><input class="form-input" id="skillCur'+i+'" type="number" min="0" max="10" value="0" oninput="calculateMaster()"><span>→</span><input class="form-input" id="skillTar'+i+'" type="number" min="0" max="10" value="'+(i===0?10:5)+'" oninput="calculateMaster()"></div></div>';}).join('');
+}
+function selectMaster(name){selectedMaster=name; document.querySelectorAll('.master-card').forEach(function(c){c.classList.toggle('active',c.dataset.master===name);}); n('selectedMasterBadge').textContent=name; buildSkillRows(); calculateMaster();}
+function calculateMaster(){
+  var ec=clamp(n('expertCurrent').value,0,10), et=clamp(n('expertTarget').value,0,10); if(et<ec)et=ec; n('expertCurrent').value=ec; n('expertTarget').value=et;
+  var rc=clamp(n('relCurrent').value,0,5), rt=clamp(n('relTarget').value,0,5); if(rt<rc)rt=rc; n('relCurrent').value=rc; n('relTarget').value=rt;
+  var affinity=sumBetween(affinityCost,ec,et)+sumBetween(relAffinity,rc,rt);
+  var emblems=sumBetween(emblemCost,ec,et); var manuscripts=0,xp=0,power=0;
+  for(var i=0;i<4;i++){var inc=n('skillInc'+i).checked; var c=clamp(n('skillCur'+i).value,0,10), t=clamp(n('skillTar'+i).value,0,10); if(t<c)t=c; n('skillCur'+i).value=c; n('skillTar'+i).value=t; if(inc){manuscripts+=sumBetween(manuscriptCost,c,t)*(i+1); xp+=sumBetween(xpCost,c,t); power+=(t-c)*(i===0?3000:6500);}}
+  power += (et-ec)*22000 + (rt-rc)*18000;
+  var curBuff=(ec*0.65)+(rc*0.45), tarBuff=(et*0.65)+(rt*0.45)+Math.min(4.0,manuscripts/9000); curBuff=Math.min(curBuff,15); tarBuff=Math.min(tarBuff,15);
+  var stockA=clamp(n('stockAffinity').value,0,999999999), stockE=clamp(n('stockEmblems').value,0,999999999), stockM=clamp(n('stockManuscripts').value,0,999999999);
+  n('outAffinity').textContent=fmt(affinity); n('needAffinity').textContent='still needed: '+fmt(Math.max(0,affinity-stockA));
+  n('outEmblems').textContent=fmt(emblems); n('needEmblems').textContent='still needed: '+fmt(Math.max(0,emblems-stockE));
+  n('outManuscripts').textContent=fmt(manuscripts); n('needManuscripts').textContent='still needed: '+fmt(Math.max(0,manuscripts-stockM));
+  var hours=Math.ceil(xp/3600); n('outTime').textContent=hours>720?'~'+Math.floor(hours/720)+' mo '+Math.floor((hours%720)/24)+' d':'~'+Math.floor(hours/24)+' d '+(hours%24)+' h'; n('outXp').textContent=fmt(xp)+' XP';
+  n('outPower').textContent='+'+fmt(power); n('outPowerRange').textContent='0 → '+fmt(power);
+  n('outBuff').textContent='+'+(tarBuff-curBuff).toFixed(2)+'%'; n('outBuffRange').textContent=curBuff.toFixed(2)+'% → '+tarBuff.toFixed(2)+'%';
+}
+function resetMasterPlan(){n('expertCurrent').value=0;n('expertTarget').value=10;n('relCurrent').value=0;n('relTarget').value=5;n('stockAffinity').value=0;n('stockEmblems').value=0;n('stockManuscripts').value=0;buildSkillRows();calculateMaster();}
+function maxMasterPlan(){n('expertCurrent').value=0;n('expertTarget').value=10;n('relCurrent').value=0;n('relTarget').value=5;for(var i=0;i<4;i++){n('skillCur'+i).value=0;n('skillTar'+i).value=10;if(n('skillInc'+i))n('skillInc'+i).checked=true;}calculateMaster();}
+function copyMasterResults(){var text='FAM Master Plan — '+selectedMaster+'\nAffinity: '+n('outAffinity').textContent+' ('+n('needAffinity').textContent+')\nEmblems: '+n('outEmblems').textContent+' ('+n('needEmblems').textContent+')\nManuscripts: '+n('outManuscripts').textContent+' ('+n('needManuscripts').textContent+')\nPower gain: '+n('outPower').textContent+'\nBuff gain: '+n('outBuff').textContent; navigator.clipboard&&navigator.clipboard.writeText(text);}
+function buildTables(){var rows=''; for(var i=1;i<=10;i++){rows+='<tr><td>Level '+(i-1)+' → '+i+'</td><td>'+fmt(affinityCost[i])+'</td><td>'+fmt(emblemCost[i])+'</td><td>'+fmt(manuscriptCost[i])+'</td><td>'+fmt(xpCost[i])+'</td></tr>';} n('masterTableBody').innerHTML=rows;}
+function buildCompare(){n('compareGrid').innerHTML=Object.keys(masterData).map(function(k){var m=masterData[k]; return '<div class="calc-card compare-card"><div class="calc-card-header"><h2>'+k+'</h2><span class="badge">'+m.role+'</span></div><div class="calc-body"><p>'+m.focus+'</p><div class="section-label">Priority</div><p>'+m.priority+'</p><div class="tile-tags">'+m.skills.map(function(s){return '<span>'+s+'</span>';}).join('')+'</div></div></div>';}).join('');}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initMaster);else initMaster();
+</script>
+</body>
+</html>

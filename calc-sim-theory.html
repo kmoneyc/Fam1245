@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Simulation Theory</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+
+<style>
+.sim-shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 2.6rem;}
+.sim-hero{background:var(--surface);border:1px solid var(--soft-grey-line,var(--border));border-left:7px solid var(--gold);border-radius:22px;padding:1.35rem;margin-bottom:1rem;box-shadow:0 16px 40px rgba(45,34,42,.09);}
+.sim-hero .eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.sim-hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.75rem,4vw,3.15rem);line-height:1.05;margin:.35rem 0;color:var(--section-ink,var(--text));}
+.sim-hero p{color:var(--structure-grey,var(--text-dim));line-height:1.65;max-width:900px;margin:0;}
+.sim-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:1rem;align-items:start;}
+.sim-card,.sim-panel{background:var(--surface);border:1px solid var(--soft-grey-line,var(--border));border-radius:18px;padding:1rem;box-shadow:0 12px 32px rgba(45,34,42,.075);}
+.sim-panel{position:sticky;top:84px;}
+.card-title{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start;border-bottom:1px solid var(--soft-grey-line,var(--border));padding-bottom:.7rem;margin-bottom:.85rem;}
+.card-title h2{font-family:'Orbitron',sans-serif;font-size:1rem;margin:0;color:var(--section-ink,var(--text));}
+.card-title p{font-size:.82rem;color:var(--structure-grey,var(--text-dim));margin:.2rem 0 0;line-height:1.5;}
+.badge-soft{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:rgba(214,48,122,.08);border:1px solid rgba(214,48,122,.24);border-radius:999px;padding:.24rem .45rem;white-space:nowrap;}
+.input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem;}
+.input-grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--structure-grey-2,var(--text-muted));margin-bottom:.28rem;}
+.input,.select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.68rem .72rem;font-family:'DM Mono',monospace;font-size:.86rem;outline:none;}
+.input:focus,.select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,48,122,.10);}
+.tool-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0;}
+.btn-small,.btn-main,.btn-danger{border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;cursor:pointer;transition:.15s ease;padding:.48rem .7rem;text-decoration:none;}
+.btn-main{background:linear-gradient(135deg,#ff4aa2,#7c3aed);color:white;border:none;font-weight:800;}
+.btn-small:hover,.btn-main:hover{transform:translateY(-1px);border-color:var(--gold);}
+.btn-danger:hover{background:#d6307a;color:white;border-color:#d6307a;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.8rem;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;min-width:0;}
+.summary-card span{display:block;font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--structure-grey-2,var(--text-muted));margin-bottom:.25rem;}
+.summary-card strong{display:block;font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-list{display:flex;flex-direction:column;gap:.55rem;}
+.rec{border:1px solid var(--border);background:var(--surface2);border-radius:14px;padding:.75rem;}
+.rec strong{display:block;color:var(--section-ink,var(--text));}
+.rec span{display:block;color:var(--structure-grey,var(--text-dim));font-size:.8rem;margin-top:.18rem;line-height:1.45;}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface2);}
+.sim-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:650px;}
+.sim-table th,.sim-table td{padding:.62rem .68rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:middle;}
+.sim-table th{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;color:var(--structure-grey-2,var(--text-muted));letter-spacing:.08em;}
+.result-good{color:#1ea96a;font-weight:800}.result-warn{color:#d6307a;font-weight:800}
+.progress-bar{height:10px;background:var(--surface3);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:.45rem;}
+.progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff4aa2,#7c3aed);width:0%;}
+.info-box{border:1px solid rgba(214,48,122,.24);background:linear-gradient(135deg,rgba(214,48,122,.09),rgba(124,58,237,.06));border-radius:16px;padding:.9rem;margin:.85rem 0;color:var(--structure-grey,var(--text-dim));font-size:.86rem;line-height:1.6;}
+@media(max-width:980px){.sim-grid{grid-template-columns:1fr}.sim-panel{position:static}}
+@media(max-width:680px){.sim-shell{padding:.9rem .75rem 2rem}.input-grid,.input-grid.two,.summary-grid{grid-template-columns:1fr}.sim-table{min-width:600px}}
+</style>
+
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+<main class="sim-shell">
+<div class="crumb"><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Simulation Theory</span></div>
+<section class="sim-hero"><span class="eyebrow">FAM SIM LAB · K1245</span><h1>Simulation Theory Lab</h1><p>A short guide explaining how the new FAM simulation calculators think about battle math, where they are useful, and where real battle reports still matter.</p></section>
+
+<section class="sim-card">
+  <div class="card-title"><div><h2>FAM Simulation Math</h2><p>Plain-English explanation of the new simulator pages.</p></div><span class="badge-soft">Theory</span></div>
+  <div class="info-box">
+    <strong>Important:</strong> These tools are inspired by public Frakinator-style features, but they do not copy private app code or claim to reproduce hidden Kingshot combat exactly. They use transparent formulas that are useful for comparing formations and decisions.
+  </div>
+  <div class="table-wrap">
+    <table class="sim-table">
+      <thead><tr><th>Tool</th><th>What it optimizes</th><th>Formula idea</th><th>Best use</th></tr></thead>
+      <tbody>
+        <tr><td>Bear Hunt Simulator</td><td>Damage pressure</td><td>Troops × Attack × Lethality × Bear modifier</td><td>Find high-archer damage ratios from your own battle-report stats.</td></tr>
+        <tr><td>Mystic Trial Simulator</td><td>No-hero troop mix</td><td>Attack × Lethality × Health × counter matrix</td><td>Estimate best Infantry/Cavalry/Archer split vs a visible enemy mix.</td></tr>
+        <tr><td>Battle Simulator</td><td>March comparison</td><td>Stats × hero/buff modifier × troop counter coefficient × capacity factor</td><td>Compare two setups and see which change moves the result.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info-box">
+    <strong>How to make the math useful:</strong> Use battle-report stats, not just base Town Center stats. Run a real test, enter the report numbers, then adjust enemy stats until the result roughly matches. After calibration, the tool is much better for testing “what if I change ratio/heroes/buffs?”
+  </div>
+  <div class="tool-row">
+    <a class="btn-main" href="calc-bear-sim.html">Open Bear Simulator</a>
+    <a class="btn-small" href="calc-mystic-sim.html">Open Mystic Simulator</a>
+    <a class="btn-small" href="calc-battle-sim.html">Open Battle Simulator</a>
+  </div>
+</section>
+
+</main>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="calc-bear-sim.html">Bear Sim</a><a href="calc-battle-sim.html">Battle Sim</a></nav>
+</footer>
+<script>
+
+</script>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+</body>
+</html>

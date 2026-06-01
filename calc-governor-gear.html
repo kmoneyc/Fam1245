@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Governor Gear Optimizer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+<style>
+.optimizer-shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 2.5rem;}
+.opt-hero{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:1.35rem;margin-bottom:1rem;box-shadow:0 16px 40px rgba(168,32,94,.10);}
+.opt-hero .eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.opt-hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.75rem,4vw,3.15rem);line-height:1.05;margin:.35rem 0;color:var(--text);}
+.opt-hero p{color:var(--text-dim);line-height:1.65;max-width:850px;margin:0;}
+.opt-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1rem;align-items:start;}
+.opt-card,.opt-panel{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1rem;box-shadow:0 12px 32px rgba(168,32,94,.08);}
+.opt-panel{position:sticky;top:84px;}
+.card-title{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start;border-bottom:1px solid var(--border);padding-bottom:.7rem;margin-bottom:.85rem;}
+.card-title h2{font-family:'Orbitron',sans-serif;font-size:1rem;margin:0;color:var(--text);}
+.card-title p{font-size:.82rem;color:var(--text-dim);margin:.2rem 0 0;line-height:1.5;}
+.badge-soft{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:rgba(214,48,122,.08);border:1px solid rgba(214,48,122,.24);border-radius:999px;padding:.24rem .45rem;white-space:nowrap;}
+.input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.72rem;}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.28rem;}
+.input,.select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.68rem .72rem;font-family:'DM Mono',monospace;font-size:.86rem;outline:none;}
+.input:focus,.select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,48,122,.10);}
+.tool-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0;}
+.btn-small,.btn-main,.btn-danger{border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;cursor:pointer;transition:.15s ease;padding:.48rem .7rem;}
+.btn-main{background:linear-gradient(135deg,#ff4aa2,#7c3aed);color:white;border:none;font-weight:800;}
+.btn-small:hover,.btn-main:hover{transform:translateY(-1px);border-color:var(--gold);}
+.btn-danger:hover{background:#d6307a;color:white;border-color:#d6307a;}
+.item-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;}
+.item-card{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:.75rem;}
+.item-card h3{font-size:.88rem;margin:0 0 .55rem;color:var(--text);}
+.item-card .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.8rem;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:.72rem;min-width:0;}
+.summary-card span{display:block;font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.25rem;}
+.summary-card strong{display:block;font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-list{display:flex;flex-direction:column;gap:.55rem;}
+.rec{border:1px solid var(--border);background:var(--surface2);border-radius:14px;padding:.75rem;}
+.rec strong{display:block;color:var(--text);}
+.rec span{display:block;color:var(--text-dim);font-size:.8rem;margin-top:.18rem;line-height:1.45;}
+.progress-bar{height:10px;background:var(--surface3);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:.45rem;}
+.progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff4aa2,#7c3aed);width:0%;}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface2);}
+.opt-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:640px;}
+.opt-table th,.opt-table td{padding:.65rem .7rem;border-bottom:1px solid var(--border);text-align:left;}
+.opt-table th{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:.08em;}
+.opt-note{font-size:.8rem;color:var(--text-dim);line-height:1.55;margin-top:.75rem;}
+@media(max-width:980px){.opt-grid{grid-template-columns:1fr}.opt-panel{position:static}}
+@media(max-width:680px){.optimizer-shell{padding:.9rem .75rem 2rem}.input-grid,.item-grid,.summary-grid{grid-template-columns:1fr}.item-card .mini-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="calculators.html" class="header-back">&larr; All Calculators</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+<main class="optimizer-shell">
+<div class="crumb"><a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span><span>Governor Gear</span></div>
+<section class="opt-hero"><span class="eyebrow">FAM OPTIMIZER · GOVERNOR GEAR</span><h1>Governor Gear Optimizer</h1><p>Plan Satin, Gilded Threads, and Artisan's Vision spending across Infantry, Cavalry, and Archer gear.</p></section>
+
+<div id="govDataSyncStatus"></div>
+<div class="k1245-panel"><strong>K1245 calculator data sync</strong><p>This optimizer tries to sync public calculator data first, then uses FAM fallback estimates if live data is unavailable.</p></div>
+<div class="opt-grid">
+  <section class="opt-card">
+    <div class="card-title"><div><h2>Inventory</h2><p>Enter what you have, then select current and target gear levels.</p></div><span class="badge-soft">Optimizer</span></div>
+    <div class="input-grid">
+      <div class="field"><label>Satin</label><input class="input" id="satin" type="number" value="0" min="0" oninput="calcGov()"></div>
+      <div class="field"><label>Gilded Threads</label><input class="input" id="threads" type="number" value="0" min="0" oninput="calcGov()"></div>
+      <div class="field"><label>Artisan's Visions</label><input class="input" id="visions" type="number" value="0" min="0" oninput="calcGov()"></div>
+    </div>
+    <div class="tool-row">
+      <button class="btn-small" onclick="setAllTargets('Blue')">Set Targets Blue</button>
+      <button class="btn-small" onclick="setAllTargets('Purple')">Set Targets Purple</button>
+      <button class="btn-small" onclick="setAllTargets('Gold')">Set Targets Gold</button>
+      <button class="btn-small" onclick="saveGov()">Save</button>
+      <button class="btn-danger" onclick="resetGov()">Reset</button>
+    </div>
+    <div class="item-grid" id="gearItems"></div>
+  </section>
+  <aside class="opt-panel">
+    <div class="card-title"><div><h2>Live Summary</h2><p>Shows total cost, missing materials, and the best affordable next move.</p></div><span class="badge-soft">Live</span></div>
+    <div class="summary-grid">
+      <div class="summary-card"><span>Satin Needed</span><strong id="sumSatin">0</strong></div>
+      <div class="summary-card"><span>Threads Needed</span><strong id="sumThreads">0</strong></div>
+      <div class="summary-card"><span>Visions Needed</span><strong id="sumVisions">0</strong></div>
+      <div class="summary-card"><span>Missing</span><strong id="sumMissing">0</strong></div>
+    </div>
+    <div class="rec-list" id="govRecs"></div>
+    <div class="tool-row"><button class="btn-main" onclick="copyGov()">Copy Plan</button></div>
+    <p class="opt-note">This is a practical FAM planner with editable estimated costs. Use it for planning and inventory tracking; exact game values can be tuned later if your kingdom has updated tables.</p>
+  </aside>
+</div>
+
+<script>
+
+const levels = ['None','Green','Blue','Purple','Gold','Red'];
+let costs = {Green:{satin:45,threads:0,visions:0,power:1200},Blue:{satin:120,threads:12,visions:0,power:2800},Purple:{satin:360,threads:48,visions:1,power:7200},Gold:{satin:900,threads:130,visions:4,power:17000},Red:{satin:2200,threads:330,visions:12,power:42000}};
+const pieces = ['Infantry Coat','Infantry Pants','Cavalry Cap','Cavalry Watch','Archer Belt','Archer Weapon'];
+const storeKey = 'fam_gov_gear_v1';
+function num(id){return Math.max(0,parseInt(document.getElementById(id).value,10)||0)}
+function idx(l){return levels.indexOf(l)}
+function options(selected){return levels.map(l=>`<option ${l===selected?'selected':''}>${l}</option>`).join('')}
+function initGov(){
+  const saved = JSON.parse(localStorage.getItem(storeKey)||'null');
+  if(saved){['satin','threads','visions'].forEach(k=>{if(saved[k]!=null)document.getElementById(k).value=saved[k]})}
+  const data = saved?.items || {};
+  document.getElementById('gearItems').innerHTML = pieces.map((p)=>{
+    const cur=data[p]?.cur||'None', tar=data[p]?.tar||'Green';
+    return `<div class="item-card"><h3>${p}</h3><div class="mini-grid">
+      <div class="field"><label>Current</label><select class="select cur" data-piece="${p}" onchange="calcGov()">${options(cur)}</select></div>
+      <div class="field"><label>Target</label><select class="select tar" data-piece="${p}" onchange="calcGov()">${options(tar)}</select></div>
+    </div></div>`;
+  }).join('');
+  calcGov();
+}
+function calcCost(cur,tar){
+  let total={satin:0,threads:0,visions:0,power:0};
+  for(let i=idx(cur)+1;i<=idx(tar);i++){
+    const c=costs[levels[i]]||{};
+    total.satin+=c.satin||0; total.threads+=c.threads||0; total.visions+=c.visions||0; total.power+=c.power||0;
+  }
+  return total;
+}
+function collect(){
+  const items={}; let total={satin:0,threads:0,visions:0,power:0}; const upgrades=[];
+  pieces.forEach(p=>{
+    const cur=document.querySelector(`.cur[data-piece="${p}"]`).value;
+    const tar=document.querySelector(`.tar[data-piece="${p}"]`).value;
+    items[p]={cur,tar};
+    const c=idx(tar)>idx(cur)?calcCost(cur,tar):{satin:0,threads:0,visions:0,power:0};
+    total.satin+=c.satin; total.threads+=c.threads; total.visions+=c.visions; total.power+=c.power;
+    if(idx(cur)<levels.length-1){const next=levels[idx(cur)+1], nc=calcCost(cur,next);upgrades.push({p,cur,next,...nc});}
+  });
+  return {items,total,upgrades};
+}
+function calcGov(){
+  const {total,upgrades}=collect(); const inv={satin:num('satin'),threads:num('threads'),visions:num('visions')};
+  const miss={satin:Math.max(0,total.satin-inv.satin),threads:Math.max(0,total.threads-inv.threads),visions:Math.max(0,total.visions-inv.visions)};
+  sumSatin.textContent=total.satin.toLocaleString(); sumThreads.textContent=total.threads.toLocaleString(); sumVisions.textContent=total.visions.toLocaleString(); sumMissing.textContent=(miss.satin+miss.threads+miss.visions).toLocaleString();
+  const affordable=upgrades.filter(u=>u.satin<=inv.satin&&u.threads<=inv.threads&&u.visions<=inv.visions).sort((a,b)=>b.power-a.power)[0];
+  const bottleneck = Object.entries(miss).sort((a,b)=>b[1]-a[1])[0];
+  govRecs.innerHTML = `<div class="rec"><strong>Power planned: ${total.power.toLocaleString()}</strong><span>Total estimated power from selected targets.</span></div>
+    <div class="rec"><strong>${affordable?`Best affordable next: ${affordable.p} → ${affordable.next}`:'No affordable next upgrade yet'}</strong><span>${affordable?`Cost: ${affordable.satin} Satin, ${affordable.threads} Threads, ${affordable.visions} Visions.`:`Biggest missing material: ${bottleneck[0]} (${bottleneck[1].toLocaleString()}).`}</span></div>`;
+}
+function setAllTargets(level){document.querySelectorAll('.tar').forEach(s=>s.value=level);calcGov()}
+function saveGov(){const d=collect();localStorage.setItem(storeKey,JSON.stringify({satin:num('satin'),threads:num('threads'),visions:num('visions'),items:d.items}));govRecs.insertAdjacentHTML('afterbegin','<div class="rec"><strong>Saved locally.</strong><span>Your governor gear plan is stored in this browser.</span></div>')}
+function resetGov(){localStorage.removeItem(storeKey);location.reload()}
+function copyGov(){const d=collect();let t=`Governor Gear Plan\nSatin: ${d.total.satin}\nThreads: ${d.total.threads}\nVisions: ${d.total.visions}\nPower: ${d.total.power}\n`;navigator.clipboard?.writeText(t)}
+
+function syncGovData(){
+  if(!window.FAM_LIVE_SYNC){initGov();return;}
+  FAM_LIVE_SYNC.get('calculatorData',{cacheHours:24}).then(function(result){
+    FAM_LIVE_SYNC.injectSyncBadge('#govDataSyncStatus', result, 'Calculator Data Sync');
+    var g=result.payload && (result.payload.governorGear || (result.payload.data && result.payload.data.governorGear));
+    if(g && g.levels){ costs = g.levels; }
+    initGov();
+  }).catch(initGov);
+}
+syncGovData();
+
+</script>
+
+</main>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="fam-live-sync.js?v=1779083200"></script>
+</body>
+</html>

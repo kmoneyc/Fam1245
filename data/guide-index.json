@@ -1,0 +1,81 @@
+{
+  "source": "FAM local guide index",
+  "updatedAt": "2026-05-31T00:00:00Z",
+  "guides": [
+    {
+      "title": "Critical Rules",
+      "url": "index.html#critical",
+      "tags": [
+        "rally joiner",
+        "bear",
+        "garrison",
+        "widgets"
+      ],
+      "summary": "Must-know rules for joiners, Bear, garrisons, and widgets."
+    },
+    {
+      "title": "Bear Hunt",
+      "url": "index.html#bear",
+      "tags": [
+        "bear",
+        "rally",
+        "chenko",
+        "amaine",
+        "archers"
+      ],
+      "summary": "Bear rally leader and joiner setup, max archers, and lethality hero presets."
+    },
+    {
+      "title": "Pet Guide",
+      "url": "index.html#pets",
+      "tags": [
+        "pets",
+        "mighty bison",
+        "lion",
+        "skills"
+      ],
+      "summary": "Pet investment and skill timing guidance."
+    },
+    {
+      "title": "Gear Guide",
+      "url": "index.html#gear",
+      "tags": [
+        "gear",
+        "governor gear",
+        "charms"
+      ],
+      "summary": "Gear priorities and upgrade logic."
+    },
+    {
+      "title": "Calculator Hub",
+      "url": "calculators.html",
+      "tags": [
+        "calculator",
+        "tools",
+        "optimizer"
+      ],
+      "summary": "All FAM calculators and simulators."
+    },
+    {
+      "title": "Events & Packs Calendar",
+      "url": "event-calendar.html",
+      "tags": [
+        "events",
+        "packs",
+        "calendar",
+        "utc"
+      ],
+      "summary": "K1245 event and pack cycle tracker."
+    },
+    {
+      "title": "Transfer Planner",
+      "url": "transfer-planner.html",
+      "tags": [
+        "transfer",
+        "planner",
+        "kingdom"
+      ],
+      "summary": "K1245 transfer candidate planning."
+    }
+  ]
+}

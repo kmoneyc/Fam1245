@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Alliance Transfer Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="calc-style.css?v=1779083200">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="calc-top-nav" aria-label="FAM quick links">
+      <a href="index.html">Manual</a>
+      <a href="calculators.html">Calculators</a>
+      <a href="event-calendar.html">Events</a>
+      <a href="gift-codes.html">Gift Codes</a>
+      <a href="transfer-planner.html">Transfer</a>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>☾</span><span data-theme-label>Light</span></button>
+      <a href="index.html" class="header-back">&larr; Back to Manual</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+
+<div class="page-container">
+  <div class="crumb"><a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span><span>Alliance Transfer Planner</span></div>
+
+  <section class="hub-hero tool-hero">
+    <div>
+      <span class="eyebrow">FAM ALLIANCE &middot; LOCAL PLANNER</span>
+      <h1>Transfer Planner</h1>
+      <p>Track incoming players, power, invite type, status, and notes. Everything saves locally in your browser; export JSON before clearing cache or switching devices.</p>
+      <div class="hero-actions"><button class="action-pill" type="button" id="copyTransferSummary">Copy Summary</button><button class="action-pill secondary" type="button" id="exportTransferJson">Export JSON</button></div>
+    </div>
+    <div class="hub-status-card"><span>TOTAL PLAYERS</span><strong id="transferCount">0</strong><p id="transferPower">0 total power</p></div>
+  </section>
+
+  <div id="transferSyncStatus"></div>
+  <div class="k1245-panel" id="k1245TransferPanel">
+    <strong>K1245 transfer references</strong>
+    <p>Live public transfer history is attempted for Kingdom 1245. Use it only as reference; always verify current power caps, special invites, and rules inside the live transfer event.</p>
+    <ul id="transferHistoryList"><li>Loading K1245 transfer references...</li></ul>
+  </div>
+
+  <div class="metric-grid compact-metrics">
+    <div class="metric-card"><span>Ordinary</span><strong id="ordinaryCount">0</strong></div>
+    <div class="metric-card"><span>Special</span><strong id="specialCount">0</strong></div>
+    <div class="metric-card"><span>Ready</span><strong id="readyCount">0</strong></div>
+    <div class="metric-card"><span>Transferred</span><strong id="doneCount">0</strong></div>
+  </div>
+
+  <div class="tool-layout wide-left">
+    <section class="calc-card">
+      <div class="calc-card-header"><h2>Add transfer candidate</h2><span class="badge">Roster</span></div>
+      <div class="calc-body">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Player Name</label><input id="tpName" class="form-input" placeholder="Name"></div>
+          <div class="form-group"><label class="form-label">Power</label><input id="tpPower" class="form-input" type="number" min="0" placeholder="150000000"></div>
+          <div class="form-group"><label class="form-label">Current Kingdom</label><input id="tpKingdom" class="form-input" placeholder="K####"></div>
+          <div class="form-group"><label class="form-label">Role</label><select id="tpRole" class="form-select"><option>Rally Lead</option><option>Garrison Lead</option><option>Fighter</option><option>Support</option><option>Farmer</option><option>Alt</option></select></div>
+          <div class="form-group"><label class="form-label">Invite Type</label><select id="tpInvite" class="form-select"><option>Ordinary</option><option>Special</option><option>Waiting</option></select></div>
+          <div class="form-group"><label class="form-label">Status</label><select id="tpStatus" class="form-select"><option>Interested</option><option>Ready</option><option>Invited</option><option>Transferred</option><option>Hold</option></select></div>
+          <div class="form-group full-span"><label class="form-label">Notes</label><input id="tpNotes" class="form-input" placeholder="Timezone, troops, availability, NAP note..."></div>
+        </div>
+        <button class="action-btn" id="addTransferPlayer" type="button">Add Player</button>
+      </div>
+    </section>
+
+    <aside class="calc-card">
+      <div class="calc-card-header"><h2>Controls</h2><span class="badge">Local</span></div>
+      <div class="calc-body stack-actions">
+        <label class="hub-search planner-search"><span>🔎</span><input id="transferSearch" type="search" placeholder="Search name, kingdom, role..."></label>
+        <select id="transferFilter" class="form-select"><option value="all">All statuses</option><option>Interested</option><option>Ready</option><option>Invited</option><option>Transferred</option><option>Hold</option></select>
+        <label class="btn-small file-label">Import JSON<input id="importTransferJson" type="file" accept="application/json" hidden></label>
+        <button class="btn-small" type="button" id="clearTransferred">Clear Transferred</button>
+        <button class="btn-small" type="button" id="clearTransfers">Clear All</button>
+        <p class="muted-copy">Tip: use Export JSON before major changes. This planner does not send data anywhere.</p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="section-label">Transfer roster</div>
+  <div class="data-table-wrap planner-table-wrap">
+    <table class="data-table planner-table"><thead><tr><th>Player</th><th>Power</th><th>Kingdom</th><th>Role</th><th>Invite</th><th>Status</th><th>Notes</th><th></th></tr></thead><tbody id="transferRows"></tbody></table>
+  </div>
+</div>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+<script src="theme-core.js?v=1779083200"></script>
+<script src="venator-motion.js?v=1779083200"></script>
+<script src="fam-live-sync.js?v=1779083200"></script>
+<script>
+(function(){
+  var KEY='fam_transfer_planner_v1';
+  var state=[];
+  function $(id){return document.getElementById(id);} 
+  function fmt(n){return Number(n||0).toLocaleString();}
+  function load(){try{state=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){state=[];}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function copy(text){if(navigator.clipboard) navigator.clipboard.writeText(text).catch(function(){}); else {var t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();}}
+  function render(){
+    var q=($('transferSearch').value||'').toLowerCase(); var filter=$('transferFilter').value;
+    var rows=state.filter(function(p){var text=(p.name+' '+p.kingdom+' '+p.role+' '+p.invite+' '+p.status+' '+p.notes).toLowerCase(); return (!q||text.indexOf(q)>-1)&&(filter==='all'||p.status===filter);});
+    rows.sort(function(a,b){return Number(b.power||0)-Number(a.power||0);});
+    $('transferRows').innerHTML=rows.length?rows.map(function(p){var i=state.indexOf(p);return '<tr><td class="accent">'+escapeHtml(p.name)+'</td><td>'+fmt(p.power)+'</td><td>'+escapeHtml(p.kingdom)+'</td><td>'+escapeHtml(p.role)+'</td><td><select class="mini-select" data-field="invite" data-index="'+i+'"><option '+sel(p.invite,'Ordinary')+'>Ordinary</option><option '+sel(p.invite,'Special')+'>Special</option><option '+sel(p.invite,'Waiting')+'>Waiting</option></select></td><td><select class="mini-select" data-field="status" data-index="'+i+'"><option '+sel(p.status,'Interested')+'>Interested</option><option '+sel(p.status,'Ready')+'>Ready</option><option '+sel(p.status,'Invited')+'>Invited</option><option '+sel(p.status,'Transferred')+'>Transferred</option><option '+sel(p.status,'Hold')+'>Hold</option></select></td><td>'+escapeHtml(p.notes)+'</td><td><button class="btn-small" data-remove="'+i+'">Remove</button></td></tr>';}).join(''):'<tr><td colspan="8" class="muted">No players match this view.</td></tr>';
+    var total=state.reduce(function(s,p){return s+Number(p.power||0);},0);
+    $('transferCount').textContent=state.length; $('transferPower').textContent=fmt(total)+' total power';
+    $('ordinaryCount').textContent=state.filter(function(p){return p.invite==='Ordinary';}).length;
+    $('specialCount').textContent=state.filter(function(p){return p.invite==='Special';}).length;
+    $('readyCount').textContent=state.filter(function(p){return p.status==='Ready';}).length;
+    $('doneCount').textContent=state.filter(function(p){return p.status==='Transferred';}).length;
+  }
+  function sel(a,b){return a===b?'selected':'';}
+  function add(){var name=$('tpName').value.trim(); if(!name) return; state.push({name:name,power:Number($('tpPower').value||0),kingdom:$('tpKingdom').value.trim(),role:$('tpRole').value,invite:$('tpInvite').value,status:$('tpStatus').value,notes:$('tpNotes').value.trim(),created:new Date().toISOString()}); ['tpName','tpPower','tpKingdom','tpNotes'].forEach(function(id){$(id).value='';}); save(); render();}
+  $('addTransferPlayer').addEventListener('click',add);
+  $('transferSearch').addEventListener('input',render); $('transferFilter').addEventListener('change',render);
+  document.addEventListener('change',function(e){var el=e.target.closest('[data-field]'); if(!el) return; var i=Number(el.getAttribute('data-index')); var field=el.getAttribute('data-field'); if(state[i]){state[i][field]=el.value; save(); render();}});
+  document.addEventListener('click',function(e){var rm=e.target.closest('[data-remove]'); if(rm){state.splice(Number(rm.getAttribute('data-remove')),1);save();render();}});
+  $('copyTransferSummary').addEventListener('click',function(){var lines=['FAM Transfer Planner', 'Players: '+state.length, 'Total power: '+fmt(state.reduce(function(s,p){return s+Number(p.power||0);},0)), '']; state.forEach(function(p){lines.push('- '+p.name+' | '+fmt(p.power)+' | '+p.kingdom+' | '+p.role+' | '+p.invite+' | '+p.status+(p.notes?' | '+p.notes:''));}); copy(lines.join('\n')); this.textContent='Copied'; var btn=this; setTimeout(function(){btn.textContent='Copy Summary';},1200);});
+  $('exportTransferJson').addEventListener('click',function(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='fam-transfer-planner.json'; a.click(); URL.revokeObjectURL(a.href);});
+  $('importTransferJson').addEventListener('change',function(){var file=this.files&&this.files[0]; if(!file) return; var r=new FileReader(); r.onload=function(){try{var data=JSON.parse(r.result); if(Array.isArray(data)){state=data; save(); render();}}catch(e){alert('Import failed: invalid JSON');}}; r.readAsText(file);});
+  $('clearTransferred').addEventListener('click',function(){state=state.filter(function(p){return p.status!=='Transferred';});save();render();});
+  $('clearTransfers').addEventListener('click',function(){if(confirm('Clear all saved transfer players on this browser?')){state=[];save();render();}});
+
+  function syncTransferHistory(){
+    if(!window.FAM_LIVE_SYNC) return;
+    FAM_LIVE_SYNC.get('transferHistory',{cacheHours:24}).then(function(result){
+      FAM_LIVE_SYNC.injectSyncBadge('#transferSyncStatus', result, 'K1245 Transfer History Sync');
+      var payload=result.payload||{};
+      var list=$('transferHistoryList');
+      if(!list) return;
+      var history=Array.isArray(payload.history)?payload.history:[];
+      var notes=Array.isArray(payload.notes)?payload.notes:[];
+      if(history.length){
+        list.innerHTML=history.slice(0,6).map(function(item){
+          var label=item.title||item.name||item.event||item.date||'Transfer reference';
+          var detail=item.powerCap||item.cap||item.group||item.note||item.description||'Check current transfer event rules in game.';
+          return '<li><strong>'+label+'</strong> — '+detail+'</li>';
+        }).join('');
+      }else{
+        list.innerHTML=(notes.length?notes:['No public K1245 transfer history returned yet. Keep using the local planner and verify caps in-game.']).map(function(n){return '<li>'+n+'</li>';}).join('');
+      }
+    });
+  }
+
+  load(); render(); syncTransferHistory();
+})();
+</script>
+</body>
+</html>
