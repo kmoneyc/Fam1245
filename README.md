@@ -422,3 +422,11 @@ To swap the hero image: replace `hero.webp` and `hero.jpg` (keep same filenames)
 - Added static JSON database docs under `db/` and setup instructions in `GITHUB_PAGES_SETUP.md`.
 - Updated `fam-live-sync.js` to read local `data/*.json` files first and cache them in `localStorage`.
 - Added `.nojekyll` for GitHub Pages.
+
+
+## v4.54 Events calendar Kingshot snapshot
+- Updated Events & Packs Calendar with the visible public Kingshot Week 1 schedule.
+- Corrected the default rotation anchor so Week 1 Monday is 2026-04-27 UTC and Saturday Week 3 remains 2026-05-16 UTC.
+- Added daily pack notes: Pet Chests and Gear Enhancement.
+- Added special note: Governor Stamina Pack appears for 3 days during Cesares Fury.
+- Added editable Weeks 2–4 fallback data in `data/events.json`.

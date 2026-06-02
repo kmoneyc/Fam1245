@@ -1,11 +1,11 @@
-// FAM Events & Packs Calendar v1.1
-// Original FAM implementation inspired by public Kingshot calendar structure.
-// Default baseline: Saturday, Week 3 on 2026-05-16 UTC.
+// FAM Events & Packs Calendar v1.2
+// Updated from public Kingshot calendar visible snapshot plus FAM K1245 editable fallback data.
+// Default baseline: Monday, Week 1 on 2026-04-27 UTC; equivalent to Saturday, Week 3 on 2026-05-16 UTC.
 (function(){
   var MS_DAY = 86400000;
   var STORAGE_ANCHOR = 'fam_event_anchor_utc';
   var STORAGE_VERSION = 'fam_event_calendar_version';
-  var CALENDAR_VERSION = '2026-05-16-week3-saturday-v2';
+  var CALENDAR_VERSION = '2026-06-01-kingshot-calendar-snapshot-v3';
   var DEFAULT_ANCHOR = '2026-04-27T00:00:00Z';
   var dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   var shortDayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -24,57 +24,263 @@
   }
 
   var dailyPacks = [
-    {name:'Pet Chests', type:'Daily', note:'Listed as daily available on Kingshot calendar.'},
-    {name:'Gear Enhancement', type:'Daily', note:'Listed as daily available on Kingshot calendar.'}
+    {name:'Pet Chests', type:'Daily available', note:'Listed on the public Kingshot calendar as daily available.'},
+    {name:'Gear Enhancement', type:'Daily available', note:'Listed on the public Kingshot calendar as daily available.'}
+  ];
+
+  var specialNotes = [
+    'Governor Stamina Pack: available for 3 days during Cesares Fury.',
+    'Does not include Custom Pet Chests or Enhance Gear unless those packs are explicitly listed for the day.',
+    'Use the week/day selector if your kingdom is offset from the default K1245 anchor.'
   ];
 
   var calendarWeeks = [
     {
-      name:'Week 1', tone:'pink', focus:'Alliance battles + event packs', verified:true,
+      name:'Week 1', tone:'pink', focus:'Public Kingshot visible snapshot — alliance events + pack windows', verified:true,
+      source:'Kingshot.net visible calendar snapshot',
       days:[
-        {event:'Alliance Championship', category:'Alliance', type:'Event', icon:'🏆', packs:[], prep:'Set lanes, double-check strongest teams, and save heals for active fights.'},
-        {event:'Alliance Brawl', category:'Alliance', type:'Event', icon:'🥊', packs:[], prep:'Finish daily brawl tasks early and coordinate alliance points.'},
-        {event:'Swordland Showdown', category:'PvP', type:'Event', icon:'⚔️', packs:[], prep:'Review assignments, teleport discipline, building priority, and re-entry timing.'},
-        {event:'Armament Competition 1', category:'Growth', type:'Event', icon:'🛡️', packs:[], prep:'Spend only the matching gear/armament items for points.'},
-        {event:'Champagne Fair', category:'Pack/Event', type:'Pack', icon:'🍾', packs:[{name:'Champagne Fair', type:'Event pack', note:'Monthly fair-style pack/event window.'}], prep:'Check value before buying. Usually not needed for F2P planning.'},
-        {event:'Custom Selection', category:'Pack', type:'Pack', icon:'🎁', packs:[{name:'Custom Selection', type:'Event pack', note:'Selection pack window shown on the calendar.'}], prep:'Choose items tied to your current bottleneck, not random power.'},
-        {event:'Combat Medic', category:'Pack', type:'Pack', icon:'⛑️', packs:[{name:'Combat Medic', type:'Event pack', note:'Healing/combat support pack window shown on the calendar.'}], prep:'Useful only when healing pressure is high; otherwise save spend.'}
+        {
+          event:'Alliance Championship',
+          category:'Alliance',
+          type:'Event',
+          icon:'🏆',
+          packs:[],
+          prep:'Set teams, lanes, rally/garrison assignments, and healing rules before reset.'
+        },
+        {
+          event:'Alliance Brawl',
+          category:'Alliance',
+          type:'Event',
+          icon:'🥊',
+          packs:[],
+          prep:'Push alliance brawl objectives early and avoid wasting attempts after reset.'
+        },
+        {
+          event:'Swordland Showdown',
+          category:'PvP',
+          type:'Event',
+          icon:'⚔️',
+          packs:[],
+          prep:'Confirm teleport discipline, building priority, rally leads, and re-entry timing.'
+        },
+        {
+          event:'Armament Competition 1',
+          category:'Growth',
+          type:'Event',
+          icon:'🛡️',
+          packs:[],
+          prep:'Spend only the matching armament/gear items while the scoring window is active.'
+        },
+        {
+          event:'Champagne Fair',
+          category:'Pack/Event',
+          type:'Pack',
+          icon:'🍾',
+          packs:[{name:'Champagne Fair', type:'Event pack', note:'Shown on the public calendar.'}],
+          prep:'Check value before buying; prioritize bottlenecks instead of random power.'
+        },
+        {
+          event:'Custom Selection',
+          category:'Pack',
+          type:'Pack',
+          icon:'🎁',
+          packs:[{name:'Custom Selection', type:'Event pack', note:'Shown on the public calendar.'}],
+          prep:'Pick items tied to your current bottleneck.'
+        },
+        {
+          event:'Combat Medic',
+          category:'Pack',
+          type:'Pack',
+          icon:'⛑️',
+          packs:[{name:'Combat Medic', type:'Event pack', note:'Shown on the public calendar.'}],
+          prep:'Best value only during heavy healing/battle windows.'
+        }
       ]
     },
     {
-      name:'Week 2', tone:'violet', focus:'Sanctuary + armament/officer rotation', verified:false,
+      name:'Week 2', tone:'violet', focus:'Sanctuary + armament/officer rotation — FAM editable fallback', verified:false,
+      source:'FAM editable fallback; update data/events.json if Kingshot changes this week',
       days:[
-        {event:'Sanctuary Battle', category:'Alliance', type:'Event', icon:'🏰', packs:[], prep:'Confirm rally leads, garrison leads, and battle time with the alliance.'},
-        {event:'Desert Trial / Champion\'s Way', category:'PvE', type:'Event', icon:'🐺', packs:[{name:'Governor Stamina Pack', type:'Conditional', note:'Available for 3 days during Cesares Fury when that event is active.'}], prep:'Use stamina/event attempts after daily reset; do not waste refreshes early.'},
-        {event:'Officer Project 1', category:'Growth', type:'Event', icon:'📜', packs:[], prep:'Use correct officer/charm items only while the event is scoring.'},
-        {event:'Armament Competition 2', category:'Growth', type:'Event', icon:'🛡️', packs:[], prep:'Hold armament upgrades for scoring windows instead of spending early.'},
-        {event:'Golden Glaives', category:'Growth', type:'Event', icon:'⚜️', packs:[], prep:'Check milestone rewards before spending rare items.'},
-        {event:'Fishing Tournament', category:'Event', type:'Event', icon:'🎣', packs:[], prep:'Use attempts consistently and claim milestone rewards before reset.'},
-        {event:'Officer Project 2', category:'Growth', type:'Event', icon:'📜', packs:[], prep:'Save charm/gear project materials for the active scoring variant.'}
+        {
+          event:'Sanctuary Battle',
+          category:'Alliance',
+          type:'Event',
+          icon:'🏰',
+          packs:[],
+          prep:'Confirm rally leads, garrison leads, timers, and lane assignments.'
+        },
+        {
+          event:'Cesares Fury',
+          category:'PvE',
+          type:'Event',
+          icon:'🐺',
+          packs:[{name:'Governor Stamina Pack', type:'Special 3-day pack', note:'Special note from the public calendar.'}],
+          prep:'Use stamina after reset and coordinate alliance rally participation.'
+        },
+        {
+          event:'Officer Project 1',
+          category:'Growth',
+          type:'Event',
+          icon:'📜',
+          packs:[],
+          prep:'Hold officer/charm/project materials until this scoring window is active.'
+        },
+        {
+          event:'Armament Competition 2',
+          category:'Growth',
+          type:'Event',
+          icon:'🛡️',
+          packs:[],
+          prep:'Use matching armament upgrades only during the correct scoring variant.'
+        },
+        {
+          event:'Golden Glaives',
+          category:'Growth',
+          type:'Event',
+          icon:'⚜️',
+          packs:[],
+          prep:'Check milestone value before spending rare items.'
+        },
+        {
+          event:'Fishing Tournament',
+          category:'Event',
+          type:'Event',
+          icon:'🎣',
+          packs:[],
+          prep:'Use attempts consistently and claim rewards before reset.'
+        },
+        {
+          event:'Officer Project 2',
+          category:'Growth',
+          type:'Event',
+          icon:'📜',
+          packs:[],
+          prep:'Save project/charm materials for the matching score day.'
+        }
       ]
     },
     {
-      name:'Week 3', tone:'rose', focus:'Repeat alliance pressure + pack windows', verified:false,
+      name:'Week 3', tone:'rose', focus:'Alliance pressure + pets/pack windows — FAM editable fallback', verified:false,
+      source:'FAM editable fallback; default K1245 anchor was Saturday Week 3 on 2026-05-16 UTC',
       days:[
-        {event:'Alliance Championship', category:'Alliance', type:'Event', icon:'🏆', packs:[], prep:'Refresh teams and check that all assigned members are registered.'},
-        {event:'Alliance Brawl', category:'Alliance', type:'Event', icon:'🥊', packs:[], prep:'Push alliance brawl objectives and avoid wasted daily scoring.'},
-        {event:'Swordland Showdown', category:'PvP', type:'Event', icon:'⚔️', packs:[], prep:'Set roles before the fight starts; late assignments lose buildings.'},
-        {event:'Armament Competition 1', category:'Growth', type:'Event', icon:'🛡️', packs:[], prep:'Score armament upgrades here if your variant is active.'},
-        {event:'Beast Whisperer', category:'Pets', type:'Event', icon:'🦊', packs:[], prep:'Save pet growth items and beast-related pushes for scoring.'},
-        {event:'Custom Selection', category:'Pack', type:'Pack', icon:'🎁', packs:[{name:'Custom Selection', type:'Event pack', note:'Selection pack window.'}], prep:'Pick bottleneck items only.'},
-        {event:'Combat Medic', category:'Pack', type:'Pack', icon:'⛑️', packs:[{name:'Combat Medic', type:'Event pack', note:'Healing/combat support pack window.'}], prep:'Better during heavy battle weeks than quiet growth weeks.'}
+        {
+          event:'Alliance Championship',
+          category:'Alliance',
+          type:'Event',
+          icon:'🏆',
+          packs:[],
+          prep:'Refresh teams and make sure all assigned members are registered.'
+        },
+        {
+          event:'Alliance Brawl',
+          category:'Alliance',
+          type:'Event',
+          icon:'🥊',
+          packs:[],
+          prep:'Push alliance objectives and finish daily brawl tasks early.'
+        },
+        {
+          event:'Swordland Showdown',
+          category:'PvP',
+          type:'Event',
+          icon:'⚔️',
+          packs:[],
+          prep:'Set roles before battle starts; late assignments lose buildings.'
+        },
+        {
+          event:'Armament Competition 1',
+          category:'Growth',
+          type:'Event',
+          icon:'🛡️',
+          packs:[],
+          prep:'Score armament upgrades only if this variant is active.'
+        },
+        {
+          event:'Beast Whisperer',
+          category:'Pets',
+          type:'Event',
+          icon:'🦊',
+          packs:[{name:'Pet Chests', type:'Daily available', note:'Public calendar daily pack.'}],
+          prep:'Save pet marks and beast materials for scoring.'
+        },
+        {
+          event:'Custom Selection',
+          category:'Pack',
+          type:'Pack',
+          icon:'🎁',
+          packs:[{name:'Custom Selection', type:'Event pack', note:'Selection pack window.'}],
+          prep:'Choose bottleneck items only.'
+        },
+        {
+          event:'Combat Medic',
+          category:'Pack',
+          type:'Pack',
+          icon:'⛑️',
+          packs:[{name:'Combat Medic', type:'Event pack', note:'Healing/combat support pack window.'}],
+          prep:'Better during battle weeks than quiet growth weeks.'
+        }
       ]
     },
     {
-      name:'Week 4', tone:'dark', focus:'KvK / all-out war planning', verified:false,
+      name:'Week 4', tone:'dark', focus:'KvK / Kingdom of Power planning — FAM editable fallback', verified:false,
+      source:'FAM editable fallback; verify in-game before KvK spend',
       days:[
-        {event:'Kingdom of Power Prep I — City Construction', category:'KvK', type:'Event', icon:'👑', packs:[], prep:'Use construction speedups/upgrades only if this prep day is active.'},
-        {event:'Kingdom of Power Prep II — Research', category:'KvK', type:'Event', icon:'📚', packs:[], prep:'Save research speedups and large tech completions for this day.'},
-        {event:'Kingdom of Power Prep III — Hero Development', category:'KvK', type:'Event', icon:'⭐', packs:[], prep:'Use hero shards, recruitment, and hero XP when this day scores.'},
-        {event:'Kingdom of Power Prep IV — Troop Training', category:'KvK', type:'Event', icon:'🪖', packs:[], prep:'Train/promote troops with speedups during the scoring window.'},
-        {event:'Kingdom of Power Prep V — Pets / Beast', category:'KvK', type:'Event', icon:'🐾', packs:[], prep:'Save pet marks and beast materials for this scoring day.'},
-        {event:'Kingdom of Power Battle / All Out', category:'PvP', type:'Event', icon:'🔥', packs:[{name:'Combat Medic', type:'Battle support', note:'May appear around heavy combat windows.'}], prep:'Shield before battle opens, empty resources, and keep hospital space ready.'},
-        {event:'Recovery + Reward Claim', category:'Cooldown', type:'Planning', icon:'📦', packs:[], prep:'Claim rewards, heal safely, rebuild resources, and prep for next rotation.'}
+        {
+          event:'Kingdom of Power Prep I — City Construction',
+          category:'KvK',
+          type:'Event',
+          icon:'👑',
+          packs:[],
+          prep:'Use construction speedups/upgrades only if this prep day is active.'
+        },
+        {
+          event:'Kingdom of Power Prep II — Research',
+          category:'KvK',
+          type:'Event',
+          icon:'📚',
+          packs:[],
+          prep:'Save research speedups and big tech completions for this day.'
+        },
+        {
+          event:'Kingdom of Power Prep III — Hero Development',
+          category:'KvK',
+          type:'Event',
+          icon:'⭐',
+          packs:[],
+          prep:'Use hero shards, recruitment, and hero XP when this day scores.'
+        },
+        {
+          event:'Kingdom of Power Prep IV — Troop Training',
+          category:'KvK',
+          type:'Event',
+          icon:'🪖',
+          packs:[],
+          prep:'Train/promote troops with speedups during this scoring window.'
+        },
+        {
+          event:'Kingdom of Power Prep V — Pets / Beast',
+          category:'KvK',
+          type:'Event',
+          icon:'🐾',
+          packs:[{name:'Pet Chests', type:'Daily available', note:'Public calendar daily pack.'}],
+          prep:'Save pet marks and beast materials for this scoring day.'
+        },
+        {
+          event:'Kingdom of Power Battle / All Out',
+          category:'PvP',
+          type:'Event',
+          icon:'🔥',
+          packs:[{name:'Combat Medic', type:'Battle support', note:'May be useful around heavy combat windows.'}],
+          prep:'Shield before battle opens, empty resources, and keep hospital space ready.'
+        },
+        {
+          event:'Recovery + Reward Claim',
+          category:'Cooldown',
+          type:'Planning',
+          icon:'📦',
+          packs:[],
+          prep:'Claim rewards, heal safely, rebuild resources, and prep for next rotation.'
+        }
       ]
     }
   ];
@@ -145,7 +351,7 @@
   function htmlEscape(str){ return String(str).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function renderPackList(target, packs){
     if(!target) return;
-    target.innerHTML = packs.map(function(p){ return '<li><strong>'+htmlEscape(p.name)+'</strong><span>'+htmlEscape(p.type)+'</span></li>'; }).join('');
+    target.innerHTML = packs.map(function(p){ return '<li><strong>'+htmlEscape(p.name)+'</strong><span>'+htmlEscape(p.type)+(p.note ? ' · '+htmlEscape(p.note) : '')+'</span></li>'; }).join('');
   }
   function renderTodayWidgets(){
     var state = getState();
@@ -159,7 +365,7 @@
     var clock = el('todayUtcNow'); if(clock) clock.textContent = utcClock(state.now);
     var next = el('todayNextEvent'); if(next) next.textContent = 'Next: '+state.nextDayName+' — '+state.nextDay.event;
     var week = el('todayWeekPill'); if(week) week.textContent = state.week.name;
-    var source = el('todaySourceNote'); if(source) source.textContent = 'Default tracker: Saturday, Week 3 on May 16, 2026 UTC. Use Events & Packs to recalibrate for your kingdom.';
+    var source = el('todaySourceNote'); if(source) source.textContent = 'Default tracker: Week 1 Monday on Apr 27, 2026 UTC, matching Saturday Week 3 on May 16, 2026 UTC. Use Events & Packs to recalibrate if K1245 is offset.';
     renderPackList(el('todayPacksList'), packs);
   }
   function renderFullCalendar(){
@@ -254,6 +460,6 @@
     renderFullCalendar();
     setInterval(function(){ renderTodayWidgets(); renderFullCalendar(); }, 1000);
   }
-  window.FAMEventCalendar = {weeks:calendarWeeks, dailyPacks:dailyPacks, getState:getState, setAnchorForCurrentPosition:setAnchorForCurrentPosition, resetAnchor:resetAnchor, renderTodayWidgets:renderTodayWidgets, renderFullCalendar:renderFullCalendar};
+  window.FAMEventCalendar = {weeks:calendarWeeks, dailyPacks:dailyPacks, specialNotes:specialNotes, getState:getState, setAnchorForCurrentPosition:setAnchorForCurrentPosition, resetAnchor:resetAnchor, renderTodayWidgets:renderTodayWidgets, renderFullCalendar:renderFullCalendar};
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ init(); syncLiveCalendar(); }); else { init(); syncLiveCalendar(); }
 })();

@@ -1,32 +1,32 @@
 {
   "host": "github-pages",
-  "updatedAt": "2026-06-01T01:35:18.800Z",
+  "updatedAt": "2026-06-01T00:00:00Z",
   "database": "Static JSON files in /data",
-  "browserCache": "localStorage cache via fam-live-sync.js",
+  "calendarUpdate": "v4.54 Kingshot visible Week 1 snapshot + editable fallback weeks",
   "files": [
-    {
-      "file": "data/gift-codes.json",
-      "bytes": 946
-    },
-    {
-      "file": "data/events.json",
-      "bytes": 1017
-    },
     {
       "file": "data/calculator-data.json",
       "bytes": 685
-    },
-    {
-      "file": "data/transfer-history.json",
-      "bytes": 459
     },
     {
       "file": "data/changelog.json",
       "bytes": 477
     },
     {
+      "file": "data/events.json",
+      "bytes": 7219
+    },
+    {
+      "file": "data/gift-codes.json",
+      "bytes": 946
+    },
+    {
       "file": "data/guide-index.json",
       "bytes": 1914
+    },
+    {
+      "file": "data/transfer-history.json",
+      "bytes": 459
     }
   ]
 }

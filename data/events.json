@@ -1,46 +1,285 @@
 {
-  "source": "FAM K1245 fallback rotation",
-  "updatedAt": "2026-05-31T00:00:00Z",
+  "source": "FAM K1245 editable static JSON — Kingshot.net visible Week 1 snapshot + FAM fallback for hidden weeks",
+  "sourceUrl": "https://kingshot.net/calendar",
+  "updatedAt": "2026-06-01T00:00:00Z",
   "kingdom": 1245,
   "timezone": "UTC",
   "baseline": {
-    "week": 3,
-    "day": "Saturday",
-    "date": "2026-05-16",
-    "note": "K1245 fallback anchor."
+    "week": 1,
+    "day": "Monday",
+    "date": "2026-04-27",
+    "equivalent": "Saturday Week 3 on 2026-05-16 UTC",
+    "note": "Default anchor used by event-calendar.js. Use the page selector to recalibrate if the kingdom is offset."
   },
   "cycleWeeks": 4,
-  "packsByDay": {
-    "Monday": [
-      "Alliance Championship",
-      "Daily value packs"
-    ],
-    "Tuesday": [
-      "Growth / speedup packs",
-      "Daily value packs"
-    ],
-    "Wednesday": [
-      "Officer / armament packs",
-      "Daily value packs"
-    ],
-    "Thursday": [
-      "Hero / pet / gear value packs",
-      "Daily value packs"
-    ],
-    "Friday": [
-      "KvK prep / battle packs",
-      "Daily value packs"
-    ],
-    "Saturday": [
-      "Event push packs",
-      "Daily value packs"
-    ],
-    "Sunday": [
-      "Recovery + reward claim",
-      "Daily value packs"
-    ]
-  },
+  "dayNames": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+  ],
+  "dailyAvailable": [
+    {
+      "name": "Pet Chests",
+      "note": "Listed as daily available on Kingshot.net calendar."
+    },
+    {
+      "name": "Gear Enhancement",
+      "note": "Listed as daily available on Kingshot.net calendar."
+    }
+  ],
+  "specialNotes": [
+    "Governor Stamina Pack available for 3 days during Cesares Fury.",
+    "Does not include Custom Pet Chests or Enhance Gear unless those packs are explicitly listed for the day."
+  ],
+  "weeks": [
+    {
+      "name": "Week 1",
+      "verified": true,
+      "source": "Kingshot.net visible calendar snapshot",
+      "days": [
+        {
+          "day": "Monday",
+          "event": "Alliance Championship",
+          "category": "Alliance",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Tuesday",
+          "event": "Alliance Brawl",
+          "category": "Alliance",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Wednesday",
+          "event": "Swordland Showdown",
+          "category": "PvP",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Thursday",
+          "event": "Armament Competition 1",
+          "category": "Growth",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Friday",
+          "event": "Champagne Fair",
+          "category": "Pack/Event",
+          "type": "Pack",
+          "packs": [
+            "Champagne Fair"
+          ]
+        },
+        {
+          "day": "Saturday",
+          "event": "Custom Selection",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Custom Selection"
+          ]
+        },
+        {
+          "day": "Sunday",
+          "event": "Combat Medic",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Combat Medic"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Week 2",
+      "verified": false,
+      "source": "FAM editable fallback; verify in game/Kingshot if hidden weeks change",
+      "days": [
+        {
+          "day": "Monday",
+          "event": "Sanctuary Battle",
+          "category": "Alliance",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Tuesday",
+          "event": "Cesares Fury",
+          "category": "PvE",
+          "type": "Event",
+          "packs": [
+            "Governor Stamina Pack"
+          ]
+        },
+        {
+          "day": "Wednesday",
+          "event": "Officer Project 1",
+          "category": "Growth",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Thursday",
+          "event": "Armament Competition 2",
+          "category": "Growth",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Friday",
+          "event": "Golden Glaives",
+          "category": "Growth",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Saturday",
+          "event": "Fishing Tournament",
+          "category": "Event",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Sunday",
+          "event": "Officer Project 2",
+          "category": "Growth",
+          "type": "Event",
+          "packs": []
+        }
+      ]
+    },
+    {
+      "name": "Week 3",
+      "verified": false,
+      "source": "FAM editable fallback; default K1245 anchor was Saturday Week 3 on 2026-05-16 UTC",
+      "days": [
+        {
+          "day": "Monday",
+          "event": "Alliance Championship",
+          "category": "Alliance",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Tuesday",
+          "event": "Alliance Brawl",
+          "category": "Alliance",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Wednesday",
+          "event": "Swordland Showdown",
+          "category": "PvP",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Thursday",
+          "event": "Armament Competition 1",
+          "category": "Growth",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Friday",
+          "event": "Beast Whisperer",
+          "category": "Pets",
+          "type": "Event",
+          "packs": [
+            "Pet Chests"
+          ]
+        },
+        {
+          "day": "Saturday",
+          "event": "Custom Selection",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Custom Selection"
+          ]
+        },
+        {
+          "day": "Sunday",
+          "event": "Combat Medic",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Combat Medic"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Week 4",
+      "verified": false,
+      "source": "FAM editable fallback; verify in game before KvK spend",
+      "days": [
+        {
+          "day": "Monday",
+          "event": "Kingdom of Power Prep I — City Construction",
+          "category": "KvK",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Tuesday",
+          "event": "Kingdom of Power Prep II — Research",
+          "category": "KvK",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Wednesday",
+          "event": "Kingdom of Power Prep III — Hero Development",
+          "category": "KvK",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Thursday",
+          "event": "Kingdom of Power Prep IV — Troop Training",
+          "category": "KvK",
+          "type": "Event",
+          "packs": []
+        },
+        {
+          "day": "Friday",
+          "event": "Kingdom of Power Prep V — Pets / Beast",
+          "category": "KvK",
+          "type": "Event",
+          "packs": [
+            "Pet Chests"
+          ]
+        },
+        {
+          "day": "Saturday",
+          "event": "Kingdom of Power Battle / All Out",
+          "category": "PvP",
+          "type": "Event",
+          "packs": [
+            "Combat Medic"
+          ]
+        },
+        {
+          "day": "Sunday",
+          "event": "Recovery + Reward Claim",
+          "category": "Cooldown",
+          "type": "Planning",
+          "packs": []
+        }
+      ]
+    }
+  ],
   "host": "github-pages",
-  "lastWorkflowRefresh": "2026-06-01T01:35:18.800Z",
-  "updatePolicy": "Static JSON database refreshed by GitHub Actions."
+  "lastWorkflowRefresh": "2026-06-01T00:00:00Z",
+  "updatePolicy": "Static JSON database refreshed by GitHub Actions; manually update when Kingshot calendar changes."
 }
