@@ -446,3 +446,11 @@ To swap the hero image: replace `hero.webp` and `hero.jpg` (keep same filenames)
 - Added visible packs/events for Week 1–4 into `event-calendar.js` and `data/events.json`.
 - Marked collapsed screenshot `+more` items as placeholders until expanded/verified.
 - Bumped the calendar version so old localStorage anchors reset automatically.
+
+
+## v4.56 Full Kingshot calendar export
+- Extracted the full 4-week event/pack calendar object from the uploaded Kingshot export.
+- Rebuilt Events & Packs Calendar to show all active events and all active packs for each day.
+- Added raw export data and computed daily calendar data to `data/events.json`.
+- Removed screenshot `+more` placeholders because the export provides the full pack/event windows.
+- Kept Week 1 Monday anchored to 2026-05-25 UTC.

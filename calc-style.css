@@ -5128,3 +5128,40 @@ body.sidebar-collapsed main{
     min-width:0 !important;
   }
 }
+
+
+
+/* v4.56 — Full Kingshot export event/pack calendar polish */
+.event-list li{
+  border-left-color:color-mix(in srgb,var(--gold) 60%,var(--border)) !important;
+}
+.event-list li strong::before{
+  content:"⚔️ ";
+}
+.pack-list li span{
+  overflow-wrap:anywhere !important;
+}
+.calendar-day-card .day-pack-strip span{
+  max-width:100% !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+@media(min-width:960px){
+  .calendar-grid-two{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+  .calendar-grid-two > .calendar-card:nth-child(3){
+    grid-column:1 / -1;
+  }
+}
+@media(max-width:760px){
+  .calendar-day-card h3{
+    font-size:1.05rem !important;
+  }
+  .day-pack-strip{
+    gap:.35rem !important;
+  }
+  .day-pack-strip span{
+    font-size:.72rem !important;
+  }
+}

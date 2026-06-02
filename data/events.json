@@ -1,6 +1,6 @@
 {
-  "source": "FAM static JSON — user screenshot schedule from Kingshot calendar",
-  "sourceUrl": "https://kingshot.net/calendar",
+  "source": "Uploaded Kingshot calendar export",
+  "sourceFile": "js/9f8633e712bf7703.js",
   "updatedAt": "2026-06-02T00:00:00Z",
   "kingdom": 1245,
   "timezone": "UTC",
@@ -8,7 +8,7 @@
     "week": 1,
     "day": "Monday",
     "date": "2026-05-25",
-    "note": "Screenshot schedule anchor. June 1 is Week 2 Monday; June 2 is Week 2 Tuesday after reset."
+    "note": "Week 1 Monday anchor. June 1 is Week 2 Monday; June 2 is Week 2 Tuesday after reset."
   },
   "cycleWeeks": 4,
   "dayNames": [
@@ -23,353 +23,3191 @@
   "dailyAvailable": [
     {
       "name": "Pet Chests",
-      "note": "Listed as Daily Available on Kingshot.net calendar."
+      "type": "PACK",
+      "titleKey": "petChests",
+      "window": "Monday – Sunday",
+      "note": "Chests containing pet materials and evolution items"
     },
     {
       "name": "Gear Enhancement",
-      "note": "Listed as Daily Available on Kingshot.net calendar."
+      "type": "GEAR",
+      "titleKey": "gearEnhancement",
+      "window": "Monday – Sunday",
+      "note": "Materials to enhance gear equipment"
     }
   ],
   "specialNotes": [
-    "Governor Stamina Pack available for 3 days during Cesares Fury.",
-    "Custom Pet Chests / Enhance Gear are not included unless explicitly listed.",
-    "Some screenshot days show +more collapsed items. Those days are marked as hidden placeholders until expanded and verified."
+    "Governor Stamina Pack: Governor Stamina Pack available for 3 days during Cesares Fury",
+    "Does not include: Does not include Custom Pet Chests or Enhance Gear"
   ],
+  "rawExport": {
+    "weeks": [
+      {
+        "week": 1,
+        "events": [
+          {
+            "type": "SPECIAL",
+            "title": "Sanctuary Battle",
+            "titleKey": "sanctuaryBattle",
+            "startDay": "Tuesday",
+            "endDay": "Friday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Alliance Championship",
+            "titleKey": "allianceChampionship",
+            "startDay": "Monday",
+            "endDay": "Sunday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Alliance Brawl",
+            "titleKey": "allianceBrawl",
+            "startDay": "Monday",
+            "endDay": "Sunday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Swordland Showdown",
+            "titleKey": "swordlandShowdown",
+            "startDay": "Monday",
+            "endDay": "Sunday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Desert Trial / Champion's Way",
+            "titleKey": "desertTrial",
+            "startDay": "Wednesday",
+            "endDay": "Friday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Armament Competition 1",
+            "titleKey": "armamentCompetition1",
+            "startDay": "Monday",
+            "endDay": "Tuesday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Armament Competition 2",
+            "titleKey": "armamentCompetition2",
+            "startDay": "Friday",
+            "endDay": "Saturday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Officer Project 1",
+            "titleKey": "officerProject1",
+            "startDay": "Wednesday",
+            "endDay": "Thursday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Officer Project 2",
+            "titleKey": "officerProject2",
+            "startDay": "Sunday",
+            "endDay": "Monday",
+            "isMainEvent": true
+          },
+          {
+            "type": "SPECIAL",
+            "title": "Fishing",
+            "titleKey": "fishing",
+            "startDay": "Tuesday",
+            "endDay": "Thursday",
+            "isMainEvent": true
+          },
+          {
+            "type": "SPECIAL",
+            "title": "Champagne Fair",
+            "titleKey": "champagneFair",
+            "startDay": "Monday",
+            "endDay": "Tuesday",
+            "isMainEvent": true
+          }
+        ],
+        "packs": [
+          {
+            "type": "PACK",
+            "title": "Custom Selection",
+            "titleKey": "customSelection",
+            "startDay": "Monday",
+            "endDay": "Wednesday"
+          },
+          {
+            "type": "PACK",
+            "title": "Hope Market",
+            "titleKey": "hopeMarket",
+            "startDay": "Friday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Combat Medic",
+            "titleKey": "combatMedic",
+            "startDay": "Monday",
+            "endDay": "Monday"
+          },
+          {
+            "type": "PACK",
+            "title": "Conqueror",
+            "titleKey": "conqueror",
+            "startDay": "Thursday",
+            "endDay": "Saturday"
+          },
+          {
+            "type": "PACK",
+            "title": "Combat Medic",
+            "titleKey": "combatMedic",
+            "startDay": "Friday",
+            "endDay": "Friday"
+          },
+          {
+            "type": "PACK",
+            "title": "Charm Craftsman",
+            "titleKey": "charmCraftsman",
+            "startDay": "Wednesday",
+            "endDay": "Thursday"
+          },
+          {
+            "type": "PACK",
+            "title": "Top Governor - Governor Gear",
+            "titleKey": "topGovernorGovernorGear",
+            "startDay": "Friday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Custom Arms Set",
+            "titleKey": "customArmsSet",
+            "startDay": "Thursday",
+            "endDay": "Friday"
+          },
+          {
+            "type": "PACK",
+            "title": "Custom Forging Set",
+            "titleKey": "customForgingSet",
+            "startDay": "Sunday",
+            "endDay": "Sunday"
+          }
+        ]
+      },
+      {
+        "week": 2,
+        "events": [
+          {
+            "type": "SPECIAL",
+            "title": "Sanctuary Battle",
+            "titleKey": "sanctuaryBattle",
+            "startDay": "Tuesday",
+            "endDay": "Friday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Alliance Championship",
+            "titleKey": "allianceChampionship",
+            "startDay": "Monday",
+            "endDay": "Sunday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "King's Castle",
+            "titleKey": "kingsCastle",
+            "startDay": "Saturday",
+            "endDay": "Saturday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "All Out",
+            "titleKey": "allOut",
+            "startDay": "Friday",
+            "endDay": "Saturday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Officer Project 2",
+            "titleKey": "officerProject2",
+            "startDay": "Monday",
+            "endDay": "Monday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Golden Glaives",
+            "titleKey": "goldenGlaives",
+            "startDay": "Monday",
+            "endDay": "Tuesday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Eternity's Reach",
+            "titleKey": "eternitysReach",
+            "startDay": "Tuesday",
+            "endDay": "Tuesday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Defeat Beasts",
+            "titleKey": "defeatBeasts",
+            "startDay": "Tuesday",
+            "endDay": "Wednesday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Vikings Vengeance",
+            "titleKey": "vikingsVengeance",
+            "startDay": "Tuesday",
+            "endDay": "Thursday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Strongest Governor",
+            "titleKey": "strongestGovernor",
+            "startDay": "Monday",
+            "endDay": "Sunday",
+            "isMainEvent": true
+          }
+        ],
+        "packs": [
+          {
+            "type": "PACK",
+            "title": "Truegold Wonders",
+            "titleKey": "truegoldWonders",
+            "startDay": "Monday",
+            "endDay": "Saturday"
+          },
+          {
+            "type": "PACK",
+            "title": "Governor Stamina",
+            "titleKey": "governorStamina",
+            "startDay": "Monday",
+            "endDay": "Monday"
+          },
+          {
+            "type": "PACK",
+            "title": "Charm Craftsman",
+            "titleKey": "charmCraftsman",
+            "startDay": "Wednesday",
+            "endDay": "Thursday"
+          },
+          {
+            "type": "PACK",
+            "title": "Governor Gear Enhancement",
+            "titleKey": "governorGearEnhancement",
+            "startDay": "Friday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Troop Training",
+            "titleKey": "troopTraining",
+            "startDay": "Wednesday",
+            "endDay": "Thursday"
+          },
+          {
+            "type": "PACK",
+            "title": "Hall of Governors",
+            "titleKey": "hallOfGovernors",
+            "startDay": "Friday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Custom Forging Set",
+            "titleKey": "customForgingSet",
+            "startDay": "Monday",
+            "endDay": "Monday"
+          },
+          {
+            "type": "PACK",
+            "title": "Custom Arms Set",
+            "titleKey": "customArmsSet",
+            "startDay": "Thursday",
+            "endDay": "Friday"
+          },
+          {
+            "type": "PACK",
+            "title": "Tech Storm",
+            "titleKey": "techStorm",
+            "startDay": "Thursday",
+            "endDay": "Friday"
+          },
+          {
+            "type": "PACK",
+            "title": "Conqueror",
+            "titleKey": "conqueror",
+            "startDay": "Thursday",
+            "endDay": "Saturday"
+          },
+          {
+            "type": "PACK",
+            "title": "World Traveler",
+            "titleKey": "worldTraveler",
+            "startDay": "Thursday",
+            "endDay": "Saturday"
+          }
+        ]
+      },
+      {
+        "week": 3,
+        "events": [
+          {
+            "type": "SPECIAL",
+            "title": "Sanctuary Battle",
+            "titleKey": "sanctuaryBattle",
+            "startDay": "Tuesday",
+            "endDay": "Friday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Alliance Championship",
+            "titleKey": "allianceChampionship",
+            "startDay": "Monday",
+            "endDay": "Sunday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Alliance Mobilization",
+            "titleKey": "allianceMobilization",
+            "startDay": "Monday",
+            "endDay": "Saturday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Swordland Showdown",
+            "titleKey": "swordlandShowdown",
+            "startDay": "Monday",
+            "endDay": "Sunday",
+            "isMainEvent": true
+          },
+          {
+            "type": "SPECIAL",
+            "title": "Tri-Alliance Clash",
+            "titleKey": "triAllianceClash",
+            "startDay": "Monday",
+            "endDay": "Saturday",
+            "isMainEvent": true
+          },
+          {
+            "type": "SPECIAL",
+            "title": "KvK Matchmaking",
+            "titleKey": "kvkMatchmaking",
+            "startDay": "Saturday",
+            "endDay": "Sunday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Desert Trial / Champion's Way",
+            "titleKey": "desertTrial",
+            "startDay": "Wednesday",
+            "endDay": "Friday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Armament Competition 1",
+            "titleKey": "armamentCompetition1",
+            "startDay": "Monday",
+            "endDay": "Tuesday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Officer Project 1",
+            "titleKey": "officerProject1",
+            "startDay": "Wednesday",
+            "endDay": "Thursday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Armament Competition 2",
+            "titleKey": "armamentCompetition2",
+            "startDay": "Friday",
+            "endDay": "Saturday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Officer Project 2",
+            "titleKey": "officerProject2",
+            "startDay": "Sunday",
+            "endDay": "Monday",
+            "isMainEvent": true
+          },
+          {
+            "type": "SPECIAL",
+            "title": "Mystic Divination",
+            "titleKey": "mysticDivination",
+            "startDay": "Friday",
+            "endDay": "Saturday",
+            "isMainEvent": true
+          }
+        ],
+        "packs": [
+          {
+            "type": "PACK",
+            "title": "Charm Craftsman",
+            "titleKey": "charmCraftsman",
+            "startDay": "Wednesday",
+            "endDay": "Thursday"
+          },
+          {
+            "type": "PACK",
+            "title": "Hope Market",
+            "titleKey": "hopeMarket",
+            "startDay": "Friday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Custom Selection",
+            "titleKey": "customSelection",
+            "startDay": "Monday",
+            "endDay": "Wednesday"
+          },
+          {
+            "type": "PACK",
+            "title": "Conqueror",
+            "titleKey": "conqueror",
+            "startDay": "Thursday",
+            "endDay": "Saturday"
+          },
+          {
+            "type": "PACK",
+            "title": "Combat Medic",
+            "titleKey": "combatMedic",
+            "startDay": "Sunday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Custom Arms Set",
+            "titleKey": "customArmsSet",
+            "startDay": "Thursday",
+            "endDay": "Friday"
+          },
+          {
+            "type": "PACK",
+            "title": "Custom Forging Set",
+            "titleKey": "customForgingSet",
+            "startDay": "Sunday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Jeweler's Collection",
+            "titleKey": "jewelersCollection",
+            "startDay": "Friday",
+            "endDay": "Sunday"
+          }
+        ]
+      },
+      {
+        "week": 4,
+        "events": [
+          {
+            "type": "SPECIAL",
+            "title": "Sanctuary Battle",
+            "titleKey": "sanctuaryBattle",
+            "startDay": "Tuesday",
+            "endDay": "Friday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Alliance Championship",
+            "titleKey": "allianceChampionship",
+            "startDay": "Monday",
+            "endDay": "Sunday",
+            "isMainEvent": true
+          },
+          {
+            "type": "SPECIAL",
+            "title": "KvK Prep Phase",
+            "titleKey": "kvkPrepPhase",
+            "startDay": "Monday",
+            "endDay": "Friday",
+            "isMainEvent": true
+          },
+          {
+            "type": "SPECIAL",
+            "title": "KvK Field Triage",
+            "titleKey": "kvkFieldTriage",
+            "startDay": "Saturday",
+            "endDay": "Monday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Castle Battle",
+            "titleKey": "castleBattle",
+            "startDay": "Saturday",
+            "endDay": "Saturday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "All Out",
+            "titleKey": "allOut",
+            "startDay": "Friday",
+            "endDay": "Saturday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Golden Glaives",
+            "titleKey": "goldenGlaives",
+            "startDay": "Monday",
+            "endDay": "Tuesday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Eternity's Reach",
+            "titleKey": "eternitysReach",
+            "startDay": "Tuesday",
+            "endDay": "Tuesday",
+            "isMainEvent": true
+          },
+          {
+            "type": "COMPETITION",
+            "title": "Defeat Beasts",
+            "titleKey": "defeatBeasts",
+            "startDay": "Tuesday",
+            "endDay": "Wednesday",
+            "isMainEvent": true
+          },
+          {
+            "type": "BATTLE",
+            "title": "Vikings Vengeance",
+            "titleKey": "vikingsVengeance",
+            "startDay": "Tuesday",
+            "endDay": "Thursday",
+            "isMainEvent": true
+          }
+        ],
+        "packs": [
+          {
+            "type": "PACK",
+            "title": "Truegold Wonders",
+            "titleKey": "truegoldWonders",
+            "startDay": "Monday",
+            "endDay": "Saturday"
+          },
+          {
+            "type": "PACK",
+            "title": "Wishful Emporium",
+            "titleKey": "wishfulEmporium",
+            "startDay": "Sunday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Charm Craftsman",
+            "titleKey": "charmCraftsman",
+            "startDay": "Wednesday",
+            "endDay": "Thursday"
+          },
+          {
+            "type": "PACK",
+            "title": "Top Governor - Governor Gear",
+            "titleKey": "topGovernorGovernorGear",
+            "startDay": "Friday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Custom Forging Set",
+            "titleKey": "customForgingSet",
+            "startDay": "Monday",
+            "endDay": "Monday"
+          },
+          {
+            "type": "PACK",
+            "title": "Hall of Governors",
+            "titleKey": "hallOfGovernors",
+            "startDay": "Friday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Troop Training",
+            "titleKey": "troopTraining",
+            "startDay": "Wednesday",
+            "endDay": "Thursday"
+          },
+          {
+            "type": "PACK",
+            "title": "Enhance Gear",
+            "titleKey": "enhanceGear",
+            "startDay": "Friday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Custom Arms Set",
+            "titleKey": "customArmsSet",
+            "startDay": "Thursday",
+            "endDay": "Friday"
+          },
+          {
+            "type": "PACK",
+            "title": "Combat Medic",
+            "titleKey": "combatMedic",
+            "startDay": "Sunday",
+            "endDay": "Sunday"
+          },
+          {
+            "type": "PACK",
+            "title": "Governor Stamina",
+            "titleKey": "governorStamina",
+            "startDay": "Tuesday",
+            "endDay": "Wednesday"
+          },
+          {
+            "type": "PACK",
+            "title": "Tech Storm",
+            "titleKey": "techStorm",
+            "startDay": "Thursday",
+            "endDay": "Friday"
+          },
+          {
+            "type": "PACK",
+            "title": "Conqueror",
+            "titleKey": "conqueror",
+            "startDay": "Thursday",
+            "endDay": "Saturday"
+          },
+          {
+            "type": "PACK",
+            "title": "World Traveler",
+            "titleKey": "worldTraveler",
+            "startDay": "Thursday",
+            "endDay": "Saturday"
+          }
+        ]
+      }
+    ],
+    "dailyAvailable": [
+      {
+        "type": "PACK",
+        "title": "Pet Chests",
+        "titleKey": "petChests",
+        "description": "Chests containing pet materials and evolution items",
+        "startDay": "Monday",
+        "endDay": "Sunday"
+      },
+      {
+        "type": "GEAR",
+        "title": "Gear Enhancement",
+        "titleKey": "gearEnhancement",
+        "description": "Materials to enhance gear equipment",
+        "startDay": "Monday",
+        "endDay": "Sunday"
+      }
+    ],
+    "specialNotes": {
+      "Governor Stamina Pack": "Governor Stamina Pack available for 3 days during Cesares Fury",
+      "Does not include": "Does not include Custom Pet Chests or Enhance Gear"
+    }
+  },
   "weeks": [
     {
       "name": "Week 1",
-      "dateRange": "May 25 - May 31, 2026",
+      "week": 1,
       "verified": true,
-      "source": "User screenshot from Kingshot calendar",
+      "source": "Uploaded Kingshot calendar export (js/9f8633e712bf7703.js)",
+      "focus": "Sanctuary, alliance events, armament/officer events, and Week 1 pack windows",
       "days": [
         {
           "day": "Monday",
-          "event": "Custom Selection",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "6 events · 2 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Brawl",
+              "type": "BATTLE",
+              "titleKey": "allianceBrawl",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Armament Competition 1",
+              "type": "COMPETITION",
+              "titleKey": "armamentCompetition1",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            },
+            {
+              "name": "Officer Project 2",
+              "type": "COMPETITION",
+              "titleKey": "officerProject2",
+              "window": "Sunday – Monday",
+              "note": "Sunday – Monday"
+            },
+            {
+              "name": "Champagne Fair",
+              "type": "SPECIAL",
+              "titleKey": "champagneFair",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            }
+          ],
           "packs": [
-            "Custom Selection",
-            "Combat Medic"
+            {
+              "name": "Custom Selection",
+              "type": "PACK",
+              "titleKey": "customSelection",
+              "window": "Monday – Wednesday",
+              "note": "Monday – Wednesday"
+            },
+            {
+              "name": "Combat Medic",
+              "type": "PACK",
+              "titleKey": "combatMedic",
+              "window": "Monday – Monday",
+              "note": "Monday – Monday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Tuesday",
-          "event": "Custom Selection",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "7 events · 1 pack",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Brawl",
+              "type": "BATTLE",
+              "titleKey": "allianceBrawl",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Armament Competition 1",
+              "type": "COMPETITION",
+              "titleKey": "armamentCompetition1",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            },
+            {
+              "name": "Fishing",
+              "type": "SPECIAL",
+              "titleKey": "fishing",
+              "window": "Tuesday – Thursday",
+              "note": "Tuesday – Thursday"
+            },
+            {
+              "name": "Champagne Fair",
+              "type": "SPECIAL",
+              "titleKey": "champagneFair",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            }
+          ],
           "packs": [
-            "Custom Selection"
+            {
+              "name": "Custom Selection",
+              "type": "PACK",
+              "titleKey": "customSelection",
+              "window": "Monday – Wednesday",
+              "note": "Monday – Wednesday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Wednesday",
-          "event": "Custom Selection",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "7 events · 2 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Brawl",
+              "type": "BATTLE",
+              "titleKey": "allianceBrawl",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Desert Trial / Champion's Way",
+              "type": "COMPETITION",
+              "titleKey": "desertTrial",
+              "window": "Wednesday – Friday",
+              "note": "Wednesday – Friday"
+            },
+            {
+              "name": "Officer Project 1",
+              "type": "COMPETITION",
+              "titleKey": "officerProject1",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Fishing",
+              "type": "SPECIAL",
+              "titleKey": "fishing",
+              "window": "Tuesday – Thursday",
+              "note": "Tuesday – Thursday"
+            }
+          ],
           "packs": [
-            "Custom Selection",
-            "Charm Craftsman"
+            {
+              "name": "Custom Selection",
+              "type": "PACK",
+              "titleKey": "customSelection",
+              "window": "Monday – Wednesday",
+              "note": "Monday – Wednesday"
+            },
+            {
+              "name": "Charm Craftsman",
+              "type": "PACK",
+              "titleKey": "charmCraftsman",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Thursday",
-          "event": "Conqueror",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "7 events · 3 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Brawl",
+              "type": "BATTLE",
+              "titleKey": "allianceBrawl",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Desert Trial / Champion's Way",
+              "type": "COMPETITION",
+              "titleKey": "desertTrial",
+              "window": "Wednesday – Friday",
+              "note": "Wednesday – Friday"
+            },
+            {
+              "name": "Officer Project 1",
+              "type": "COMPETITION",
+              "titleKey": "officerProject1",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Fishing",
+              "type": "SPECIAL",
+              "titleKey": "fishing",
+              "window": "Tuesday – Thursday",
+              "note": "Tuesday – Thursday"
+            }
+          ],
           "packs": [
-            "Conqueror",
-            "Charm Craftsman",
-            "Custom Arms Set"
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "Charm Craftsman",
+              "type": "PACK",
+              "titleKey": "charmCraftsman",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Custom Arms Set",
+              "type": "PACK",
+              "titleKey": "customArmsSet",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Friday",
-          "event": "Hope Market",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "6 events · 5 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Brawl",
+              "type": "BATTLE",
+              "titleKey": "allianceBrawl",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Desert Trial / Champion's Way",
+              "type": "COMPETITION",
+              "titleKey": "desertTrial",
+              "window": "Wednesday – Friday",
+              "note": "Wednesday – Friday"
+            },
+            {
+              "name": "Armament Competition 2",
+              "type": "COMPETITION",
+              "titleKey": "armamentCompetition2",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            }
+          ],
           "packs": [
-            "Hope Market",
-            "Conqueror",
-            "Combat Medic",
-            "Top Governor - Governor Gear",
-            "Custom Arms Set"
+            {
+              "name": "Hope Market",
+              "type": "PACK",
+              "titleKey": "hopeMarket",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "Combat Medic",
+              "type": "PACK",
+              "titleKey": "combatMedic",
+              "window": "Friday – Friday",
+              "note": "Friday – Friday"
+            },
+            {
+              "name": "Top Governor - Governor Gear",
+              "type": "PACK",
+              "titleKey": "topGovernorGovernorGear",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Custom Arms Set",
+              "type": "PACK",
+              "titleKey": "customArmsSet",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Saturday",
-          "event": "Hope Market",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "4 events · 3 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Brawl",
+              "type": "BATTLE",
+              "titleKey": "allianceBrawl",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Armament Competition 2",
+              "type": "COMPETITION",
+              "titleKey": "armamentCompetition2",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            }
+          ],
           "packs": [
-            "Hope Market",
-            "Conqueror",
-            "Top Governor - Governor Gear"
+            {
+              "name": "Hope Market",
+              "type": "PACK",
+              "titleKey": "hopeMarket",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "Top Governor - Governor Gear",
+              "type": "PACK",
+              "titleKey": "topGovernorGovernorGear",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Sunday",
-          "event": "Hope Market",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "4 events · 3 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Brawl",
+              "type": "BATTLE",
+              "titleKey": "allianceBrawl",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Officer Project 2",
+              "type": "COMPETITION",
+              "titleKey": "officerProject2",
+              "window": "Sunday – Monday",
+              "note": "Sunday – Monday"
+            }
+          ],
           "packs": [
-            "Hope Market",
-            "Top Governor - Governor Gear",
-            "Custom Forging Set"
+            {
+              "name": "Hope Market",
+              "type": "PACK",
+              "titleKey": "hopeMarket",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Top Governor - Governor Gear",
+              "type": "PACK",
+              "titleKey": "topGovernorGovernorGear",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Custom Forging Set",
+              "type": "PACK",
+              "titleKey": "customForgingSet",
+              "window": "Sunday – Sunday",
+              "note": "Sunday – Sunday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         }
       ]
     },
     {
       "name": "Week 2",
-      "dateRange": "Jun 1 - Jun 7, 2026",
+      "week": 2,
       "verified": true,
-      "source": "User screenshot from Kingshot calendar",
+      "source": "Uploaded Kingshot calendar export (js/9f8633e712bf7703.js)",
+      "focus": "Castle/All Out, Strongest Governor, Vikings, and Truegold/Governor pack windows",
       "days": [
         {
           "day": "Monday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "4 events · 3 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Officer Project 2",
+              "type": "COMPETITION",
+              "titleKey": "officerProject2",
+              "window": "Monday – Monday",
+              "note": "Monday – Monday"
+            },
+            {
+              "name": "Golden Glaives",
+              "type": "BATTLE",
+              "titleKey": "goldenGlaives",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            },
+            {
+              "name": "Strongest Governor",
+              "type": "COMPETITION",
+              "titleKey": "strongestGovernor",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Governor Stamina",
-            "Custom Forging Set"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Governor Stamina",
+              "type": "PACK",
+              "titleKey": "governorStamina",
+              "window": "Monday – Monday",
+              "note": "Monday – Monday"
+            },
+            {
+              "name": "Custom Forging Set",
+              "type": "PACK",
+              "titleKey": "customForgingSet",
+              "window": "Monday – Monday",
+              "note": "Monday – Monday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Tuesday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "7 events · 1 pack",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Golden Glaives",
+              "type": "BATTLE",
+              "titleKey": "goldenGlaives",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            },
+            {
+              "name": "Eternity's Reach",
+              "type": "BATTLE",
+              "titleKey": "eternitysReach",
+              "window": "Tuesday – Tuesday",
+              "note": "Tuesday – Tuesday"
+            },
+            {
+              "name": "Defeat Beasts",
+              "type": "COMPETITION",
+              "titleKey": "defeatBeasts",
+              "window": "Tuesday – Wednesday",
+              "note": "Tuesday – Wednesday"
+            },
+            {
+              "name": "Vikings Vengeance",
+              "type": "BATTLE",
+              "titleKey": "vikingsVengeance",
+              "window": "Tuesday – Thursday",
+              "note": "Tuesday – Thursday"
+            },
+            {
+              "name": "Strongest Governor",
+              "type": "COMPETITION",
+              "titleKey": "strongestGovernor",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Wednesday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "5 events · 3 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Defeat Beasts",
+              "type": "COMPETITION",
+              "titleKey": "defeatBeasts",
+              "window": "Tuesday – Wednesday",
+              "note": "Tuesday – Wednesday"
+            },
+            {
+              "name": "Vikings Vengeance",
+              "type": "BATTLE",
+              "titleKey": "vikingsVengeance",
+              "window": "Tuesday – Thursday",
+              "note": "Tuesday – Thursday"
+            },
+            {
+              "name": "Strongest Governor",
+              "type": "COMPETITION",
+              "titleKey": "strongestGovernor",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Charm Craftsman",
-            "Troop Training"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Charm Craftsman",
+              "type": "PACK",
+              "titleKey": "charmCraftsman",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Troop Training",
+              "type": "PACK",
+              "titleKey": "troopTraining",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Thursday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "4 events · 7 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Vikings Vengeance",
+              "type": "BATTLE",
+              "titleKey": "vikingsVengeance",
+              "window": "Tuesday – Thursday",
+              "note": "Tuesday – Thursday"
+            },
+            {
+              "name": "Strongest Governor",
+              "type": "COMPETITION",
+              "titleKey": "strongestGovernor",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Charm Craftsman",
-            "Troop Training",
-            "Additional items hidden in screenshot (+4)"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Charm Craftsman",
+              "type": "PACK",
+              "titleKey": "charmCraftsman",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Troop Training",
+              "type": "PACK",
+              "titleKey": "troopTraining",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Custom Arms Set",
+              "type": "PACK",
+              "titleKey": "customArmsSet",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            },
+            {
+              "name": "Tech Storm",
+              "type": "PACK",
+              "titleKey": "techStorm",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "World Traveler",
+              "type": "PACK",
+              "titleKey": "worldTraveler",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Friday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "4 events · 7 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "All Out",
+              "type": "BATTLE",
+              "titleKey": "allOut",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            },
+            {
+              "name": "Strongest Governor",
+              "type": "COMPETITION",
+              "titleKey": "strongestGovernor",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Governor Gear Enhancement",
-            "Hall of Governors",
-            "Additional items hidden in screenshot (+4)"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Governor Gear Enhancement",
+              "type": "PACK",
+              "titleKey": "governorGearEnhancement",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Hall of Governors",
+              "type": "PACK",
+              "titleKey": "hallOfGovernors",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Custom Arms Set",
+              "type": "PACK",
+              "titleKey": "customArmsSet",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            },
+            {
+              "name": "Tech Storm",
+              "type": "PACK",
+              "titleKey": "techStorm",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "World Traveler",
+              "type": "PACK",
+              "titleKey": "worldTraveler",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Saturday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "4 events · 5 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "King's Castle",
+              "type": "BATTLE",
+              "titleKey": "kingsCastle",
+              "window": "Saturday – Saturday",
+              "note": "Saturday – Saturday"
+            },
+            {
+              "name": "All Out",
+              "type": "BATTLE",
+              "titleKey": "allOut",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            },
+            {
+              "name": "Strongest Governor",
+              "type": "COMPETITION",
+              "titleKey": "strongestGovernor",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Governor Gear Enhancement",
-            "Hall of Governors",
-            "Additional items hidden in screenshot (+2)"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Governor Gear Enhancement",
+              "type": "PACK",
+              "titleKey": "governorGearEnhancement",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Hall of Governors",
+              "type": "PACK",
+              "titleKey": "hallOfGovernors",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "World Traveler",
+              "type": "PACK",
+              "titleKey": "worldTraveler",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Sunday",
-          "event": "Governor Gear Enhancement",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "2 events · 2 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Strongest Governor",
+              "type": "COMPETITION",
+              "titleKey": "strongestGovernor",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            }
+          ],
           "packs": [
-            "Governor Gear Enhancement",
-            "Hall of Governors"
+            {
+              "name": "Governor Gear Enhancement",
+              "type": "PACK",
+              "titleKey": "governorGearEnhancement",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Hall of Governors",
+              "type": "PACK",
+              "titleKey": "hallOfGovernors",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         }
       ]
     },
     {
       "name": "Week 3",
-      "dateRange": "Jun 8 - Jun 14, 2026",
+      "week": 3,
       "verified": true,
-      "source": "User screenshot from Kingshot calendar",
+      "source": "Uploaded Kingshot calendar export (js/9f8633e712bf7703.js)",
+      "focus": "Alliance Mobilization, Tri-Alliance, KvK matchmaking, and Hope Market pack windows",
       "days": [
         {
           "day": "Monday",
-          "event": "Custom Selection",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "6 events · 1 pack",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Mobilization",
+              "type": "COMPETITION",
+              "titleKey": "allianceMobilization",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Tri-Alliance Clash",
+              "type": "SPECIAL",
+              "titleKey": "triAllianceClash",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Armament Competition 1",
+              "type": "COMPETITION",
+              "titleKey": "armamentCompetition1",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            },
+            {
+              "name": "Officer Project 2",
+              "type": "COMPETITION",
+              "titleKey": "officerProject2",
+              "window": "Sunday – Monday",
+              "note": "Sunday – Monday"
+            }
+          ],
           "packs": [
-            "Custom Selection"
+            {
+              "name": "Custom Selection",
+              "type": "PACK",
+              "titleKey": "customSelection",
+              "window": "Monday – Wednesday",
+              "note": "Monday – Wednesday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Tuesday",
-          "event": "Custom Selection",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "6 events · 1 pack",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Mobilization",
+              "type": "COMPETITION",
+              "titleKey": "allianceMobilization",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Tri-Alliance Clash",
+              "type": "SPECIAL",
+              "titleKey": "triAllianceClash",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Armament Competition 1",
+              "type": "COMPETITION",
+              "titleKey": "armamentCompetition1",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            }
+          ],
           "packs": [
-            "Custom Selection"
+            {
+              "name": "Custom Selection",
+              "type": "PACK",
+              "titleKey": "customSelection",
+              "window": "Monday – Wednesday",
+              "note": "Monday – Wednesday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Wednesday",
-          "event": "Charm Craftsman",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "7 events · 2 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Mobilization",
+              "type": "COMPETITION",
+              "titleKey": "allianceMobilization",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Tri-Alliance Clash",
+              "type": "SPECIAL",
+              "titleKey": "triAllianceClash",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Desert Trial / Champion's Way",
+              "type": "COMPETITION",
+              "titleKey": "desertTrial",
+              "window": "Wednesday – Friday",
+              "note": "Wednesday – Friday"
+            },
+            {
+              "name": "Officer Project 1",
+              "type": "COMPETITION",
+              "titleKey": "officerProject1",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            }
+          ],
           "packs": [
-            "Charm Craftsman",
-            "Custom Selection"
+            {
+              "name": "Charm Craftsman",
+              "type": "PACK",
+              "titleKey": "charmCraftsman",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Custom Selection",
+              "type": "PACK",
+              "titleKey": "customSelection",
+              "window": "Monday – Wednesday",
+              "note": "Monday – Wednesday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Thursday",
-          "event": "Charm Craftsman",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "7 events · 3 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Mobilization",
+              "type": "COMPETITION",
+              "titleKey": "allianceMobilization",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Tri-Alliance Clash",
+              "type": "SPECIAL",
+              "titleKey": "triAllianceClash",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Desert Trial / Champion's Way",
+              "type": "COMPETITION",
+              "titleKey": "desertTrial",
+              "window": "Wednesday – Friday",
+              "note": "Wednesday – Friday"
+            },
+            {
+              "name": "Officer Project 1",
+              "type": "COMPETITION",
+              "titleKey": "officerProject1",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            }
+          ],
           "packs": [
-            "Charm Craftsman",
-            "Conqueror",
-            "Custom Arms Set"
+            {
+              "name": "Charm Craftsman",
+              "type": "PACK",
+              "titleKey": "charmCraftsman",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "Custom Arms Set",
+              "type": "PACK",
+              "titleKey": "customArmsSet",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Friday",
-          "event": "Hope Market",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "8 events · 4 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Mobilization",
+              "type": "COMPETITION",
+              "titleKey": "allianceMobilization",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Tri-Alliance Clash",
+              "type": "SPECIAL",
+              "titleKey": "triAllianceClash",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Desert Trial / Champion's Way",
+              "type": "COMPETITION",
+              "titleKey": "desertTrial",
+              "window": "Wednesday – Friday",
+              "note": "Wednesday – Friday"
+            },
+            {
+              "name": "Armament Competition 2",
+              "type": "COMPETITION",
+              "titleKey": "armamentCompetition2",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            },
+            {
+              "name": "Mystic Divination",
+              "type": "SPECIAL",
+              "titleKey": "mysticDivination",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            }
+          ],
           "packs": [
-            "Hope Market",
-            "Conqueror",
-            "Custom Arms Set",
-            "Additional item hidden in screenshot (+1)"
+            {
+              "name": "Hope Market",
+              "type": "PACK",
+              "titleKey": "hopeMarket",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "Custom Arms Set",
+              "type": "PACK",
+              "titleKey": "customArmsSet",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            },
+            {
+              "name": "Jeweler's Collection",
+              "type": "PACK",
+              "titleKey": "jewelersCollection",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Saturday",
-          "event": "Hope Market",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "7 events · 3 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Alliance Mobilization",
+              "type": "COMPETITION",
+              "titleKey": "allianceMobilization",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Tri-Alliance Clash",
+              "type": "SPECIAL",
+              "titleKey": "triAllianceClash",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "KvK Matchmaking",
+              "type": "SPECIAL",
+              "titleKey": "kvkMatchmaking",
+              "window": "Saturday – Sunday",
+              "note": "Saturday – Sunday"
+            },
+            {
+              "name": "Armament Competition 2",
+              "type": "COMPETITION",
+              "titleKey": "armamentCompetition2",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            },
+            {
+              "name": "Mystic Divination",
+              "type": "SPECIAL",
+              "titleKey": "mysticDivination",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            }
+          ],
           "packs": [
-            "Hope Market",
-            "Conqueror",
-            "Jeweler's Collection"
+            {
+              "name": "Hope Market",
+              "type": "PACK",
+              "titleKey": "hopeMarket",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "Jeweler's Collection",
+              "type": "PACK",
+              "titleKey": "jewelersCollection",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Sunday",
-          "event": "Hope Market",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "4 events · 4 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "Swordland Showdown",
+              "type": "BATTLE",
+              "titleKey": "swordlandShowdown",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "KvK Matchmaking",
+              "type": "SPECIAL",
+              "titleKey": "kvkMatchmaking",
+              "window": "Saturday – Sunday",
+              "note": "Saturday – Sunday"
+            },
+            {
+              "name": "Officer Project 2",
+              "type": "COMPETITION",
+              "titleKey": "officerProject2",
+              "window": "Sunday – Monday",
+              "note": "Sunday – Monday"
+            }
+          ],
           "packs": [
-            "Hope Market",
-            "Combat Medic",
-            "Custom Forging Set",
-            "Additional item hidden in screenshot (+1)"
+            {
+              "name": "Hope Market",
+              "type": "PACK",
+              "titleKey": "hopeMarket",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Combat Medic",
+              "type": "PACK",
+              "titleKey": "combatMedic",
+              "window": "Sunday – Sunday",
+              "note": "Sunday – Sunday"
+            },
+            {
+              "name": "Custom Forging Set",
+              "type": "PACK",
+              "titleKey": "customForgingSet",
+              "window": "Sunday – Sunday",
+              "note": "Sunday – Sunday"
+            },
+            {
+              "name": "Jeweler's Collection",
+              "type": "PACK",
+              "titleKey": "jewelersCollection",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         }
       ]
     },
     {
       "name": "Week 4",
-      "dateRange": "Jun 15 - Jun 21, 2026",
+      "week": 4,
       "verified": true,
-      "source": "User screenshot from Kingshot calendar",
+      "source": "Uploaded Kingshot calendar export (js/9f8633e712bf7703.js)",
+      "focus": "KvK prep/battle week, Castle Battle, Vikings, Truegold, Wishful Emporium, and combat packs",
       "days": [
         {
           "day": "Monday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "4 events · 2 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "KvK Prep Phase",
+              "type": "SPECIAL",
+              "titleKey": "kvkPrepPhase",
+              "window": "Monday – Friday",
+              "note": "Monday – Friday"
+            },
+            {
+              "name": "KvK Field Triage",
+              "type": "SPECIAL",
+              "titleKey": "kvkFieldTriage",
+              "window": "Saturday – Monday",
+              "note": "Saturday – Monday"
+            },
+            {
+              "name": "Golden Glaives",
+              "type": "BATTLE",
+              "titleKey": "goldenGlaives",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Custom Forging Set"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Custom Forging Set",
+              "type": "PACK",
+              "titleKey": "customForgingSet",
+              "window": "Monday – Monday",
+              "note": "Monday – Monday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Tuesday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "7 events · 2 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "KvK Prep Phase",
+              "type": "SPECIAL",
+              "titleKey": "kvkPrepPhase",
+              "window": "Monday – Friday",
+              "note": "Monday – Friday"
+            },
+            {
+              "name": "Golden Glaives",
+              "type": "BATTLE",
+              "titleKey": "goldenGlaives",
+              "window": "Monday – Tuesday",
+              "note": "Monday – Tuesday"
+            },
+            {
+              "name": "Eternity's Reach",
+              "type": "BATTLE",
+              "titleKey": "eternitysReach",
+              "window": "Tuesday – Tuesday",
+              "note": "Tuesday – Tuesday"
+            },
+            {
+              "name": "Defeat Beasts",
+              "type": "COMPETITION",
+              "titleKey": "defeatBeasts",
+              "window": "Tuesday – Wednesday",
+              "note": "Tuesday – Wednesday"
+            },
+            {
+              "name": "Vikings Vengeance",
+              "type": "BATTLE",
+              "titleKey": "vikingsVengeance",
+              "window": "Tuesday – Thursday",
+              "note": "Tuesday – Thursday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Governor Stamina"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Governor Stamina",
+              "type": "PACK",
+              "titleKey": "governorStamina",
+              "window": "Tuesday – Wednesday",
+              "note": "Tuesday – Wednesday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Wednesday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "5 events · 4 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "KvK Prep Phase",
+              "type": "SPECIAL",
+              "titleKey": "kvkPrepPhase",
+              "window": "Monday – Friday",
+              "note": "Monday – Friday"
+            },
+            {
+              "name": "Defeat Beasts",
+              "type": "COMPETITION",
+              "titleKey": "defeatBeasts",
+              "window": "Tuesday – Wednesday",
+              "note": "Tuesday – Wednesday"
+            },
+            {
+              "name": "Vikings Vengeance",
+              "type": "BATTLE",
+              "titleKey": "vikingsVengeance",
+              "window": "Tuesday – Thursday",
+              "note": "Tuesday – Thursday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Charm Craftsman",
-            "Troop Training",
-            "Additional item hidden in screenshot (+1)"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Charm Craftsman",
+              "type": "PACK",
+              "titleKey": "charmCraftsman",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Troop Training",
+              "type": "PACK",
+              "titleKey": "troopTraining",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Governor Stamina",
+              "type": "PACK",
+              "titleKey": "governorStamina",
+              "window": "Tuesday – Wednesday",
+              "note": "Tuesday – Wednesday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Thursday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "4 events · 7 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "KvK Prep Phase",
+              "type": "SPECIAL",
+              "titleKey": "kvkPrepPhase",
+              "window": "Monday – Friday",
+              "note": "Monday – Friday"
+            },
+            {
+              "name": "Vikings Vengeance",
+              "type": "BATTLE",
+              "titleKey": "vikingsVengeance",
+              "window": "Tuesday – Thursday",
+              "note": "Tuesday – Thursday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Charm Craftsman",
-            "Troop Training",
-            "Additional items hidden in screenshot (+4)"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Charm Craftsman",
+              "type": "PACK",
+              "titleKey": "charmCraftsman",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Troop Training",
+              "type": "PACK",
+              "titleKey": "troopTraining",
+              "window": "Wednesday – Thursday",
+              "note": "Wednesday – Thursday"
+            },
+            {
+              "name": "Custom Arms Set",
+              "type": "PACK",
+              "titleKey": "customArmsSet",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            },
+            {
+              "name": "Tech Storm",
+              "type": "PACK",
+              "titleKey": "techStorm",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "World Traveler",
+              "type": "PACK",
+              "titleKey": "worldTraveler",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Friday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Sanctuary Battle",
+          "category": "Events + Packs",
+          "type": "4 events · 8 packs",
+          "events": [
+            {
+              "name": "Sanctuary Battle",
+              "type": "SPECIAL",
+              "titleKey": "sanctuaryBattle",
+              "window": "Tuesday – Friday",
+              "note": "Tuesday – Friday"
+            },
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "KvK Prep Phase",
+              "type": "SPECIAL",
+              "titleKey": "kvkPrepPhase",
+              "window": "Monday – Friday",
+              "note": "Monday – Friday"
+            },
+            {
+              "name": "All Out",
+              "type": "BATTLE",
+              "titleKey": "allOut",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Top Governor - Governor Gear",
-            "Hall of Governors",
-            "Additional items hidden in screenshot (+5)"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Top Governor - Governor Gear",
+              "type": "PACK",
+              "titleKey": "topGovernorGovernorGear",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Hall of Governors",
+              "type": "PACK",
+              "titleKey": "hallOfGovernors",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Enhance Gear",
+              "type": "PACK",
+              "titleKey": "enhanceGear",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Custom Arms Set",
+              "type": "PACK",
+              "titleKey": "customArmsSet",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            },
+            {
+              "name": "Tech Storm",
+              "type": "PACK",
+              "titleKey": "techStorm",
+              "window": "Thursday – Friday",
+              "note": "Thursday – Friday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "World Traveler",
+              "type": "PACK",
+              "titleKey": "worldTraveler",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Saturday",
-          "event": "Truegold Wonders",
-          "category": "Event/Pack",
-          "type": "Event",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "4 events · 6 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "KvK Field Triage",
+              "type": "SPECIAL",
+              "titleKey": "kvkFieldTriage",
+              "window": "Saturday – Monday",
+              "note": "Saturday – Monday"
+            },
+            {
+              "name": "Castle Battle",
+              "type": "BATTLE",
+              "titleKey": "castleBattle",
+              "window": "Saturday – Saturday",
+              "note": "Saturday – Saturday"
+            },
+            {
+              "name": "All Out",
+              "type": "BATTLE",
+              "titleKey": "allOut",
+              "window": "Friday – Saturday",
+              "note": "Friday – Saturday"
+            }
+          ],
           "packs": [
-            "Truegold Wonders",
-            "Top Governor - Governor Gear",
-            "Hall of Governors",
-            "Additional items hidden in screenshot (+3)"
+            {
+              "name": "Truegold Wonders",
+              "type": "PACK",
+              "titleKey": "truegoldWonders",
+              "window": "Monday – Saturday",
+              "note": "Monday – Saturday"
+            },
+            {
+              "name": "Top Governor - Governor Gear",
+              "type": "PACK",
+              "titleKey": "topGovernorGovernorGear",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Hall of Governors",
+              "type": "PACK",
+              "titleKey": "hallOfGovernors",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Enhance Gear",
+              "type": "PACK",
+              "titleKey": "enhanceGear",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Conqueror",
+              "type": "PACK",
+              "titleKey": "conqueror",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            },
+            {
+              "name": "World Traveler",
+              "type": "PACK",
+              "titleKey": "worldTraveler",
+              "window": "Thursday – Saturday",
+              "note": "Thursday – Saturday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         },
         {
           "day": "Sunday",
-          "event": "Wishful Emporium",
-          "category": "Pack",
-          "type": "Pack",
+          "mainLabel": "Alliance Championship",
+          "category": "Events + Packs",
+          "type": "2 events · 5 packs",
+          "events": [
+            {
+              "name": "Alliance Championship",
+              "type": "COMPETITION",
+              "titleKey": "allianceChampionship",
+              "window": "Monday – Sunday",
+              "note": "Monday – Sunday"
+            },
+            {
+              "name": "KvK Field Triage",
+              "type": "SPECIAL",
+              "titleKey": "kvkFieldTriage",
+              "window": "Saturday – Monday",
+              "note": "Saturday – Monday"
+            }
+          ],
           "packs": [
-            "Wishful Emporium",
-            "Top Governor - Governor Gear",
-            "Hall of Governors",
-            "Additional items hidden in screenshot (+2)"
+            {
+              "name": "Wishful Emporium",
+              "type": "PACK",
+              "titleKey": "wishfulEmporium",
+              "window": "Sunday – Sunday",
+              "note": "Sunday – Sunday"
+            },
+            {
+              "name": "Top Governor - Governor Gear",
+              "type": "PACK",
+              "titleKey": "topGovernorGovernorGear",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Hall of Governors",
+              "type": "PACK",
+              "titleKey": "hallOfGovernors",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Enhance Gear",
+              "type": "PACK",
+              "titleKey": "enhanceGear",
+              "window": "Friday – Sunday",
+              "note": "Friday – Sunday"
+            },
+            {
+              "name": "Combat Medic",
+              "type": "PACK",
+              "titleKey": "combatMedic",
+              "window": "Sunday – Sunday",
+              "note": "Sunday – Sunday"
+            }
+          ],
+          "dailyAvailable": [
+            {
+              "name": "Pet Chests",
+              "type": "PACK",
+              "titleKey": "petChests",
+              "window": "Monday – Sunday",
+              "note": "Chests containing pet materials and evolution items"
+            },
+            {
+              "name": "Gear Enhancement",
+              "type": "GEAR",
+              "titleKey": "gearEnhancement",
+              "window": "Monday – Sunday",
+              "note": "Materials to enhance gear equipment"
+            }
           ]
         }
       ]
@@ -377,5 +3215,5 @@
   ],
   "host": "github-pages",
   "lastWorkflowRefresh": "2026-06-02T00:00:00Z",
-  "updatePolicy": "Static JSON database refreshed by GitHub Actions; manually update hidden +more days after expanding them on Kingshot."
+  "updatePolicy": "Static JSON database refreshed by GitHub Actions; extracted from uploaded Kingshot calendar export."
 }

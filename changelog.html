@@ -7,7 +7,7 @@
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
 <title>FAM 1245 — Changelog</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="calc-style.css?v=1779091200">
+<link rel="stylesheet" href="calc-style.css?v=1779094200">
 </head>
 <body>
 <header>
@@ -32,14 +32,14 @@
   <div class="crumb"><a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span><span>Changelog</span></div>
   <section class="hub-hero tool-hero">
     <div><span class="eyebrow">FAM COMMAND &middot; RELEASE NOTES</span><h1>Changelog</h1><p>Track what changed on the FAM site so members know what tools are new, what bugs were fixed, and what is planned next.</p></div>
-    <div class="hub-status-card"><span>CURRENT VERSION</span><strong>4.55</strong><p>May 2026</p></div>
+    <div class="hub-status-card"><span>CURRENT VERSION</span><strong>4.56</strong><p>May 2026</p></div>
   </section>
 
   <div class="changelog-list">
     
     <article class="changelog-entry current">
       <span class="change-date">May 17, 2026</span>
-      <h2>Daily Build Summary — v4.44 to v4.55</h2>
+      <h2>Daily Build Summary — v4.44 to v4.56</h2>
       <ul>
         <li><strong>Changelog cleanup:</strong> kept the changelog grouped in 24-hour increments instead of one entry per small build.</li>
         <li><strong>Mobile guide repair:</strong> fixed right-side overflow and blended mobile card headers across the main guide pages.</li>
@@ -47,7 +47,7 @@
         <li><strong>Events page repair:</strong> fixed the Events &amp; Packs Calendar mobile header overlap and rebuilt the date anchor.</li>
         <li><strong>Full site audit:</strong> checked every page for theme scripts, motion scripts, legal footer text, header/footer consistency, local asset links, CSS structure, JavaScript syntax, and calculator hub integrity.</li>
         <li><strong>GitHub Pages conversion:</strong> added GitHub Actions deploy/check/refresh workflows, static JSON database files, and browser localStorage caching.</li>
-        <li><strong>Events data update:</strong> rebuilt the 4-week Events &amp; Packs schedule from the supplied Kingshot screenshots, added visible daily packs, corrected Week 1/Week 2 dates, reset old saved anchors, and marked screenshot “+more” items as placeholders until expanded/verified.</li>
+        <li><strong>Events data update:</strong> replaced the partial screenshot calendar with the full 4-week event/pack object extracted from the uploaded Kingshot calendar export, including multi-day event windows, pack windows, daily available items, and special notes.</li>
       </ul>
     </article>
 
@@ -91,8 +91,8 @@
   <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
   <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
 </footer>
-<script src="theme-core.js?v=1779091200"></script>
-<script src="venator-motion.js?v=1779091200"></script>
+<script src="theme-core.js?v=1779094200"></script>
+<script src="venator-motion.js?v=1779094200"></script>
 
 </body>
 </html>
