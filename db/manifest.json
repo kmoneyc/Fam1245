@@ -1,8 +1,8 @@
 {
   "host": "github-pages",
-  "updatedAt": "2026-06-01T00:00:00Z",
+  "updatedAt": "2026-06-02T00:00:00Z",
   "database": "Static JSON files in /data",
-  "calendarUpdate": "v4.54 Kingshot visible Week 1 snapshot + editable fallback weeks",
+  "calendarUpdate": "v4.55 screenshot schedule May 25 \u2013 Jun 21, 2026",
   "files": [
     {
       "file": "data/calculator-data.json",
@@ -14,7 +14,7 @@
     },
     {
       "file": "data/events.json",
-      "bytes": 7219
+      "bytes": 9956
     },
     {
       "file": "data/gift-codes.json",

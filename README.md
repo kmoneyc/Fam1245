@@ -430,3 +430,19 @@ To swap the hero image: replace `hero.webp` and `hero.jpg` (keep same filenames)
 - Added daily pack notes: Pet Chests and Gear Enhancement.
 - Added special note: Governor Stamina Pack appears for 3 days during Cesares Fury.
 - Added editable Weeks 2–4 fallback data in `data/events.json`.
+
+
+## v4.55 Events screenshot schedule
+- Reset Events & Packs anchor to Week 1 Monday = May 25, 2026 UTC.
+- This makes Jun 1 Week 2 Monday and Jun 2 Week 2 Tuesday after reset.
+- Added screenshot-visible Week 1–4 pack/event items to `event-calendar.js`.
+- Mirrored the schedule into `data/events.json` for GitHub Pages static database editing.
+- Days with collapsed `+more` markers include visible names only until expanded screenshots are provided.
+
+
+## v4.55 Events packs screenshot schedule
+- Rebuilt the Events & Packs Calendar from the supplied Kingshot calendar screenshots for May 25 – June 21, 2026.
+- Set Week 1 Monday anchor to May 25, 2026 UTC so June 1 is Week 2 Monday and June 2 is Week 2 Tuesday after reset.
+- Added visible packs/events for Week 1–4 into `event-calendar.js` and `data/events.json`.
+- Marked collapsed screenshot `+more` items as placeholders until expanded/verified.
+- Bumped the calendar version so old localStorage anchors reset automatically.

@@ -1,15 +1,14 @@
 {
-  "source": "FAM K1245 editable static JSON — Kingshot.net visible Week 1 snapshot + FAM fallback for hidden weeks",
+  "source": "FAM static JSON — user screenshot schedule from Kingshot calendar",
   "sourceUrl": "https://kingshot.net/calendar",
-  "updatedAt": "2026-06-01T00:00:00Z",
+  "updatedAt": "2026-06-02T00:00:00Z",
   "kingdom": 1245,
   "timezone": "UTC",
   "baseline": {
     "week": 1,
     "day": "Monday",
-    "date": "2026-04-27",
-    "equivalent": "Saturday Week 3 on 2026-05-16 UTC",
-    "note": "Default anchor used by event-calendar.js. Use the page selector to recalibrate if the kingdom is offset."
+    "date": "2026-05-25",
+    "note": "Screenshot schedule anchor. June 1 is Week 2 Monday; June 2 is Week 2 Tuesday after reset."
   },
   "cycleWeeks": 4,
   "dayNames": [
@@ -24,62 +23,37 @@
   "dailyAvailable": [
     {
       "name": "Pet Chests",
-      "note": "Listed as daily available on Kingshot.net calendar."
+      "note": "Listed as Daily Available on Kingshot.net calendar."
     },
     {
       "name": "Gear Enhancement",
-      "note": "Listed as daily available on Kingshot.net calendar."
+      "note": "Listed as Daily Available on Kingshot.net calendar."
     }
   ],
   "specialNotes": [
     "Governor Stamina Pack available for 3 days during Cesares Fury.",
-    "Does not include Custom Pet Chests or Enhance Gear unless those packs are explicitly listed for the day."
+    "Custom Pet Chests / Enhance Gear are not included unless explicitly listed.",
+    "Some screenshot days show +more collapsed items. Those days are marked as hidden placeholders until expanded and verified."
   ],
   "weeks": [
     {
       "name": "Week 1",
+      "dateRange": "May 25 - May 31, 2026",
       "verified": true,
-      "source": "Kingshot.net visible calendar snapshot",
+      "source": "User screenshot from Kingshot calendar",
       "days": [
         {
           "day": "Monday",
-          "event": "Alliance Championship",
-          "category": "Alliance",
-          "type": "Event",
-          "packs": []
-        },
-        {
-          "day": "Tuesday",
-          "event": "Alliance Brawl",
-          "category": "Alliance",
-          "type": "Event",
-          "packs": []
-        },
-        {
-          "day": "Wednesday",
-          "event": "Swordland Showdown",
-          "category": "PvP",
-          "type": "Event",
-          "packs": []
-        },
-        {
-          "day": "Thursday",
-          "event": "Armament Competition 1",
-          "category": "Growth",
-          "type": "Event",
-          "packs": []
-        },
-        {
-          "day": "Friday",
-          "event": "Champagne Fair",
-          "category": "Pack/Event",
+          "event": "Custom Selection",
+          "category": "Pack",
           "type": "Pack",
           "packs": [
-            "Champagne Fair"
+            "Custom Selection",
+            "Combat Medic"
           ]
         },
         {
-          "day": "Saturday",
+          "day": "Tuesday",
           "event": "Custom Selection",
           "category": "Pack",
           "type": "Pack",
@@ -88,118 +62,156 @@
           ]
         },
         {
-          "day": "Sunday",
-          "event": "Combat Medic",
+          "day": "Wednesday",
+          "event": "Custom Selection",
           "category": "Pack",
           "type": "Pack",
           "packs": [
-            "Combat Medic"
+            "Custom Selection",
+            "Charm Craftsman"
+          ]
+        },
+        {
+          "day": "Thursday",
+          "event": "Conqueror",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Conqueror",
+            "Charm Craftsman",
+            "Custom Arms Set"
+          ]
+        },
+        {
+          "day": "Friday",
+          "event": "Hope Market",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Hope Market",
+            "Conqueror",
+            "Combat Medic",
+            "Top Governor - Governor Gear",
+            "Custom Arms Set"
+          ]
+        },
+        {
+          "day": "Saturday",
+          "event": "Hope Market",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Hope Market",
+            "Conqueror",
+            "Top Governor - Governor Gear"
+          ]
+        },
+        {
+          "day": "Sunday",
+          "event": "Hope Market",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Hope Market",
+            "Top Governor - Governor Gear",
+            "Custom Forging Set"
           ]
         }
       ]
     },
     {
       "name": "Week 2",
-      "verified": false,
-      "source": "FAM editable fallback; verify in game/Kingshot if hidden weeks change",
+      "dateRange": "Jun 1 - Jun 7, 2026",
+      "verified": true,
+      "source": "User screenshot from Kingshot calendar",
       "days": [
         {
           "day": "Monday",
-          "event": "Sanctuary Battle",
-          "category": "Alliance",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
-          "packs": []
+          "packs": [
+            "Truegold Wonders",
+            "Governor Stamina",
+            "Custom Forging Set"
+          ]
         },
         {
           "day": "Tuesday",
-          "event": "Cesares Fury",
-          "category": "PvE",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
           "packs": [
-            "Governor Stamina Pack"
+            "Truegold Wonders"
           ]
         },
         {
           "day": "Wednesday",
-          "event": "Officer Project 1",
-          "category": "Growth",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
-          "packs": []
+          "packs": [
+            "Truegold Wonders",
+            "Charm Craftsman",
+            "Troop Training"
+          ]
         },
         {
           "day": "Thursday",
-          "event": "Armament Competition 2",
-          "category": "Growth",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
-          "packs": []
+          "packs": [
+            "Truegold Wonders",
+            "Charm Craftsman",
+            "Troop Training",
+            "Additional items hidden in screenshot (+4)"
+          ]
         },
         {
           "day": "Friday",
-          "event": "Golden Glaives",
-          "category": "Growth",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
-          "packs": []
+          "packs": [
+            "Truegold Wonders",
+            "Governor Gear Enhancement",
+            "Hall of Governors",
+            "Additional items hidden in screenshot (+4)"
+          ]
         },
         {
           "day": "Saturday",
-          "event": "Fishing Tournament",
-          "category": "Event",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
-          "packs": []
+          "packs": [
+            "Truegold Wonders",
+            "Governor Gear Enhancement",
+            "Hall of Governors",
+            "Additional items hidden in screenshot (+2)"
+          ]
         },
         {
           "day": "Sunday",
-          "event": "Officer Project 2",
-          "category": "Growth",
-          "type": "Event",
-          "packs": []
+          "event": "Governor Gear Enhancement",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Governor Gear Enhancement",
+            "Hall of Governors"
+          ]
         }
       ]
     },
     {
       "name": "Week 3",
-      "verified": false,
-      "source": "FAM editable fallback; default K1245 anchor was Saturday Week 3 on 2026-05-16 UTC",
+      "dateRange": "Jun 8 - Jun 14, 2026",
+      "verified": true,
+      "source": "User screenshot from Kingshot calendar",
       "days": [
         {
           "day": "Monday",
-          "event": "Alliance Championship",
-          "category": "Alliance",
-          "type": "Event",
-          "packs": []
-        },
-        {
-          "day": "Tuesday",
-          "event": "Alliance Brawl",
-          "category": "Alliance",
-          "type": "Event",
-          "packs": []
-        },
-        {
-          "day": "Wednesday",
-          "event": "Swordland Showdown",
-          "category": "PvP",
-          "type": "Event",
-          "packs": []
-        },
-        {
-          "day": "Thursday",
-          "event": "Armament Competition 1",
-          "category": "Growth",
-          "type": "Event",
-          "packs": []
-        },
-        {
-          "day": "Friday",
-          "event": "Beast Whisperer",
-          "category": "Pets",
-          "type": "Event",
-          "packs": [
-            "Pet Chests"
-          ]
-        },
-        {
-          "day": "Saturday",
           "event": "Custom Selection",
           "category": "Pack",
           "type": "Pack",
@@ -208,78 +220,162 @@
           ]
         },
         {
-          "day": "Sunday",
-          "event": "Combat Medic",
+          "day": "Tuesday",
+          "event": "Custom Selection",
           "category": "Pack",
           "type": "Pack",
           "packs": [
-            "Combat Medic"
+            "Custom Selection"
+          ]
+        },
+        {
+          "day": "Wednesday",
+          "event": "Charm Craftsman",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Charm Craftsman",
+            "Custom Selection"
+          ]
+        },
+        {
+          "day": "Thursday",
+          "event": "Charm Craftsman",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Charm Craftsman",
+            "Conqueror",
+            "Custom Arms Set"
+          ]
+        },
+        {
+          "day": "Friday",
+          "event": "Hope Market",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Hope Market",
+            "Conqueror",
+            "Custom Arms Set",
+            "Additional item hidden in screenshot (+1)"
+          ]
+        },
+        {
+          "day": "Saturday",
+          "event": "Hope Market",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Hope Market",
+            "Conqueror",
+            "Jeweler's Collection"
+          ]
+        },
+        {
+          "day": "Sunday",
+          "event": "Hope Market",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Hope Market",
+            "Combat Medic",
+            "Custom Forging Set",
+            "Additional item hidden in screenshot (+1)"
           ]
         }
       ]
     },
     {
       "name": "Week 4",
-      "verified": false,
-      "source": "FAM editable fallback; verify in game before KvK spend",
+      "dateRange": "Jun 15 - Jun 21, 2026",
+      "verified": true,
+      "source": "User screenshot from Kingshot calendar",
       "days": [
         {
           "day": "Monday",
-          "event": "Kingdom of Power Prep I — City Construction",
-          "category": "KvK",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
-          "packs": []
+          "packs": [
+            "Truegold Wonders",
+            "Custom Forging Set"
+          ]
         },
         {
           "day": "Tuesday",
-          "event": "Kingdom of Power Prep II — Research",
-          "category": "KvK",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
-          "packs": []
+          "packs": [
+            "Truegold Wonders",
+            "Governor Stamina"
+          ]
         },
         {
           "day": "Wednesday",
-          "event": "Kingdom of Power Prep III — Hero Development",
-          "category": "KvK",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
-          "packs": []
+          "packs": [
+            "Truegold Wonders",
+            "Charm Craftsman",
+            "Troop Training",
+            "Additional item hidden in screenshot (+1)"
+          ]
         },
         {
           "day": "Thursday",
-          "event": "Kingdom of Power Prep IV — Troop Training",
-          "category": "KvK",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
-          "packs": []
+          "packs": [
+            "Truegold Wonders",
+            "Charm Craftsman",
+            "Troop Training",
+            "Additional items hidden in screenshot (+4)"
+          ]
         },
         {
           "day": "Friday",
-          "event": "Kingdom of Power Prep V — Pets / Beast",
-          "category": "KvK",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
           "packs": [
-            "Pet Chests"
+            "Truegold Wonders",
+            "Top Governor - Governor Gear",
+            "Hall of Governors",
+            "Additional items hidden in screenshot (+5)"
           ]
         },
         {
           "day": "Saturday",
-          "event": "Kingdom of Power Battle / All Out",
-          "category": "PvP",
+          "event": "Truegold Wonders",
+          "category": "Event/Pack",
           "type": "Event",
           "packs": [
-            "Combat Medic"
+            "Truegold Wonders",
+            "Top Governor - Governor Gear",
+            "Hall of Governors",
+            "Additional items hidden in screenshot (+3)"
           ]
         },
         {
           "day": "Sunday",
-          "event": "Recovery + Reward Claim",
-          "category": "Cooldown",
-          "type": "Planning",
-          "packs": []
+          "event": "Wishful Emporium",
+          "category": "Pack",
+          "type": "Pack",
+          "packs": [
+            "Wishful Emporium",
+            "Top Governor - Governor Gear",
+            "Hall of Governors",
+            "Additional items hidden in screenshot (+2)"
+          ]
         }
       ]
     }
   ],
   "host": "github-pages",
-  "lastWorkflowRefresh": "2026-06-01T00:00:00Z",
-  "updatePolicy": "Static JSON database refreshed by GitHub Actions; manually update when Kingshot calendar changes."
+  "lastWorkflowRefresh": "2026-06-02T00:00:00Z",
+  "updatePolicy": "Static JSON database refreshed by GitHub Actions; manually update hidden +more days after expanding them on Kingshot."
 }

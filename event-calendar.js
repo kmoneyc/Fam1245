@@ -1,12 +1,12 @@
-// FAM Events & Packs Calendar v1.2
-// Updated from public Kingshot calendar visible snapshot plus FAM K1245 editable fallback data.
-// Default baseline: Monday, Week 1 on 2026-04-27 UTC; equivalent to Saturday, Week 3 on 2026-05-16 UTC.
+// FAM Events & Packs Calendar v1.3
+// Updated from supplied Kingshot calendar screenshots for May 25 – June 21, 2026.
+// Default baseline: Monday, Week 1 on 2026-05-25 UTC; June 1 is Monday Week 2, June 2 is Tuesday Week 2 after reset.
 (function(){
   var MS_DAY = 86400000;
   var STORAGE_ANCHOR = 'fam_event_anchor_utc';
   var STORAGE_VERSION = 'fam_event_calendar_version';
-  var CALENDAR_VERSION = '2026-06-01-kingshot-calendar-snapshot-v3';
-  var DEFAULT_ANCHOR = '2026-04-27T00:00:00Z';
+  var CALENDAR_VERSION = '2026-06-02-screenshot-pack-schedule-v4';
+  var DEFAULT_ANCHOR = '2026-05-25T00:00:00Z';
   var dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   var shortDayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
@@ -24,265 +24,21 @@
   }
 
   var dailyPacks = [
-    {name:'Pet Chests', type:'Daily available', note:'Listed on the public Kingshot calendar as daily available.'},
-    {name:'Gear Enhancement', type:'Daily available', note:'Listed on the public Kingshot calendar as daily available.'}
+    {name:'Pet Chests', type:'Daily Available', note:'Listed as Daily Available on Kingshot calendar.'},
+    {name:'Gear Enhancement', type:'Daily Available', note:'Listed as Daily Available on Kingshot calendar.'}
   ];
 
   var specialNotes = [
     'Governor Stamina Pack: available for 3 days during Cesares Fury.',
     'Does not include Custom Pet Chests or Enhance Gear unless those packs are explicitly listed for the day.',
-    'Use the week/day selector if your kingdom is offset from the default K1245 anchor.'
+    'Some screenshot days show +more collapsed items. Those are marked as hidden placeholders until expanded/verified.'
   ];
 
   var calendarWeeks = [
-    {
-      name:'Week 1', tone:'pink', focus:'Public Kingshot visible snapshot — alliance events + pack windows', verified:true,
-      source:'Kingshot.net visible calendar snapshot',
-      days:[
-        {
-          event:'Alliance Championship',
-          category:'Alliance',
-          type:'Event',
-          icon:'🏆',
-          packs:[],
-          prep:'Set teams, lanes, rally/garrison assignments, and healing rules before reset.'
-        },
-        {
-          event:'Alliance Brawl',
-          category:'Alliance',
-          type:'Event',
-          icon:'🥊',
-          packs:[],
-          prep:'Push alliance brawl objectives early and avoid wasting attempts after reset.'
-        },
-        {
-          event:'Swordland Showdown',
-          category:'PvP',
-          type:'Event',
-          icon:'⚔️',
-          packs:[],
-          prep:'Confirm teleport discipline, building priority, rally leads, and re-entry timing.'
-        },
-        {
-          event:'Armament Competition 1',
-          category:'Growth',
-          type:'Event',
-          icon:'🛡️',
-          packs:[],
-          prep:'Spend only the matching armament/gear items while the scoring window is active.'
-        },
-        {
-          event:'Champagne Fair',
-          category:'Pack/Event',
-          type:'Pack',
-          icon:'🍾',
-          packs:[{name:'Champagne Fair', type:'Event pack', note:'Shown on the public calendar.'}],
-          prep:'Check value before buying; prioritize bottlenecks instead of random power.'
-        },
-        {
-          event:'Custom Selection',
-          category:'Pack',
-          type:'Pack',
-          icon:'🎁',
-          packs:[{name:'Custom Selection', type:'Event pack', note:'Shown on the public calendar.'}],
-          prep:'Pick items tied to your current bottleneck.'
-        },
-        {
-          event:'Combat Medic',
-          category:'Pack',
-          type:'Pack',
-          icon:'⛑️',
-          packs:[{name:'Combat Medic', type:'Event pack', note:'Shown on the public calendar.'}],
-          prep:'Best value only during heavy healing/battle windows.'
-        }
-      ]
-    },
-    {
-      name:'Week 2', tone:'violet', focus:'Sanctuary + armament/officer rotation — FAM editable fallback', verified:false,
-      source:'FAM editable fallback; update data/events.json if Kingshot changes this week',
-      days:[
-        {
-          event:'Sanctuary Battle',
-          category:'Alliance',
-          type:'Event',
-          icon:'🏰',
-          packs:[],
-          prep:'Confirm rally leads, garrison leads, timers, and lane assignments.'
-        },
-        {
-          event:'Cesares Fury',
-          category:'PvE',
-          type:'Event',
-          icon:'🐺',
-          packs:[{name:'Governor Stamina Pack', type:'Special 3-day pack', note:'Special note from the public calendar.'}],
-          prep:'Use stamina after reset and coordinate alliance rally participation.'
-        },
-        {
-          event:'Officer Project 1',
-          category:'Growth',
-          type:'Event',
-          icon:'📜',
-          packs:[],
-          prep:'Hold officer/charm/project materials until this scoring window is active.'
-        },
-        {
-          event:'Armament Competition 2',
-          category:'Growth',
-          type:'Event',
-          icon:'🛡️',
-          packs:[],
-          prep:'Use matching armament upgrades only during the correct scoring variant.'
-        },
-        {
-          event:'Golden Glaives',
-          category:'Growth',
-          type:'Event',
-          icon:'⚜️',
-          packs:[],
-          prep:'Check milestone value before spending rare items.'
-        },
-        {
-          event:'Fishing Tournament',
-          category:'Event',
-          type:'Event',
-          icon:'🎣',
-          packs:[],
-          prep:'Use attempts consistently and claim rewards before reset.'
-        },
-        {
-          event:'Officer Project 2',
-          category:'Growth',
-          type:'Event',
-          icon:'📜',
-          packs:[],
-          prep:'Save project/charm materials for the matching score day.'
-        }
-      ]
-    },
-    {
-      name:'Week 3', tone:'rose', focus:'Alliance pressure + pets/pack windows — FAM editable fallback', verified:false,
-      source:'FAM editable fallback; default K1245 anchor was Saturday Week 3 on 2026-05-16 UTC',
-      days:[
-        {
-          event:'Alliance Championship',
-          category:'Alliance',
-          type:'Event',
-          icon:'🏆',
-          packs:[],
-          prep:'Refresh teams and make sure all assigned members are registered.'
-        },
-        {
-          event:'Alliance Brawl',
-          category:'Alliance',
-          type:'Event',
-          icon:'🥊',
-          packs:[],
-          prep:'Push alliance objectives and finish daily brawl tasks early.'
-        },
-        {
-          event:'Swordland Showdown',
-          category:'PvP',
-          type:'Event',
-          icon:'⚔️',
-          packs:[],
-          prep:'Set roles before battle starts; late assignments lose buildings.'
-        },
-        {
-          event:'Armament Competition 1',
-          category:'Growth',
-          type:'Event',
-          icon:'🛡️',
-          packs:[],
-          prep:'Score armament upgrades only if this variant is active.'
-        },
-        {
-          event:'Beast Whisperer',
-          category:'Pets',
-          type:'Event',
-          icon:'🦊',
-          packs:[{name:'Pet Chests', type:'Daily available', note:'Public calendar daily pack.'}],
-          prep:'Save pet marks and beast materials for scoring.'
-        },
-        {
-          event:'Custom Selection',
-          category:'Pack',
-          type:'Pack',
-          icon:'🎁',
-          packs:[{name:'Custom Selection', type:'Event pack', note:'Selection pack window.'}],
-          prep:'Choose bottleneck items only.'
-        },
-        {
-          event:'Combat Medic',
-          category:'Pack',
-          type:'Pack',
-          icon:'⛑️',
-          packs:[{name:'Combat Medic', type:'Event pack', note:'Healing/combat support pack window.'}],
-          prep:'Better during battle weeks than quiet growth weeks.'
-        }
-      ]
-    },
-    {
-      name:'Week 4', tone:'dark', focus:'KvK / Kingdom of Power planning — FAM editable fallback', verified:false,
-      source:'FAM editable fallback; verify in-game before KvK spend',
-      days:[
-        {
-          event:'Kingdom of Power Prep I — City Construction',
-          category:'KvK',
-          type:'Event',
-          icon:'👑',
-          packs:[],
-          prep:'Use construction speedups/upgrades only if this prep day is active.'
-        },
-        {
-          event:'Kingdom of Power Prep II — Research',
-          category:'KvK',
-          type:'Event',
-          icon:'📚',
-          packs:[],
-          prep:'Save research speedups and big tech completions for this day.'
-        },
-        {
-          event:'Kingdom of Power Prep III — Hero Development',
-          category:'KvK',
-          type:'Event',
-          icon:'⭐',
-          packs:[],
-          prep:'Use hero shards, recruitment, and hero XP when this day scores.'
-        },
-        {
-          event:'Kingdom of Power Prep IV — Troop Training',
-          category:'KvK',
-          type:'Event',
-          icon:'🪖',
-          packs:[],
-          prep:'Train/promote troops with speedups during this scoring window.'
-        },
-        {
-          event:'Kingdom of Power Prep V — Pets / Beast',
-          category:'KvK',
-          type:'Event',
-          icon:'🐾',
-          packs:[{name:'Pet Chests', type:'Daily available', note:'Public calendar daily pack.'}],
-          prep:'Save pet marks and beast materials for this scoring day.'
-        },
-        {
-          event:'Kingdom of Power Battle / All Out',
-          category:'PvP',
-          type:'Event',
-          icon:'🔥',
-          packs:[{name:'Combat Medic', type:'Battle support', note:'May be useful around heavy combat windows.'}],
-          prep:'Shield before battle opens, empty resources, and keep hospital space ready.'
-        },
-        {
-          event:'Recovery + Reward Claim',
-          category:'Cooldown',
-          type:'Planning',
-          icon:'📦',
-          packs:[],
-          prep:'Claim rewards, heal safely, rebuild resources, and prep for next rotation.'
-        }
-      ]
-    }
+    {name:"Week 1", tone:"pink", focus:"May 25 – May 31 screenshot schedule", verified:true, source:"User screenshot from Kingshot calendar", days:[{event:"Custom Selection", category:"Pack", type:"Pack", icon:"🎁", packs:[{name:"Custom Selection", type:"Pack", note:"Screenshot calendar item"},{name:"Combat Medic", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: May 25. Pack window day."},{event:"Custom Selection", category:"Pack", type:"Pack", icon:"🎁", packs:[{name:"Custom Selection", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: May 26. Pack window day."},{event:"Custom Selection", category:"Pack", type:"Pack", icon:"🎁", packs:[{name:"Custom Selection", type:"Pack", note:"Screenshot calendar item"},{name:"Charm Craftsman", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: May 27. Pack window day."},{event:"Conqueror", category:"Pack", type:"Pack", icon:"🛡️", packs:[{name:"Conqueror", type:"Pack", note:"Screenshot calendar item"},{name:"Charm Craftsman", type:"Pack", note:"Screenshot calendar item"},{name:"Custom Arms Set", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: May 28. Pack window day."},{event:"Hope Market", category:"Pack", type:"Pack", icon:"🏪", packs:[{name:"Hope Market", type:"Pack", note:"Friday – Sunday"},{name:"Conqueror", type:"Pack", note:"Thursday – Saturday"},{name:"Combat Medic", type:"Pack", note:"Friday"},{name:"Top Governor - Governor Gear", type:"Pack", note:"Friday – Sunday"},{name:"Custom Arms Set", type:"Pack", note:"Thursday – Friday"}], prep:"Screenshot date: May 29. Expanded day showed 5 packs."},{event:"Hope Market", category:"Pack", type:"Pack", icon:"🏪", packs:[{name:"Hope Market", type:"Pack", note:"Screenshot calendar item"},{name:"Conqueror", type:"Pack", note:"Screenshot calendar item"},{name:"Top Governor - Governor Gear", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: May 30. Pack window day."},{event:"Hope Market", category:"Pack", type:"Pack", icon:"🏪", packs:[{name:"Hope Market", type:"Pack", note:"Screenshot calendar item"},{name:"Top Governor - Governor Gear", type:"Pack", note:"Screenshot calendar item"},{name:"Custom Forging Set", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: May 31. Pack window day."}]},
+    {name:"Week 2", tone:"violet", focus:"Jun 1 – Jun 7 screenshot schedule", verified:true, source:"User screenshot from Kingshot calendar", days:[{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Governor Stamina", type:"Pack", note:"Screenshot calendar item"},{name:"Custom Forging Set", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 1. This is Monday Week 2."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"}], prep:"Screenshot date: June 2. Shown as Today in screenshot."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Charm Craftsman", type:"Pack", note:"Screenshot calendar item"},{name:"Troop Training", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 3."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Charm Craftsman", type:"Pack", note:"Screenshot calendar item"},{name:"Troop Training", type:"Pack", note:"Screenshot calendar item"},{name:"Additional items hidden in screenshot", type:"More", note:"Screenshot shows +4 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 4. Screenshot shows +4 more hidden items."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Governor Gear Enhancement", type:"Pack", note:"Screenshot calendar item"},{name:"Hall of Governors", type:"Pack", note:"Screenshot calendar item"},{name:"Additional items hidden in screenshot", type:"More", note:"Screenshot shows +4 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 5. Screenshot shows +4 more hidden items."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Governor Gear Enhancement", type:"Pack", note:"Screenshot calendar item"},{name:"Hall of Governors", type:"Pack", note:"Screenshot calendar item"},{name:"Additional items hidden in screenshot", type:"More", note:"Screenshot shows +2 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 6. Screenshot shows +2 more hidden items."},{event:"Governor Gear Enhancement", category:"Pack", type:"Pack", icon:"⚙️", packs:[{name:"Governor Gear Enhancement", type:"Pack", note:"Screenshot calendar item"},{name:"Hall of Governors", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 7."}]},
+    {name:"Week 3", tone:"rose", focus:"Jun 8 – Jun 14 screenshot schedule", verified:true, source:"User screenshot from Kingshot calendar", days:[{event:"Custom Selection", category:"Pack", type:"Pack", icon:"🎁", packs:[{name:"Custom Selection", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 8."},{event:"Custom Selection", category:"Pack", type:"Pack", icon:"🎁", packs:[{name:"Custom Selection", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 9."},{event:"Charm Craftsman", category:"Pack", type:"Pack", icon:"🧰", packs:[{name:"Charm Craftsman", type:"Pack", note:"Screenshot calendar item"},{name:"Custom Selection", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 10."},{event:"Charm Craftsman", category:"Pack", type:"Pack", icon:"🧰", packs:[{name:"Charm Craftsman", type:"Pack", note:"Screenshot calendar item"},{name:"Conqueror", type:"Pack", note:"Screenshot calendar item"},{name:"Custom Arms Set", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 11."},{event:"Hope Market", category:"Pack", type:"Pack", icon:"🏪", packs:[{name:"Hope Market", type:"Pack", note:"Screenshot calendar item"},{name:"Conqueror", type:"Pack", note:"Screenshot calendar item"},{name:"Custom Arms Set", type:"Pack", note:"Screenshot calendar item"},{name:"Additional item hidden in screenshot", type:"More", note:"Screenshot shows +1 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 12. Screenshot shows +1 more hidden item."},{event:"Hope Market", category:"Pack", type:"Pack", icon:"🏪", packs:[{name:"Hope Market", type:"Pack", note:"Screenshot calendar item"},{name:"Conqueror", type:"Pack", note:"Screenshot calendar item"},{name:"Jeweler's Collection", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 13."},{event:"Hope Market", category:"Pack", type:"Pack", icon:"🏪", packs:[{name:"Hope Market", type:"Pack", note:"Screenshot calendar item"},{name:"Combat Medic", type:"Pack", note:"Screenshot calendar item"},{name:"Custom Forging Set", type:"Pack", note:"Screenshot calendar item"},{name:"Additional item hidden in screenshot", type:"More", note:"Screenshot shows +1 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 14. Screenshot shows +1 more hidden item."}]},
+    {name:"Week 4", tone:"dark", focus:"Jun 15 – Jun 21 screenshot schedule", verified:true, source:"User screenshot from Kingshot calendar", days:[{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Custom Forging Set", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 15."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Governor Stamina", type:"Pack", note:"Screenshot calendar item"}], prep:"Screenshot date: June 16."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Charm Craftsman", type:"Pack", note:"Screenshot calendar item"},{name:"Troop Training", type:"Pack", note:"Screenshot calendar item"},{name:"Additional item hidden in screenshot", type:"More", note:"Screenshot shows +1 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 17."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Charm Craftsman", type:"Pack", note:"Screenshot calendar item"},{name:"Troop Training", type:"Pack", note:"Screenshot calendar item"},{name:"Additional items hidden in screenshot", type:"More", note:"Screenshot shows +4 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 18."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Top Governor - Governor Gear", type:"Pack", note:"Screenshot calendar item"},{name:"Hall of Governors", type:"Pack", note:"Screenshot calendar item"},{name:"Additional items hidden in screenshot", type:"More", note:"Screenshot shows +5 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 19."},{event:"Truegold Wonders", category:"Event/Pack", type:"Event", icon:"✨", packs:[{name:"Truegold Wonders", type:"Event", note:"Screenshot calendar item"},{name:"Top Governor - Governor Gear", type:"Pack", note:"Screenshot calendar item"},{name:"Hall of Governors", type:"Pack", note:"Screenshot calendar item"},{name:"Additional items hidden in screenshot", type:"More", note:"Screenshot shows +3 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 20."},{event:"Wishful Emporium", category:"Pack", type:"Pack", icon:"🧞", packs:[{name:"Wishful Emporium", type:"Pack", note:"Screenshot calendar item"},{name:"Top Governor - Governor Gear", type:"Pack", note:"Screenshot calendar item"},{name:"Hall of Governors", type:"Pack", note:"Screenshot calendar item"},{name:"Additional items hidden in screenshot", type:"More", note:"Screenshot shows +2 more; verify by expanding this day on Kingshot."}], prep:"Screenshot date: June 21."}]}
   ];
 
   var lastCalendarGridKey = '';
@@ -347,6 +103,8 @@
   }
   function utcClock(d){ return pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())+':'+pad(d.getUTCSeconds())+' UTC'; }
   function packsForDay(day){ return dailyPacks.concat(day.packs || []); }
+  function daySpecificPacks(day){ return day.packs || []; }
+  function dayStripPacks(day){ return (day.packs && day.packs.length ? day.packs : [{name:day.event,type:day.type,note:''}]); }
   function el(id){ return document.getElementById(id); }
   function htmlEscape(str){ return String(str).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function renderPackList(target, packs){
@@ -365,7 +123,7 @@
     var clock = el('todayUtcNow'); if(clock) clock.textContent = utcClock(state.now);
     var next = el('todayNextEvent'); if(next) next.textContent = 'Next: '+state.nextDayName+' — '+state.nextDay.event;
     var week = el('todayWeekPill'); if(week) week.textContent = state.week.name;
-    var source = el('todaySourceNote'); if(source) source.textContent = 'Default tracker: Week 1 Monday on Apr 27, 2026 UTC, matching Saturday Week 3 on May 16, 2026 UTC. Use Events & Packs to recalibrate if K1245 is offset.';
+    var source = el('todaySourceNote'); if(source) source.textContent = 'Default tracker reset: Week 1 Monday is May 25, 2026 UTC. Week 2 Monday is Jun 1, 2026 UTC, so Jun 2 becomes Week 2 Tuesday after reset.';
     renderPackList(el('todayPacksList'), packs);
   }
   function renderFullCalendar(){
@@ -392,7 +150,7 @@
             + '<div class="day-card-top"><span>'+shortDayNames[di]+'</span><em>'+week.name+'</em></div>'
             + '<h3>'+htmlEscape(day.icon+' '+day.event)+'</h3>'
             + '<p>'+htmlEscape(day.category+' • '+day.type)+'</p>'
-            + '<div class="day-pack-strip">'+packsForDay(day).map(function(p){return '<span>'+htmlEscape(p.name)+'</span>';}).join('')+'</div>'
+            + '<div class="day-pack-strip">'+dayStripPacks(day).map(function(p){return '<span>'+htmlEscape(p.name)+'</span>';}).join('')+'</div>'
             + '</article>';
         }).join('');
         return '<section class="calendar-week-panel" data-week-panel="'+wi+'"><div class="week-panel-head"><div><h2>'+week.name+'</h2><p>'+htmlEscape(week.focus)+'</p></div><span>'+(week.verified?'Public seed':'Kingdom editable')+'</span></div><div class="calendar-days-row">'+days+'</div></section>';

@@ -7,8 +7,8 @@
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
 <title>FAM 1245 — Events & Packs Calendar</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="calc-style.css?v=1779088600">
-<link rel="stylesheet" href="event-calendar.css?v=1779088600">
+<link rel="stylesheet" href="calc-style.css?v=1779091200">
+<link rel="stylesheet" href="event-calendar.css?v=1779091200">
 </head>
 <body class="events-calendar-page">
 <header>
@@ -42,7 +42,7 @@
   </section>
 
   <div id="calendarSyncStatus"></div>
-  <div class="k1245-panel"><strong>K1245 personalized calendar</strong><p>This page is anchored for Kingdom 1245. Week 1 visible data was checked against the public Kingshot calendar; hidden/unclickable weeks are kept as FAM editable fallback data in data/events.json. If your kingdom is offset, set the current week/day below and it will save on this device.</p></div>
+  <div class="k1245-panel"><strong>K1245 personalized calendar</strong><p>This page is anchored from your Kingshot screenshot: Week 1 is May 25–May 31, Week 2 is Jun 1–Jun 7, Week 3 is Jun 8–Jun 14, and Week 4 is Jun 15–Jun 21. Jun 2 is treated as Week 2 Tuesday after reset.</p></div>
 
   <section class="calendar-grid-two">
     <article class="calendar-card">
@@ -50,7 +50,7 @@
       <h2 class="calendar-today-title" id="calendarTodayTitle">Loading event...</h2>
       <p class="today-meta" id="calendarTodayMeta">Checking rotation...</p>
       <p class="today-prep" id="calendarTodayPrep">Loading plan...</p>
-      <div class="event-note-box">Default tracker is set to Week 1 Monday on Apr 27, 2026 UTC, which equals Saturday Week 3 on May 16, 2026 UTC. This makes June 1, 2026 read as Week 2 Monday.</div>
+      <div class="event-note-box">Default tracker has been reset: Week 1 Monday is May 25, 2026 UTC. Week 2 Monday is Jun 1, 2026 UTC, so after the next reset Jun 2 is Week 2 Tuesday.</div>
     </article>
     <article class="calendar-card">
       <h2>Packs available today</h2>
@@ -62,7 +62,7 @@
   
   <section class="calendar-card calendar-source-card" style="margin-bottom:1rem">
     <h2>Source & accuracy note</h2>
-    <p>Public Kingshot calendar text currently exposes Week 1 events and pack notes clearly. The site now includes that Week 1 snapshot and keeps Weeks 2–4 editable in <code>data/events.json</code> so you can correct any hidden day after verifying in-game or on Kingshot.net.</p>
+    <p>This version uses your screenshots for Week 1–4 visible items and keeps the full schedule editable in <code>data/events.json</code>. Days with a <strong>+more</strong> marker in the screenshot only include visible names until you provide expanded day screenshots.</p>
   </section>
 
   <section class="calendar-card" style="margin-bottom:1rem">
@@ -102,9 +102,9 @@
   <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
   <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a></nav>
 </footer>
-<script src="theme-core.js?v=1779088600"></script>
-<script src="venator-motion.js?v=1779088600"></script>
-<script src="fam-live-sync.js?v=1779088600"></script>
-<script src="event-calendar.js?v=1779088600"></script>
+<script src="theme-core.js?v=1779091200"></script>
+<script src="venator-motion.js?v=1779091200"></script>
+<script src="fam-live-sync.js?v=1779091200"></script>
+<script src="event-calendar.js?v=1779091200"></script>
 </body>
 </html>
