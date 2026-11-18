@@ -3007,5 +3007,23 @@
 <script src="venator-motion.js?v=20261114"></script>
 <script src="event-calendar.js?v=20261114"></script>
 <script src="app.js?v=20261114"></script>
+<script>
+  // Keep desktop header clean: only one theme toggle (desk-theme-toggle in header-right)
+  // On mobile, header-theme-btn (icon-only 42px box) is shown via CSS media query
+  (function syncHeaderButtons(){
+    var htb = document.querySelector('.header-theme-btn');
+    var dt  = document.querySelector('.desk-theme-toggle');
+    var isMobile = window.matchMedia('(max-width: 760px)').matches;
+    if(htb){
+      if(isMobile){ htb.style.display = 'inline-flex'; htb.style.removeProperty('visibility'); }
+      else { htb.style.display = 'none'; }
+    }
+    if(dt){
+      if(isMobile){ dt.style.display = 'none'; dt.style.visibility = 'hidden'; }
+      else { dt.style.display = 'inline-flex'; dt.style.removeProperty('visibility'); }
+    }
+  })();
+  window.addEventListener('resize', syncHeaderButtons);
+</script>
 </body>
 </html>

@@ -1444,7 +1444,8 @@ header {
 @media (max-width: 768px) {
   .mobile-menu-btn { display: block; }
   .desk-nav { display: none; }
-  .header-right .sidebar-toggle { display: none; }
+  .header-right .sidebar-toggle { display:flex !important; align-items:center !important; justify-content:center !important; width:44px !important; height:44px !important; min-width:44px !important; min-height:44px !important; padding:0 !important; border-radius:12px !important; z-index:960 !important; }
+  .header-right .desk-theme-toggle { display:none !important; visibility:hidden !important; }
   
   .page-container { padding: 1rem 0.75rem 2rem; }
   

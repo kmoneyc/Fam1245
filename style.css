@@ -6735,12 +6735,72 @@ a.logo:focus-visible{
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
+   MOBILE SIDEBAR BUTTON FIX — fam-clean.css hides it on ≤768px; re-show it
+   ═══════════════════════════════════════════════════════════════════════ */
+@media(max-width:768px){
+  .header-right .sidebar-toggle{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    padding:0 !important;
+    border-radius:12px !important;
+    z-index:960 !important;
+  }
+  .header-right .sidebar-toggle .hamburger-icon{
+    display:block !important;
+    font-size:1.15rem !important;
+    line-height:1 !important;
+  }
+  .header-right .sidebar-toggle .close-icon{
+    display:none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   THEME BUTTON ALIGNMENT — clean icon-only button matching search button
+   ═══════════════════════════════════════════════════════════════════════ */
+@media(max-width:760px){
+  /* Theme button in header-center: 42px icon box, no text label */
+  .header-theme-btn{
+    display:inline-flex !important;
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    padding:0 !important;
+    border-radius:14px !important;
+    justify-content:center !important;
+    align-items:center !important;
+    gap:0 !important;
+  }
+  .header-theme-btn .label{
+    display:none !important;
+    visibility:hidden !important;
+    width:0 !important;
+    height:0 !important;
+    overflow:hidden !important;
+  }
+  .header-theme-btn .icon{
+    font-size:1.15rem !important;
+    line-height:1 !important;
+  }
+  /* Hide desktop theme toggle on mobile */
+  .desk-theme-toggle{
+    display:none !important;
+    visibility:hidden !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
    MOBILE TOP BAR FIX — clean, non-glitchy header on phones
    ══════════════════════════════════════════════════════════════════════ */
 
 /* Header theme button — same format as the guide search button */
 .header-theme-btn{
-  display:none; /* hidden on desktop; desk-theme-toggle in header-right is used instead */
+  display:none !important; /* hidden on desktop; desk-theme-toggle in header-right is used instead */
   align-items:center;
   justify-content:center;
   gap:0.5rem;
