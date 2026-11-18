@@ -30,10 +30,6 @@
         <p>Search all guides...</p>
         <kbd>&#8984;K</kbd>
       </div>
-      <button type="button" class="header-theme-btn theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false">
-        <span class="icon" data-theme-icon>🎨</span>
-        <span class="label" data-theme-label>Theme</span>
-      </button>
     </div>
     <nav class="desk-nav" aria-label="Manual sections">
       <details class="dn-drop">
@@ -73,7 +69,8 @@
     </nav>
     <div class="header-right">
       <div id="google_translate_element"></div>
-      <button type="button" class="theme-toggle desk-theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>🎨</span><span data-theme-label>Theme</span></button>
+      <!-- Theme + Sidebar buttons aligned together -->
+      <button type="button" class="theme-toggle header-theme-btn" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span class="theme-icon" data-theme-icon>🎨</span><span class="theme-label" data-theme-label>Theme</span></button>
       <button type="button" class="sidebar-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span class="hamburger-icon">&#9776;</span>
         <span class="close-icon">&times;</span>
@@ -3008,19 +3005,14 @@
 <script src="event-calendar.js?v=20261114"></script>
 <script src="app.js?v=20261114"></script>
 <script>
-  // Keep desktop header clean: only one theme toggle (desk-theme-toggle in header-right)
-  // On mobile, header-theme-btn (icon-only 42px box) is shown via CSS media query
+  // Keep desktop header clean: theme button + sidebar button aligned together in header-right.
+  // On mobile both shrink to 42px icon boxes; on desktop theme is a pill bubble.
   (function syncHeaderButtons(){
     var htb = document.querySelector('.header-theme-btn');
-    var dt  = document.querySelector('.desk-theme-toggle');
     var isMobile = window.matchMedia('(max-width: 760px)').matches;
     if(htb){
-      if(isMobile){ htb.style.display = 'inline-flex'; htb.style.removeProperty('visibility'); }
-      else { htb.style.display = 'none'; }
-    }
-    if(dt){
-      if(isMobile){ dt.style.display = 'none'; dt.style.visibility = 'hidden'; }
-      else { dt.style.display = 'inline-flex'; dt.style.removeProperty('visibility'); }
+      htb.style.display = 'inline-flex';
+      htb.style.removeProperty('visibility');
     }
   })();
   window.addEventListener('resize', syncHeaderButtons);

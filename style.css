@@ -6798,32 +6798,32 @@ a.logo:focus-visible{
    MOBILE TOP BAR FIX — clean, non-glitchy header on phones
    ══════════════════════════════════════════════════════════════════════ */
 
-/* Header theme button — same format as the guide search button */
-.header-theme-btn{
-  display:none !important; /* hidden on desktop; desk-theme-toggle in header-right is used instead */
-  align-items:center;
-  justify-content:center;
-  gap:0.5rem;
-  background:var(--surface2);
-  border:1px solid var(--border);
-  border-radius:8px;
-  color:var(--text-dim);
-  padding:0.5rem 0.9rem;
-  font-family:'DM Mono',monospace;
-  font-size:0.78rem;
-  cursor:pointer;
-  transition:all 0.2s;
-  white-space:nowrap;
+/* Header theme button — pill bubble matching the guide search button */
+html[data-theme] .header-theme-btn{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:0.5rem !important;
+  background:var(--surface2) !important;
+  border:1px solid var(--border) !important;
+  border-radius:var(--radius-pill) !important;
+  padding:0.5rem 1rem !important;
+  color:var(--text) !important;
+  font-family:'DM Mono',monospace !important;
+  font-size:0.85rem !important;
+  cursor:pointer !important;
+  transition:all 0.2s !important;
+  white-space:nowrap !important;
 }
-.header-theme-btn:hover{
-  border-color:var(--gold);
-  color:var(--gold);
-  background:var(--surface3);
+html[data-theme] .header-theme-btn:hover{
+  border-color:var(--gold) !important;
+  color:var(--gold) !important;
+  background:var(--surface3) !important;
 }
-.header-theme-btn .icon{font-size:1rem;}
-.header-theme-btn .label{display:none;}
+html[data-theme] .header-theme-btn .theme-icon{font-size:1rem !important;line-height:1 !important;}
+html[data-theme] .header-theme-btn .theme-label{letter-spacing:.02em !important;}
 
-/* Mobile (<=760px): rework header so nothing overlaps or glitches */
+/* Mobile (<=760px): search + theme + sidebar all as 42px icon boxes, aligned together */
 @media(max-width:760px){
   header{
     height:var(--mobile-header-h) !important;
@@ -6882,7 +6882,7 @@ a.logo:focus-visible{
     font-size:1rem !important;
   }
   /* Theme button — same 42px box format as the search button */
-  .header-theme-btn{
+  html[data-theme] .header-theme-btn{
     display:inline-flex !important;
     width:42px !important;
     height:42px !important;
@@ -6890,26 +6890,54 @@ a.logo:focus-visible{
     padding:0 !important;
     border-radius:14px !important;
     justify-content:center !important;
+    align-items:center !important;
+    gap:0 !important;
   }
-  .header-theme-btn .label{display:none !important;}
-  .header-theme-btn .icon{font-size:1rem !important;}
-  /* Header right — only hamburger on mobile */
+  html[data-theme] .header-theme-btn .theme-label{display:none !important;}
+  html[data-theme] .header-theme-btn .theme-icon{font-size:1rem !important;}
+  /* Header right — theme button + sidebar button aligned together */
   .header-right{
     flex:0 0 auto !important;
     gap:.35rem !important;
     align-items:center !important;
   }
-  .desk-theme-toggle{
-    display:none !important;
+  .sidebar-toggle{
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    padding:0 !important;
+    border-radius:14px !important;
+  }
+  .hamburger-icon{
+    font-size:1rem !important;
   }
   #google_translate_element{
     display:none !important;
   }
 }
 
-/* Desktop: header-center theme button stays hidden; desk theme toggle in header-right */
+/* Desktop (>760px): theme bubble + sidebar box aligned together in header-right */
 @media(min-width:761px){
-  .header-theme-btn{display:none !important;}
+  .header-right{
+    display:flex !important;
+    align-items:center !important;
+    gap:.5rem !important;
+  }
+  html[data-theme] .header-theme-btn{
+    min-width:auto !important;
+    width:auto !important;
+    padding:0.5rem 1rem !important;
+    border-radius:var(--radius-pill) !important;
+  }
+  .sidebar-toggle{
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    padding:0 !important;
+    border-radius:var(--radius-sm) !important;
+  }
+  #google_translate_element{display:none !important;}
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -6939,3 +6967,70 @@ a.logo:focus-visible{
 #fam-chat .chat-header .chat-subtitle{color:#fff !important;}
 #fam-chat .chat-close{color:#fff !important;}
 #fam-chat .chat-close:hover{background:rgba(255,255,255,0.18) !important;}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HEADER THEME BUTTON — final guarantee: pill bubble matching search button
+   Theme button + sidebar button aligned together in header-right
+   ═══════════════════════════════════════════════════════════════════════ */
+html[data-theme] .header-theme-btn{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:0.5rem !important;
+  background:var(--surface2) !important;
+  border:1px solid var(--border) !important;
+  border-radius:999px !important;
+  padding:0.5rem 1rem !important;
+  color:var(--text) !important;
+  font-family:'DM Mono',monospace !important;
+  font-size:0.85rem !important;
+  cursor:pointer !important;
+  white-space:nowrap !important;
+}
+html[data-theme] .header-theme-btn:hover{
+  border-color:var(--gold) !important;
+  color:var(--gold) !important;
+  background:var(--surface3) !important;
+}
+html[data-theme] .header-theme-btn .theme-icon{font-size:1rem !important;line-height:1 !important;}
+html[data-theme] .header-theme-btn .theme-label{letter-spacing:.02em !important;}
+
+/* Mobile (<=760px): all three buttons as matching 42px icon boxes */
+@media(max-width:760px){
+  html[data-theme] .header-theme-btn{
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    padding:0 !important;
+    border-radius:14px !important;
+    gap:0 !important;
+    justify-content:center !important;
+    align-items:center !important;
+  }
+  html[data-theme] .header-theme-btn .theme-label{display:none !important;}
+  html[data-theme] .header-theme-btn .theme-icon{font-size:1rem !important;}
+  .sidebar-toggle{
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    padding:0 !important;
+    border-radius:14px !important;
+  }
+  .hamburger-icon{font-size:1rem !important;}
+}
+/* Desktop (>760px): theme bubble + sidebar box aligned side by side */
+@media(min-width:761px){
+  .header-right{
+    display:flex !important;
+    align-items:center !important;
+    gap:.5rem !important;
+  }
+  .sidebar-toggle{
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    padding:0 !important;
+    border-radius:12px !important;
+  }
+}
