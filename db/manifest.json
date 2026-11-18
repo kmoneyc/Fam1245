@@ -1,0 +1,32 @@
+{
+  "host": "github-pages",
+  "updatedAt": "2026-06-02T00:00:00Z",
+  "database": "Static JSON files in /data",
+  "calendarUpdate": "v4.56 full event/pack object extracted from uploaded Kingshot export",
+  "files": [
+    {
+      "file": "data/calculator-data.json",
+      "bytes": 685
+    },
+    {
+      "file": "data/changelog.json",
+      "bytes": 477
+    },
+    {
+      "file": "data/events.json",
+      "bytes": 103230
+    },
+    {
+      "file": "data/gift-codes.json",
+      "bytes": 946
+    },
+    {
+      "file": "data/guide-index.json",
+      "bytes": 1914
+    },
+    {
+      "file": "data/transfer-history.json",
+      "bytes": 459
+    }
+  ]
+}

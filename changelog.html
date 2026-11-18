@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Changelog</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fam-clean.css?v=20261114">
+<link rel="stylesheet" href="calc-style.css?v=20261114">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="calc-top-nav" aria-label="FAM quick links">
+      <a href="index.html">Manual</a>
+      <a href="calculators.html">Calculators</a>
+      <a href="event-calendar.html">Events</a>
+      <a href="gift-codes.html">Gift Codes</a>
+      <a href="transfer-planner.html">Transfer</a>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>🎨</span><span data-theme-label>Light</span></button>
+      <a href="index.html" class="header-back">&larr; Back to Manual</a>
+    </div>
+  </div>
+</header>
+<div class="app-body">
+
+<div class="page-container">
+  <div class="crumb"><a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span><span>Changelog</span></div>
+  <section class="hub-hero tool-hero">
+    <div><span class="eyebrow">FAM COMMAND &middot; RELEASE NOTES</span><h1>Changelog</h1><p>Track what changed on the FAM site so members know what tools are new, what bugs were fixed, and what is planned next.</p></div>
+    <div class="hub-status-card"><span>CURRENT VERSION</span><strong>5.4</strong><p>November 2026</p></div>
+  </section>
+
+  <div class="changelog-list">
+
+    <article class="changelog-entry current">
+      <span class="change-date">November 14, 2026</span>
+      <h2>Calculator Data Refresh — all 21 calculators updated from kingshot.net</h2>
+      <ul>
+        <li><strong>Pets Planner:</strong> replaced 6 fake pet names with all 14 real pets from kingshot.net/database/pets (Gray Wolf → Ironclad War Bear), with real rarities, generations, max levels, and Atk/Def bonuses (5.02% → 33.52%). Fixed undefined-variable bugs.</li>
+        <li><strong>Master Calculator:</strong> added all 7 missing masters — now all 10 from kingshot.net/database/masters (Cassia, Guinevere, Wilson, Isnor, Aena, Olander, Catherine) with real stat lines (Lethality 15–20%, Health 10–20%, max power 6.6M–19.1M). Fixed skill count (5 per master) and stat display.</li>
+        <li><strong>Building Upgrades:</strong> replaced fake approximations with real kingshot.net/database/truegold-requirements tier costs. All 8 buildings to TG8: 29,900 Truegold + 904 Tempered Truegold. Per-building tables for Town Center, Embassy, Barracks, Range, Stable, Command Center, Infirmary, War Academy.</li>
+        <li><strong>Governor Gear Optimizer:</strong> replaced fake Green→Red tiers with real Uncommon→Legendary qualities from kingshot.net/database/governor-gear. Real material totals per piece (~9.9M Satin, ~99.5K Gilded Threads, ~20.3K Artisan's Vision). Fixed undefined-variable bugs.</li>
+        <li><strong>Governor Charms Optimizer:</strong> updated max level 10 → 22 with real kingshot.net/database/governor-charm costs (1 charm = 10.9K Guides + 19.2K Designs; all 18 = 195.8K + 345.6K). Fixed undefined-variable bugs.</li>
+        <li><strong>Hero Comparison:</strong> added Gen 6–8 heroes from kingshot.net/heroes (Sophia, Triton, Yang, Ava, Charles, Wee & Woo, Diego, Liz, Luna) — 17 heroes total across 8 generations.</li>
+        <li><strong>Bug fixes across 8 calculators:</strong> fixed undefined-variable references in Pets, Masters, Governor Gear, Charms, Hero Gear, Widgets, Events, Battle Sim, Bear Sim, and Mystic Sim so all tools load and calculate without console errors.</li>
+        <li><strong>Truegold & Dust:</strong> source repointed to kingshot.net/database/truegold-requirements (29.9K TG + 904 TTG to TG8 across all buildings).</li>
+      </ul>
+    </article>
+
+    <article class="changelog-entry">
+      <span class="change-date">November 14, 2026</span>
+      <h2>K1245 live data refresh (sourced from kingshot.net)</h2>
+      <ul>
+        <li><strong>Gift codes:</strong> active list updated — VIP777 (expires ~Dec 31, 2026) and FORTHEKINGDOM; OFFICIALSTORE516, LOVEFAMILY, KSPRAWNING moved to expired.</li>
+        <li><strong>Heroes:</strong> Hero Builds now covers Gen 6 (Sophia, Triton, Yang — live Nov 9, 2026), Gen 7 (Ava, Charles, Wee & Woo, Feb 2027 est.) and Gen 8 (Diego, Liz, Luna, Apr 2027 est.).</li>
+        <li><strong>Pets:</strong> unlock timeline rewritten with real K1245 dates (Gen 1 Dec 26, 2025 through Gen 6 Nov 9, 2026, Gen 7 War Bear Feb 2027 est.), plus Gen 5–7 mythic refinement notes.</li>
+        <li><strong>Masters:</strong> full rewrite for all 10 masters with K1245 unlock dates, new F2P/P2P priorities (Olander first for KvK prep points), and blocks for Cassia through Catherine.</li>
+        <li><strong>Server timeline:</strong> rebuilt milestone list with real K1245 day numbers (TG9/10 at Day 666, Aug 2027 est.), slider extended to Day 700, War Academy corrected to Day 217 (Jun 8, 2026), TG reference table updated (TG8 unlocked Sep 28, 2026).</li>
+        <li><strong>Events:</strong> new Aug–Nov 2026 changes section (Blizzard Brawl, Hero Rally Gen 6, Swordland Summit League, Fishing rework, Cesares Fury 50→25, terror rally timers, scam warnings).</li>
+        <li><strong>KvK:</strong> next-KvK alert (~Nov 30 prep / ~Dec 5 Castle), Duel of the Elites (top 150, added Aug 24, 2026), and Olander's Oration notes.</li>
+        <li><strong>Truegold:</strong> K1245 status (TG8 unlocked), TG9/TG10 card, Super Refine batch-20 UI note.</li>
+        <li><strong>Events calendar:</strong> re-anchored to the live K1245 rotation (Week 1 = Nov 9, 2026) and Hero Rally + Swordland Summit League added to the rotation data.</li>
+        <li><strong>New Patch Notes page:</strong> chronological summary of every 2026 game announcement (Aug 8/17/24, Oct 12/19, Halloween, Nov 9) linked from the sidebar and footer.</li>
+      </ul>
+    </article>
+
+  </div>
+</div>
+<footer class="calc-footer">
+  <div><strong>FAM COMMAND</strong><span>Independent FAM alliance project. Not affiliated with Kingshot or its developers.</span></div>
+  <nav><a href="index.html">Manual</a><a href="calculators.html">Calculators</a><a href="event-calendar.html">Events</a><a href="changelog.html">Changelog</a></nav>
+</footer>
+<script src="theme-core.js?v=20261114"></script>
+<script src="venator-motion.js?v=20261114"></script>
+</body>
+</html>

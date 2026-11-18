@@ -1,0 +1,27 @@
+{
+  "source": "FAM local fallback (verified against kingshot.net)",
+  "updatedAt": "2026-11-15T00:00:00Z",
+  "kingdom": 1245,
+  "active": [
+    {
+      "code": "VIP777",
+      "status": "active",
+      "reward": "Gold Key x2, Mythic Conquest Skill Book x2, Gems x200, Mythic Expedition Skill Manual x2",
+      "note": "Expires in ~46 days (around Dec 31, 2026). Verify in-game before posting alliance-wide."
+    },
+    {
+      "code": "FORTHEKINGDOM",
+      "status": "active",
+      "reward": "1h General Speedup x10, 10K Hero XP x2, Gems x666, Gold Key x5",
+      "note": "No expiry announced. Verify in-game before posting alliance-wide."
+    }
+  ],
+  "expired": [
+    { "code": "OFFICIALSTORE516", "status": "expired" },
+    { "code": "LOVEFAMILY", "status": "expired", "note": "Expired 05/20/2026" },
+    { "code": "KSPRAWNING", "status": "expired" }
+  ],
+  "host": "github-pages",
+  "lastWorkflowRefresh": "2026-06-01T01:35:18.800Z",
+  "updatePolicy": "Static JSON database refreshed by GitHub Actions."
+}

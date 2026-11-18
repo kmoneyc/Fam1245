@@ -1,0 +1,20 @@
+{
+  "source": "FAM site",
+  "updatedAt": "2026-11-14T00:00:00Z",
+  "policy": "Grouped by 24-hour increments.",
+  "entries": [
+    {
+      "date": "November 14, 2026",
+      "title": "Calculator Data Refresh — all 21 calculators updated from kingshot.net",
+      "summary": "Pets Planner updated with all 14 real pets from kingshot.net/database/pets; Master Calculator now has all 10 masters with real stat lines; Building Upgrades uses real Truegold requirements (29.9K TG + 904 TTG to TG8); Governor Gear Optimizer uses real Uncommon→Legendary costs; Governor Charms updated to 22 levels with real Guide/Design costs; Hero Comparison adds Gen 6–8 heroes (17 total); fixed undefined-variable bugs across 8 calculators; Truegold & Dust source repointed to kingshot.net/database/truegold-requirements."
+    },
+    {
+      "date": "November 14, 2026",
+      "title": "K1245 live data refresh (sourced from kingshot.net)",
+      "summary": "Gift codes updated (VIP777, FORTHEKINGDOM active); Gen 6–8 hero tabs; pet unlock timeline with real K1245 dates; full 10-master rewrite; server timeline rebuilt to Day 700 with TG9/10 at Day 666; events/KvK/Truegold alerts for Nov 2026; calendar re-anchored to live K1245 rotation; new Patch Notes page covering all 2026 game announcements."
+    }
+  ],
+  "host": "github-pages",
+  "lastWorkflowRefresh": "2026-11-14T00:00:00Z",
+  "updatePolicy": "Static JSON database refreshed by GitHub Actions."
+}

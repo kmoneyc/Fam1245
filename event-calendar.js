@@ -1,0 +1,2561 @@
+// FAM Events & Packs Calendar v1.5
+// Full 4-week event and pack data extracted from uploaded Kingshot calendar export.
+// Re-anchored Nov 2026 to the live K1245 cycle: Week 1 starts Monday Nov 9, 2026
+// (Alliance Brawl + Alliance Championship + Hero Rally + Swordland Summit League week).
+// Live K1245 rotation: Week 1 = Alliance Brawl week, Week 2 = Strongest Governor +
+// Golden Glaives, Week 4 = KvK prep (Nov 30) + Castle Battle (~Dec 5).
+(function(){
+  var MS_DAY = 86400000;
+  var STORAGE_ANCHOR = 'fam_event_anchor_utc';
+  var STORAGE_VERSION = 'fam_event_calendar_version';
+  var CALENDAR_VERSION = '2026-11-09-k1245-live-cycle-v2';
+  var DEFAULT_ANCHOR = '2026-11-09T00:00:00Z';
+  var dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  var shortDayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+
+  // v4.17 live calendar sync: safe API attempt + K1245 fallback status.
+  var liveCalendarResult = null;
+  function syncLiveCalendar(){
+    if(!window.FAM_LIVE_SYNC) return;
+    FAM_LIVE_SYNC.get('calendar',{cacheHours:6}).then(function(result){
+      liveCalendarResult = result;
+      FAM_LIVE_SYNC.injectSyncBadge('#calendarSyncStatus', result, 'Events & Packs Sync');
+      // The local K1245 rotation remains the source of truth for rendering unless a future API returns a compatible events/weeks object.
+      // This keeps the page stable if the public API changes shape or blocks CORS.
+    }).catch(function(){});
+  }
+
+  var dailyPacks = [{"name": "Pet Chests", "type": "PACK", "titleKey": "petChests", "window": "Monday – Sunday", "note": "Chests containing pet materials and evolution items"}, {"name": "Gear Enhancement", "type": "GEAR", "titleKey": "gearEnhancement", "window": "Monday – Sunday", "note": "Materials to enhance gear equipment"}];
+
+  var specialNotes = ["Governor Stamina Pack: Governor Stamina Pack available for 3 days during Cesares Fury", "Does not include: Does not include Custom Pet Chests or Enhance Gear"];
+
+  var calendarWeeks = [
+ {
+  "name": "Week 1",
+  "tone": "pink",
+  "focus": "Alliance Brawl + Championship, Hero Rally (Gen 6, Nov 9-23), Swordland Summit League season, and Week 1 pack windows",
+  "verified": true,
+  "source": "Uploaded Kingshot calendar export (js/9f8633e712bf7703.js)",
+  "days": [
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "8 events · 2 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Hero Rally (Gen 6)",
+      "type": "COMPETITION",
+      "titleKey": "heroRallyGen6",
+      "window": "Nov 9 - Nov 23",
+      "note": "Gen 6 heroes featured (Sophia, Triton, Yang). KvK prep-day spins score in Kingdom of Power"
+     },
+     {
+      "name": "Alliance Brawl",
+      "type": "BATTLE",
+      "titleKey": "allianceBrawl",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Armament Competition 1",
+      "type": "COMPETITION",
+      "titleKey": "armamentCompetition1",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Officer Project 2",
+      "type": "COMPETITION",
+      "titleKey": "officerProject2",
+      "window": "Sunday – Monday",
+      "note": "Sunday – Monday"
+     },
+     {
+      "name": "Champagne Fair",
+      "type": "SPECIAL",
+      "titleKey": "champagneFair",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Custom Selection",
+      "type": "PACK",
+      "titleKey": "customSelection",
+      "window": "Monday – Wednesday",
+      "note": "Monday – Wednesday"
+     },
+     {
+      "name": "Combat Medic",
+      "type": "PACK",
+      "titleKey": "combatMedic",
+      "window": "Monday – Monday",
+      "note": "Monday – Monday"
+     }
+    ],
+    "prep": "Monday: 6 active event(s), 2 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "7 events · 1 pack",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Hero Rally (Gen 6)",
+      "type": "COMPETITION",
+      "titleKey": "heroRallyGen6",
+      "window": "Nov 9 - Nov 23",
+      "note": "Gen 6 heroes featured (Sophia, Triton, Yang). KvK prep-day spins score in Kingdom of Power"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Brawl",
+      "type": "BATTLE",
+      "titleKey": "allianceBrawl",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Armament Competition 1",
+      "type": "COMPETITION",
+      "titleKey": "armamentCompetition1",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Fishing",
+      "type": "SPECIAL",
+      "titleKey": "fishing",
+      "window": "Tuesday – Thursday",
+      "note": "Tuesday – Thursday"
+     },
+     {
+      "name": "Champagne Fair",
+      "type": "SPECIAL",
+      "titleKey": "champagneFair",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Custom Selection",
+      "type": "PACK",
+      "titleKey": "customSelection",
+      "window": "Monday – Wednesday",
+      "note": "Monday – Wednesday"
+     }
+    ],
+    "prep": "Tuesday: 7 active event(s), 1 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "7 events · 2 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Hero Rally (Gen 6)",
+      "type": "COMPETITION",
+      "titleKey": "heroRallyGen6",
+      "window": "Nov 9 - Nov 23",
+      "note": "Gen 6 heroes featured (Sophia, Triton, Yang). KvK prep-day spins score in Kingdom of Power"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Brawl",
+      "type": "BATTLE",
+      "titleKey": "allianceBrawl",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Desert Trial / Champion's Way",
+      "type": "COMPETITION",
+      "titleKey": "desertTrial",
+      "window": "Wednesday – Friday",
+      "note": "Wednesday – Friday"
+     },
+     {
+      "name": "Officer Project 1",
+      "type": "COMPETITION",
+      "titleKey": "officerProject1",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Fishing",
+      "type": "SPECIAL",
+      "titleKey": "fishing",
+      "window": "Tuesday – Thursday",
+      "note": "Tuesday – Thursday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Custom Selection",
+      "type": "PACK",
+      "titleKey": "customSelection",
+      "window": "Monday – Wednesday",
+      "note": "Monday – Wednesday"
+     },
+     {
+      "name": "Charm Craftsman",
+      "type": "PACK",
+      "titleKey": "charmCraftsman",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     }
+    ],
+    "prep": "Wednesday: 7 active event(s), 2 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "7 events · 3 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Hero Rally (Gen 6)",
+      "type": "COMPETITION",
+      "titleKey": "heroRallyGen6",
+      "window": "Nov 9 - Nov 23",
+      "note": "Gen 6 heroes featured (Sophia, Triton, Yang). KvK prep-day spins score in Kingdom of Power"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Brawl",
+      "type": "BATTLE",
+      "titleKey": "allianceBrawl",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Desert Trial / Champion's Way",
+      "type": "COMPETITION",
+      "titleKey": "desertTrial",
+      "window": "Wednesday – Friday",
+      "note": "Wednesday – Friday"
+     },
+     {
+      "name": "Officer Project 1",
+      "type": "COMPETITION",
+      "titleKey": "officerProject1",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Fishing",
+      "type": "SPECIAL",
+      "titleKey": "fishing",
+      "window": "Tuesday – Thursday",
+      "note": "Tuesday – Thursday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "Charm Craftsman",
+      "type": "PACK",
+      "titleKey": "charmCraftsman",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Custom Arms Set",
+      "type": "PACK",
+      "titleKey": "customArmsSet",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     }
+    ],
+    "prep": "Thursday: 7 active event(s), 3 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "6 events · 5 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Hero Rally (Gen 6)",
+      "type": "COMPETITION",
+      "titleKey": "heroRallyGen6",
+      "window": "Nov 9 - Nov 23",
+      "note": "Gen 6 heroes featured (Sophia, Triton, Yang). KvK prep-day spins score in Kingdom of Power"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Brawl",
+      "type": "BATTLE",
+      "titleKey": "allianceBrawl",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Desert Trial / Champion's Way",
+      "type": "COMPETITION",
+      "titleKey": "desertTrial",
+      "window": "Wednesday – Friday",
+      "note": "Wednesday – Friday"
+     },
+     {
+      "name": "Armament Competition 2",
+      "type": "COMPETITION",
+      "titleKey": "armamentCompetition2",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Hope Market",
+      "type": "PACK",
+      "titleKey": "hopeMarket",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "Combat Medic",
+      "type": "PACK",
+      "titleKey": "combatMedic",
+      "window": "Friday – Friday",
+      "note": "Friday – Friday"
+     },
+     {
+      "name": "Top Governor - Governor Gear",
+      "type": "PACK",
+      "titleKey": "topGovernorGovernorGear",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Custom Arms Set",
+      "type": "PACK",
+      "titleKey": "customArmsSet",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     }
+    ],
+    "prep": "Friday: 6 active event(s), 5 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "4 events · 3 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Hero Rally (Gen 6)",
+      "type": "COMPETITION",
+      "titleKey": "heroRallyGen6",
+      "window": "Nov 9 - Nov 23",
+      "note": "Gen 6 heroes featured (Sophia, Triton, Yang). KvK prep-day spins score in Kingdom of Power"
+     },
+     {
+      "name": "Alliance Brawl",
+      "type": "BATTLE",
+      "titleKey": "allianceBrawl",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Armament Competition 2",
+      "type": "COMPETITION",
+      "titleKey": "armamentCompetition2",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Hope Market",
+      "type": "PACK",
+      "titleKey": "hopeMarket",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "Top Governor - Governor Gear",
+      "type": "PACK",
+      "titleKey": "topGovernorGovernorGear",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     }
+    ],
+    "prep": "Saturday: 4 active event(s), 3 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "4 events · 3 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Hero Rally (Gen 6)",
+      "type": "COMPETITION",
+      "titleKey": "heroRallyGen6",
+      "window": "Nov 9 - Nov 23",
+      "note": "Gen 6 heroes featured (Sophia, Triton, Yang). KvK prep-day spins score in Kingdom of Power"
+     },
+     {
+      "name": "Alliance Brawl",
+      "type": "BATTLE",
+      "titleKey": "allianceBrawl",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Officer Project 2",
+      "type": "COMPETITION",
+      "titleKey": "officerProject2",
+      "window": "Sunday – Monday",
+      "note": "Sunday – Monday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Hope Market",
+      "type": "PACK",
+      "titleKey": "hopeMarket",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Top Governor - Governor Gear",
+      "type": "PACK",
+      "titleKey": "topGovernorGovernorGear",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Custom Forging Set",
+      "type": "PACK",
+      "titleKey": "customForgingSet",
+      "window": "Sunday – Sunday",
+      "note": "Sunday – Sunday"
+     }
+    ],
+    "prep": "Sunday: 4 active event(s), 3 active pack(s). Daily available packs also show below."
+   }
+  ]
+ },
+ {
+  "name": "Week 2",
+  "tone": "violet",
+  "focus": "Strongest Governor + Golden Glaives, Castle/All Out, Vikings, Hero Rally final days (to Nov 23), and Truegold/Governor pack windows",
+  "verified": true,
+  "source": "Uploaded Kingshot calendar export (js/9f8633e712bf7703.js)",
+  "days": [
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "6 events · 3 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Hero Rally (Gen 6)",
+      "type": "COMPETITION",
+      "titleKey": "heroRallyGen6",
+      "window": "Nov 9 - Nov 23",
+      "note": "Gen 6 heroes featured (Sophia, Triton, Yang). KvK prep-day spins score in Kingdom of Power"
+     },
+     {
+      "name": "Officer Project 2",
+      "type": "COMPETITION",
+      "titleKey": "officerProject2",
+      "window": "Monday – Monday",
+      "note": "Monday – Monday"
+     },
+     {
+      "name": "Golden Glaives",
+      "type": "BATTLE",
+      "titleKey": "goldenGlaives",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Strongest Governor",
+      "type": "COMPETITION",
+      "titleKey": "strongestGovernor",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Governor Stamina",
+      "type": "PACK",
+      "titleKey": "governorStamina",
+      "window": "Monday – Monday",
+      "note": "Monday – Monday"
+     },
+     {
+      "name": "Custom Forging Set",
+      "type": "PACK",
+      "titleKey": "customForgingSet",
+      "window": "Monday – Monday",
+      "note": "Monday – Monday"
+     }
+    ],
+    "prep": "Monday: 4 active event(s), 3 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "7 events · 1 pack",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Hero Rally (Gen 6)",
+      "type": "COMPETITION",
+      "titleKey": "heroRallyGen6",
+      "window": "Nov 9 - Nov 23",
+      "note": "Gen 6 heroes featured (Sophia, Triton, Yang). KvK prep-day spins score in Kingdom of Power"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Golden Glaives",
+      "type": "BATTLE",
+      "titleKey": "goldenGlaives",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Eternity's Reach",
+      "type": "BATTLE",
+      "titleKey": "eternitysReach",
+      "window": "Tuesday – Tuesday",
+      "note": "Tuesday – Tuesday"
+     },
+     {
+      "name": "Defeat Beasts",
+      "type": "COMPETITION",
+      "titleKey": "defeatBeasts",
+      "window": "Tuesday – Wednesday",
+      "note": "Tuesday – Wednesday"
+     },
+     {
+      "name": "Vikings Vengeance",
+      "type": "BATTLE",
+      "titleKey": "vikingsVengeance",
+      "window": "Tuesday – Thursday",
+      "note": "Tuesday – Thursday"
+     },
+     {
+      "name": "Strongest Governor",
+      "type": "COMPETITION",
+      "titleKey": "strongestGovernor",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     }
+    ],
+    "prep": "Tuesday: 7 active event(s), 1 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "5 events · 3 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Defeat Beasts",
+      "type": "COMPETITION",
+      "titleKey": "defeatBeasts",
+      "window": "Tuesday – Wednesday",
+      "note": "Tuesday – Wednesday"
+     },
+     {
+      "name": "Vikings Vengeance",
+      "type": "BATTLE",
+      "titleKey": "vikingsVengeance",
+      "window": "Tuesday – Thursday",
+      "note": "Tuesday – Thursday"
+     },
+     {
+      "name": "Strongest Governor",
+      "type": "COMPETITION",
+      "titleKey": "strongestGovernor",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Charm Craftsman",
+      "type": "PACK",
+      "titleKey": "charmCraftsman",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Troop Training",
+      "type": "PACK",
+      "titleKey": "troopTraining",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     }
+    ],
+    "prep": "Wednesday: 5 active event(s), 3 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "4 events · 7 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Vikings Vengeance",
+      "type": "BATTLE",
+      "titleKey": "vikingsVengeance",
+      "window": "Tuesday – Thursday",
+      "note": "Tuesday – Thursday"
+     },
+     {
+      "name": "Strongest Governor",
+      "type": "COMPETITION",
+      "titleKey": "strongestGovernor",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Charm Craftsman",
+      "type": "PACK",
+      "titleKey": "charmCraftsman",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Troop Training",
+      "type": "PACK",
+      "titleKey": "troopTraining",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Custom Arms Set",
+      "type": "PACK",
+      "titleKey": "customArmsSet",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     },
+     {
+      "name": "Tech Storm",
+      "type": "PACK",
+      "titleKey": "techStorm",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "World Traveler",
+      "type": "PACK",
+      "titleKey": "worldTraveler",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     }
+    ],
+    "prep": "Thursday: 4 active event(s), 7 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "4 events · 7 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "All Out",
+      "type": "BATTLE",
+      "titleKey": "allOut",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Strongest Governor",
+      "type": "COMPETITION",
+      "titleKey": "strongestGovernor",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Governor Gear Enhancement",
+      "type": "PACK",
+      "titleKey": "governorGearEnhancement",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Hall of Governors",
+      "type": "PACK",
+      "titleKey": "hallOfGovernors",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Custom Arms Set",
+      "type": "PACK",
+      "titleKey": "customArmsSet",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     },
+     {
+      "name": "Tech Storm",
+      "type": "PACK",
+      "titleKey": "techStorm",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "World Traveler",
+      "type": "PACK",
+      "titleKey": "worldTraveler",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     }
+    ],
+    "prep": "Friday: 4 active event(s), 7 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "4 events · 5 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "King's Castle",
+      "type": "BATTLE",
+      "titleKey": "kingsCastle",
+      "window": "Saturday – Saturday",
+      "note": "Saturday – Saturday"
+     },
+     {
+      "name": "All Out",
+      "type": "BATTLE",
+      "titleKey": "allOut",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Strongest Governor",
+      "type": "COMPETITION",
+      "titleKey": "strongestGovernor",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Governor Gear Enhancement",
+      "type": "PACK",
+      "titleKey": "governorGearEnhancement",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Hall of Governors",
+      "type": "PACK",
+      "titleKey": "hallOfGovernors",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "World Traveler",
+      "type": "PACK",
+      "titleKey": "worldTraveler",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     }
+    ],
+    "prep": "Saturday: 4 active event(s), 5 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "2 events · 2 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Strongest Governor",
+      "type": "COMPETITION",
+      "titleKey": "strongestGovernor",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Governor Gear Enhancement",
+      "type": "PACK",
+      "titleKey": "governorGearEnhancement",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Hall of Governors",
+      "type": "PACK",
+      "titleKey": "hallOfGovernors",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     }
+    ],
+    "prep": "Sunday: 2 active event(s), 2 active pack(s). Daily available packs also show below."
+   }
+  ]
+ },
+ {
+  "name": "Week 3",
+  "tone": "rose",
+  "focus": "Alliance Mobilization, Tri-Alliance, KvK matchmaking ramp-up, and Hope Market pack windows",
+  "verified": true,
+  "source": "Uploaded Kingshot calendar export (js/9f8633e712bf7703.js)",
+  "days": [
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "7 events · 1 pack",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Mobilization",
+      "type": "COMPETITION",
+      "titleKey": "allianceMobilization",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Tri-Alliance Clash",
+      "type": "SPECIAL",
+      "titleKey": "triAllianceClash",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Armament Competition 1",
+      "type": "COMPETITION",
+      "titleKey": "armamentCompetition1",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Officer Project 2",
+      "type": "COMPETITION",
+      "titleKey": "officerProject2",
+      "window": "Sunday – Monday",
+      "note": "Sunday – Monday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Custom Selection",
+      "type": "PACK",
+      "titleKey": "customSelection",
+      "window": "Monday – Wednesday",
+      "note": "Monday – Wednesday"
+     }
+    ],
+    "prep": "Monday: 6 active event(s), 1 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "6 events · 1 pack",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Mobilization",
+      "type": "COMPETITION",
+      "titleKey": "allianceMobilization",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Tri-Alliance Clash",
+      "type": "SPECIAL",
+      "titleKey": "triAllianceClash",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Armament Competition 1",
+      "type": "COMPETITION",
+      "titleKey": "armamentCompetition1",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Custom Selection",
+      "type": "PACK",
+      "titleKey": "customSelection",
+      "window": "Monday – Wednesday",
+      "note": "Monday – Wednesday"
+     }
+    ],
+    "prep": "Tuesday: 6 active event(s), 1 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "7 events · 2 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Mobilization",
+      "type": "COMPETITION",
+      "titleKey": "allianceMobilization",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Tri-Alliance Clash",
+      "type": "SPECIAL",
+      "titleKey": "triAllianceClash",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Desert Trial / Champion's Way",
+      "type": "COMPETITION",
+      "titleKey": "desertTrial",
+      "window": "Wednesday – Friday",
+      "note": "Wednesday – Friday"
+     },
+     {
+      "name": "Officer Project 1",
+      "type": "COMPETITION",
+      "titleKey": "officerProject1",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Charm Craftsman",
+      "type": "PACK",
+      "titleKey": "charmCraftsman",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Custom Selection",
+      "type": "PACK",
+      "titleKey": "customSelection",
+      "window": "Monday – Wednesday",
+      "note": "Monday – Wednesday"
+     }
+    ],
+    "prep": "Wednesday: 7 active event(s), 2 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "7 events · 3 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Mobilization",
+      "type": "COMPETITION",
+      "titleKey": "allianceMobilization",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Tri-Alliance Clash",
+      "type": "SPECIAL",
+      "titleKey": "triAllianceClash",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Desert Trial / Champion's Way",
+      "type": "COMPETITION",
+      "titleKey": "desertTrial",
+      "window": "Wednesday – Friday",
+      "note": "Wednesday – Friday"
+     },
+     {
+      "name": "Officer Project 1",
+      "type": "COMPETITION",
+      "titleKey": "officerProject1",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Charm Craftsman",
+      "type": "PACK",
+      "titleKey": "charmCraftsman",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "Custom Arms Set",
+      "type": "PACK",
+      "titleKey": "customArmsSet",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     }
+    ],
+    "prep": "Thursday: 7 active event(s), 3 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "8 events · 4 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Mobilization",
+      "type": "COMPETITION",
+      "titleKey": "allianceMobilization",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Tri-Alliance Clash",
+      "type": "SPECIAL",
+      "titleKey": "triAllianceClash",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Desert Trial / Champion's Way",
+      "type": "COMPETITION",
+      "titleKey": "desertTrial",
+      "window": "Wednesday – Friday",
+      "note": "Wednesday – Friday"
+     },
+     {
+      "name": "Armament Competition 2",
+      "type": "COMPETITION",
+      "titleKey": "armamentCompetition2",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Mystic Divination",
+      "type": "SPECIAL",
+      "titleKey": "mysticDivination",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Hope Market",
+      "type": "PACK",
+      "titleKey": "hopeMarket",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "Custom Arms Set",
+      "type": "PACK",
+      "titleKey": "customArmsSet",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     },
+     {
+      "name": "Jeweler's Collection",
+      "type": "PACK",
+      "titleKey": "jewelersCollection",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     }
+    ],
+    "prep": "Friday: 8 active event(s), 4 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "7 events · 3 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Alliance Mobilization",
+      "type": "COMPETITION",
+      "titleKey": "allianceMobilization",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Tri-Alliance Clash",
+      "type": "SPECIAL",
+      "titleKey": "triAllianceClash",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "KvK Matchmaking",
+      "type": "SPECIAL",
+      "titleKey": "kvkMatchmaking",
+      "window": "Saturday – Sunday",
+      "note": "Saturday – Sunday"
+     },
+     {
+      "name": "Armament Competition 2",
+      "type": "COMPETITION",
+      "titleKey": "armamentCompetition2",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Mystic Divination",
+      "type": "SPECIAL",
+      "titleKey": "mysticDivination",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Hope Market",
+      "type": "PACK",
+      "titleKey": "hopeMarket",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "Jeweler's Collection",
+      "type": "PACK",
+      "titleKey": "jewelersCollection",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     }
+    ],
+    "prep": "Saturday: 7 active event(s), 3 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "4 events · 4 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "Swordland Showdown",
+      "type": "BATTLE",
+      "titleKey": "swordlandShowdown",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "KvK Matchmaking",
+      "type": "SPECIAL",
+      "titleKey": "kvkMatchmaking",
+      "window": "Saturday – Sunday",
+      "note": "Saturday – Sunday"
+     },
+     {
+      "name": "Officer Project 2",
+      "type": "COMPETITION",
+      "titleKey": "officerProject2",
+      "window": "Sunday – Monday",
+      "note": "Sunday – Monday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Hope Market",
+      "type": "PACK",
+      "titleKey": "hopeMarket",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Combat Medic",
+      "type": "PACK",
+      "titleKey": "combatMedic",
+      "window": "Sunday – Sunday",
+      "note": "Sunday – Sunday"
+     },
+     {
+      "name": "Custom Forging Set",
+      "type": "PACK",
+      "titleKey": "customForgingSet",
+      "window": "Sunday – Sunday",
+      "note": "Sunday – Sunday"
+     },
+     {
+      "name": "Jeweler's Collection",
+      "type": "PACK",
+      "titleKey": "jewelersCollection",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     }
+    ],
+    "prep": "Sunday: 4 active event(s), 4 active pack(s). Daily available packs also show below."
+   }
+  ]
+ },
+ {
+  "name": "Week 4",
+  "tone": "dark",
+  "focus": "KvK prep week (next: ~Nov 30) + Castle Battle (~Dec 5), Vikings, Truegold, Wishful Emporium, and combat packs",
+  "verified": true,
+  "source": "Uploaded Kingshot calendar export (js/9f8633e712bf7703.js)",
+  "days": [
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "5 events · 2 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "KvK Prep Phase",
+      "type": "SPECIAL",
+      "titleKey": "kvkPrepPhase",
+      "window": "Monday – Friday",
+      "note": "Monday – Friday"
+     },
+     {
+      "name": "KvK Field Triage",
+      "type": "SPECIAL",
+      "titleKey": "kvkFieldTriage",
+      "window": "Saturday – Monday",
+      "note": "Saturday – Monday"
+     },
+     {
+      "name": "Golden Glaives",
+      "type": "BATTLE",
+      "titleKey": "goldenGlaives",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Custom Forging Set",
+      "type": "PACK",
+      "titleKey": "customForgingSet",
+      "window": "Monday – Monday",
+      "note": "Monday – Monday"
+     }
+    ],
+    "prep": "Monday: 4 active event(s), 2 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "7 events · 2 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "KvK Prep Phase",
+      "type": "SPECIAL",
+      "titleKey": "kvkPrepPhase",
+      "window": "Monday – Friday",
+      "note": "Monday – Friday"
+     },
+     {
+      "name": "Golden Glaives",
+      "type": "BATTLE",
+      "titleKey": "goldenGlaives",
+      "window": "Monday – Tuesday",
+      "note": "Monday – Tuesday"
+     },
+     {
+      "name": "Eternity's Reach",
+      "type": "BATTLE",
+      "titleKey": "eternitysReach",
+      "window": "Tuesday – Tuesday",
+      "note": "Tuesday – Tuesday"
+     },
+     {
+      "name": "Defeat Beasts",
+      "type": "COMPETITION",
+      "titleKey": "defeatBeasts",
+      "window": "Tuesday – Wednesday",
+      "note": "Tuesday – Wednesday"
+     },
+     {
+      "name": "Vikings Vengeance",
+      "type": "BATTLE",
+      "titleKey": "vikingsVengeance",
+      "window": "Tuesday – Thursday",
+      "note": "Tuesday – Thursday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Governor Stamina",
+      "type": "PACK",
+      "titleKey": "governorStamina",
+      "window": "Tuesday – Wednesday",
+      "note": "Tuesday – Wednesday"
+     }
+    ],
+    "prep": "Tuesday: 7 active event(s), 2 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "5 events · 4 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "KvK Prep Phase",
+      "type": "SPECIAL",
+      "titleKey": "kvkPrepPhase",
+      "window": "Monday – Friday",
+      "note": "Monday – Friday"
+     },
+     {
+      "name": "Defeat Beasts",
+      "type": "COMPETITION",
+      "titleKey": "defeatBeasts",
+      "window": "Tuesday – Wednesday",
+      "note": "Tuesday – Wednesday"
+     },
+     {
+      "name": "Vikings Vengeance",
+      "type": "BATTLE",
+      "titleKey": "vikingsVengeance",
+      "window": "Tuesday – Thursday",
+      "note": "Tuesday – Thursday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Charm Craftsman",
+      "type": "PACK",
+      "titleKey": "charmCraftsman",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Troop Training",
+      "type": "PACK",
+      "titleKey": "troopTraining",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Governor Stamina",
+      "type": "PACK",
+      "titleKey": "governorStamina",
+      "window": "Tuesday – Wednesday",
+      "note": "Tuesday – Wednesday"
+     }
+    ],
+    "prep": "Wednesday: 5 active event(s), 4 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "4 events · 7 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "KvK Prep Phase",
+      "type": "SPECIAL",
+      "titleKey": "kvkPrepPhase",
+      "window": "Monday – Friday",
+      "note": "Monday – Friday"
+     },
+     {
+      "name": "Vikings Vengeance",
+      "type": "BATTLE",
+      "titleKey": "vikingsVengeance",
+      "window": "Tuesday – Thursday",
+      "note": "Tuesday – Thursday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Charm Craftsman",
+      "type": "PACK",
+      "titleKey": "charmCraftsman",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Troop Training",
+      "type": "PACK",
+      "titleKey": "troopTraining",
+      "window": "Wednesday – Thursday",
+      "note": "Wednesday – Thursday"
+     },
+     {
+      "name": "Custom Arms Set",
+      "type": "PACK",
+      "titleKey": "customArmsSet",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     },
+     {
+      "name": "Tech Storm",
+      "type": "PACK",
+      "titleKey": "techStorm",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "World Traveler",
+      "type": "PACK",
+      "titleKey": "worldTraveler",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     }
+    ],
+    "prep": "Thursday: 4 active event(s), 7 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Sanctuary Battle",
+    "category": "Events + Packs",
+    "type": "4 events · 8 packs",
+    "icon": "✨",
+    "events": [
+     {
+      "name": "Sanctuary Battle",
+      "type": "SPECIAL",
+      "titleKey": "sanctuaryBattle",
+      "window": "Tuesday – Friday",
+      "note": "Tuesday – Friday"
+     },
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "KvK Prep Phase",
+      "type": "SPECIAL",
+      "titleKey": "kvkPrepPhase",
+      "window": "Monday – Friday",
+      "note": "Monday – Friday"
+     },
+     {
+      "name": "All Out",
+      "type": "BATTLE",
+      "titleKey": "allOut",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Top Governor - Governor Gear",
+      "type": "PACK",
+      "titleKey": "topGovernorGovernorGear",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Hall of Governors",
+      "type": "PACK",
+      "titleKey": "hallOfGovernors",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Enhance Gear",
+      "type": "PACK",
+      "titleKey": "enhanceGear",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Custom Arms Set",
+      "type": "PACK",
+      "titleKey": "customArmsSet",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     },
+     {
+      "name": "Tech Storm",
+      "type": "PACK",
+      "titleKey": "techStorm",
+      "window": "Thursday – Friday",
+      "note": "Thursday – Friday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "World Traveler",
+      "type": "PACK",
+      "titleKey": "worldTraveler",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     }
+    ],
+    "prep": "Friday: 4 active event(s), 8 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "4 events · 6 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "KvK Field Triage",
+      "type": "SPECIAL",
+      "titleKey": "kvkFieldTriage",
+      "window": "Saturday – Monday",
+      "note": "Saturday – Monday"
+     },
+     {
+      "name": "Castle Battle",
+      "type": "BATTLE",
+      "titleKey": "castleBattle",
+      "window": "Saturday – Saturday",
+      "note": "Saturday – Saturday"
+     },
+     {
+      "name": "All Out",
+      "type": "BATTLE",
+      "titleKey": "allOut",
+      "window": "Friday – Saturday",
+      "note": "Friday – Saturday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Truegold Wonders",
+      "type": "PACK",
+      "titleKey": "truegoldWonders",
+      "window": "Monday – Saturday",
+      "note": "Monday – Saturday"
+     },
+     {
+      "name": "Top Governor - Governor Gear",
+      "type": "PACK",
+      "titleKey": "topGovernorGovernorGear",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Hall of Governors",
+      "type": "PACK",
+      "titleKey": "hallOfGovernors",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Enhance Gear",
+      "type": "PACK",
+      "titleKey": "enhanceGear",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Conqueror",
+      "type": "PACK",
+      "titleKey": "conqueror",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     },
+     {
+      "name": "World Traveler",
+      "type": "PACK",
+      "titleKey": "worldTraveler",
+      "window": "Thursday – Saturday",
+      "note": "Thursday – Saturday"
+     }
+    ],
+    "prep": "Saturday: 4 active event(s), 6 active pack(s). Daily available packs also show below."
+   },
+   {
+    "event": "Alliance Championship",
+    "category": "Events + Packs",
+    "type": "2 events · 5 packs",
+    "icon": "🏆",
+    "events": [
+     {
+      "name": "Alliance Championship",
+      "type": "COMPETITION",
+      "titleKey": "allianceChampionship",
+      "window": "Monday – Sunday",
+      "note": "Monday – Sunday"
+     },
+     {
+      "name": "KvK Field Triage",
+      "type": "SPECIAL",
+      "titleKey": "kvkFieldTriage",
+      "window": "Saturday – Monday",
+      "note": "Saturday – Monday"
+     },
+     {
+      "name": "Swordland Summit League",
+      "type": "COMPETITION",
+      "titleKey": "swordlandSummitLeague",
+      "window": "Season - Oct 30 to Dec 15",
+      "note": "Season-long Swordland ladder running Oct 30 - Dec 15, 2026"
+     }
+    ],
+    "packs": [
+     {
+      "name": "Wishful Emporium",
+      "type": "PACK",
+      "titleKey": "wishfulEmporium",
+      "window": "Sunday – Sunday",
+      "note": "Sunday – Sunday"
+     },
+     {
+      "name": "Top Governor - Governor Gear",
+      "type": "PACK",
+      "titleKey": "topGovernorGovernorGear",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Hall of Governors",
+      "type": "PACK",
+      "titleKey": "hallOfGovernors",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Enhance Gear",
+      "type": "PACK",
+      "titleKey": "enhanceGear",
+      "window": "Friday – Sunday",
+      "note": "Friday – Sunday"
+     },
+     {
+      "name": "Combat Medic",
+      "type": "PACK",
+      "titleKey": "combatMedic",
+      "window": "Sunday – Sunday",
+      "note": "Sunday – Sunday"
+     }
+    ],
+    "prep": "Sunday: 2 active event(s), 5 active pack(s). Daily available packs also show below."
+   }
+  ]
+ }
+];
+
+  var lastCalendarGridKey = '';
+
+  function toUtcMidnight(d){ return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()); }
+  function parseAnchor(){
+    try{
+      var saved = localStorage.getItem(STORAGE_ANCHOR);
+      var savedVersion = localStorage.getItem(STORAGE_VERSION);
+      if(saved && savedVersion === CALENDAR_VERSION && !isNaN(Date.parse(saved))) return new Date(saved);
+    }catch(e){}
+    return new Date(DEFAULT_ANCHOR);
+  }
+  function setAnchorForCurrentPosition(weekIndex, dayIndex){
+    var now = new Date();
+    var today = toUtcMidnight(now);
+    var cycleOffset = (weekIndex * 7) + dayIndex;
+    var anchor = new Date(today - (cycleOffset * MS_DAY));
+    try{
+      localStorage.setItem(STORAGE_ANCHOR, anchor.toISOString());
+      localStorage.setItem(STORAGE_VERSION, CALENDAR_VERSION);
+    }catch(e){}
+    return anchor;
+  }
+  function resetAnchor(){ try{ localStorage.removeItem(STORAGE_ANCHOR); localStorage.removeItem(STORAGE_VERSION); }catch(e){} }
+  function getState(date){
+    var now = date || new Date();
+    var anchor = parseAnchor();
+    var anchorMid = toUtcMidnight(anchor);
+    var todayMid = toUtcMidnight(now);
+    var daysSince = Math.floor((todayMid - anchorMid) / MS_DAY);
+    var normalized = ((daysSince % 28) + 28) % 28;
+    var weekIndex = Math.floor(normalized / 7);
+    var dayIndex = normalized % 7;
+    var day = calendarWeeks[weekIndex].days[dayIndex];
+    var nextReset = new Date(todayMid + MS_DAY);
+    var tomorrowNorm = (normalized + 1) % 28;
+    var tomorrowWeek = Math.floor(tomorrowNorm / 7);
+    var tomorrowDay = tomorrowNorm % 7;
+    return {
+      now: now,
+      anchor: anchor,
+      weekIndex: weekIndex,
+      dayIndex: dayIndex,
+      week: calendarWeeks[weekIndex],
+      day: day,
+      dayName: dayNames[dayIndex],
+      shortDayName: shortDayNames[dayIndex],
+      nextReset: nextReset,
+      nextDay: calendarWeeks[tomorrowWeek].days[tomorrowDay],
+      nextDayName: dayNames[tomorrowDay],
+      daysSince: daysSince
+    };
+  }
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function formatCountdown(ms){
+    if(ms < 0) ms = 0;
+    var total = Math.floor(ms/1000);
+    var h = Math.floor(total/3600); total %= 3600;
+    var m = Math.floor(total/60); var s = total % 60;
+    return pad(h)+':'+pad(m)+':'+pad(s);
+  }
+  function utcClock(d){ return pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())+':'+pad(d.getUTCSeconds())+' UTC'; }
+  function packsForDay(day){ return dailyPacks.concat(day.packs || []); }
+  function eventsForDay(day){ return day.events || (day.event ? [{name:day.event,type:day.type || 'Event',note:day.prep || ''}] : []); }
+  function daySpecificPacks(day){ return day.packs || []; }
+  function dayStripPacks(day){
+    var arr = [];
+    eventsForDay(day).slice(0,2).forEach(function(e){ arr.push({name:e.name,type:'Event'}); });
+    daySpecificPacks(day).slice(0,3).forEach(function(p){ arr.push({name:p.name,type:'Pack'}); });
+    return arr.length ? arr : [{name:day.event,type:day.type,note:''}];
+  }
+  function primaryEventLabel(day){
+    var events = eventsForDay(day);
+    if(events.length === 1) return events[0].name;
+    if(events.length > 1) return events[0].name + ' +' + (events.length - 1) + ' more';
+    var packs = daySpecificPacks(day);
+    if(packs.length === 1) return packs[0].name;
+    if(packs.length > 1) return packs[0].name + ' +' + (packs.length - 1) + ' more';
+    return day.event || 'Planning Day';
+  }
+  function el(id){ return document.getElementById(id); }
+  function htmlEscape(str){ return String(str).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function renderItemList(target, items, emptyText){
+    if(!target) return;
+    if(!items || !items.length){
+      target.innerHTML = '<li><strong>'+htmlEscape(emptyText || 'None listed')+'</strong><span>Check in-game if needed</span></li>';
+      return;
+    }
+    target.innerHTML = items.map(function(p){
+      var meta = [p.type || '', p.window || p.note || ''].filter(Boolean).join(' · ');
+      return '<li><strong>'+htmlEscape(p.name || p.title)+'</strong><span>'+htmlEscape(meta)+'</span></li>';
+    }).join('');
+  }
+  function renderPackList(target, packs){ renderItemList(target, packs, 'No packs listed'); }
+  function renderEventList(target, events){ renderItemList(target, events, 'No events listed'); }
+  function renderTodayWidgets(){
+    var state = getState();
+    var eventName = el('todayEventName');
+    if(!eventName) return;
+    var events = eventsForDay(state.day);
+    var packs = packsForDay(state.day);
+    eventName.textContent = state.day.icon + ' ' + primaryEventLabel(state.day);
+    var meta = el('todayEventMeta'); if(meta) meta.textContent = state.week.name+' • '+state.dayName+' • '+events.length+' active event(s) • '+daySpecificPacks(state.day).length+' active pack(s)';
+    var prep = el('todayEventPrep'); if(prep) prep.textContent = state.day.prep;
+    var count = el('todayCountdown'); if(count) count.textContent = formatCountdown(state.nextReset - state.now);
+    var clock = el('todayUtcNow'); if(clock) clock.textContent = utcClock(state.now);
+    var next = el('todayNextEvent'); if(next) next.textContent = 'Next: '+state.nextDayName+' — '+primaryEventLabel(state.nextDay);
+    var week = el('todayWeekPill'); if(week) week.textContent = state.week.name;
+    var source = el('todaySourceNote'); if(source) source.textContent = 'Full 4-week data extracted from uploaded Kingshot calendar export. Week 1 Monday anchor: May 25, 2026 UTC.';
+    renderEventList(el('todayEventsList'), events);
+    renderPackList(el('todayPacksList'), packs);
+  }
+  function renderFullCalendar(){
+    var state = getState();
+    var title = el('calendarTodayTitle');
+    if(!title) return;
+    var events = eventsForDay(state.day);
+    var packs = packsForDay(state.day);
+    title.textContent = state.day.icon + ' ' + primaryEventLabel(state.day);
+    var meta = el('calendarTodayMeta'); if(meta) meta.textContent = state.week.name+' • '+state.dayName+' • '+events.length+' active event(s) • '+daySpecificPacks(state.day).length+' active pack(s)';
+    var prep = el('calendarTodayPrep'); if(prep) prep.textContent = state.day.prep;
+    var count = el('calendarCountdown'); if(count) count.textContent = formatCountdown(state.nextReset - state.now);
+    var clock = el('calendarUtcNow'); if(clock) clock.textContent = utcClock(state.now);
+    var next = el('calendarNextEvent'); if(next) next.textContent = state.nextDayName+' — '+primaryEventLabel(state.nextDay);
+    renderEventList(el('calendarEventsList'), events);
+    renderPackList(el('calendarPacksList'), packs);
+
+    var renderKey = state.weekIndex + '-' + state.dayIndex + '-' + state.anchor.toISOString();
+    var grid = el('calendarWeekGrid');
+    if(grid && lastCalendarGridKey !== renderKey){
+      grid.innerHTML = calendarWeeks.map(function(week, wi){
+        var days = week.days.map(function(day, di){
+          var active = wi === state.weekIndex && di === state.dayIndex ? ' is-current' : '';
+          var verified = week.verified ? ' verified' : '';
+          return '<article class="calendar-day-card'+active+verified+'" data-week="'+wi+'" data-day="'+di+'">'
+            + '<div class="day-card-top"><span>'+shortDayNames[di]+'</span><em>'+week.name+'</em></div>'
+            + '<h3>'+htmlEscape(day.icon+' '+primaryEventLabel(day))+'</h3>'
+            + '<p>'+htmlEscape(eventsForDay(day).length+' events • '+daySpecificPacks(day).length+' packs')+'</p>'
+            + '<div class="day-pack-strip">'+dayStripPacks(day).map(function(p){return '<span>'+htmlEscape(p.name)+'</span>';}).join('')+'</div>'
+            + '</article>';
+        }).join('');
+        return '<section class="calendar-week-panel" data-week-panel="'+wi+'"><div class="week-panel-head"><div><h2>'+week.name+'</h2><p>'+htmlEscape(week.focus)+'</p></div><span>'+(week.verified?'Public seed':'Kingdom editable')+'</span></div><div class="calendar-days-row">'+days+'</div></section>';
+      }).join('');
+      grid.querySelectorAll('[data-week][data-day]').forEach(function(card){
+        card.addEventListener('click', function(){
+          setAnchorForCurrentPosition(Number(card.getAttribute('data-week')), Number(card.getAttribute('data-day')));
+          lastCalendarGridKey = '';
+          renderFullCalendar(); renderTodayWidgets();
+        });
+      });
+      lastCalendarGridKey = renderKey;
+    }
+
+    var timeline = el('calendarNextSeven');
+    if(timeline && timeline.dataset.renderKey !== renderKey){
+      var rows = [];
+      for(var i=0;i<7;i++){
+        var idx = (((state.weekIndex*7+state.dayIndex+i)%28)+28)%28;
+        var wi = Math.floor(idx/7), di = idx%7;
+        var d = calendarWeeks[wi].days[di];
+        rows.push('<li'+(i===0?' class="active"':'')+'><span>'+shortDayNames[di]+'</span><strong>'+htmlEscape(primaryEventLabel(d))+'</strong><em>'+htmlEscape(calendarWeeks[wi].name+' • '+eventsForDay(d).length+' events • '+daySpecificPacks(d).length+' packs')+'</em></li>');
+      }
+      timeline.innerHTML = rows.join('');
+      timeline.dataset.renderKey = renderKey;
+    }
+
+    var weekSelect = el('calendarWeekSelect');
+    var daySelect = el('calendarDaySelect');
+    if(weekSelect && daySelect){
+      if(!weekSelect.dataset.ready){
+        weekSelect.innerHTML = calendarWeeks.map(function(w,i){ return '<option value="'+i+'">'+w.name+'</option>'; }).join('');
+        daySelect.innerHTML = dayNames.map(function(d,i){ return '<option value="'+i+'">'+d+'</option>'; }).join('');
+        weekSelect.dataset.ready = '1';
+      }
+      weekSelect.value = String(state.weekIndex);
+      daySelect.value = String(state.dayIndex);
+    }
+  }
+  function bindControls(){
+    var save = el('saveCalendarPosition');
+    if(save && !save.dataset.bound){
+      save.dataset.bound='1';
+      save.addEventListener('click', function(){
+        var wi = Number(el('calendarWeekSelect').value || 0);
+        var di = Number(el('calendarDaySelect').value || 0);
+        setAnchorForCurrentPosition(wi, di);
+        lastCalendarGridKey = '';
+        renderFullCalendar(); renderTodayWidgets();
+      });
+    }
+    var reset = el('resetCalendarPosition');
+    if(reset && !reset.dataset.bound){
+      reset.dataset.bound='1';
+      reset.addEventListener('click', function(){
+        resetAnchor();
+        lastCalendarGridKey = '';
+        renderFullCalendar(); renderTodayWidgets();
+      });
+    }
+  }
+  function init(){
+    bindControls();
+    renderTodayWidgets();
+    renderFullCalendar();
+    setInterval(function(){ renderTodayWidgets(); renderFullCalendar(); }, 1000);
+  }
+  window.FAMEventCalendar = {weeks:calendarWeeks, dailyPacks:dailyPacks, specialNotes:specialNotes, getState:getState, eventsForDay:eventsForDay, packsForDay:packsForDay, setAnchorForCurrentPosition:setAnchorForCurrentPosition, resetAnchor:resetAnchor, renderTodayWidgets:renderTodayWidgets, renderFullCalendar:renderFullCalendar};
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ init(); syncLiveCalendar(); }); else { init(); syncLiveCalendar(); }
+})();
