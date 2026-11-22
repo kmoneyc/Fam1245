@@ -18,6 +18,16 @@
 .calc-category-count{font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);border:1px solid rgba(214,48,122,.24);background:rgba(214,48,122,.08);border-radius:999px;padding:.25rem .5rem;white-space:nowrap;}
 .calc-grid.category-grid{margin-bottom:1rem;}
 @media(max-width:640px){.calc-category-head{align-items:flex-start;flex-direction:column;gap:.35rem}.calc-category-count{align-self:flex-start}}
+.hub-hero{padding-bottom:1rem;}
+.hub-hero h1{font-size:clamp(2rem,6vw,3rem)!important;margin:.25rem 0 .5rem;}
+.hub-hero p{font-size:.9rem;color:var(--text-dim);max-width:720px;}
+.hub-hero .eyebrow{font-size:.72rem;letter-spacing:.12em;}
+.hub-controls{margin-top:1rem;}
+.filter-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem;}
+.filter-chip{background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);border-radius:999px;padding:.45rem .85rem;font-size:.78rem;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace;}
+.filter-chip.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.filter-chip:hover{border-color:var(--gold);color:var(--gold);}
+.filter-count{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--text-muted);margin:0;}
 </style>
 
 </head>
@@ -46,22 +56,10 @@
       <span class="eyebrow">FAM TOOLS &middot; K1245</span>
       <h1>Calculators Hub</h1>
       <p>Quick launch every FAM calculator, filter by task, and plan your next upgrade without digging through the field manual.</p>
-      <div class="hero-actions">
-        <a class="action-pill" href="calc-masters.html">Open Master Calculator</a>
-        <a class="action-pill secondary" href="calc-castle.html">Castle Rally Tool</a>
-        <a class="action-pill secondary" href="calc-bear-sim.html">Bear Simulator</a>
-        <a class="action-pill secondary" href="calc-governor-gear.html">Governor Gear</a>
-      </div>
-    </div>
-    <div class="hub-status-card">
-      <span>LIVE TOOLKIT</span>
-      <strong>22</strong>
-      <p>Tools ready</p>
     </div>
   </section>
 
   <div class="hub-controls">
-    <label class="hub-search"><span>&#128269;</span><input data-calc-search type="search" placeholder="Search calculators, resources, events..."></label>
     <div class="filter-row" data-tab-group="calc-filter">
       <button class="filter-chip active" data-calc-filter="all">All</button>
       <button class="filter-chip" data-calc-filter="combat">Combat</button>
@@ -69,6 +67,7 @@
       <button class="filter-chip" data-calc-filter="time">Time</button>
       <button class="filter-chip" data-calc-filter="events">Events</button>
       <button class="filter-chip" data-calc-filter="planning">Planning</button>
+      <button class="filter-chip" data-calc-filter="database">Database</button>
     </div>
     <p class="filter-count" data-calc-count>22 tools shown</p>
   </div>
