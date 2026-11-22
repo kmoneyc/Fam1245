@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Governor Equipment Database</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fam-clean.css?v=20261114">
+<link rel="stylesheet" href="calc-style.css?v=20261114">
+
+<style>
+.db-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin:1rem 0;}
+.db-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1rem;overflow:hidden;transition:transform .18s,box-shadow .18s;}
+.db-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(214,48,122,.1);border-color:var(--border-bright);}
+.db-card h3{margin:0 0 .25rem;font-size:.95rem;color:var(--text);}
+.db-card .bld-cat{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.4rem;}
+.db-stat{display:flex;justify-content:space-between;font-size:.78rem;color:var(--text-dim);margin:.15rem 0;}
+.db-stat strong{color:var(--text);}
+.db-section{margin:2.5rem 0;}
+.db-section h2{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:var(--text);margin:0 0 .75rem;letter-spacing:.02em;}
+.db-section p{color:var(--text-dim);font-size:.86rem;line-height:1.55;}
+.tg-table{width:100%;border-collapse:collapse;font-size:.72rem;margin:1rem 0;}
+.tg-table th{text-align:left;color:var(--text-dim);padding:.4rem .5rem;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;}
+.tg-table td{padding:.4rem .5rem;border-bottom:1px solid rgba(42,42,42,0.3);color:var(--text);}
+.tg-table tr:hover td{background:var(--surface2);}
+.tg-table tr:last-child td{border-bottom:none;}
+.tg-total{font-weight:700;color:var(--gold);}
+.tg-tier{font-weight:700;color:var(--primary);}
+.db-piece{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--primary);margin:0 0 .4rem;}
+.db-qual{font-size:.74rem;font-weight:700;color:var(--gold);margin-top:1rem;}
+.set-table{width:100%;border-collapse:collapse;font-size:.72rem;margin:1rem 0;}
+.set-table th{text-align:left;color:var(--text-dim);padding:.4rem .5rem;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:.64rem;}
+.set-table td{padding:.4rem .5rem;border-bottom:1px solid rgba(42,42,42,0.3);color:var(--text);}
+@media(max-width:640px){.db-grid{grid-template-columns:1fr;}}
+</style>
+
+</head>
+<body class="calc-theme-modern">
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions"><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>🎨</span><span data-theme-label>Theme</span></button><a href="calculators.html" class="header-back">&larr; All Calculators</a></div>
+  </div>
+</header>
+
+<div class="app-body">
+<div class="page-container">
+
+  <div class="crumb">
+    <a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span>
+    <a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span>
+    <span>Governor Equipment Database</span>
+  </div>
+
+  <section class="opt-hero">
+    <span class="eyebrow">FAM DATABASE · GOVERNOR EQUIPMENT</span>
+    <h1>Governor Gear &amp; Charms</h1>
+    <p>Upgrade costs, power, stats, and set bonuses for Governor Gear (6 pieces) and Governor Charms (18 slots). Data from kingshot.net/database/governor-gear and governor-charm.</p>
+  </div>
+
+  <!-- GOVERNOR GEAR SECTION -->
+  <div class="db-section">
+    <h2>Governor Gear (6 Pieces)</h2>
+    <p>One set of 6 pieces for you as Governor, not for a hero: 2 for each troop type. A piece adds attack and defense to its own troop type only. Grows through 58 levels in 5 qualities, from Uncommon to Legendary.</p>
+
+    <div class="db-grid">
+      <div class="db-card">
+        <div class="bld-cat">Materials (per piece → all 6)</div>
+        <h3>Material Costs to Max</h3>
+        <div class="db-stat"><span>Satin</span><strong>9.9M → 59.7M</strong></div>
+        <div class="db-stat"><span>Gilded Threads</span><strong>99.5K → 596.9K</strong></div>
+        <div class="db-stat"><span>Artisan's Vision</span><strong>20.3K → 121.5K</strong></div>
+        <div class="db-stat"><span>Attack &amp; Defense at max</span><strong>+171.00%</strong></div>
+        <div class="db-stat"><span>Troops Deployment Capacity</span><strong>+2,000</strong></div>
+        <div class="db-stat"><span>Quality</span><strong>Legendary T6 · 3 stars</strong></div>
+      </div>
+
+      <div class="db-card">
+        <div class="bld-cat">Gear Pieces</div>
+        <h3>Pieces by Troop Type</h3>
+        <div class="db-stat"><span>Cavalry</span><strong>Hood · Charmstone</strong></div>
+        <div class="db-stat"><span>Infantry</span><strong>Cloak · Breeches</strong></div>
+        <div class="db-stat"><span>Archer</span><strong>Ring · Staff</strong></div>
+        <div class="db-stat"><span>Total pieces</span><strong>6</strong></div>
+        <div class="db-stat"><span>Charms per piece</span><strong>3</strong></div>
+        <div class="db-stat"><span>Total charm slots</span><strong>18</strong></div>
+      </div>
+    </div>
+
+    <div class="db-qual">Level Costs &amp; Stats (per piece)</div>
+    <table class="tg-table">
+      <thead><tr><th>Level</th><th>Satin</th><th>Gilded Threads</th><th>Artisan's Vision</th><th>Power</th><th>Atk/Def</th><th>Capacity</th><th>Rating</th></tr></thead>
+      <tbody>
+        <tr><td class="tg-tier">Uncommon · 0★</td><td>1.5K</td><td>15</td><td>—</td><td>224.4K</td><td>9.35%</td><td>—</td><td>1.1K</td></tr>
+        <tr><td class="tg-tier">Uncommon · 1★</td><td>3.8K</td><td>40</td><td>—</td><td>306K</td><td>12.75%</td><td>—</td><td>3K</td></tr>
+        <tr><td class="tg-tier">Rare · 0★</td><td>7K</td><td>70</td><td>—</td><td>408K</td><td>17.00%</td><td>—</td><td>6K</td></tr>
+        <tr><td class="tg-tier">Rare · 1★</td><td>9.7K</td><td>95</td><td>—</td><td>510K</td><td>21.25%</td><td>—</td><td>10.5K</td></tr>
+        <tr><td class="tg-tier">Rare · 2★</td><td>1K</td><td>10</td><td>45</td><td>612K</td><td>25.50%</td><td>—</td><td>15.6K</td></tr>
+        <tr><td class="tg-tier">Rare · 3★</td><td>1K</td><td>10</td><td>50</td><td>714K</td><td>29.75%</td><td>—</td><td>21K</td></tr>
+        <tr><td class="tg-tier">Epic · 0★</td><td>1.5K</td><td>15</td><td>60</td><td>816K</td><td>34.00%</td><td>—</td><td>24.3K</td></tr>
+        <tr><td class="tg-tier">Epic · 1★</td><td>1.5K</td><td>15</td><td>70</td><td>885.4K</td><td>36.89%</td><td>—</td><td>27.5K</td></tr>
+        <tr><td class="tg-tier">Epic · 2★</td><td>6.5K</td><td>65</td><td>40</td><td>954.7K</td><td>39.78%</td><td>—</td><td>30.7K</td></tr>
+        <tr><td class="tg-tier">Epic · 3★</td><td>8K</td><td>80</td><td>50</td><td>1M</td><td>42.67%</td><td>—</td><td>34K</td></tr>
+        <tr><td class="tg-tier">Mythic · 0★</td><td>22K</td><td>220</td><td>40</td><td>1.4M</td><td>56.78%</td><td>—</td><td>55.3K</td></tr>
+        <tr><td class="tg-tier">Mythic · 3★</td><td>26K</td><td>260</td><td>45</td><td>1.5M</td><td>64.43%</td><td>—</td><td>74K</td></tr>
+        <tr><td class="tg-tier">Legendary · 0★</td><td>108K</td><td>1.1K</td><td>220</td><td>2.3M</td><td>97.50%</td><td>10</td><td>172K</td></tr>
+        <tr><td class="tg-tier">Legendary · 3★</td><td>128K</td><td>1.3K</td><td>250</td><td>2.5M</td><td>105.00%</td><td>160</td><td>208K</td></tr>
+        <tr><td class="tg-tier">Legendary T6 · 3★</td><td>599K</td><td>6K</td><td>1.2K</td><td>4.1M</td><td>171.00%</td><td>2K</td><td>868K</td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="font-family:'DM Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--primary);margin:1.5rem 0 .4rem;">Set Bonuses (3 pieces / 6 pieces)</h4>
+    <table class="set-table">
+      <thead><tr><th>Piece level</th><th>3 pieces · Defense</th><th>6 pieces · Attack</th></tr></thead>
+      <tbody>
+        <tr><td>Uncommon · 0★</td><td>+2.00%</td><td>+2.00%</td></tr>
+        <tr><td>Rare · 0★</td><td>+3.00%</td><td>+3.00%</td></tr>
+        <tr><td>Epic · 0★</td><td>+5.00%</td><td>+5.00%</td></tr>
+        <tr><td>Mythic · 0★</td><td>+7.00%</td><td>+7.00%</td></tr>
+        <tr><td>Mythic T2 · 0★</td><td>+9.00%</td><td>+9.00%</td></tr>
+        <tr><td>Legendary · 0★</td><td>+12.00%</td><td>+12.00%</td></tr>
+        <tr><td>Legendary T3 · 0★</td><td>+19.50%</td><td>+19.50%</td></tr>
+        <tr><td>Legendary T6 · 0★</td><td>+30.00%</td><td>+30.00%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GOVERNOR CHARMS SECTION -->
+  <div class="db-section">
+    <h2>Governor Charms (18 Slots)</h2>
+    <p>Governor Charms sit on your Governor Gear. Each of the 6 gear pieces holds 3 charms, 18 in all. Every charm adds lethality and health to the troop type of its piece. Grows through 22 levels, up to +99% lethality and +99% health.</p>
+
+    <div class="db-grid">
+      <div class="db-card">
+        <div class="bld-cat">Materials (per charm → all 18)</div>
+        <h3>Material Costs to Max</h3>
+        <div class="db-stat"><span>Charm Guides</span><strong>10.9K → 195.8K</strong></div>
+        <div class="db-stat"><span>Charm Designs</span><strong>19.2K → 345.6K</strong></div>
+        <div class="db-stat"><span>Lethality &amp; Health at max</span><strong>+99.00%</strong></div>
+        <div class="db-stat"><span>Power at max</span><strong>2.4M</strong></div>
+        <div class="db-stat"><span>Max level</span><strong>22</strong></div>
+      </div>
+
+      <div class="db-card">
+        <div class="bld-cat">Charm Slots</div>
+        <h3>Charms by Troop Type</h3>
+        <div class="db-stat"><span>Cavalry</span><strong>Hood · Charmstone</strong></div>
+        <div class="db-stat"><span>Infantry</span><strong>Cloak · Breeches</strong></div>
+        <div class="db-stat"><span>Archer</span><strong>Ring · Staff</strong></div>
+        <div class="db-stat"><span>Slots per piece</span><strong>3</strong></div>
+        <div class="db-stat"><span>Total slots</span><strong>18</strong></div>
+      </div>
+    </div>
+
+    <h4 style="font-family:'DM Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--primary);margin:1.5rem 0 .4rem;">Charm Level Costs &amp; Stats</h4>
+    <table class="tg-table">
+      <thead><tr><th>Level</th><th>Charm Guides</th><th>Charm Designs</th><th>Power</th><th>Leth./Health</th><th>Rating</th></tr></thead>
+      <tbody>
+        <tr><td class="tg-tier">Level 1</td><td>5</td><td>5</td><td>205.7K</td><td>9.00%</td><td>625</td></tr>
+        <tr><td class="tg-tier">Level 2</td><td>40</td><td>15</td><td>288K</td><td>12.00%</td><td>1.9K</td></tr>
+        <tr><td class="tg-tier">Level 3</td><td>60</td><td>40</td><td>370K</td><td>16.00%</td><td>5K</td></tr>
+        <tr><td class="tg-tier">Level 4</td><td>80</td><td>100</td><td>452K</td><td>19.00%</td><td>13.8K</td></tr>
+        <tr><td class="tg-tier">Level 5</td><td>100</td><td>200</td><td>576K</td><td>25.00%</td><td>25K</td></tr>
+        <tr><td class="tg-tier">Level 6</td><td>120</td><td>300</td><td>700K</td><td>30.00%</td><td>37.5K</td></tr>
+        <tr><td class="tg-tier">Level 7</td><td>140</td><td>400</td><td>824K</td><td>35.00%</td><td>50K</td></tr>
+        <tr><td class="tg-tier">Level 8</td><td>200</td><td>400</td><td>948K</td><td>40.00%</td><td>63K</td></tr>
+        <tr><td class="tg-tier">Level 9</td><td>300</td><td>400</td><td>1.1M</td><td>45.00%</td><td>77K</td></tr>
+        <tr><td class="tg-tier">Level 10</td><td>420</td><td>420</td><td>1.2M</td><td>50.00%</td><td>92K</td></tr>
+        <tr><td class="tg-tier">Level 11</td><td>560</td><td>420</td><td>1.3M</td><td>55.00%</td><td>108K</td></tr>
+        <tr><td class="tg-tier">Level 12</td><td>580</td><td>600</td><td>1.4M</td><td>59.00%</td><td>126K</td></tr>
+        <tr><td class="tg-tier">Level 13</td><td>610</td><td>780</td><td>1.5M</td><td>63.00%</td><td>147K</td></tr>
+        <tr><td class="tg-tier">Level 14</td><td>645</td><td>960</td><td>1.6M</td><td>67.00%</td><td>171K</td></tr>
+        <tr><td class="tg-tier">Level 15</td><td>685</td><td>1.1K</td><td>1.7M</td><td>71.00%</td><td>198K</td></tr>
+        <tr><td class="tg-tier">Level 16</td><td>730</td><td>1.3K</td><td>1.8M</td><td>75.00%</td><td>228K</td></tr>
+        <tr><td class="tg-tier">Level 17</td><td>780</td><td>1.5K</td><td>1.9M</td><td>79.00%</td><td>261K</td></tr>
+        <tr><td class="tg-tier">Level 18</td><td>835</td><td>1.7K</td><td>2M</td><td>83.00%</td><td>297K</td></tr>
+        <tr><td class="tg-tier">Level 19</td><td>895</td><td>1.9K</td><td>2.1M</td><td>87.00%</td><td>336K</td></tr>
+        <tr><td class="tg-tier">Level 20</td><td>960</td><td>2K</td><td>2.2M</td><td>91.00%</td><td>378K</td></tr>
+        <tr><td class="tg-tier">Level 21</td><td>1K</td><td>2.2K</td><td>2.3M</td><td>95.00%</td><td>423K</td></tr>
+        <tr><td class="tg-tier">Level 22</td><td>1.1K</td><td>2.4K</td><td>2.4M</td><td>99.00%</td><td>471K</td></tr>
+        <tr class="tg-total"><td>All 18 charms</td><td>195.8K</td><td>345.6K</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>

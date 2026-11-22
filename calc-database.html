@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Kingshot Database</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fam-clean.css?v=20261114">
+<link rel="stylesheet" href="calc-style.css?v=20261114">
+
+<style>
+.db-hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1.5rem 0;}
+.db-hub-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.25rem;overflow:hidden;transition:transform .18s,box-shadow .18s;text-decoration:none;color:inherit;display:block;}
+.db-hub-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(214,48,122,.15);border-color:var(--border-bright);}
+.db-hub-card .cat{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.5rem;}
+.db-hub-card h2{font-family:'Orbitron',sans-serif;font-size:1.15rem;color:var(--text);margin:0 0 .4rem;}
+.db-hub-card p{color:var(--text-dim);font-size:.78rem;line-height:1.5;margin:0 0 .75rem;}
+.db-hub-card .count{font-family:'DM Mono',monospace;font-size:.68rem;background:rgba(214,48,122,.1);color:var(--gold);padding:.2rem .5rem;border-radius:999px;border:1px solid rgba(214,48,122,.3);}
+.db-hero{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border-radius:20px;padding:2rem;margin-bottom:2rem;}
+.db-hero h1{margin:0 0 .5rem;font-size:1.8rem;}
+.db-hero p{margin:0;opacity:.95;font-size:.95rem;}
+.db-note{margin-top:2rem;padding:1rem;background:var(--surface2);border:1px solid var(--border);border-radius:12px;font-size:.78rem;color:var(--text-dim);}
+@media(max-width:640px){.db-hub-grid{grid-template-columns:1fr;}}
+</style>
+
+</head>
+<body class="calc-theme-modern">
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions"><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>🎨</span><span data-theme-label>Theme</span></button><a href="calculators.html" class="header-back">&larr; All Calculators</a></div>
+  </div>
+</header>
+
+<div class="app-body">
+<div class="page-container">
+
+  <div class="crumb">
+    <a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span>
+    <a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span>
+    <span>Kingshot Database</span>
+  </div>
+
+  <section class="opt-hero">
+    <span class="eyebrow">FAM DATABASE</span>
+    <h1>Kingshot Database</h1>
+    <p>Browse heroes, research, buildings, governor gear, and charms. All data from kingshot.net/database, organized for K1245 planning.</p>
+  </div>
+
+  <div class="db-hub-grid">
+    <a href="calc-buildings-truegold.html" class="db-hub-card">
+      <div class="cat">Buildings &amp; Truegold</div>
+      <h2>Buildings &amp; Truegold</h2>
+      <p>10 buildings · 586 upgrade levels · Truegold TG1–TG8 costs for all 8 buildings · Tempered Truegold requirements.</p>
+      <span class="count">10 buildings · 8 TG tiers</span>
+    </a>
+
+    <a href="calc-governor-equipment.html" class="db-hub-card">
+      <div class="cat">Governor Equipment</div>
+      <h2>Governor Gear &amp; Charms</h2>
+      <p>6 gear pieces · 18 charm slots · Material costs (Satin, Threads, Vision, Guides, Designs) · Set bonuses · Max stats +171% / +99%.</p>
+      <span class="count">6 pieces · 18 slots</span>
+    </a>
+
+    <a href="calc-heroes-companions.html" class="db-hub-card">
+      <div class="cat">Heroes &amp; Companions</div>
+      <h2>Heroes, Masters &amp; Pets</h2>
+      <p>37 heroes across 8 generations · 10 Masters · 14 pets · Max Attack/Defense/Health · Expedition bonuses.</p>
+      <span class="count">37 heroes · 10 masters · 14 pets</span>
+    </a>
+
+    <a href="calc-research-db.html" class="db-hub-card">
+      <div class="cat">Research</div>
+      <h2>Academy · War Academy · Advanced Truegold · Alliance</h2>
+      <p>Research nodes, maximum bonuses, upgrade costs and requirements across all four research categories.</p>
+      <span class="count">4 categories · 100+ nodes</span>
+    </a>
+  </div>
+
+  <div class="db-note">
+    <strong>Source:</strong> All data is from <a href="https://kingshot.net/database" target="_blank" style="color:var(--gold);text-decoration:underline;">kingshot.net/database</a> and <a href="https://kingshot.net/heroes" target="_blank" style="color:var(--gold);text-decoration:underline;">kingshot.net/heroes</a>. This is a fan-made database for K1245 planning — always verify in-game values before spending resources.
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Heroes & Companions Database</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fam-clean.css?v=20261114">
+<link rel="stylesheet" href="calc-style.css?v=20261114">
+
+<style>
+.db-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin:1rem 0;}
+.db-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1rem;overflow:hidden;transition:transform .18s,box-shadow .18s;}
+.db-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(214,48,122,.1);border-color:var(--border-bright);}
+.db-card h3{margin:0 0 .25rem;font-size:.95rem;color:var(--text);}
+.db-card .bld-cat{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.4rem;}
+.db-stat{display:flex;justify-content:space-between;font-size:.78rem;color:var(--text-dim);margin:.15rem 0;}
+.db-stat strong{color:var(--text);}
+.db-section{margin:2.5rem 0;}
+.db-section h2{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:var(--text);margin:0 0 .75rem;letter-spacing:.02em;}
+.db-section p{color:var(--text-dim);font-size:.86rem;line-height:1.55;}
+.tg-table{width:100%;border-collapse:collapse;font-size:.72rem;margin:1rem 0;}
+.tg-table th{text-align:left;color:var(--text-dim);padding:.4rem .5rem;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;}
+.tg-table td{padding:.4rem .5rem;border-bottom:1px solid rgba(42,42,42,0.3);color:var(--text);}
+.tg-table tr:hover td{background:var(--surface2);}
+.tg-table tr:last-child td{border-bottom:none;}
+.tg-total{font-weight:700;color:var(--gold);}
+.tg-tier{font-weight:700;color:var(--primary);}
+.gen-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:.62rem;padding:.15rem .5rem;border-radius:999px;background:rgba(214,48,122,.1);color:var(--gold);border:1px solid rgba(214,48,122,.3);}
+.rarity-m{color:var(--gold);font-weight:700;}
+.rarity-e{color:#a855f7;font-weight:700;}
+.rarity-r{color:#3b82f6;font-weight:700;}
+.rarity-u{color:#22c55e;font-weight:700;}
+.rarity-c{color:#9ca3af;font-weight:700;}
+@media(max-width:640px){.db-grid{grid-template-columns:1fr;}}
+</style>
+
+</head>
+<body class="calc-theme-modern">
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions"><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>🎨</span><span data-theme-label>Theme</span></button><a href="calculators.html" class="header-back">&larr; All Calculators</a></div>
+  </div>
+</header>
+
+<div class="app-body">
+<div class="page-container">
+
+  <div class="crumb">
+    <a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span>
+    <a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span>
+    <span>Heroes &amp; Companions Database</span>
+  </div>
+
+  <section class="opt-hero">
+    <span class="eyebrow">FAM DATABASE · HEROES &amp; COMPANIONS</span>
+    <h1>Heroes, Masters &amp; Pets</h1>
+    <p>37 heroes across 8 generations, 10 Masters, and 14 pets. Max stats, skills, and Expedition bonuses. Data from kingshot.net/heroes and kingshot.net/database.</p>
+  </div>
+
+  <!-- HEROES SECTION -->
+  <div class="db-section">
+    <h2>Heroes (37 · 8 Generations)</h2>
+    <p>Cards show hero attack, defense, health, and Expedition bonus at maximum level and stars.</p>
+
+    <!-- Gen 8 -->
+    <div class="db-card">
+      <div class="bld-cat">Generation 8 · 3 heroes</div>
+      <h3>Diego</h3>
+      <span class="gen-badge">Mythic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>6.6K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>8.6K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>128.5K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>780.62%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Hero Roulette infantry with three full-value skills and a top joiner skill.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 8 · 3 heroes</div>
+      <h3>Liz</h3>
+      <span class="gen-badge">Mythic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>8.6K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>8.6K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>85.7K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>780.62%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Generation 8 cavalry built for 60/40 garrisons and area damage in Arena.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 8 · 3 heroes</div>
+      <h3>Luna</h3>
+      <span class="gen-badge">Mythic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>10.4K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>8.6K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>64.3K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>780.62%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Generation 8 archer for attacking PvP rallies, Bear Hunt and Arena damage.</p>
+    </div>
+
+    <!-- Gen 7 -->
+    <div class="db-card">
+      <div class="bld-cat">Generation 7 · 3 heroes</div>
+      <h3>Ava</h3>
+      <span class="gen-badge">Mythic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>7.1K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>7.1K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>71.3K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>650.52%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Fully offensive cavalry and the new favourite to lead or join Bear Hunt.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 7 · 3 heroes</div>
+      <h3>Charles</h3>
+      <span class="gen-badge">Mythic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>5.5K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>7.1K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>106.9K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>650.52%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Defensive infantry held back by two capped skills; invest with caution.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 7 · 3 heroes</div>
+      <h3>Wee &amp; Woo</h3>
+      <span class="gen-badge">Mythic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>8.7K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>7.1K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>53.4K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>650.52%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Must-have archer pair from the Hero Roulette for garrisons, joining and Arena.</p>
+    </div>
+
+    <!-- Gen 6 -->
+    <div class="db-card">
+      <div class="bld-cat">Generation 6 · 3 heroes</div>
+      <h3>Sophia</h3>
+      <span class="gen-badge">Mythic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>5.9K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>5.9K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>59.3K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>540.43%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Free-to-play friendly cavalry for 60/40 garrisons and crowd control in Arena.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 6 · 3 heroes</div>
+      <h3>Triton</h3>
+      <span class="gen-badge">Mythic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>4.5K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>5.9K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>88.9K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>540.43%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Defensive infantry whose high stats outweigh an underwhelming skill set.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 6 · 3 heroes</div>
+      <h3>Yang</h3>
+      <span class="gen-badge">Mythic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>7.2K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>5.9K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>44.5K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>540.43%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Offensive archer built to lead Bear Hunt rallies and carry the Arena back row.</p>
+    </div>
+
+    <!-- Gen 5 -->
+    <div class="db-card">
+      <div class="bld-cat">Generation 5 · 3 heroes</div>
+      <h3>Long Fei</h3>
+      <span class="gen-badge">Mythic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>3.8K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>4.9K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>73.9K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>444.36%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Free-to-play infantry for garrisons, PvP rallies and the Arena front row.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 5 · 3 heroes</div>
+      <h3>Thrud</h3>
+      <span class="gen-badge">Mythic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>4.9K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>4.9K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>49.3K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>444.36%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Offensive cavalry whose Reckless Charge hits all three enemy troop types.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 5 · 3 heroes</div>
+      <h3>Vivian</h3>
+      <span class="gen-badge">Mythic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>6K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>4.9K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>37K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>444.36%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Defensive archer with a rare joiner skill and an Arena attack on the back row.</p>
+    </div>
+
+    <!-- Gen 4 -->
+    <div class="db-card">
+      <div class="bld-cat">Generation 4 · 3 heroes</div>
+      <h3>Alcar</h3>
+      <span class="gen-badge">Mythic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>3.2K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>4.1K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>61.6K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>370.30%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Infantry hero who makes infantry hit hard and anchors 60/40 garrisons.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 4 · 3 heroes</div>
+      <h3>Margot</h3>
+      <span class="gen-badge">Mythic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>4.1K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>4.1K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>41.1K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>370.30%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Cavalry for 60/40 garrisons, a 25% Attack joiner and top Arena area damage.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 4 · 3 heroes</div>
+      <h3>Rosa</h3>
+      <span class="gen-badge">Mythic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>5K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>4.1K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>30.8K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>370.30%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Free-to-play friendly archer who takes over Bear Hunt leading in her generation.</p>
+    </div>
+
+    <!-- Gen 3 -->
+    <div class="db-card">
+      <div class="bld-cat">Generation 3 · 3 heroes</div>
+      <h3>Eric</h3>
+      <span class="gen-badge">Mythic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>2.6K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>3.3K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>50K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>290.23%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Defensive infantry, best garrison leader of his generation and a sturdy tank.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 3 · 3 heroes</div>
+      <h3>Jaeger</h3>
+      <span class="gen-badge">Mythic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>4K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>3.3K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>25K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>290.23%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Defensive archer for garrisons and a disruptive back-row bard in Arena.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 3 · 3 heroes</div>
+      <h3>Petra</h3>
+      <span class="gen-badge">Mythic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>3.3K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>3.3K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>33.3K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>290.23%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Free-to-play friendly cavalry whose Evil Eye keeps her leading Bear Hunt.</p>
+    </div>
+
+    <!-- Gen 2 -->
+    <div class="db-card">
+      <div class="bld-cat">Generation 2 · 3 heroes</div>
+      <h3>Hilde</h3>
+      <span class="gen-badge">Mythic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>2.7K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>26.6K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>240.19%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Cavalry healer and a small step up from Jabel.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 2 · 3 heroes</div>
+      <h3>Marlin</h3>
+      <span class="gen-badge">Mythic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>3.2K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>20K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>240.19%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Offensive archer who lifts Bear Hunt scores and controls Arena fights.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 2 · 3 heroes</div>
+      <h3>Zoe</h3>
+      <span class="gen-badge">Mythic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>2K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.7K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>40K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>240.19%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">The first mythic infantry for free-to-play players and a top garrison leader.</p>
+    </div>
+
+    <!-- Gen 1 -->
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Amadeus</h3>
+      <span class="gen-badge">Mythic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>2.1K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>41.6K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>260.21%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Pay-to-win VIP hero and the strongest Bear Hunt rally leader in the game.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Amane</h3>
+      <span class="gen-badge">Epic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>13.3K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>140.11%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Growth archer whose Tri-Phalanx is a 25% Attack joiner skill for Bear Hunt rallies.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Chenko</h3>
+      <span class="gen-badge">Epic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>1.8K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>17.8K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>140.11%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Farmable cavalry whose Stand of Arms Lethality joiner skill belongs in every alliance's rallies.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Diana</h3>
+      <span class="gen-badge">Epic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>13.3K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>110.09%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Farmable archer who cuts Stamina costs and deals area damage in early Conquest.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Edwin</h3>
+      <span class="gen-badge">Rare · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>1.4K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>14.4K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>90.07%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Growth hero who raises stone output; skip for combat.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Fahd</h3>
+      <span class="gen-badge">Epic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>1.8K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>17.8K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>140.11%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Niche cavalry for Desert Eclipse, an enemy damage joiner skill for PvP.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Forrest</h3>
+      <span class="gen-badge">Rare · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>1.1K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>21.6K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>90.07%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Growth hero who raises wood output; no useful combat role.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Gordon</h3>
+      <span class="gen-badge">Epic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>1.8K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>17.8K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>140.11%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Farmable cavalry with Super Nutrients, a 25% Health joiner skill for garrisons.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Helga</h3>
+      <span class="gen-badge">Mythic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>1.9K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>36.6K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>200.16%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Pay-to-win VIP hero and second-best Bear Hunt infantry leader after Amadeus.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Howard</h3>
+      <span class="gen-badge">Epic · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>1.4K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>26.6K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>140.11%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Free-to-play infantry anchor for early Conquest and Arena.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Jabel</h3>
+      <span class="gen-badge">Mythic · Cavalry</span>
+      <div class="db-stat"><span>Attack</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>22.2K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>200.16%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">The free-to-play mythic of Generation 1, strong in garrisons and early Arena.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Olive</h3>
+      <span class="gen-badge">Rare · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>1.8K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>10.8K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>90.07%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Growth hero who boosts bread output for the whole game.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Quinn</h3>
+      <span class="gen-badge">Epic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>13.3K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>140.11%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Free-to-play friendly archer with two combat Expedition skills.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Saul</h3>
+      <span class="gen-badge">Mythic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>2.7K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>16.7K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>200.16%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Growth archer whose construction bonus speeds up your account all game.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Seth</h3>
+      <span class="gen-badge">Rare · Infantry</span>
+      <div class="db-stat"><span>Attack</span><strong>1.1K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>21.6K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>90.07%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Growth hero for iron output and second tank in early Conquest.</p>
+    </div>
+    <div class="db-card">
+      <div class="bld-cat">Generation 1 · 16 heroes</div>
+      <h3>Yeonwoo</h3>
+      <span class="gen-badge">Epic · Archer</span>
+      <div class="db-stat"><span>Attack</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Defense</span><strong>2.2K</strong></div>
+      <div class="db-stat"><span>Health</span><strong>13.3K</strong></div>
+      <div class="db-stat"><span>Expedition</span><strong>140.11%</strong></div>
+      <p style="font-size:.74rem;color:var(--text-dim);margin-top:.5rem">Farmable archer with faster research, a 25% Lethality joiner skill and area damage in Arena.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>

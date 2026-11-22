@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d6307a">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('fam_theme')||'pink';}catch(e){document.documentElement.dataset.theme='pink';}</script>
+<title>FAM 1245 — Research Database</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fam-clean.css?v=20261114">
+<link rel="stylesheet" href="calc-style.css?v=20261114">
+
+<style>
+.db-section{margin:2.5rem 0;}
+.db-section h2{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:var(--text);margin:0 0 .75rem;letter-spacing:.02em;}
+.db-section p{color:var(--text-dim);font-size:.86rem;line-height:1.55;}
+.tg-table{width:100%;border-collapse:collapse;font-size:.72rem;margin:1rem 0;}
+.tg-table th{text-align:left;color:var(--text-dim);padding:.4rem .5rem;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;}
+.tg-table td{padding:.4rem .5rem;border-bottom:1px solid rgba(42,42,42,0.3);color:var(--text);}
+.tg-table tr:hover td{background:var(--surface2);}
+.tg-table tr:last-child td{border-bottom:none;}
+.tg-total{font-weight:700;color:var(--gold);}
+.tg-tier{font-weight:700;color:var(--primary);}
+.db-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1rem;overflow:hidden;transition:transform .18s,box-shadow .18s;}
+.db-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(214,48,122,.1);border-color:var(--border-bright);}
+.db-card h3{margin:0 0 .25rem;font-size:.95rem;color:var(--text);}
+.db-card .bld-cat{font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.4rem;}
+.db-stat{display:flex;justify-content:space-between;font-size:.78rem;color:var(--text-dim);margin:.15rem 0;}
+.db-stat strong{color:var(--text);}
+.db-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin:1rem 0;}
+.cat-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:.62rem;padding:.15rem .5rem;border-radius:999px;background:rgba(214,48,122,.1);color:var(--gold);border:1px solid rgba(214,48,122,.3);}
+@media(max-width:640px){.db-grid{grid-template-columns:1fr;}}
+</style>
+
+</head>
+<body class="calc-theme-modern">
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">FAM COMMAND<span>KINGSHOT &middot; K1245</span></a>
+    <div class="header-actions"><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span data-theme-icon>🎨</span><span data-theme-label>Theme</span></button><a href="calculators.html" class="header-back">&larr; All Calculators</a></div>
+  </div>
+</header>
+
+<div class="app-body">
+<div class="page-container">
+
+  <div class="crumb">
+    <a href="index.html">FAM Manual</a><span class="sep">&rsaquo;</span>
+    <a href="calculators.html">Calculators</a><span class="sep">&rsaquo;</span>
+    <span>Research Database</span>
+  </div>
+
+  <section class="opt-hero">
+    <span class="eyebrow">FAM DATABASE · RESEARCH</span>
+    <h1>Academy · War Academy · Advanced Truegold · Alliance</h1>
+    <p>Research nodes, maximum bonuses, upgrade costs, and requirements across all four research categories. Data from kingshot.net/database.</p>
+  </div>
+
+  <!-- ACADEMY RESEARCH -->
+  <div class="db-section">
+    <h2>Academy Research</h2>
+    <span class="cat-badge">Growth 45 · Economy 44 · Battle 102</span>
+    <p>Explore research by category. View maximum bonuses, upgrade costs and requirements.</p>
+
+    <table class="tg-table">
+      <thead><tr><th>Research</th><th>Bonus</th><th>Max Level</th></tr></thead>
+      <tbody>
+        <tr><td>Tooling Up I</td><td>Construction Speed 1.30%</td><td>3</td></tr>
+        <tr><td>Tooling Up II</td><td>Construction Speed 2.20%</td><td>3</td></tr>
+        <tr><td>Tooling Up III</td><td>Construction Speed 3.00%</td><td>3</td></tr>
+        <tr><td>Tooling Up IV</td><td>Construction Speed 3.90%</td><td>3</td></tr>
+        <tr><td>Tooling Up V</td><td>Construction Speed 5.20%</td><td>3</td></tr>
+        <tr><td>Tooling Up VI</td><td>Construction Speed 6.10%</td><td>3</td></tr>
+        <tr><td>Tooling Up VII</td><td>Construction Speed 6.10%</td><td>3</td></tr>
+        <tr><td>Ward Expansion I</td><td>Infirmary Capacity 1,800</td><td>3</td></tr>
+        <tr><td>Ward Expansion II</td><td>Infirmary Capacity 3,600</td><td>3</td></tr>
+        <tr><td>Ward Expansion III</td><td>Infirmary Capacity 7,300</td><td>3</td></tr>
+        <tr><td>Ward Expansion IV</td><td>Infirmary Capacity 14,400</td><td>3</td></tr>
+        <tr><td>Ward Expansion V</td><td>Infirmary Capacity 29,200</td><td>3</td></tr>
+        <tr><td>Ward Expansion VI</td><td>Infirmary Capacity 40,000</td><td>3</td></tr>
+        <tr><td>Ward Expansion VII</td><td>Infirmary Capacity 67,000</td><td>3</td></tr>
+        <tr><td>Camp Expansion I</td><td>Training Capacity 7</td><td>3</td></tr>
+        <tr><td>Camp Expansion II</td><td>Training Capacity 15</td><td>3</td></tr>
+        <tr><td>Camp Expansion III</td><td>Training Capacity 23</td><td>3</td></tr>
+        <tr><td>Camp Expansion IV</td><td>Training Capacity 30</td><td>3</td></tr>
+        <tr><td>Camp Expansion V</td><td>Training Capacity 37</td><td>3</td></tr>
+        <tr><td>Camp Expansion VI</td><td>Training Capacity 46</td><td>3</td></tr>
+        <tr><td>Camp Expansion VII</td><td>Training Capacity 46</td><td>3</td></tr>
+        <tr><td>Tool Enhancement I</td><td>Research Speed 1.30%</td><td>3</td></tr>
+        <tr><td>Tool Enhancement II</td><td>Research Speed 2.20%</td><td>3</td></tr>
+        <tr><td>Tool Enhancement III</td><td>Research Speed 3.00%</td><td>3</td></tr>
+        <tr><td>Tool Enhancement IV</td><td>Research Speed 3.90%</td><td>3</td></tr>
+        <tr><td>Tool Enhancement V</td><td>Research Speed 5.20%</td><td>3</td></tr>
+        <tr><td>Tool Enhancement VI</td><td>Research Speed 6.10%</td><td>3</td></tr>
+        <tr><td>Tool Enhancement VII</td><td>Research Speed 6.10%</td><td>3</td></tr>
+        <tr><td>Bandaging I</td><td>Healing Speed 15.20%</td><td>3</td></tr>
+        <tr><td>Bandaging II</td><td>Healing Speed 30.00%</td><td>3</td></tr>
+        <tr><td>Bandaging III</td><td>Healing Speed 44.80%</td><td>3</td></tr>
+        <tr><td>Bandaging IV</td><td>Healing Speed 60.00%</td><td>3</td></tr>
+        <tr><td>Bandaging V</td><td>Healing Speed 74.80%</td><td>3</td></tr>
+        <tr><td>Bandaging VI</td><td>Healing Speed 90.00%</td><td>3</td></tr>
+        <tr><td>Bandaging VII</td><td>Healing Speed 90.00%</td><td>3</td></tr>
+        <tr><td>Trainer Tools I</td><td>Training Speed 7.40%</td><td>3</td></tr>
+        <tr><td>Trainer Tools II</td><td>Training Speed 15.20%</td><td>3</td></tr>
+        <tr><td>Trainer Tools III</td><td>Training Speed 22.60%</td><td>3</td></tr>
+        <tr><td>Trainer Tools IV</td><td>Training Speed 30.00%</td><td>3</td></tr>
+        <tr><td>Trainer Tools V</td><td>Training Speed 37.40%</td><td>3</td></tr>
+        <tr><td>Trainer Tools VI</td><td>Training Speed 44.80%</td><td>3</td></tr>
+        <tr><td>Trainer Tools VII</td><td>Training Speed 44.80%</td><td>3</td></tr>
+        <tr><td>Command Tactics I</td><td>March Queue 1</td><td>1</td></tr>
+        <tr><td>Command Tactics II</td><td>March Queue 1</td><td>1</td></tr>
+        <tr><td>Command Tactics III</td><td>March Queue 1</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WAR ACADEMY RESEARCH -->
+  <div class="db-section">
+    <h2>War Academy Research</h2>
+    <span class="cat-badge">Infantry 10 · Cavalry 10 · Archer 10</span>
+    <p>War Academy research unlocks with Truegold. Troop-type specific bonuses for Infantry, Cavalry, and Archer.</p>
+
+    <table class="tg-table">
+      <thead><tr><th>Research</th><th>Bonus</th><th>Max Level</th></tr></thead>
+      <tbody>
+        <tr><td>Truegold Battalion (Infantry)</td><td>Troops Deployment Capacity 1,000</td><td>5</td></tr>
+        <tr><td>Truegold Blades</td><td>Infantry Lethality 25.00%</td><td>8</td></tr>
+        <tr><td>Truegold Shields</td><td>Infantry Health 25.00%</td><td>8</td></tr>
+        <tr><td>Truegold Mauls</td><td>Infantry Attack 40.00%</td><td>12</td></tr>
+        <tr><td>Truegold Plating</td><td>Infantry Defense 40.00%</td><td>12</td></tr>
+        <tr><td>Truegold Legionaries</td><td>Rally Capacity 33,500</td><td>12</td></tr>
+        <tr><td>Truegold Infantry</td><td>Truegold Infantry</td><td>1</td></tr>
+        <tr><td>Truegold Infantry Healing</td><td>Truegold Infantry Healing Cost Down 50.00%</td><td>10</td></tr>
+        <tr><td>Truegold Infantry Aid</td><td>Truegold Infantry Healing Time Down 15.00%</td><td>10</td></tr>
+        <tr><td>Truegold Infantry Training</td><td>Truegold Infantry Training Cost Down 50.00%</td><td>10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ADVANCED TRUEGOLD RESEARCH -->
+  <div class="db-section">
+    <h2>Advanced Truegold Research</h2>
+    <p>Advanced Truegold research provides powerful late-game bonuses across troop types, rallies, and resource production.</p>
+
+    <table class="tg-table">
+      <thead><tr><th>Research</th><th>Bonus</th><th>Max Level</th></tr></thead>
+      <tbody>
+        <tr><td>Chests of Gold</td><td>6th Daily Mission Chest Truegold quantity 10</td><td>10</td></tr>
+        <tr><td>Truegold Weaponry</td><td>Training Speed 40.00%</td><td>10</td></tr>
+        <tr><td>Truegold Barracks</td><td>Training Capacity 150</td><td>10</td></tr>
+        <tr><td>Truegold Intel</td><td>Chance of obtaining 1 extra Truegold from Beast Hunting 100.00%</td><td>10</td></tr>
+        <tr><td>Truegold Infirmaries</td><td>Infirmary Capacity 50,000</td><td>10</td></tr>
+        <tr><td>Quick Bandage</td><td>Healing Speed 60.00%</td><td>10</td></tr>
+        <tr><td>Limited Supply</td><td>Half-price Truegold Dust exchanges 20</td><td>10</td></tr>
+        <tr><td>Auric Mauls I-VI</td><td>Infantry Attack 30.00%</td><td>10</td></tr>
+        <tr><td>Truegold Lances I-VI</td><td>Cavalry Attack 30.00%</td><td>10</td></tr>
+        <tr><td>Auric Arrowheads I-VI</td><td>Archer Attack 30.00%</td><td>10</td></tr>
+        <tr><td>Auric Plating I-VI</td><td>Infantry Defense 30.00%</td><td>10</td></tr>
+        <tr><td>Golden Mantle I-VI</td><td>Cavalry Defense 30.00%</td><td>10</td></tr>
+        <tr><td>Auric Pauldrons I-VI</td><td>Archer Defense 30.00%</td><td>10</td></tr>
+        <tr><td>Auric Destruction I-VI</td><td>Infantry Lethality 30.00%</td><td>10</td></tr>
+        <tr><td>True Shock I-VI</td><td>Cavalry Lethality 30.00%</td><td>10</td></tr>
+        <tr><td>Golden Bows I-VI</td><td>Archer Lethality 30.00%</td><td>10</td></tr>
+        <tr><td>Golden Shield I-VI</td><td>Infantry Health 30.00%</td><td>10</td></tr>
+        <tr><td>Golden Horseshoes I-VI</td><td>Cavalry Health 30.00%</td><td>10</td></tr>
+        <tr><td>Auric Bracers I-VI</td><td>Archer Health 30.00%</td><td>10</td></tr>
+        <tr><td>Truegold Provisions I-III</td><td>Troops Deployment Capacity 10,000 → 40,000</td><td>100</td></tr>
+        <tr><td>Generation Truegold I-II</td><td>Rally Capacity 100,000</td><td>10</td></tr>
+        <tr><td>Truegold Armaments I-II</td><td>Squads' Attack 15.00%</td><td>10</td></tr>
+        <tr><td>Truegold Armor I-II</td><td>Squads' Defense 15.00%</td><td>10</td></tr>
+        <tr><td>Truegold Bounties I-II</td><td>Squads' Lethality 15.00%</td><td>10</td></tr>
+        <tr><td>Heart of Gold I-II</td><td>Squads' Health 15.00%</td><td>10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ALLIANCE RESEARCH -->
+  <div class="db-section">
+    <h2>Alliance Research</h2>
+    <span class="cat-badge">Growth 24 · Territory 16 · Battle 20</span>
+    <p>Browse Alliance Research by category. View maximum bonuses, research costs, contribution requirements and prerequisites.</p>
+
+    <table class="tg-table">
+      <thead><tr><th>Research</th><th>Bonus</th><th>Max Level</th></tr></thead>
+      <tbody>
+        <tr><td>Alliance Regimentation I</td><td>Alliance Members 10</td><td>5</td></tr>
+        <tr><td>Alliance Regimentation II</td><td>Alliance Members 20</td><td>5</td></tr>
+        <tr><td>Alliance Regimentation III</td><td>Alliance Members 20</td><td>5</td></tr>
+        <tr><td>Cooperative Protocols I</td><td>Ally Help Time 150</td><td>5</td></tr>
+        <tr><td>Adaptive Tools I</td><td>Construction Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Adaptive Tools II</td><td>Construction Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Treaties I</td><td>Ally Assists 5</td><td>5</td></tr>
+        <tr><td>Treaties II</td><td>Ally Assists 10</td><td>5</td></tr>
+        <tr><td>Mechanisms I</td><td>Research Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Mechanisms II</td><td>Research Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Advanced Training I</td><td>Training Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Advanced Training II</td><td>Training Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Food Gathering I</td><td>Bread Gathering Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Food Gathering II</td><td>Bread Gathering Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Wood Gathering I</td><td>Wood Gathering Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Wood Gathering II</td><td>Wood Gathering Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Stone Gathering I</td><td>Stone Gathering Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Stone Gathering II</td><td>Stone Gathering Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Iron Gathering I</td><td>Iron Mining Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Iron Gathering II</td><td>Iron Mining Speed 5.00%</td><td>5</td></tr>
+        <tr><td>Plains Enrichment</td><td>Unlock Plains Buildings 1</td><td>1</td></tr>
+        <tr><td>Cultivation Drive</td><td>Unlock Fertile Land Buildings 1</td><td>1</td></tr>
+        <tr><td>Sanctuary Teleport</td><td>Sanctuary Teleports 1</td><td>1</td></tr>
+        <tr><td>First Aid Techniques I</td><td>Healing Speed 20.00%</td><td>5</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
